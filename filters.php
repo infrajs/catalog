@@ -3,9 +3,9 @@
  * Блок "filters"
  */
 
-namespace itlife\catalog;
+namespace infrajs\catalog;
 
-use itlife\files\Xlsx;
+use infrajs\excel\Xlsx;
 
 $ans = array();
 $md = Catalog::initMark($ans);

@@ -2,9 +2,9 @@
 /**
  * Выводит список производителей с количеством позиций
  */
-namespace itlife\catalog;
+namespace infrajs\catalog;
 
-use itlife\files\Xlsx;
+use infrajs\excel\Xlsx;
 
 $ans=array();
 if(isset($_GET['seo'])){

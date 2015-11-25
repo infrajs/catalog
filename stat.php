@@ -1,5 +1,5 @@
 <?php
-namespace itlife\catalog;
+namespace infrajs\catalog;
 
 $ans=array();
 if(isset($_GET['seo'])){

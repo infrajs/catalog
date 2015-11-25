@@ -1,5 +1,5 @@
 <?php
-namespace itlife\catalog;
+namespace infrajs\catalog;
 
 /**
  * Класс обеспечивает негарантированное хранение параметров в экстрокороткой строке из ~2 символов

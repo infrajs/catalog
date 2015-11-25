@@ -1,8 +1,8 @@
 <?php
 
-namespace itlife\catalog;
+namespace infrajs\catalog;
 
-use itlife\files\Xlsx;
+use infrajs\excel\Xlsx;
 infra_cache_no();
 $orig_val=infra_toutf(strip_tags($_GET['val']));
 $orig_art=infra_toutf(strip_tags($_GET['art']));

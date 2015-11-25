@@ -1,6 +1,6 @@
 <?php
-namespace itlife\catalog;
-use itlife\files\Xlsx;
+namespace infrajs\catalog;
+use infrajs\excel\Xlsx;
 class Extend
 {
 	public static function init(&$data)
