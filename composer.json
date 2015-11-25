@@ -1,19 +1,16 @@
 {
-    "name": "oduvanio/catalog",
-    "description": "catalog for sites infrajs",
+    "name": "infrajs/catalog",
+    "description": "Catalog based on files docx and xlsx",
     "license": "GPL3",
-    "authors": [{
-        "name": "oduvanio",
-        "email": "info@itlife-studio.ru"
-    }],
     "require":{
-    	"itlife/files":"~1",
-        "itlife/imager":"~1",
-        "itlife/infrajs":"~1"
+    	"infrajs/files":"~1",
+    	"infrajs/excel":"~1",
+        "infrajs/imager":"~1",
+        "infrajs/controller":"~1"
     },
     "autoload":{
         "psr-4":{
-            "itlife\\catalog\\":"/"
+            "infrajs\\catalog\\":"/"
         }
     }
 }
