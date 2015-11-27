@@ -1,6 +1,6 @@
 <?php
 namespace infrajs\catalog;
-
+use infrajs\once\Once;
 /**
  * Класс обеспечивает негарантированное хранение параметров в экстрокороткой строке из ~2 символов
  * Это работает за счёт сохранения объекта данных в 2х символах, со временем данные этих ~2х символов буду заменены, но нам важно только короткая память
@@ -134,7 +134,7 @@ class Mark
 		$key=md5(serialize($data));
 		$that=$this;
 
-		$mark=infra_once($this->prefix.$key, function () use ($data, $that, $key) {
+		$mark=Once::exec($this->prefix.$key, function () use ($data, $that, $key) {
 			$isoutdate=true;
 			$raise=$this->raise; //На сколько символов разрешено увеличивать хэш
 			$note=$this->note;//При увеличении на сколько записывается сообщение в лог
