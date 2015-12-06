@@ -6,8 +6,8 @@ use infrajs\excel\Xlsx;
 infra_cache_no();
 $orig_val=infra_toutf(strip_tags($_GET['val']));
 $orig_art=infra_toutf(strip_tags($_GET['art']));
-$val=infra_strtolower($orig_val);
-$art=infra_strtolower($orig_art);
+$val=mb_strtolower($orig_val);
+$art=mb_strtolower($orig_art);
 
 
 $args=array($val,$art);

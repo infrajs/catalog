@@ -439,7 +439,7 @@ class Catalog
 			$str.=' '.implode(' ', $pos['more']);
 			$str.=' '.implode(' ', array_keys($pos['more']));
 		}
-		$str=infra_strtolower($str);
+		$str=mb_strtolower($str);
 		foreach ($v as $s) {
 			if (mb_strrpos($str, $s)===false) {
 				return false;
