@@ -9,11 +9,11 @@ use infrajs\excel\Xlsx;
 
 $ans = array();
 $md = Catalog::initMark($ans);
-$conf = infra_config();
+$conf = Infra::config();
 
 $args = array(Catalog::nocache($md));
 $res = Catalog::cache('filters.php filter list', function ($md) {
-	$conf = infra_config();
+	$conf = Infra::config();
 	$ans = array();
 	$params=Catalog::getParams($md['group']);
 	
@@ -36,7 +36,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 					$arval=array($pos[$prop['posid']]);
 				}
 				foreach($arval as $value){
-					$idi=infra_forFS($value);
+					$idi=Path::encode($value);
 					$id=mb_strtolower($idi);
 					if (!Xlsx::isSpecified($id)) continue;
 					$r=true;
@@ -57,7 +57,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 					$arname=array($pos[$prop['posname']]);
 				}
 				foreach($arval as $i => $value){
-					$idi=infra_forFS($value);
+					$idi=Path::encode($value);
 					$id=mb_strtolower($idi);
 
 					if (!Xlsx::isSpecified($id)) continue;
@@ -94,7 +94,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 					$arval=array($pos['more'][$prop['posid']]);
 				}
 				foreach($arval as $value){
-					$idi=infra_forFS($value);
+					$idi=Path::encode($value);
 					$id=mb_strtolower($idi);
 					if (!Xlsx::isSpecified($id)) continue;
 					$r=true;
@@ -119,7 +119,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 				}
 				
 				foreach($arval as $i => $value){
-					$idi=infra_forFS($value);
+					$idi=Path::encode($value);
 					$id=mb_strtolower($idi);
 					if (!Xlsx::isSpecified($id)) continue;
 					$r=true;
@@ -148,7 +148,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			$right=array($v['mdid']);    
 			$add='';
 		}
-		$showhard=infra_seq_get($md, $right);
+		$showhard=Sequence::get($md, $right);
 		$opt=Catalog::option($params[$k]['option'], $count, $search, $showhard);
 		if (!$opt) {
 			unset($params[$k]);
@@ -175,11 +175,11 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			$right=array($param['mdid']);    
 			$add='';
 		}
-		$mymd=infra_seq_get($md, $right);
+		$mymd=Sequence::get($md, $right);
 		if (!$mymd) $mymd=array();
 		
 		
-		$paramid=infra_seq_short(array(Catalog::urlencode($param['mdid'])));
+		$paramid=Sequence::short(array(Catalog::urlencode($param['mdid'])));
 		$block['checked']=!!$mymd['yes'];
 		
 		
@@ -216,7 +216,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 					'filter'=>$value['filter']
 				);
 				$row['checked']=!!$mymd[$value['id']];
-				$valueid=infra_seq_short(array(Catalog::urlencode($value['id'])));
+				$valueid=Sequence::short(array(Catalog::urlencode($value['id'])));
 				if($row['checked']){
 					$row['add']=$add.$paramid.'.'.$valueid.':';
 				} else {
@@ -233,4 +233,4 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 }, $args, isset($_GET['re']));
 $ans=array_merge($ans, $res);
 
-return infra_ret($ans);
+return Ans::ret($ans);

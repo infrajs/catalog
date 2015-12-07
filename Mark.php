@@ -67,10 +67,10 @@ class Mark
 		$this->mark=array_shift($r);
 		if ($this->mark!='') {
 
-			$src=infra_theme('~.marks/'.$this->prefix.$this->mark.'.json');
+			$src=Path::theme('~.marks/'.$this->prefix.$this->mark.'.json');
 			if ($src) {
 				$data = file_get_contents($src);
-				$data = infra_json_decode($data);
+				$data = Load::json_decode($data);
 			} else {
 				$data = false;
 			}
@@ -104,14 +104,14 @@ class Mark
 				}
 				for ($i = 0; $i < $l; $i = $i + 2) {
 					if (!$r[$i]) continue;
-					infra_seq_set($this->data, infra_seq_right($r[$i]), $r[$i+1]);
+					Sequence::set($this->data, Sequence::right($r[$i]), $r[$i+1]);
 				}
 			} else {
 				for ($i = 0; $i < $l; $i = $i + 1) {
 					if (!$r[$i]) continue;
 					$rr = explode($this->symeq, $r[$i], 2);
 					if (!$rr[0]) continue;
-					infra_seq_set($this->data, infra_seq_right($rr[0]), $rr[1]);
+					Sequence::set($this->data, Sequence::right($rr[0]), $rr[1]);
 				}
 			}
 		}
@@ -121,7 +121,7 @@ class Mark
 		ksort($data);
 		foreach($data as &$v){
 			if(!is_array($v))continue;
-			if(infra_isAssoc($v)===true) self::rksort($v);
+			if(Each::isAssoc($v)===true) self::rksort($v);
 			//else sort($v);
 		}
 	}
@@ -145,10 +145,10 @@ class Mark
 				$mark=substr($key, 0, $len);
 				
 				
-				$src=infra_theme('~.marks/'.$that->prefix.$mark.'.json');
+				$src=Path::theme('~.marks/'.$that->prefix.$mark.'.json');
 				if ($src) {
 					$otherdata = file_get_contents($src);
-					$otherdata = infra_json_decode($otherdata);
+					$otherdata = Load::json_decode($otherdata);
 				} else {
 					$otherdata = false;
 				}
@@ -178,7 +178,7 @@ class Mark
 				$mark=substr($key, 0, $this->len);
 			}
 
-			$src=infra_theme('~.marks/');
+			$src=Path::theme('~.marks/');
 			if(!$src)die('Fatal error no marks dir');
 			$src=$src.$this->prefix.$mark.'.json';
 			$data = infra_json_encode(array(

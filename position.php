@@ -3,9 +3,9 @@
 namespace infrajs\catalog;
 
 use infrajs\excel\Xlsx;
-infra_cache_no();
-$orig_val=infra_toutf(strip_tags($_GET['val']));
-$orig_art=infra_toutf(strip_tags($_GET['art']));
+header('Cache-Controll: no-store');
+$orig_val=Path::toutf(strip_tags($_GET['val']));
+$orig_art=Path::toutf(strip_tags($_GET['art']));
 $val=mb_strtolower($orig_val);
 $art=mb_strtolower($orig_art);
 
@@ -26,7 +26,7 @@ $pos=Catalog::cache('position', function($val, $art){
 
 if(isset($_GET['seo'])) {
 	if(!$pos){
-		return infra_err($ans,'Position not found');
+		return Ans::err($ans,'Position not found');
 	}
 	$link=$_GET['seo'];
 	$link=$link.'/'.$pos['producer'].'/'.$pos['article'];
@@ -41,7 +41,7 @@ $ans=array(//Оригинальные значения
 	'art'=>$art
 );
 $ans['breadcrumbs']=array();//Путь где я нахожусь
-$conf=infra_config();
+$conf=Infra::config();
 $ans['breadcrumbs'][]=array('title'=>$conf['catalog']['title']);
 
 if ($pos) {
@@ -58,10 +58,10 @@ if ($pos) {
 	}, $pos['path']);
 	$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$orig_val.':1', 'title'=>$orig_val);
 	$ans['breadcrumbs'][]=array('title'=>$orig_art);
-	return infra_ret($ans);
+	return Ans::ret($ans);
 } else {
 	$ans['breadcrumbs'][]=array('href'=>'producers','title'=>'Производители');
 	$ans['breadcrumbs'][]=array('href'=>'','title'=>$orig_val,'add'=>'producer::producer.'.$orig_val.':1');
 	$ans['breadcrumbs'][]=array('title'=>$orig_art);
-	return infra_err($ans);
+	return Ans::err($ans);
 }

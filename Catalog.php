@@ -1,10 +1,38 @@
 <?php
 namespace infrajs\catalog;
-
 use infrajs\excel\Xlsx;
-infra_require('*catalog/Extend.php');
+use infrajs\path\Path;
+use infrajs\load\Load;
+use infrajs\cache\Cache;
+use infrajs\sequence\Sequence;
+
+Path::req('*catalog/Extend.php');
 class Catalog
 {
+	public static $conf= array(
+		"pub"=>array("dir", "title"),
+		"dir"=>"~catalog/",
+		"cache"=>array("~catalog/","|mem/configmd5.json"),
+		"title"=>"Каталог",
+		"md"=>array(),
+		"filename"=>"Производитель",
+		"columns"=>array(),
+		"filteroneitem"=>true, //Показывать ли фильтр в котором только один пункт, который true для всей выборке
+		"filters"=>array(
+			"producer"=>array(
+				"posid"=>"producer",
+				"posname"=>"Производитель",
+				"title"=>"Производитель",
+				"separator"=>false
+			),
+			"cost"=>array(
+				"posid"=>"Цена",
+				"posname"=>"Цена", //Можно ли писать комменты
+				"title"=>"Цена",
+				"separator"=>false
+			)
+		)
+	);
 	public static $md = array(
 		"count"=>10,
 		"reverse"=>false,
@@ -18,11 +46,11 @@ class Catalog
 	public static function init()
 	{
 		return self::cache('cat_init', function () {
-			$conf=infra_config();
-			$columns=array_merge(array("Наименование","Артикул","Производитель","Цена","Описание"),$conf['catalog']['columns']);
-			$data=&Xlsx::init($conf['catalog']['dir'], array(
+			$conf=Catalog::$conf;
+			$columns=array_merge(array("Наименование","Артикул","Производитель","Цена","Описание"),$conf['columns']);
+			$data=&Xlsx::init($conf['dir'], array(
 				'more' => true,
-				'Имя файла' => $conf['catalog']['filename'],
+				'Имя файла' => $conf['filename'],
 				'Известные колонки'=>$columns
 				)
 			);
@@ -155,7 +183,6 @@ class Catalog
 	*/
 	public static function getParams($group = false){
 		return Catalog::cache('getParams', function &($group){
-			$conf = infra_config();
 			$poss = Catalog::getPoss($group);
 		
 			$params = array();//параметры
@@ -182,7 +209,7 @@ class Catalog
 				'search' => 0
 			);
 			//more берутся все параметры, а из main только указанные, расширенные config.catalog.filters
-			$main=$conf['catalog']['filters'];
+			$main=Catalog::$conf['filters'];
 
 			foreach($main as $k=>$prop){
 				if ($prop['more']) continue;
@@ -208,7 +235,7 @@ class Catalog
 						$arname=array($name);
 					}
 					foreach($arval as $i => $value){
-						$idi=infra_forFS($value);
+						$idi=Path::encode($value);
 						$id=mb_strtolower($idi);
 						if (!Xlsx::isSpecified($id)) continue;
 						if (!isset($params[$k]['option'][$id])) {
@@ -246,7 +273,7 @@ class Catalog
 							$arval=array($val);
 						}
 						foreach($arval as $value){
-							$idi=infra_forFS($value);
+							$idi=Path::encode($value);
 							$id=mb_strtolower($idi);
 							if (!Xlsx::isSpecified($id)) continue;
 							$r=true;
@@ -325,10 +352,10 @@ class Catalog
 				
 				$poss=Catalog::cache('change', function($md) use($poss){
 					foreach($poss as &$pos) {
-						$conf=infra_config();
-						$dir=infra_theme($conf['catalog']['dir'].$pos['producer'].'/'.$pos['article'].'/');
+						$conf=Catalog::$conf;
+						$dir=Path::theme($conf['dir'].$pos['producer'].'/'.$pos['article'].'/');
 						if (!$dir) {
-							$dir=infra_theme($conf['catalog']['dir']);
+							$dir=Path::theme($conf['dir']);
 							$pos['time']=0; //filemtime($dir);
 						} else {
 							$pos['time']=filemtime($dir);
@@ -401,8 +428,8 @@ class Catalog
 		}
 		
 		if (!sizeof($path)) {
-			$conf=infra_config();
-			$groupchilds=$subgroups[$conf['catalog']['title']];
+			$conf=Catalog::$conf;
+			$groupchilds=$subgroups[$conf['title']];
 		} else {
 			$g=$path[sizeof($path)-1];
 			if (isset($subgroups[$g])) {
@@ -450,8 +477,8 @@ class Catalog
 	public static function cache($name, $call, $args = array(), $re = null)
 	{
 		if (is_null($re)) $re=isset($_GET['re']);
-		$conf=infra_config();
-		return infra_cache($conf['catalog']['cache'], 'cat-'.$name, $call, $args, $re);
+		$conf=Catalog::$conf;
+		return Cache::exec($conf['cache'], 'cat-'.$name, $call, $args, $re);
 	}
 	public static function numbers($page, $pages, $plen = 11)
 	{
@@ -543,14 +570,13 @@ class Catalog
 	public static function initMark(&$ans = array())
 	{
 		//Нельзя добавлять в скрипте к метке новые значения. так как метка приходит во многие скрипты и везде должен получится один результат и все должны получить одинаковую новую метку содержающую изменения
-		$mark=infra_toutf(infra_seq_get($_GET, infra_seq_right('m')));
+		$mark=Path::toutf(Sequence::get($_GET, Sequence::right('m')));
 		
 		$mark=Mark::getInstance($mark);
 		$md=$mark->getData();
 		
-		$conf=infra_config();
 
-		$defmd=array_merge(Catalog::$md, $conf['catalog']['md']);	
+		$defmd=array_merge(Catalog::$md, Catalog::$conf['md']);	
 		
 		$admit=array_keys($defmd);
 		$md = array_intersect_key($md, array_flip($admit));
@@ -586,7 +612,7 @@ class Catalog
 
 				$filter = array(
 					'title' => $prop['title'], 
-					'name' => infra_seq_short(array('more', Catalog::urlencode($prop['mdid'])))
+					'name' => Sequence::short(array('more', Catalog::urlencode($prop['mdid'])))
 				);
 				
 
@@ -607,7 +633,7 @@ class Catalog
 						}
 
 						foreach($option as $k=>$opt){
-							$id=infra_forFS($opt);
+							$id=Path::encode($opt);
 							if (strcasecmp($value, $id)==0) {
 								$valtitles[$value]=$titles[$k];
 								return true;
@@ -637,7 +663,7 @@ class Catalog
 
 				$filter=array(
 					'title' => $prop['title'], 
-					'name' => infra_seq_short(array(Catalog::urlencode($prop['mdid'])))
+					'name' => Sequence::short(array(Catalog::urlencode($prop['mdid'])))
 				);
 
 				$poss = array_filter($poss, function ($pos) use ($prop, $val, &$valtitles) {
@@ -656,7 +682,7 @@ class Catalog
 							$titles=array($titles);
 						}
 						foreach($option as $k=>$opt){
-							$id=infra_forFS($opt);
+							$id=Path::encode($opt);
 							if (strcasecmp($value, $id)==0) {
 								$valtitles[$value]=$titles[$k];
 								return true;
@@ -685,7 +711,7 @@ class Catalog
 		if (!empty($md[$key])) {
 			$title='Группа';
 			$val=$md[$key];
-			$filter=array('title'=>$title, 'name'=>infra_seq_short(array(Catalog::urlencode($key))));
+			$filter=array('title'=>$title, 'name'=>Sequence::short(array(Catalog::urlencode($key))));
 			$poss=array_filter($poss, function ($pos) use ($key, $val) {
 				$prop=$pos[$key];
 				foreach ($val as $value => $one) {
@@ -834,21 +860,20 @@ class Catalog
 					continue;
 				}
 				$f=trim($f);
-				$conf=infra_config();
-				Xlsx::addFiles($pos, $conf['catalog']['dir'].$f);
+				Xlsx::addFiles($pos, Catalog::$conf['dir'].$f);
 			}
 
 			$files=array();
 			foreach ($pos['files'] as $f) {
 				if (is_string($f)) {
-					$f = infra_theme($f); //убрали звездочку
-					$d=infra_srcinfo(infra_toutf($f));
+					$f = Path::theme($f); //убрали звездочку
+					$d=Load::srcInfo(Path::toutf($f));
 				} else {
 					$d=$f;
 					$f=$d['src'];
 				}
 
-				$d['size']=round(filesize(infra_tofs($f))/1000000, 2);
+				$d['size']=round(filesize(Path::tofs($f))/1000000, 2);
 				if (!$d['size']) {
 					$d['size']='0.01';
 				}
@@ -857,7 +882,7 @@ class Catalog
 			$pos['files']=$files;
 			if ($pos['texts']) {
 				foreach ($pos['texts'] as $k => $t) {
-					$pos['texts'][$k]=infra_loadTEXT('*files/get.php?'.$t);
+					$pos['texts'][$k]=Load::loadTEXT('*files/get.php?'.$t);
 				}
 			}
 			return $pos;
@@ -866,7 +891,7 @@ class Catalog
 	public static function search($md, &$ans=array()) {
 		$args=array(Catalog::nocache($md));
 		$res=Catalog::cache('search.php filter list', function ($md) {
-			$conf=infra_config();
+
 			$ans['list']=Catalog::getPoss($md['group']);
 			//ЭТАП filters list
 			$ans['filters']=Catalog::filtering($ans['list'], $md);

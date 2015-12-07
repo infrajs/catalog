@@ -1,10 +1,14 @@
 <?php
 namespace infrajs\catalog;
 
+use infrajs\excel\Xlsx;
+use infrajs\load\Load;
+use infrajs\ans\Ans;
+
 $ans=array();
 if(isset($_GET['seo'])){
 	if(empty($_GET['link'])){
-	    return infra_err($ans,'Wrong parameters');
+	    return Ans::err($ans,'Wrong parameters');
 	}
 	$link=$_GET['link'];
 	$link=$link.'/stat';
@@ -12,35 +16,32 @@ if(isset($_GET['seo'])){
 	$ans['canonical']=infra_view_getPath().'?'.$link;
 	return infra_ans($ans);
 }
-$ans['menu']=infra_loadJSON('*catalog/menu.json');
+$ans['menu']=Load::loadJSON('*catalog/menu.json');
 $submit=!empty($_GET['submit']); // сбор статистики
 
-$conf=infra_config();
-$ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['catalog']['title'],'add'=>'group');
+$conf=Catalog::$conf;
+$ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title'],'add'=>'group');
 $ans['breadcrumbs'][]=array('href'=>'stat','title'=>'Статистика поиска');
 
-$dirs=infra_dirs();
-$dir=$dirs['data'];
-$data=infra_loadJSON($dir.'catalog_stat.json');
+$data=Load::loadJSON('~catalog_stat.json');
 if (!$data) {
 	$data=array('users' => array(),'cat_id' => 0,'time' => time());//100 10 user list array('val'=>$val,'time'=>time())
 }
 
 if (!$submit) {
-	$conf=infra_config();
-	$ans['text']=infra_loadTEXT('*files/get.php?'+$conf['catalog']['dir'].'/articals/stat');
+	$ans['text']=Load::loadTEXT('*files/get.php?'+$conf['dir'].'/articals/stat');
 	$ans['stat']=$data;
-	return infra_ret($ans);
+	return Ans::ret($ans);
 }
 
 
 $val=strip_tags(@$_GET['val']);
 if (!$val) {
-	return infra_err($ans, 'Incorrect parameters');
+	return Ans::err($ans, 'Incorrect parameters');
 }
-infra_cache_no();
-$val=infra_forFS($val);
-$val=infra_toutf($val);
+header('Cache-Controll: no-store');
+$val=Path::encode($val);
+$val=Path::toutf($val);
 $id=infra_view_getCookie('cat_id');
 $time=infra_view_getCookie('cat_time');
 if (!$time||!$id||$time!=$data['time']) {
@@ -68,7 +69,7 @@ foreach ($user['list'] as $k => $v) {
 	}
 }
 $user['list']=array_values($user['list']);
-$search=infra_loadJSON('*catalog/search.php?val='.$val);
+$search=Load::loadJSON('*catalog/search.php?val='.$val);
 array_unshift($user['list'], array('val' => $val,'time' => time(),'count' => $search['count']));
 
 if (sizeof($user['list'])>10) {
@@ -79,7 +80,7 @@ array_unshift($data['users'], $user);
 if (sizeof($data['users'])>100) {
 	$data['users']=array_slice($data['users'], 0, 50);
 }
-file_put_contents($dir.'catalog_stat.json', infra_json_encode($data));
+file_put_contents(Path::resolve('~catalog_stat.json'), infra_json_encode($data));
 $ans['data']=$data;
 
-return infra_ret($ans);
+return Ans::ret($ans);

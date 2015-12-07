@@ -1,18 +1,19 @@
 <?php
-/**
- * Страница "search"
- */
 
 namespace infrajs\catalog;
-
 use infrajs\excel\Xlsx;
+use infrajs\path\Path;
+use infrajs\ans\Ans;
+use infrajs\load\Load;
 
 
 
 $ans=array();
+
 $md=Catalog::initMark($ans);
 
-$val=infra_forFS(infra_toutf(strip_tags($_GET['val'])));
+$val=Ans::get('val');
+$val=Path::toutf(strip_tags($val));
 if ($val) $md['search']=$val;//Временное значение
 
 
@@ -38,7 +39,7 @@ if(isset($_GET['seo'])){
 }
 
 
-infra_cache_no();
+header('Cache-Controll: no-store');
 if (isset($_GET['p'])) {
 	$ans['page']=(int)$_GET['p'];
 	if ($ans['page']<1) $ans['page']=1;
@@ -55,7 +56,9 @@ if (!$re) {
 	if ($ans['page'] != 1) $re = true;
 	if ($md['more']) $re = true;//Не сохраняем когда есть фильтры more
 }
+
 $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
+	
 	//1
 	$ans['is']=''; //group producer search Что было найдено по запросу val (Отдельный файл is:change)
 	$ans['descr']='';//абзац текста в начале страницы';
@@ -71,7 +74,8 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 	$ans['list']=array(); //Массив позиций
 	Catalog::search($md, $ans);
 
-	$conf=infra_config();
+	$conf=Catalog::$conf;
+
 	//BREADCRUMBS TITLE
 	if(!$md['group']&&$md['producer']&&sizeof($md['producer'])==1) { //ПРОИЗВОДИТЕЛЬ
 		if($md['producer'])foreach ($md['producer'] as $producer => $v) break;
@@ -81,18 +85,17 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 		$name=Catalog::getProducer($producer);
 		$ans['name']=$name;
 		$ans['title']=$name;
-		$conf=infra_config();
-		$ans['breadcrumbs'][]=array('title'=>$conf['catalog']['title'], 'add'=>'producer:');
-		$menu=infra_loadJSON('*catalog/menu.json');
+		$conf=Infra::config();
+		$ans['breadcrumbs'][]=array('title'=>$conf['title'], 'add'=>'producer:');
+		$menu=Load::loadJSON('*catalog/menu.json');
 		$ans['breadcrumbs'][]=array('href'=>'producers','title'=>$menu['producers']['title']);
 		$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$name.':1','title'=>$name);
 	} else if (!$md['group'] && $md['search']) {
 		$ans['is']='search';
 		$ans['name']=$md['search'];
-		$ans['title']=infra_forFs($md['search']);
-		$conf=infra_config();
-		$ans['breadcrumbs'][]=array('title'=>$conf['catalog']['title'], 'add'=>'search:');
-		$menu=infra_loadJSON('*catalog/menu.json');
+		$ans['title']=Path::encode($md['search']);
+		$ans['breadcrumbs'][]=array('title'=>$conf['title'], 'add'=>'search:');
+		$menu=Load::loadJSON('*catalog/menu.json');
 		$ans['breadcrumbs'][]=array('href'=>'find','title'=>$menu['find']['title']);
 		$ans['breadcrumbs'][]=array('title'=>$ans['name']);
 	} else {
@@ -101,7 +104,7 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 		else $group=false;
 		$group=Catalog::getGroup($group);
 		$ans['is']='group';	
-		$ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['catalog']['title'], 'add'=>'group:');
+		$ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title'], 'add'=>'group:');
 		array_map(function ($p) use (&$ans) {
 			$group=Catalog::getGroup($p);
 			$ans['breadcrumbs'][]=array('href'=>'','title'=>$group['name'], 'add'=>'group::group.'.$p.':1');
@@ -125,7 +128,7 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 	$ans['list']=array_slice($ans['list'], ($page-1)*$md['count'], $md['count']);
 
 	//Text
-	$ans['text']=infra_loadTEXT('*files/get.php?'.$conf['catalog']['dir'].'articals/'.$ans['title']);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
+	$ans['text']=Load::loadTEXT('*files/get.php?'.$conf['dir'].'articals/'.$ans['title']);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
 	foreach($ans['list'] as $k=>$pos){
 		$pos=Catalog::getPos($pos);
 		unset($pos['texts']);
@@ -135,4 +138,4 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 	return $ans;
 }, $args, $re);
 
-return infra_ret($ans);
+return Ans::ret($ans);

@@ -5,11 +5,13 @@
 namespace infrajs\catalog;
 
 use infrajs\excel\Xlsx;
+use infrajs\load\Load;
+use infrajs\ans\Ans;
 
 $ans=array();
 if(isset($_GET['seo'])){
 	if(empty($_GET['link'])){
-	    return infra_err($ans,'Wrong parameters');
+	    return Ans::err($ans,'Wrong parameters');
 	}
 	$link=$_GET['link'];
 	$link=$link.'/producers';
@@ -26,14 +28,13 @@ if (isset($_GET['lim'])) {
 }
 $p = explode(',', $lim);
 if(sizeof($p)!=2){
-	return infra_err($ans, 'Is wrong paramter lim');
+	return Ans::err($ans, 'Is wrong paramter lim');
 }
 $start = (int)$p[0];
 $count = (int)$p[1];
 $args=array($start, $count);
 $list=Catalog::cache('producers.php', function ($start, $count) {
 	$ans=array();
-	$conf=infra_config();
 
 	$data=Catalog::init();
 	$prods=array();
@@ -44,11 +45,11 @@ $list=Catalog::cache('producers.php', function ($start, $count) {
 	$prods=array_slice($prods, $start, $count);
 	return $prods;
 },$args,isset($_GET['re']));
-$ans['menu']=infra_loadJSON('*catalog/menu.json');
+$ans['menu']=Load::loadJSON('*catalog/menu.json');
 $ans['list']=$list;
 
-$conf=infra_config();
-$ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['catalog']['title'],'add'=>'group');
+$conf=Catalog::$conf;
+$ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title'],'add'=>'group');
 $ans['breadcrumbs'][]=array('href'=>'producers','title'=>'Производители');
 
-return infra_ret($ans);
+return Ans::ret($ans);
