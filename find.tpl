@@ -4,7 +4,7 @@
 	<form style="margin-bottom:30px" class="form-horizontal" onsubmit="
 		var val=$(this).find('[type=text]').val();
 		val=infra.forFS(val);
-		var layer=infrajs.find('unick','catalog');
+		var layer=infrajs.find('id','catalog');
 		
 		if (infra.Crumb.get.m) {
 			var params='&m='+infra.Crumb.get.m;
