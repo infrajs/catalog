@@ -13,17 +13,17 @@ $ans=array(
 	'title'=>'Проверка обработчиков каталога - позиция, группа, производители, рубрики и тп.'
 );
 
-$data=Load::loadJSON('*catalog/rubrics.php');
+$data=Load::loadJSON('-catalog/rubrics.php');
 if (!$data) {
 	return Ans::err($ans, 'Ошибка rubrics.php');
 }
 
-$data=Load::loadJSON('*catalog/producers.php');
+$data=Load::loadJSON('-catalog/producers.php');
 if (!$data) {
 	return Ans::err($ans, 'Ошибка producers.php');
 }
 
-$data=Load::loadJSON('*catalog/stat.php');
+$data=Load::loadJSON('-catalog/stat.php');
 if (!$data) {
 	return Ans::err($ans, 'Ошибка stat.php');
 }

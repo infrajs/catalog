@@ -13,7 +13,7 @@
 		}
 		infra.Crumb.go(layer.crumb.name+'/'+val+params);
 		setTimeout(function(){
-			$.getJSON(infra.theme('*catalog/stat.php?submit=1&val='+val));
+			$.getJSON(infra.theme('-catalog/stat.php?submit=1&val='+val));
 		},1);
 		return false;">
 

@@ -55,7 +55,7 @@
 			{files::file}
 		</ul>
 	{file:}
-		<li class="ico" style="background-image:url('?*infra/theme.php?*/autoedit/icons/{ext}.png')">
+		<li class="ico" style="background-image:url('?-infra/theme.php?*/autoedit/icons/{ext}.png')">
 			<a href="{src}">{name}</a> {size}&nbsp;Mb
 		</li>
 {text:}
@@ -66,16 +66,16 @@
 		{images::image}
 	</div>
 	<div class="bigimage"></div>
-	{image:}<a onclick="return false" title="{..Наименование}" href="?*imager/imager.php?src={:imgsrc}"><img
+	{image:}<a onclick="return false" title="{..Наименование}" href="?-imager/imager.php?src={:imgsrc}"><img
 		title="{data.pos.Производитель} {data.pos.Артикул}"
 		style="cursor:pointer"
 		onclick="var img=document.getElementById('catimg{~key}'); if(img){ $(img).toggle(); return; };
-				$('.cat-position .bigimage').html('<img style=\'border-bottom:1px dotted gray;\' onclick=\'$(this).hide()\' id=\'catimg{~key}\' src=\'?*imager/imager.php?mark=1&w=590&src={:imgsrc}\' />')"
-		src="?*imager/imager.php?mark=1&h=100&src={:imgsrc}" /></a>
+				$('.cat-position .bigimage').html('<img style=\'border-bottom:1px dotted gray;\' onclick=\'$(this).hide()\' id=\'catimg{~key}\' src=\'?-imager/imager.php?mark=1&w=590&src={:imgsrc}\' />')"
+		src="?-imager/imager.php?mark=1&h=100&src={:imgsrc}" /></a>
 {producer:}
 	<div style="float:right; background-color:white; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
 		<a onclick="infrajs.scroll='.pagination'" title="Посмотреть продукцию {producer}" href="?{crumb.parent.parent}{:cat.mark.add}producer::.{producer}:1">
-			<img style="margin-left:5px" src="?*imager/imager.php?w=160&h=100&src={infra.conf.catalog.dir}{producer}/&or=*imager/empty.png" />
+			<img style="margin-left:5px" src="?-imager/imager.php?w=160&h=100&src={infra.conf.catalog.dir}{producer}/&or=-imager/empty.png" />
 		</a>
 	</div>
 <!--	<div style="text-align:right; font-size: 11px; margin-top:5px;">

@@ -30,7 +30,7 @@ if(isset($_GET['seo'])) {
 	}
 	$link=$_GET['seo'];
 	$link=$link.'/'.$pos['producer'].'/'.$pos['article'];
-	$ans['external']='*catalog/seo.json';
+	$ans['external']='-catalog/seo.json';
 	$ans['canonical']=infra_view_getPath().'?'.$link;
 	return infra_ans($ans);
 }

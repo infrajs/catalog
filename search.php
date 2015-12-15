@@ -33,7 +33,7 @@ if(isset($_GET['seo'])){
 	
 	unset($ans['md']);
 	unset($ans['m']);
-	$ans['external']='*catalog/seo.json';
+	$ans['external']='-catalog/seo.json';
 	$ans['canonical']=infra_view_getPath().'?'.$link;
 	return infra_ans($ans);
 }
@@ -87,7 +87,7 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 		$ans['title']=$name;
 		$conf=Infra::config();
 		$ans['breadcrumbs'][]=array('title'=>$conf['title'], 'add'=>'producer:');
-		$menu=Load::loadJSON('*catalog/menu.json');
+		$menu=Load::loadJSON('-catalog/menu.json');
 		$ans['breadcrumbs'][]=array('href'=>'producers','title'=>$menu['producers']['title']);
 		$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$name.':1','title'=>$name);
 	} else if (!$md['group'] && $md['search']) {
@@ -95,7 +95,7 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 		$ans['name']=$md['search'];
 		$ans['title']=Path::encode($md['search']);
 		$ans['breadcrumbs'][]=array('title'=>$conf['title'], 'add'=>'search:');
-		$menu=Load::loadJSON('*catalog/menu.json');
+		$menu=Load::loadJSON('-catalog/menu.json');
 		$ans['breadcrumbs'][]=array('href'=>'find','title'=>$menu['find']['title']);
 		$ans['breadcrumbs'][]=array('title'=>$ans['name']);
 	} else {
@@ -128,7 +128,7 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 	$ans['list']=array_slice($ans['list'], ($page-1)*$md['count'], $md['count']);
 
 	//Text
-	$ans['text']=Load::loadTEXT('*files/get.php?'.$conf['dir'].'articals/'.$ans['title']);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
+	$ans['text']=Load::loadTEXT('-doc/get.php?'.$conf['dir'].'articals/'.$ans['title']);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
 	foreach($ans['list'] as $k=>$pos){
 		$pos=Catalog::getPos($pos);
 		unset($pos['texts']);

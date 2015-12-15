@@ -15,7 +15,7 @@ if(isset($_GET['seo'])){
 	}
 	$link=$_GET['link'];
 	$link=$link.'/producers';
-	$ans['external']='*catalog/seo.json';
+	$ans['external']='-catalog/seo.json';
 	$ans['canonical']=infra_view_getPath().'?'.$link;
 	return infra_ans($ans);
 }
@@ -45,7 +45,7 @@ $list=Catalog::cache('producers.php', function ($start, $count) {
 	$prods=array_slice($prods, $start, $count);
 	return $prods;
 },$args,isset($_GET['re']));
-$ans['menu']=Load::loadJSON('*catalog/menu.json');
+$ans['menu']=Load::loadJSON('-catalog/menu.json');
 $ans['list']=$list;
 
 $conf=Catalog::$conf;

@@ -12,11 +12,11 @@ if(isset($_GET['seo'])){
 	}
 	$link=$_GET['link'];
 	$link=$link.'/stat';
-	$ans['external']='*catalog/seo.json';
+	$ans['external']='-catalog/seo.json';
 	$ans['canonical']=infra_view_getPath().'?'.$link;
 	return infra_ans($ans);
 }
-$ans['menu']=Load::loadJSON('*catalog/menu.json');
+$ans['menu']=Load::loadJSON('-catalog/menu.json');
 $submit=!empty($_GET['submit']); // сбор статистики
 
 $conf=Catalog::$conf;
@@ -29,7 +29,7 @@ if (!$data) {
 }
 
 if (!$submit) {
-	$ans['text']=Load::loadTEXT('*files/get.php?'+$conf['dir'].'/articals/stat');
+	$ans['text']=Load::loadTEXT('-doc/get.php?'+$conf['dir'].'/articals/stat');
 	$ans['stat']=$data;
 	return Ans::ret($ans);
 }
@@ -69,7 +69,7 @@ foreach ($user['list'] as $k => $v) {
 	}
 }
 $user['list']=array_values($user['list']);
-$search=Load::loadJSON('*catalog/search.php?val='.$val);
+$search=Load::loadJSON('-catalog/search.php?val='.$val);
 array_unshift($user['list'], array('val' => $val,'time' => time(),'count' => $search['count']));
 
 if (sizeof($user['list'])>10) {
@@ -80,7 +80,7 @@ array_unshift($data['users'], $user);
 if (sizeof($data['users'])>100) {
 	$data['users']=array_slice($data['users'], 0, 50);
 }
-file_put_contents(Path::resolve('~catalog_stat.json'), infra_json_encode($data));
+file_put_contents(Path::resolve('~catalog_stat.json'), Load::json_encode($data));
 $ans['data']=$data;
 
 return Ans::ret($ans);

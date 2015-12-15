@@ -1,8 +1,9 @@
 {
 	"catalog":{
 		"pub":["dir", "title"],
+		"tester":"-catalog/tests/",
 		"dir":"~catalog/",
-		"cache":["~catalog/","|mem/configmd5.json"],
+		"cache":["~catalog/","!mem/configmd5.json"],
 		"title":"Каталог",
 		"md":{ },
 		"filename":"Производитель",

@@ -6,13 +6,13 @@ use infrajs\load\Load;
 use infrajs\cache\Cache;
 use infrajs\sequence\Sequence;
 
-Path::req('*catalog/Extend.php');
+Path::req('-catalog/Extend.php');
 class Catalog
 {
 	public static $conf= array(
 		"pub"=>array("dir", "title"),
 		"dir"=>"~catalog/",
-		"cache"=>array("~catalog/","|mem/configmd5.json"),
+		"cache"=>array("~catalog/","!mem/configmd5.json"),
 		"title"=>"Каталог",
 		"md"=>array(),
 		"filename"=>"Производитель",
@@ -882,7 +882,7 @@ class Catalog
 			$pos['files']=$files;
 			if ($pos['texts']) {
 				foreach ($pos['texts'] as $k => $t) {
-					$pos['texts'][$k]=Load::loadTEXT('*files/get.php?'.$t);
+					$pos['texts'][$k]=Load::loadTEXT('-doc/get.php?'.$t);
 				}
 			}
 			return $pos;

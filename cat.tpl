@@ -52,7 +52,7 @@
 				</table>
 			</a>
 		</div>
-		{gimg:}<img src="?*imager/imager.php?src={pos.images.0}&w=110&h=80">
+		{gimg:}<img src="?-imager/imager.php?src={pos.images.0}&w=110&h=80">
 {breadcrumbs:}
 	<ul class="breadcrumb">
 		{::brcrumb}
