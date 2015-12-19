@@ -41,7 +41,7 @@ $ans=array(//Оригинальные значения
 	'art'=>$art
 );
 $ans['breadcrumbs']=array();//Путь где я нахожусь
-$conf=Infra::config();
+$conf=Config::get();
 $ans['breadcrumbs'][]=array('title'=>$conf['catalog']['title']);
 
 if ($pos) {

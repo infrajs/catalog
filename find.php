@@ -14,7 +14,7 @@ if(isset($_GET['seo'])){
 $ans=Load::loadJSON('-catalog/search.php');
 
 $ans['breadcrumbs']=array();
-$conf=Infra::config();
+$conf=Config::get();
 $ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['catalog']['title']);
 $menu=Load::loadJSON('-catalog/menu.json');
 $ans['breadcrumbs'][]=array('href'=>'find','title'=>$menu['find']['title']);

@@ -9,11 +9,11 @@ use infrajs\excel\Xlsx;
 
 $ans = array();
 $md = Catalog::initMark($ans);
-$conf = Infra::config();
+$conf = Config::get();
 
 $args = array(Catalog::nocache($md));
 $res = Catalog::cache('filters.php filter list', function ($md) {
-	$conf = Infra::config();
+	$conf = Config::get();
 	$ans = array();
 	$params=Catalog::getParams($md['group']);
 	

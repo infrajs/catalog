@@ -85,7 +85,7 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 		$name=Catalog::getProducer($producer);
 		$ans['name']=$name;
 		$ans['title']=$name;
-		$conf=Infra::config();
+		$conf=Config::get();
 		$ans['breadcrumbs'][]=array('title'=>$conf['title'], 'add'=>'producer:');
 		$menu=Load::loadJSON('-catalog/menu.json');
 		$ans['breadcrumbs'][]=array('href'=>'producers','title'=>$menu['producers']['title']);

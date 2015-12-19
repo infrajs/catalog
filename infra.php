@@ -10,6 +10,6 @@ if (!is_file('vendor/autoload.php')) {
 	require_once('vendor/autoload.php');
 }
 
-$conf=&Infra::config('catalog');
+$conf=&Config::get('catalog');
 Catalog::$conf=array_merge(Catalog::$conf, $conf);
 $conf=Catalog::$conf;
