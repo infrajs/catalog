@@ -852,7 +852,7 @@ class Catalog
 	}
 	public static function getPos(&$pos){
 		$args=array($pos['producer'],$pos['article']);
-		return Access::adminCache('getPos', function() use($pos){
+		return Access::cache('getPos', function() use($pos){
 			Xlsx::addFiles($pos);
 			$files=explode(',', @$pos['Файлы']);
 			foreach ($files as $f) {
