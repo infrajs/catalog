@@ -73,6 +73,7 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 	$ans['producers']=array();
 	$ans['numbers']=array(); //Данные для построения интерфейса постраничной разбивки
 	$ans['list']=array(); //Массив позиций
+
 	Catalog::search($md, $ans);
 
 	$conf=Catalog::$conf;

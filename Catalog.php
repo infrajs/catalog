@@ -4,6 +4,7 @@ use infrajs\excel\Xlsx;
 use infrajs\path\Path;
 use infrajs\load\Load;
 use infrajs\cache\Cache;
+use infrajs\access\Access;
 use infrajs\sequence\Sequence;
 
 Path::req('-catalog/Extend.php');
