@@ -4,6 +4,7 @@ namespace infrajs\catalog;
 use infrajs\excel\Xlsx;
 use infrajs\load\Load;
 use infrajs\ans\Ans;
+use infrajs\nostore\Nostore;
 
 $ans=array();
 if(isset($_GET['seo'])){
@@ -39,7 +40,8 @@ $val=strip_tags(@$_GET['val']);
 if (!$val) {
 	return Ans::err($ans, 'Incorrect parameters');
 }
-header('Cache-Controll: no-store');
+//header('Cache-Controll: no-store');
+Nostore::on();
 $val=Path::encode($val);
 $val=Path::toutf($val);
 $id=infra_view_getCookie('cat_id');

@@ -5,6 +5,7 @@ use infrajs\excel\Xlsx;
 use infrajs\path\Path;
 use infrajs\ans\Ans;
 use infrajs\load\Load;
+use infrajs\nostore\Nostore;
 
 
 
@@ -39,7 +40,7 @@ if(isset($_GET['seo'])){
 }
 
 
-header('Cache-Controll: no-store');
+//Nostore::on():
 if (isset($_GET['p'])) {
 	$ans['page']=(int)$_GET['p'];
 	if ($ans['page']<1) $ans['page']=1;

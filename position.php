@@ -2,8 +2,11 @@
 
 namespace infrajs\catalog;
 
+use infrajs\nostore\Nostore;
 use infrajs\excel\Xlsx;
-header('Cache-Controll: no-store');
+
+//Nostoer::on();
+
 $orig_val=Path::toutf(strip_tags($_GET['val']));
 $orig_art=Path::toutf(strip_tags($_GET['art']));
 $val=mb_strtolower($orig_val);
