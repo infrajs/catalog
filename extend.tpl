@@ -68,7 +68,7 @@
 	{no:}Нет
 	{producerlogo:}
 		<a onclick="infrajs.scroll='.breadcrumb'" title="Посмотреть продукцию {Производитель}" href="?{infrajs.ids.catalog.crumb}{:cat.mark.add}producer::.{producer}:1" class="pull-right" style="margin:5px 0 5px 5px">
-			<img src="?-imager/imager.php?w=100&h=100&src={infra.conf.catalog.dir}{producer}/&or=-imager/empty" />
+			<img src="?-imager/imager.php?w=100&h=100&src={infra.config(:catalog).dir}{producer}/&or=-imager/empty" />
 		</a>
 {cat::}*catalog/cat.tpl
 {priceblock:}<div class="alert alert-success" style="clear:right; font-size:140%; padding:5px 10px; margin:15px 0;">{~cost(Цена)}&nbsp;руб.</div>

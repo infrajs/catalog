@@ -2,7 +2,7 @@
 	"tpl":"*catalog/search.tpl",
 	"jsontpl":"*catalog/search.php?val=&m={infra.Crumb.get.m}&p={infra.Crumb.get.p}",
 	"seojsontpl":"*catalog/search.php?seo={infrajs.ids.catalog.crumb}&val=&m={infra.Crumb.get.m}",
-	"autoedittpl":{ "fast":"{infra.conf.catalog.dir}"},
+	"autoedittpl":{ "fast":"{infra.config(:catalog).dir}"},
 	"showanimate":true,
 	"unick":"catalog",
 	"configtpl":{
