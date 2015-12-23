@@ -7,6 +7,7 @@ namespace infrajs\catalog;
 use infrajs\excel\Xlsx;
 use infrajs\load\Load;
 use infrajs\ans\Ans;
+use infrajs\view\View;
 
 $ans=array();
 if(isset($_GET['seo'])){
@@ -16,8 +17,8 @@ if(isset($_GET['seo'])){
 	$link=$_GET['link'];
 	$link=$link.'/producers';
 	$ans['external']='-catalog/seo.json';
-	$ans['canonical']=infra_view_getPath().'?'.$link;
-	return infra_ans($ans);
+	$ans['canonical']=View::getPath().'?'.$link;
+	return Ans::ans($ans);
 }
 $fd=Catalog::initMark($ans);
 

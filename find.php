@@ -1,5 +1,9 @@
 <?php
 
+use infrajs\view\View;
+use infrajs\ans\Ans;
+use infrajs\load\Load;
+
 $ans=array();
 if(isset($_GET['seo'])){
 	if(empty($_GET['link'])){
@@ -8,8 +12,8 @@ if(isset($_GET['seo'])){
 	$link=$_GET['link'];
 	$link=$link.'/find';
 	$ans['external']='-catalog/seo.json';
-	$ans['canonical']=infra_view_getPath().'?'.$link;
-	return infra_ans($ans);
+	$ans['canonical']=View::getPath().'?'.$link;
+	return Ans::ans($ans);
 }
 $ans=Load::loadJSON('-catalog/search.php');
 

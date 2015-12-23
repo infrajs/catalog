@@ -5,6 +5,7 @@ use infrajs\excel\Xlsx;
 use infrajs\path\Path;
 use infrajs\ans\Ans;
 use infrajs\load\Load;
+use infrajs\view\View;
 use infrajs\nostore\Nostore;
 
 
@@ -35,8 +36,8 @@ if(isset($_GET['seo'])){
 	unset($ans['md']);
 	unset($ans['m']);
 	$ans['external']='-catalog/seo.json';
-	$ans['canonical']=infra_view_getPath().'?'.$link;
-	return infra_ans($ans);
+	$ans['canonical']=View::getPath().'?'.$link;
+	return Ans::ans($ans);
 }
 
 
@@ -58,7 +59,7 @@ if (!$re) {
 	if ($md['more']) $re = true;//Не сохраняем когда есть фильтры more
 }
 
-$ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
+$ans=Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 	
 	//1
 	$ans['is']=''; //group producer search Что было найдено по запросу val (Отдельный файл is:change)
@@ -130,9 +131,11 @@ $ans=Catalog::cache('search.php', function ($md, $page) use($ans) {
 	$ans['list']=array_slice($ans['list'], ($page-1)*$md['count'], $md['count']);
 
 	//Text
+
 	$ans['text']=Load::loadTEXT('-doc/get.php?'.$conf['dir'].'articals/'.$ans['title']);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
 	foreach($ans['list'] as $k=>$pos){
 		$pos=Catalog::getPos($pos);
+
 		unset($pos['texts']);
 		unset($pos['files']);
 		$ans['list'][$k]=$pos;

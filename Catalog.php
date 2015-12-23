@@ -853,15 +853,15 @@ class Catalog
 	}
 	public static function getPos(&$pos){
 		$args=array($pos['producer'],$pos['article']);
-		return Access::cache('getPos', function() use($pos){
-			Xlsx::addFiles($pos);
+		return Access::cache('Catalog::getPos', function() use($pos){
+			Xlsx::addFiles(Catalog::$conf['dir'], $pos);
 			$files=explode(',', @$pos['Файлы']);
 			foreach ($files as $f) {
 				if (!$f) {
 					continue;
 				}
 				$f=trim($f);
-				Xlsx::addFiles($pos, Catalog::$conf['dir'].$f);
+				Xlsx::addFiles(Catalog::$conf['dir'], $pos, $f);
 			}
 
 			$files=array();

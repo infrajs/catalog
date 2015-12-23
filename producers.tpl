@@ -14,7 +14,7 @@
 {comma:},
 {point:}.
 {catprod:}
-	<a href='?{crumb.parent}{:cat.mark.add}producer.{~key}:1' title="{~key} {.}"><img alt="{~key}" style="margin-bottom:10px" src="?-imager/imager.php?w=100&src={infra.config(:catalog).dir}{~key}/&or=-imager/empty.png"></a>
-{cat::}*catalog/cat.tpl
+	<a href='?{crumb.parent}{:cat.mark.add}producer.{~key}:1' title="{~key} {.}"><img alt="{~key}" style="margin-bottom:10px" src="/-imager/?w=100&src={infra.config(:catalog).dir}{~key}/&or=-imager/empty.png"></a>
+{cat::}-catalog/cat.tpl
 {cat.mark.set:}{:cat.mark.client.set}
 {cat.mark.add:}{:cat.mark.client.add}

@@ -39,7 +39,7 @@
 	</div>
 	{groups_group:}
 		<div class="col-sm-6">
-			<a class="thumbnail" data-anchor='.breadcrumb' href="?{infrajs.ids.catalog.crumb}{:mark.add}group::.{title}=1">
+			<a class="thumbnail" data-anchor='.breadcrumb' href="/{infrajs.ids.catalog.crumb}{:mark.add}group::.{title}=1">
 				<table>
 					<tr>
 						<td class="img">
@@ -52,7 +52,7 @@
 				</table>
 			</a>
 		</div>
-		{gimg:}<img src="?-imager/imager.php?src={pos.images.0}&w=110&h=80">
+		{gimg:}<img src="/-imager/?src={pos.images.0}&w=110&h=80">
 {breadcrumbs:}
 	<ul class="breadcrumb">
 		{::brcrumb}
@@ -66,7 +66,7 @@
 	{add:}{:mark.add}{add}
 	{hrefmain:}.
 	{href:}?{infrajs.ids.catalog.crumb}{href?:/}{href}{add?:add?(nomark|:mark.set)}
-{mark::}*catalog/mark.tpl
+{mark::}-catalog/mark.tpl
 {/:}/
 {menu:}
 	<div style="margin-top:10px">
@@ -75,4 +75,4 @@
 		</ul>
 	</div>
 	{items:}
-		<li role="presentation"><a data-anchor='.breadcrumb' href="?{config.root}/{~key}{:mark.set}">{title}</a></li>
+		<li role="presentation"><a data-anchor='.breadcrumb' href="/{config.root}/{~key}{:mark.set}">{title}</a></li>

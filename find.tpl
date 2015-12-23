@@ -28,6 +28,6 @@
 	</form>
 	{data.childs:cat.groups}
 	{data.menu:cat.menu}
-{cat::}*catalog/cat.tpl
+{cat::}-catalog/cat.tpl
 {cat.mark.set:}{:cat.mark.client.set}
 {cat.mark.add:}{:cat.mark.client.add}

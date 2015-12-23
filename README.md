@@ -4,7 +4,7 @@
 ```json
 "childs":{
 	"catalog":{
-		"external":"*catalog/catalog.layer.json"
+		"external":"-catalog/catalog.layer.json"
 	}
 }
 ```
@@ -15,7 +15,7 @@ Excel документы в папке ```data/catalog/``` будут интер
 Для автоматически сфомированных фильтров необходим отдельный слой
 ```json
 {
-	"external":"*catalog/filters.layer.json",
+	"external":"-catalog/filters.layer.json",
 }
 ```
 Список позиций можно фильтровать по разным параметрам. 

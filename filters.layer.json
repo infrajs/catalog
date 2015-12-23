@@ -1,5 +1,5 @@
 {
-    "tpl":"*catalog/filters.tpl",
+    "tpl":"-catalog/filters.tpl",
     "tplroot":"filters",
-    "jsontpl":"*catalog/filters.php?m={infra.Crumb.get.m}"
+    "jsontpl":"-catalog/filters.php?m={infra.Crumb.get.m}"
 }

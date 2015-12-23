@@ -28,7 +28,7 @@
 	{showfilter:}
 		<div class="item" data-anchor='.breadcrumb'>
 			
-			<a href="?{infrajs.ids.catalog.crumb}{:cat.mark.add}{name}">
+			<a href="/{infrajs.ids.catalog.crumb}{:cat.mark.add}{name}">
 				<span class="glyphicon glyphicon-remove" style="color:red; font-size:80%"></span>
 				{title}:</a> <b>{value}</b>
 			
@@ -64,7 +64,7 @@
 	<h2>{data.name}</h2>
 	{~length(data.filters)?:showfilters}
 	<p>
-		<a data-anchor='.breadcrumb' href="?{infrajs.ids.catalog.crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
+		<a data-anchor='.breadcrumb' href="/{infrajs.ids.catalog.crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
 	</p>
 {cat_item:}
 	<div class="position">
@@ -109,9 +109,9 @@
 		{empty?:pagenumt?:pagenuma}
 	</li>
 	{pagenumt:}<a>{title}</a>
-	{pagenuma:}<a data-anchor='.pagination' href="?{crumb}{:cat.mark.set}&p={num}">{title}</a>
+	{pagenuma:}<a data-anchor='.pagination' href="/{crumb}{:cat.mark.set}&p={num}">{title}</a>
 {pageact:} active
 {pagedis:} disabled
 {space:}&nbsp;
-{cat::}*catalog/cat.tpl
-{extend::}*catalog/extend.tpl
+{cat::}-catalog/cat.tpl
+{extend::}-catalog/extend.tpl
