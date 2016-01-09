@@ -97,7 +97,7 @@
 		Показать в <a style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='?{infrajs.ids.catalog.crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
 	</div>
 	<script>
-		infra.wait(infrajs, 'onshow', function () {
+		Event.one('Infrajs.onshow', function () {
 			//var layer=infrajs.find('id','{id}');
 			//var md = layer.data.md;
 			var show = infra.session.get('catalog.cog');
