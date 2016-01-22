@@ -14,7 +14,7 @@ $ans=array();
 
 $md=Catalog::initMark($ans);
 
-$val=Ans::get('val');
+$val=Ans::GET('val');
 $val=Path::toutf(strip_tags($val));
 if ($val) $md['search']=$val;//Временное значение
 
