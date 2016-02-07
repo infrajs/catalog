@@ -4,10 +4,10 @@
 		{data.list::prodlist}
 	</ul>
 	<div class="visible-xs visible-sm">
-		<a onclick="infra.scroll='.breadcrumb'" href="/{infrajs.ids.catalog.crumb}{:cat.mark.set}">Показать</a>
+		<a onclick="infra.scroll='.breadcrumb'" href="/{infrajs.name.catalog.crumb}{:cat.mark.set}">Показать</a>
 	</div>
 	{prodlist:}
-		<li><a onclick="infra.scroll=false"{data.fd.producer[~key]?:selprod} href="/{infrajs.ids.catalog.crumb}{:cat.mark.add}producer.{~key}:1">{~key} - {.}</a></li>
+		<li><a onclick="infra.scroll=false"{data.fd.producer[~key]?:selprod} href="/{infrajs.name.catalog.crumb}{:cat.mark.add}producer.{~key}:1">{~key} - {.}</a></li>
 	{selprod:} style="font-weight:bold"
 {cat::}-catalog/cat.tpl
 {filters:}

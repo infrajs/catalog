@@ -30,16 +30,16 @@
 {pos-item:}
 	<div class="row cat_item">
 		<div class="col-xs-4 col-sm-3">
-			<a class="thumbnail" href="/{infrajs.ids.catalog.crumb}/{producer}/{article}{:cat.mark.set}">
+			<a class="thumbnail" href="/{infrajs.name.catalog.crumb}/{producer}/{article}{:cat.mark.set}">
 				<img src="/-imager/?mark=1&w=256&h=256&src={images.0}&or=-imager/empty" />
 			</a>
 		</div>
 		<div class="col-xs-8 col-sm-9">
-			<a class="title padding" href="/{infrajs.ids.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Наименование}</a>
+			<a class="title padding" href="/{infrajs.name.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Наименование}</a>
 			{:producerlogo}
 			<div class="padding">
-				<b><a href="/{infrajs.ids.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Производитель} {Артикул}</a></b>
-				<div class="pull-right" style="font-size:90%"><a onclick="infrajs.scroll='.breadcrumb'" href="/{infrajs.ids.catalog.crumb}{:cat.mark.add}group::.{group}:1">{Группа}</a></div>
+				<b><a href="/{infrajs.name.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Производитель} {Артикул}</a></b>
+				<div class="pull-right" style="font-size:90%"><a onclick="infrajs.scroll='.breadcrumb'" href="/{infrajs.name.catalog.crumb}{:cat.mark.add}group::.{group}:1">{Группа}</a></div>
 			</div>
 			{more?:havemore?:nomore}
 		</div>
@@ -53,21 +53,21 @@
 			<span style="border-bottom:1px dashed gray; cursor:pointer" onclick="$(this).next().slideToggle();">Описание</span>
 			<div style="display:none;">
 				{Описание}
-				<b><a href="/{infrajs.ids.catalog.crumb}/{producer}/{article}{:cat.mark.set}">Подробнее</a></b>
+				<b><a href="/{infrajs.name.catalog.crumb}/{producer}/{article}{:cat.mark.set}">Подробнее</a></b>
 			</div>
 		</div>
 	{nomore:}
 		<div class="padding">
 			<div style="font-family:Tahoma; font-size:85%;">{Описание}</div>
 			{Цена?:priceblock}
-			<b><a href="/{infrajs.ids.catalog.crumb}/{producer}/{article}{:cat.mark.set}">Подробнее</a></b>
+			<b><a href="/{infrajs.name.catalog.crumb}/{producer}/{article}{:cat.mark.set}">Подробнее</a></b>
 		</div>
 	{cat_more:}{(.&(.!:no))?:more}
 	{more:}{~key}:&nbsp;{.}{~last()|:comma}
 	{comma:}, 
 	{no:}Нет
 	{producerlogo:}
-		<a onclick="infrajs.scroll='.breadcrumb'" title="Посмотреть продукцию {Производитель}" href="/{infrajs.ids.catalog.crumb}{:cat.mark.add}producer::.{producer}:1" class="pull-right" style="margin:5px 0 5px 5px">
+		<a onclick="infrajs.scroll='.breadcrumb'" title="Посмотреть продукцию {Производитель}" href="/{infrajs.name.catalog.crumb}{:cat.mark.add}producer::.{producer}:1" class="pull-right" style="margin:5px 0 5px 5px">
 			<img src="/-imager/?w=100&h=100&src={infra.config(:strcatalog).dir}{producer}/&or=-imager/empty" />
 		</a>
 {cat::}-catalog/cat.tpl

@@ -39,7 +39,7 @@
 	</div>
 	{groups_group:}
 		<div class="col-sm-6">
-			<a class="thumbnail" data-anchor='.breadcrumb' href="/{infrajs.ids.catalog.crumb}{:mark.add}group::.{title}=1">
+			<a class="thumbnail" data-anchor='.breadcrumb' href="/{infrajs.name.catalog.crumb}{:mark.add}group::.{title}=1">
 				<table>
 					<tr>
 						<td class="img">
@@ -65,7 +65,7 @@
 		<li class="active">{title}</li>
 	{add:}{:mark.add}{add}
 	{hrefmain:}.
-	{href:}?{infrajs.ids.catalog.crumb}{href?:/}{href}{add?:add?(nomark|:mark.set)}
+	{href:}?{infrajs.name.catalog.crumb}{href?:/}{href}{add?:add?(nomark|:mark.set)}
 {mark::}-catalog/mark.tpl
 {/:}/
 {menu:}
