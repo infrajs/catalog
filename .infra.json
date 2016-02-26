@@ -1,6 +1,8 @@
 {
 	"pub":["dir", "title"],
+	"dependencies":["path"],
 	"tester":"tests/",
+	"update":"update.php",
 	"dir":"~catalog/",
 	"cache":["~catalog/","!mem/configmd5.json"],
 	"title":"Каталог",
