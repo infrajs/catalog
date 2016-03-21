@@ -56,7 +56,7 @@ class Mark
 		if (isset(self::$instances[$mark])) {
 			return self::$instances[$mark];
 		}
-		self::$instances[$mark]=new Self($mark);
+		self::$instances[$mark]=new self($mark);
 		return self::$instances[$mark];
 	}
 	private function __construct($mark)
