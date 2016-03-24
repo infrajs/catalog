@@ -7,6 +7,7 @@ use infrajs\excel\Xlsx;
 use infrajs\view\View;
 use infrajs\path\Path;
 use infrajs\ans\Ans;
+use infrajs\config\Config;
 
 //Nostoer::on();
 
