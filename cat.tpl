@@ -39,7 +39,7 @@
 	</div>
 	{groups_group:}
 		<div class="col-sm-6">
-			<a class="thumbnail" data-anchor='.breadcrumb' href="/{infrajs.name.catalog.crumb}{:mark.add}group::.{title}=1">
+			<a class="thumbnail" data-anchor='.breadcrumb' href="/{infrajs.names.catalog.crumb}{:mark.add}group::.{title}=1">
 				<table>
 					<tr>
 						<td class="img">
