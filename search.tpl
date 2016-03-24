@@ -94,7 +94,7 @@
 			<option {data.md.count=:20?:selected}>20</option>
 			<option {data.md.count=:100?:selected}>100</option>
 		</select> позиций на странице<br>
-		Показать в <a style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='?{infrajs.name.catalog.crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
+		Показать в <a style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='/{infrajs.name.catalog.crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
 	</div>
 	<script>
 		Event.one('Infrajs.onshow', function () {
@@ -109,7 +109,7 @@
 		{empty?:pagenumt?:pagenuma}
 	</li>
 	{pagenumt:}<a>{title}</a>
-	{pagenuma:}<a data-anchor='.pagination' href="/{crumb}{:cat.mark.set}&p={num}">{title}</a>
+	{pagenuma:}<a data-anchor='.pagination' href="/{crumb}{:cat.mark.set}?p={num}">{title}</a>
 {pageact:} active
 {pagedis:} disabled
 {space:}&nbsp;

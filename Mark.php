@@ -1,6 +1,10 @@
 <?php
 namespace infrajs\catalog;
 use infrajs\once\Once;
+use infrajs\sequence\Sequence;
+use infrajs\load\Load;
+use infrajs\each\Each;
+use infrajs\path\Path;
 /**
  * Класс обеспечивает негарантированное хранение параметров в экстрокороткой строке из ~2 символов
  * Это работает за счёт сохранения объекта данных в 2х символах, со временем данные этих ~2х символов буду заменены, но нам важно только короткая память

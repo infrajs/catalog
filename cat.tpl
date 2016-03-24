@@ -65,7 +65,7 @@
 		<li class="active">{title}</li>
 	{add:}{:mark.add}{add}
 	{hrefmain:}.
-	{href:}?{infrajs.name.catalog.crumb}{href?:/}{href}{add?:add?(nomark|:mark.set)}
+	{href:}/{infrajs.names.catalog.crumb}{href?:/}{href}{add?:add?(nomark|:mark.set)}
 {mark::}-catalog/mark.tpl
 {/:}/
 {menu:}
