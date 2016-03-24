@@ -878,6 +878,7 @@ class Catalog
 				if (!$d['size']) {
 					$d['size']='0.01';
 				}
+				$d['src']=Path::pretty($d['src']);
 				$files[]=$d;
 			}
 			$pos['files']=$files;

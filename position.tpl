@@ -56,7 +56,7 @@
 		</ul>
 	{file:}
 		<li class="ico" style="background-image:url('/-autoedit/icons/{ext}.png')">
-			<a href="{src}">{name}</a> {size}&nbsp;Mb
+			<a href="/{src}">{name}</a> {size}&nbsp;Mb
 		</li>
 {text:}
 	{.}
