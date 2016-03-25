@@ -576,7 +576,7 @@ class Catalog
 		
 		$mark=Mark::getInstance($mark);
 		$md=$mark->getData();
-		
+
 
 		$defmd=array_merge(Catalog::$md, Catalog::$conf['md']);	
 		

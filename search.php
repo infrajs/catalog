@@ -59,8 +59,7 @@ if (!$re) {
 	if ($md['more']) $re = true;//Не сохраняем когда есть фильтры more
 }
 
-$ans=Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
-	
+$ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 	//1
 	$ans['is']=''; //group producer search Что было найдено по запросу val (Отдельный файл is:change)
 	$ans['descr']='';//абзац текста в начале страницы';

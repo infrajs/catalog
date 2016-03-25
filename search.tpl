@@ -33,6 +33,7 @@
 				{title}:</a> <b>{value}</b>
 			
 		</div>
+{cat.mark.add:}{:cat.mark.server.add}
 {searchbad:}
 	<h1>{title}</h1>
 	<p>К сожалению позиции не найдены.</p>

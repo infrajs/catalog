@@ -4,14 +4,15 @@
 	<form style="margin-bottom:30px" class="form-horizontal" onsubmit="
 		var val=$(this).find('[type=text]').val();
 		val=infra.forFS(val);
-		var layer=infrajs.find('name','catalog');
+		var layer=infrajs.names.catalog;
 		
 		if (infra.Crumb.get.m) {
-			var params='&m='+infra.Crumb.get.m;
+			var params='?m='+infra.Crumb.get.m;
 		} else {
-			var params='';
+			var params='?m=';
 		}
-		infra.Crumb.go(layer.crumb.name+'/'+val+params);
+		params+=':search='+val;
+		infra.Crumb.go('/'+layer.config.root+params);
 		setTimeout(function(){
 			$.getJSON(infra.theme('-catalog/stat.php?submit=1&val='+val));
 		},1);
