@@ -9,7 +9,7 @@
 		Задать вопрос о {Производитель} {Артикул} можно с помощью <span class="a showContacts">формы для сообщений</span> или c помощью других <a href="/contacts">контактов</a>.
 	</p>
 	<p>
-		Перейти к группе <a onclick="infrajs.scroll='.breadcrumb'" href="/{crumb.parent.parent}{:cat.mark.add}group::.{group}:1">{Группа}</a><br>
+		Перейти к группе <a onclick="infrajs.scroll='.breadcrumb'" href="/{crumb.parent.parent}{:cat.mark.add}group::.{group}=1">{Группа}</a><br>
 	</p>
 {pos-list:}
 	<style scoped>
@@ -39,7 +39,7 @@
 			{:producerlogo}
 			<div class="padding">
 				<b><a href="/{infrajs.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Производитель} {Артикул}</a></b>
-				<div class="pull-right" style="font-size:90%"><a onclick="infrajs.scroll='.breadcrumb'" href="/{infrajs.names.catalog.crumb}{:cat.mark.add}group::.{group}:1">{Группа}</a></div>
+				<div class="pull-right" style="font-size:90%"><a onclick="infrajs.scroll='.breadcrumb'" href="/{infrajs.names.catalog.crumb}{:cat.mark.add}group::.{group}=1">{Группа}</a></div>
 			</div>
 			{more?:havemore?:nomore}
 		</div>
@@ -67,7 +67,7 @@
 	{comma:}, 
 	{no:}Нет
 	{producerlogo:}
-		<a onclick="infrajs.scroll='.breadcrumb'" title="Посмотреть продукцию {Производитель}" href="/{infrajs.names.catalog.crumb}{:cat.mark.add}producer::.{producer}:1" class="pull-right" style="margin:5px 0 5px 5px">
+		<a onclick="infrajs.scroll='.breadcrumb'" title="Посмотреть продукцию {Производитель}" href="/{infrajs.names.catalog.crumb}{:cat.mark.add}producer::.{producer}=1" class="pull-right" style="margin:5px 0 5px 5px">
 			<img src="/-imager/?w=100&h=100&src={infra.config(:strcatalog).dir}{producer}/&or=-imager/empty" />
 		</a>
 {cat::}-catalog/cat.tpl

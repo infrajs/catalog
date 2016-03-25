@@ -13,7 +13,7 @@ class Catalog
 	public static $conf= array(
 		"pub"=>array("dir", "title"),
 		"dir"=>"~catalog/",
-		"cache"=>array("~catalog/","!mem/configmd5.json"),
+		"cache"=>array("~catalog/"),
 		"title"=>"Каталог",
 		"md"=>array(),
 		"filename"=>"Производитель",
@@ -387,15 +387,15 @@ class Catalog
 	}
 	public static function getGroups($list, $now = false) {
 		//Groups
-		$subgroups=Catalog::cache('search.php subgroups', function () {
-			//Микров вставка всё ради того чтобы не пользоваться $data на этом уровне
+		
+
+		$subgroups = Catalog::cache('getGroups', function () {
+			//Микро вставка всё ради того чтобы не пользоваться $data на этом уровне
 			//данный кэш один для любой страницы каталога
 			$subgroups=array();
-			$data=Catalog::init();
+			$data = Catalog::init();
 			Xlsx::runGroups($data, function ($group) use (&$subgroups) {
-				if (empty($group['childs'])) {
-					return;
-				}
+				if (empty($group['childs'])) return;
 				$subgroup=array();
 				array_walk($group['childs'], function ($g) use (&$subgroup) {
 					$subgroup[]=array('title'=>$g['title'],'name'=>$g['name']);
@@ -404,6 +404,7 @@ class Catalog
 			});
 			return $subgroups;
 		});
+		
 		$groups=array();
 		foreach ($list as &$pos) {
 			$path=$pos['path'];
@@ -598,10 +599,8 @@ class Catalog
 	public static function filtering(&$poss, $md)
 	{
 		if (!sizeof($poss)) return;
-		
 		$params=Catalog::getParams();
 		$filters=array();
-		
 		foreach($params as $prop){
 
 			if ($prop['more']) {
@@ -706,13 +705,15 @@ class Catalog
 				$filters[] = $filter;
 			}
 		}
-		
 		//Filter group
 		$key='group';
 		if (!empty($md[$key])) {
 			$title='Группа';
 			$val=$md[$key];
-			$filter=array('title'=>$title, 'name'=>Sequence::short(array(Catalog::urlencode($key))));
+			$filter = array('title'=>$title, 'name'=>Sequence::short(array(Catalog::urlencode($key))));
+
+			
+
 			$poss=array_filter($poss, function ($pos) use ($key, $val) {
 				$prop=$pos[$key];
 				foreach ($val as $value => $one) {

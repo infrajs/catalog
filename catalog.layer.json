@@ -1,4 +1,5 @@
 {
+	"domready":true,
 	"tpl":"-catalog/search.tpl",
 	"jsontpl":"-catalog/search.php?val=&m={infra.Crumb.get.m}&p={infra.Crumb.get.p}",
 	"seojsontpl":"-catalog/search.php?seo={infrajs.names.catalog.crumb}&val=&m={infra.Crumb.get.m}",

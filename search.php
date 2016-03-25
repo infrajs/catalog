@@ -7,7 +7,7 @@ use infrajs\ans\Ans;
 use infrajs\load\Load;
 use infrajs\view\View;
 use infrajs\nostore\Nostore;
-
+use infrajs\config\Config;
 
 
 $ans=array();
@@ -23,10 +23,10 @@ if(isset($_GET['seo'])){
 	$link=$_GET['seo'];
 	if($md['group']){
 		foreach($md['group'] as $val => $one) break;
-		$link=$link.'&m=:group.'.$val.':1';
+		$link=$link.'&m=:group.'.$val.'=1';
 	} else if($md['producer']){
 		foreach($md['producer'] as $val => $one) break;
-		$link=$link.'&m=:producer.'.$val.':1';
+		$link=$link.'&m=:producer.'.$val.'=1';
 	} else if($md['search']){
 		$val=$md['search'];
 		$link=$link.'&m=:search:'.$val;
@@ -88,11 +88,11 @@ $ans=Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 		$name=Catalog::getProducer($producer);
 		$ans['name']=$name;
 		$ans['title']=$name;
-		$conf=Config::get();
+		$conf=Config::get('catalog');
 		$ans['breadcrumbs'][]=array('title'=>$conf['title'], 'add'=>'producer:');
 		$menu=Load::loadJSON('-catalog/menu.json');
 		$ans['breadcrumbs'][]=array('href'=>'producers','title'=>$menu['producers']['title']);
-		$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$name.':1','title'=>$name);
+		$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$name.'=1','title'=>$name);
 	} else if (!$md['group'] && $md['search']) {
 		$ans['is']='search';
 		$ans['name']=$md['search'];
@@ -110,7 +110,7 @@ $ans=Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 		$ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title'], 'add'=>'group:');
 		array_map(function ($p) use (&$ans) {
 			$group=Catalog::getGroup($p);
-			$ans['breadcrumbs'][]=array('href'=>'','title'=>$group['name'], 'add'=>'group::group.'.$p.':1');
+			$ans['breadcrumbs'][]=array('href'=>'','title'=>$group['name'], 'add'=>'group::group.'.$p.'=1');
 		}, $group['path']);
 		if (sizeof($ans['breadcrumbs'])==1) {
 			array_unshift($ans['breadcrumbs'],array('main'=>true,"title"=>"Главная","nomark"=>true));

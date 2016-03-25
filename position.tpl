@@ -74,7 +74,7 @@
 		src="/-imager/?mark=1&h=100&src={:imgsrc}" /></a>
 {producer:}
 	<div style="float:right; background-color:white; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
-		<a onclick="infrajs.scroll='.pagination'" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer::.{producer}:1">
+		<a onclick="infrajs.scroll='.pagination'" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer::.{producer}=1">
 			<img style="margin-left:5px" src="/-imager/?w=160&h=100&src={infra.config(:catalog).dir}{producer}/&or=-imager/empty.png" />
 		</a>
 	</div>

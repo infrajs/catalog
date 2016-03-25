@@ -4,7 +4,7 @@
 	"tester":"tests/",
 	"update":"update.php",
 	"dir":"~catalog/",
-	"cache":["~catalog/","!mem/configmd5.json"],
+	"cache":["~catalog/"],
 	"title":"Каталог",
 	"md":{ },
 	"filename":"Производитель",

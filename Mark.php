@@ -98,7 +98,7 @@ class Mark
 		$this->data=$this->old;
 		
 		$add=implode($this->sym, $r);
-		if($add!==''){
+		if($add !== ''){
 			$r = explode($this->sym, $add);
 			$l = sizeof($r);
 			if ($this->sym == $this->symeq) {

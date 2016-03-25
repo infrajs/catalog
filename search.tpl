@@ -83,10 +83,10 @@
 	<div class="clearfix"></div>
 	<a class="pull-right" onclick="infra.session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');" style="cursor:pointer"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
 	<div class="settings alert alert-info" style="display:none">
-		Сортировать <a style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='?{infrajs.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,
-			<a style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='?{infrajs.names.catalog.crumb}{:cat.mark.add}sort=name'>по названию</a>, 
-			<a style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='?{infrajs.names.catalog.crumb}{:cat.mark.add}sort=cost'>по цене</a>, 
-			<a style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='?{infrajs.names.catalog.crumb}{:cat.mark.add}sort=change'>по дате</a><br>
+		Сортировать <a style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,
+			<a style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort=name'>по названию</a>, 
+			<a style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort=cost'>по цене</a>, 
+			<a style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort=change'>по дате</a><br>
 		Показывать по
 		<select onchange="infra.Crumb.go('?{infrajs.names.catalog.crumb}{:cat.mark.add}count='+$(this).val()); ascroll.go('.pagination');">
 			<option {data.md.count=:5?:selected}>5</option>
@@ -97,11 +97,11 @@
 		Показать в <a style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
 	</div>
 	<script>
-		Event.one('Infrajs.onshow', function () {
-			//var layer=infrajs.find('id','{id}');
-			//var md = layer.data.md;
-			var show = infra.session.get('catalog.cog');
-			if (show) $('.settings').show();
+		domready(function () {
+			Event.one('Infrajs.onshow', function () {
+				var show = infra.session.get('catalog.cog');
+				if (show) $('.settings').show();
+			});
 		});
 	</script>
 {pagenum:}
@@ -109,7 +109,7 @@
 		{empty?:pagenumt?:pagenuma}
 	</li>
 	{pagenumt:}<a>{title}</a>
-	{pagenuma:}<a data-anchor='.pagination' href="/{crumb}{:cat.mark.set}?p={num}">{title}</a>
+	{pagenuma:}<a data-anchor='.pagination' href="/{crumb}?p={num}{:cat.mark.aset}">{title}</a>
 {pageact:} active
 {pagedis:} disabled
 {space:}&nbsp;

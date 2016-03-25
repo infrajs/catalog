@@ -61,14 +61,14 @@ if ($pos) {
 	
 	$ans['pos']=$pos;
 	array_map(function($p) use (&$ans){
-			$ans['breadcrumbs'][]=array('title'=>$p,'add'=>'group::group.'.$p.':1');
+			$ans['breadcrumbs'][]=array('title'=>$p,'add'=>'group::group.'.$p.'=1');
 	}, $pos['path']);
-	$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$orig_val.':1', 'title'=>$orig_val);
+	$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$orig_val.'=1', 'title'=>$orig_val);
 	$ans['breadcrumbs'][]=array('title'=>$orig_art);
 	return Ans::ret($ans);
 } else {
 	$ans['breadcrumbs'][]=array('href'=>'producers','title'=>'Производители');
-	$ans['breadcrumbs'][]=array('href'=>'','title'=>$orig_val,'add'=>'producer::producer.'.$orig_val.':1');
+	$ans['breadcrumbs'][]=array('href'=>'','title'=>$orig_val,'add'=>'producer::producer.'.$orig_val.'=1');
 	$ans['breadcrumbs'][]=array('title'=>$orig_art);
 	return Ans::err($ans);
 }
