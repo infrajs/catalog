@@ -45,8 +45,10 @@
 		</table>
 		{texts::text}
 		{~length(files)?:files}
-		<hr>
-		{:extend.pos-sign}
+		<div style="clear:left">
+			<hr>
+			{:extend.pos-sign}
+		</div>
 	</div>
 {pos_more:}<tr><td>{~key}:</td><td style="text-align:left">{.}</td></tr>
 {files:}
