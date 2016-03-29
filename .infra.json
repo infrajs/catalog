@@ -3,6 +3,7 @@
 	"dependencies":["path"],
 	"tester":"tests/",
 	"update":"update.php",
+	"conf":"infrajs\\catalog\\Catalog",
 	"dir":"~catalog/",
 	"cache":["~catalog/"],
 	"title":"Каталог",
