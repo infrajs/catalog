@@ -4,10 +4,10 @@
 		{data.list::prodlist}
 	</ul>
 	<div class="visible-xs visible-sm">
-		<a onclick="infra.scroll='.breadcrumb'" href="/{infrajs.names.catalog.crumb}{:cat.mark.set}">Показать</a>
+		<a data-anchor=".breadcrumb" href="/{infrajs.names.catalog.crumb}{:cat.mark.set}">Показать</a>
 	</div>
 	{prodlist:}
-		<li><a onclick="infra.scroll=false"{data.fd.producer[~key]?:selprod} href="/{infrajs.names.catalog.crumb}{:cat.mark.add}producer.{~key}=1">{~key} - {.}</a></li>
+		<li><a data-ascroll="false"{data.fd.producer[~key]?:selprod} href="/{infrajs.names.catalog.crumb}{:cat.mark.add}producer.{~key}=1">{~key} - {.}</a></li>
 	{selprod:} style="font-weight:bold"
 {cat::}-catalog/cat.tpl
 {filters:}
@@ -37,7 +37,7 @@
 			{data.template::param}
 		</div>
 		<div class="space">
-			Найдено <a onclick="infra.scroll='.breadcrumb'" href="/catalog{:cat.mark.set}">{data.search} {~words(data.search,:pos1,:pos2,:pos5)}</a>
+			Найдено <a data-anchor=".breadcrumb" href="/catalog{:cat.mark.set}">{data.search} {~words(data.search,:pos1,:pos2,:pos5)}</a>
 		</div>
 		{pos1:}позиция
 		{pos2:}позиции
@@ -49,7 +49,7 @@
 	</div>
 {option:}
 	<div class="{filter??:disabled}">
-		<label>
+		<label style="cursor:pointer">
 		  {:box} {title}&nbsp;<small>{filter}</small>
 		</label>
 	</div>
@@ -62,4 +62,4 @@
 	</div>
 {checked:}checked
 {disabled:}disabled
-{box:}<input onchange="infra.scroll=false; infra.Crumb.go('/catalog{:cat.mark.add}{add}')" {checked?:checked} type="checkbox">
+{box:}<input onchange="ascroll.once = false; infra.Crumb.go('/catalog{:cat.mark.add}{add}')" {checked?:checked} type="checkbox">
