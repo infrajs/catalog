@@ -62,4 +62,4 @@
 	</div>
 {checked:}checked
 {disabled:}disabled
-{box:}<input onchange="infra.scroll=false; infra.Crumb.go('?catalog{:cat.mark.add}{add}')" {checked?:checked} type="checkbox">
+{box:}<input onchange="infra.scroll=false; infra.Crumb.go('/catalog{:cat.mark.add}{add}')" {checked?:checked} type="checkbox">

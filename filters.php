@@ -6,14 +6,17 @@
 namespace infrajs\catalog;
 
 use infrajs\excel\Xlsx;
+use infrajs\config\Config;
+use infrajs\path\Path;
+use infrajs\sequence\Sequence;
+use infrajs\ans\Ans;
 
 $ans = array();
 $md = Catalog::initMark($ans);
-$conf = Config::get();
 
 $args = array(Catalog::nocache($md));
 $res = Catalog::cache('filters.php filter list', function ($md) {
-	$conf = Config::get();
+	$conf = Config::get('catalog');
 	$ans = array();
 	$params=Catalog::getParams($md['group']);
 	
@@ -186,7 +189,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 		if($block['checked']){
 			$block['add']=$add.$paramid.'.yes:';
 		} else {
-			$block['add']=$add.$paramid.'.yes:1';  
+			$block['add']=$add.$paramid.'.yes=1';  
 		}
 		
 		$block['title']=$param['title'];
@@ -205,7 +208,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			if($row['checked']){
 				$row['add']=$add.$paramid.'.no:';
 			} else {
-				$row['add']=$add.$paramid.'.no:1';    
+				$row['add']=$add.$paramid.'.no=1';    
 			}
 			$block['row'][]=$row;
 		}
@@ -220,13 +223,13 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 				if($row['checked']){
 					$row['add']=$add.$paramid.'.'.$valueid.':';
 				} else {
-					$row['add']=$add.$paramid.'.'.$valueid.':1';
+					$row['add']=$add.$paramid.'.'.$valueid.'=1';
 				}
 				
 				$block['row'][]=$row;
 			}
 		}
-		if($conf['catalog']['filteroneitem']||sizeof($block['row'])>1)$ans['template'][]=$block;
+		if($conf['filteroneitem']||sizeof($block['row'])>1)$ans['template'][]=$block;
 	}
 	
 	return $ans;
