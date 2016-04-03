@@ -187,7 +187,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 		
 		
 		if($block['checked']){
-			$block['add']=$add.$paramid.'.yes:';
+			$block['add']=$add.$paramid.'.yes=';
 		} else {
 			$block['add']=$add.$paramid.'.yes=1';  
 		}
@@ -206,7 +206,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			);
 			$row['checked']=!!$mymd['no'];
 			if($row['checked']){
-				$row['add']=$add.$paramid.'.no:';
+				$row['add']=$add.$paramid.'.no=';
 			} else {
 				$row['add']=$add.$paramid.'.no=1';    
 			}
@@ -221,7 +221,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 				$row['checked']=!!$mymd[$value['id']];
 				$valueid=Sequence::short(array(Catalog::urlencode($value['id'])));
 				if($row['checked']){
-					$row['add']=$add.$paramid.'.'.$valueid.':';
+					$row['add']=$add.$paramid.'.'.$valueid.'=';
 				} else {
 					$row['add']=$add.$paramid.'.'.$valueid.'=1';
 				}
