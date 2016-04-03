@@ -601,29 +601,29 @@ class Catalog
 		if (!sizeof($poss)) return;
 		$params=Catalog::getParams();
 		$filters=array();
+
 		foreach($params as $prop){
 
 			if ($prop['more']) {
 				if (empty($md['more'])) continue; //Filter more
 				if (empty($md['more'][$prop['mdid']])) continue; //Filter more
+				
+				
+
 				$valtitles = array();
 				$val = $md['more'][$prop['mdid']];
-				foreach($val as $value => $one) $valtitles[$value] = $value;
+				foreach ($val as $value => $one) $valtitles[$value] = $value;
 
 				$filter = array(
 					'title' => $prop['title'], 
 					'name' => Sequence::short(array('more', Catalog::urlencode($prop['mdid'])))
 				);
-				
-
-				$poss=array_filter($poss, function ($pos) use ($prop, $val, &$valtitles) {
-
-					foreach($val as $value => $one) {
+				$poss = array_filter($poss, function ($pos) use ($prop, $val, &$valtitles) {
+					foreach ($val as $value => $one) {
+						$option = $pos['more'][$prop['posid']];
 						if ($value === 'yes' && Xlsx::isSpecified($option)) return true;
 						if ($value === 'no' && !Xlsx::isSpecified($option)) return true;
-
-						$option=$pos['more'][$prop['posid']];
-						$titles=$pos['more'][$prop['posname']];
+						$titles = $pos['more'][$prop['posname']];
 						if ($prop['separator']) {
 							$option=explode($prop['separator'], $option);
 							$titles=explode($prop['separator'], $titles);
