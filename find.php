@@ -13,7 +13,7 @@ if(isset($_GET['seo'])){
 	$link=$_GET['link'];
 	$link=$link.'/find';
 	$ans['external']='-catalog/seo.json';
-	$ans['canonical']=View::getPath().'?'.$link;
+	$ans['canonical']=View::getPath().$link;
 	return Ans::ans($ans);
 }
 $ans=Load::loadJSON('-catalog/search.php');

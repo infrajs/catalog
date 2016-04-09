@@ -17,7 +17,7 @@ if(isset($_GET['seo'])){
 	$link=$_GET['link'];
 	$link=$link.'/producers';
 	$ans['external']='-catalog/seo.json';
-	$ans['canonical']=View::getPath().'?'.$link;
+	$ans['canonical']=View::getPath().$link;
 	return Ans::ans($ans);
 }
 $fd=Catalog::initMark($ans);
