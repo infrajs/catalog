@@ -75,8 +75,8 @@ class Catalog
 	public static function markData(&$md)
 	{
 		if (isset($md['sort'])) {
-			$md['sort']=(string)$md['sort'];// price, name, def, group, producer
-			if (!in_array($md['sort'], array('name', 'group', 'producer','change','cost'))) {
+			$md['sort']=(string)$md['sort'];// price, name, def, group
+			if (!in_array($md['sort'], array('name','art', 'group','change','cost'))) {
 				unset($md['sort']);
 			}
 		}
@@ -338,6 +338,13 @@ class Catalog
 				usort($poss, function ($a, $b) {
 					$a=$a['Наименование'];
 					$b=$b['Наименование'];
+					if ($a == $b) return 0;
+					return ($a < $b) ? 1 : -1;
+				});
+			} else if ($md['sort']=='art') {
+				usort($poss, function ($a, $b) {
+					$a=$a['Артикул'];
+					$b=$b['Артикул'];
 					if ($a == $b) return 0;
 					return ($a < $b) ? 1 : -1;
 				});

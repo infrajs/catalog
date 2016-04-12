@@ -85,9 +85,10 @@
 	<a class="pull-right" onclick="infra.session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');" style="cursor:pointer"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
 	<div class="settings alert alert-info" style="display:none">
 		Сортировать <a style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,
-			<a style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort=name'>по названию</a>, 
-			<a style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort=cost'>по цене</a>, 
-			<a style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort=change'>по дате</a><br>
+			<a style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:name|:name}'>по наименованию</a>, 
+			<a style="font-weight:{data.md.sort=:art?:bold}"data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:art|:art}'>по артикулу</a>, 
+			<a style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:cost|:cost}'>по цене</a>, 
+			<a style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:change|:change}'>по дате изменений</a><br>
 		Показывать по
 		<select onchange="infra.Crumb.go('?{infrajs.names.catalog.crumb}{:cat.mark.add}count='+$(this).val()); ascroll.go('.pagination');">
 			<option {data.md.count=:5?:selected}>5</option>
