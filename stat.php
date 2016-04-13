@@ -31,7 +31,7 @@ if (!$data) {
 }
 
 if (!$submit) {
-	$ans['text']=Load::loadTEXT('-doc/get.php?'+$conf['dir'].'/articals/stat');
+	$ans['text']=Load::loadTEXT('-doc/get.php?src='+$conf['dir'].'/articals/stat');
 	$ans['stat']=$data;
 	return Ans::ret($ans);
 }

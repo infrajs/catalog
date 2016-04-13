@@ -131,7 +131,7 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 
 	//Text
 
-	$ans['text']=Load::loadTEXT('-doc/get.php?'.$conf['dir'].'articals/'.$ans['title']);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
+	$ans['text']=Load::loadTEXT('-doc/get.php?src='.$conf['dir'].'articals/'.$ans['title']);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
 	foreach($ans['list'] as $k=>$pos){
 		$pos=Catalog::getPos($pos);
 
