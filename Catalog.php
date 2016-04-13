@@ -892,7 +892,7 @@ class Catalog
 			$pos['files']=$files;
 			if ($pos['texts']) {
 				foreach ($pos['texts'] as $k => $t) {
-					$pos['texts'][$k]=Load::loadTEXT('-doc/get.php?'.$t);
+					$pos['texts'][$k]=Load::loadTEXT('-doc/get.php?src='.$t);
 				}
 			}
 			return $pos;
