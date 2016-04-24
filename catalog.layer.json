@@ -39,7 +39,7 @@
 			"tpl":"-catalog/producers.tpl",
 			"jsontpl":"-catalog/producers.php?lim=0,200&m={infra.Crumb.get.m}",
 			"seojsontpl":"-catalog/producers.php?seo={infrajs.names.catalog.crumb}",
-			"autoedit":{ "fast":"*Тексты/Производители"},
+			"autoedit":{ "fast":"{infra.config(:catalog).dir}article/Производители"},
 			"configtpl":{
 				"root":"{crumb.parent}"
 			}
@@ -48,7 +48,7 @@
 			"tpl":"-catalog/stat.tpl",
 			"json":"-catalog/stat.php",
 			"seojsontpl":"-catalog/stat.php?seo={infrajs.names.catalog.crumb}",
-			"autoedit":{ "fast":"*Тексты/Статистика поиска по каталогу"},
+			"autoedit":{ "fast":"{infra.config(:catalog).dir}article/Статистика поиска по каталогу"},
 			"configtpl":{
 				"root":"{crumb.parent}"
 			}

@@ -10,7 +10,7 @@
 	"md":{ },
 	"filename":"Производитель",
 	"columns":[],
-	"filteroneitem":true, //Показывать ли фильтр в котором только один пункт, который true для всей выборке
+	"filteroneitem":true,
 	"filters":{
 		"producer":{
 			"posid":"producer",
@@ -20,7 +20,7 @@
 		},
 		"cost":{
 			"posid":"Цена",
-			"posname":"Цена", //Можно ли писать комменты
+			"posname":"Цена",
 			"title":"Цена",
 			"separator":false
 		}

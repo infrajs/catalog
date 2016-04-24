@@ -182,7 +182,7 @@ class Mark
 			}
 
 			$src=Path::theme('~.marks/');
-			if(!$src)die('Fatal error no marks dir');
+			if (!$src) die('Fatal error no marks dir');
 			$src=$src.$this->prefix.$mark.'.json';
 			$data = Load::json_encode(array(
 				'time'=>time(),
