@@ -25,7 +25,7 @@ $conf=Catalog::$conf;
 $ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title'],'add'=>'group');
 $ans['breadcrumbs'][]=array('href'=>'stat','title'=>'Статистика поиска');
 
-$data=Load::loadJSON('~catalog_stat.json');
+$data = Load::loadJSON('~catalog-stat.json');
 if (!$data) {
 	$data=array('users' => array(),'cat_id' => 0,'time' => time());//100 10 user list array('val'=>$val,'time'=>time())
 }
@@ -83,7 +83,7 @@ array_unshift($data['users'], $user);
 if (sizeof($data['users'])>100) {
 	$data['users']=array_slice($data['users'], 0, 50);
 }
-file_put_contents(Path::resolve('~catalog_stat.json'), Load::json_encode($data));
+file_put_contents(Path::resolve('~catalog-stat.json'), Load::json_encode($data));
 $ans['data']=$data;
 
 return Ans::ret($ans);

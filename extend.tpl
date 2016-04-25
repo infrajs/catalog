@@ -27,12 +27,14 @@
 			color:white;
 		}
 	</style>
+{pos-img:}
+   <a class="thumbnail" href="/{infrajs.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">
+		<img src="/-imager/?mark=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty" />
+	</a>
 {pos-item:}
 	<div class="row cat_item">
 		<div class="col-xs-4 col-sm-3">
-			<a class="thumbnail" href="/{infrajs.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">
-				<img src="/-imager/?mark=1&w=256&h=256&src={images.0}&or=-imager/empty" />
-			</a>
+			{images.0?:pos-img}
 		</div>
 		<div class="col-xs-8 col-sm-9">
 			<a class="title padding" href="/{infrajs.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Наименование}</a>
@@ -68,7 +70,7 @@
 	{no:}Нет
 	{producerlogo:}
 		<a onclick="infrajs.scroll='.breadcrumb'" title="Посмотреть продукцию {Производитель}" href="/{infrajs.names.catalog.crumb}{:cat.mark.add}producer::.{producer}=1" class="pull-right" style="margin:5px 0 5px 5px">
-			<img src="/-imager/?w=100&h=100&src={infra.config(:strcatalog).dir}{producer}/&or=-imager/empty" />
+			<img src="/-imager/?w=100&amp;h=100&amp;src={infra.config(:strcatalog).dir}{producer}/&amp;or=-imager/empty" />
 		</a>
 {cat::}-catalog/cat.tpl
 {strcatalog:}catalog

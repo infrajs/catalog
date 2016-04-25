@@ -109,24 +109,6 @@ class Catalog
 			$md['producer']=array_fill_keys($producers, 1);
 			if (!$md['producer']) unset($md['producer']);
 		}
-		$key='group';
-		if (isset($md[$key])) {
-			if(!is_array($md[$key])){
-				$val=$md[$key];
-				$md[$key]=array();
-				$md[$key][$val]=1;
-			}
-			$md[$key]=array_filter($md[$key]);
-			$values=array_keys($md[$key]);
-			$values=array_filter($values, function (&$value) {
-				if(in_array($value,array('yes','no'))) return true;
-				if(!$value)return false;
-				if(!Catalog::getGroup($value))return false;
-				return true;
-			});
-			$md[$key]=array_fill_keys($values, 1);
-			if (!$md[$key]) unset($md[$key]);
-		}
 		if (isset($md['reverse'])) {
 			$md['reverse']=(bool)$md['reverse'];
 			if(!$md['reverse'])unset($md['reverse']);
@@ -135,6 +117,24 @@ class Catalog
 			$md['count']=(int)$md['count'];
 			if ($md['count']<1) unset($md['count']);
 			if ($md['count']>1000) unset($md['count']);
+		}
+		$key='group';
+		if (isset($md[$key])) {
+			if(!is_array($md[$key])){
+				$val=$md[$key];
+				$md[$key]=array();
+				$md[$key][$val]=1;
+			}
+			$md[$key] = array_filter($md[$key]);
+			$values = array_keys($md[$key]);
+			$values = array_filter($values, function (&$value) {
+				if(in_array($value,array('yes','no'))) return true;
+				if(!$value)return false;
+				if(!Catalog::getGroup($value))return false;
+				return true;
+			});
+			$md[$key]=array_fill_keys($values, 1);
+			if (!$md[$key]) unset($md[$key]);
 		}
 		$name='cost';
 		if (isset($md[$name])) {
@@ -190,10 +190,10 @@ class Catalog
 			//ПОСЧИТАЛИ COUNT
 			$count = sizeof($poss); //количество позиций
 			$parametr = array(
-				'posname' => null, //Артикул
-				'posid' => null, //article
-				'mdid' => null, //art
-				'title' => null, //Уникальный Артикул
+				'posname' => null, //Артикул - имя свойства в позиции с именем
+				'posid' => null, //article - имя свойства в позиции с id 
+				'mdid' => null, //art - имя в массиве параметров
+				'title' => null, //Уникальный Артикул для названия блока
 				'more' => null, 
 				'separator' => ',',
 				'count' => 0,
@@ -210,9 +210,8 @@ class Catalog
 				'search' => 0
 			);
 			//more берутся все параметры, а из main только указанные, расширенные config.catalog.filters
-			$main=Catalog::$conf['filters'];
-
-			foreach($main as $k=>$prop){
+			$main = Catalog::$conf['filters'];
+			foreach ($main as $k => $prop) {
 				if ($prop['more']) continue;
 				$prop['mdid']=$k;
 				$params[$k] = array_merge($parametr, $prop);
@@ -334,19 +333,18 @@ class Catalog
 	}
 	public static function sort(&$poss, $md) {
 		if ($md['sort']) {
+
 			if ($md['sort']=='name') {
 				usort($poss, function ($a, $b) {
-					$a=$a['Наименование'];
-					$b=$b['Наименование'];
-					if ($a == $b) return 0;
-					return ($a < $b) ? 1 : -1;
+					$a = $a['Наименование'];
+					$b = $b['Наименование'];
+					return strcasecmp($a, $b);
 				});
 			} else if ($md['sort']=='art') {
 				usort($poss, function ($a, $b) {
 					$a=$a['Артикул'];
 					$b=$b['Артикул'];
-					if ($a == $b) return 0;
-					return ($a < $b) ? 1 : -1;
+					return strcasecmp($a, $b);
 				});
 			} else if ($md['sort']=='cost') {
 				usort($poss, function ($a, $b) {
@@ -606,9 +604,8 @@ class Catalog
 	public static function filtering(&$poss, $md)
 	{
 		if (!sizeof($poss)) return;
-		$params=Catalog::getParams();
-		$filters=array();
-
+		$params = Catalog::getParams();
+		$filters = array();
 		foreach($params as $prop){
 
 			if ($prop['more']) {
@@ -651,15 +648,15 @@ class Catalog
 				});
 				if ($val['no']) {
 					unset($val['no']);
-					$val['Не указано']=1;	
+					$val['Не указано'] = 1;	
 				}
 				if ($val['yes']) {
 					unset($val['yes']);
-					$val['Указано']=1;
+					$val['Указано'] = 1;
 				}
 
-				$filter['value']=implode(', ', array_values($valtitles));
-				$filters[]=$filter;
+				$filter['value'] = implode(', ', array_values($valtitles));
+				$filters[] = $filter;
 				
 				
 			} else {
@@ -668,10 +665,11 @@ class Catalog
 				$val = $md[$prop['mdid']];
 				foreach($val as $value => $one) $valtitles[$value] = $value;
 
-				$filter=array(
+				$filter = array(
 					'title' => $prop['title'], 
 					'name' => Sequence::short(array(Catalog::urlencode($prop['mdid'])))
 				);
+
 
 				$poss = array_filter($poss, function ($pos) use ($prop, $val, &$valtitles) {
 					foreach($val as $value => $one) {
@@ -754,7 +752,7 @@ class Catalog
 				'value'=>$md['search']
 			);
 		}
-		Extend::filtering($poss, $md, $filters);
+		//Extend::filtering($poss, $md, $filters);
 		return $filters;
 	}
 	public static function option($values, $count, $search, $showhard = false){
