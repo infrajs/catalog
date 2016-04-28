@@ -358,10 +358,10 @@ class Catalog
 				
 				$poss=Catalog::cache('change', function($md) use($poss){
 					foreach($poss as &$pos) {
-						$conf=Catalog::$conf;
-						$dir=Path::theme($conf['dir'].$pos['producer'].'/'.$pos['article'].'/');
+						$conf = Catalog::$conf;
+						$dir = Path::theme($conf['dir'].$pos['producer'].'/'.$pos['article'].'/');
 						if (!$dir) {
-							$dir=Path::theme($conf['dir']);
+							$dir = Path::theme($conf['dir']);
 							$pos['time']=0; //filemtime($dir);
 						} else {
 							$pos['time']=filemtime($dir);
@@ -380,7 +380,7 @@ class Catalog
 						$a=$a['time'];
 						$b=$b['time'];
 						if ($a == $b) return 0;
-						return ($a < $b) ? -1 : 1;
+						return ($a < $b) ? 1 : -1;
 					});
 					return $poss;
 				}, $args, isset($_GET['re']));
