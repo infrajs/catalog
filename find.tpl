@@ -12,9 +12,9 @@
 			var params='?m=';
 		}
 		params+=':search='+val;
-		infra.Crumb.go('/'+layer.config.root+params);
+		infra.Crumb.go('/'+infrajs.names.catalog.crumb.toString()+params);
 		setTimeout(function(){
-			$.getJSON(infra.theme('-catalog/stat.php?submit=1&val='+val));
+			$.getJSON('/-catalog/stat.php?submit=1&amp;val='+val);
 		},1);
 		return false;">
 

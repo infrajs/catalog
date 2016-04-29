@@ -4,6 +4,7 @@ namespace infrajs\catalog;
 use infrajs\excel\Xlsx;
 use infrajs\load\Load;
 use infrajs\ans\Ans;
+use infrajs\path\Path;
 use infrajs\nostore\Nostore;
 use infrajs\view\View;
 
@@ -45,12 +46,12 @@ if (!$val) {
 Nostore::on();
 $val=Path::encode($val);
 $val=Path::toutf($val);
-$id=infra_view_getCookie('cat_id');
-$time=infra_view_getCookie('cat_time');
+$id = View::getCookie('cat_id');
+$time = View::getCookie('cat_time');
 if (!$time||!$id||$time!=$data['time']) {
 	$id=++$data['cat_id'];
-	infra_view_setCookie('cat_id', $id);
-	infra_view_setCookie('cat_time', $data['time']);
+	View::setCookie('cat_id', $id);
+	View::setCookie('cat_time', $data['time']);
 }
 $ans['cat_id']=$id;
 $ans['cat_time']=$time;

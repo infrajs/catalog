@@ -75,4 +75,4 @@
 		</ul>
 	</div>
 	{items:}
-		<li role="presentation"><a data-anchor='.breadcrumb' href="/{config.root}/{~key}{:mark.set}">{title}</a></li>
+		<li role="presentation"><a data-anchor='.breadcrumb' href="/{infrajs.names.catalog.crumb}/{~key}{:mark.set}">{title}</a></li>

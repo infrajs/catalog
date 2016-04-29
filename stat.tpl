@@ -9,7 +9,7 @@
 {statuser:}
 	<tr>
 		<td style="vertical-align:bottom; font-size:20px; text-align:left; color:gray;">
-			<b title="от {~date(:d.m.Y,time)}">{cat_id}</b>
+			<b title="{~date(:d.m.Y,time)}">{cat_id}</b>
 		</td>
 		<td>{list::statitem}</td>
 	</tr>
