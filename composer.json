@@ -3,6 +3,7 @@
     "description": "Catalog based on files docx and xlsx",
     "license": "GPL3",
     "require":{
+        "infrajs/infrajs":"~1",
     	"infrajs/doc":"~1",
     	"infrajs/excel":"~1",
         "infrajs/imager":"~1",
@@ -10,7 +11,8 @@
         "infrajs/path":"~1",
         "ded/domready":"~1",
         "infrajs/ascroll":"~1",
-        "infrajs/controller":"~1"
+        "infrajs/layer-seojson":"~1",
+        "infrajs/layer-config":"~1"
     },
     "autoload":{
         "psr-4":{
