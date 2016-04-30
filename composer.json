@@ -14,7 +14,7 @@
         "infrajs/layer-seojson":"~1",
         "infrajs/layer-config":"~1",
         "infrajs/layer-autosave":"~1",
-        "infrajs/layer-autoedit":"~1"
+        "infrajs/autoedit":"~1"
     },
     "autoload":{
         "psr-4":{
