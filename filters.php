@@ -18,8 +18,9 @@ $args = array(Catalog::nocache($md));
 $res = Catalog::cache('filters.php filter list', function ($md) {
 	$conf = Config::get('catalog');
 	$ans = array();
-	$params=Catalog::getParams($md['group']);
+	$params = Catalog::getParams($md['group']);
 	
+
 	
 	$poss = Catalog::getPoss($md['group']);
 	//Поиск
@@ -28,6 +29,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 	$poss=$res['list'];
 	$search=sizeof($poss);//Позиций найдено
 	//ПОСЧИТАЛИ FILTER со всеми md
+
 	foreach($params as $k=>$prop){
 		if($prop['more']){
 			foreach($poss as &$pos){
@@ -43,7 +45,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 					$id=mb_strtolower($idi);
 					if (!Xlsx::isSpecified($id)) continue;
 					$r=true;
-					$params[$k]['option'][$id]['search']++;
+					$params[$k]['option'][$idi]['search']++;
 				}
 				if ($r)	$params[$k]['search']++;
 			}
@@ -65,24 +67,25 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 
 					if (!Xlsx::isSpecified($id)) continue;
 					$r=true;
-					$params[$k]['option'][$id]['search']++;
+					$params[$k]['option'][$idi]['search']++;
 				}
 				if ($r)	$params[$k]['search']++;//Позиций с этим параметром
 			}
 		}
 
-		$params[$k]['nosearch']=sizeof($poss)-$params[$k]['search'];
+		$params[$k]['nosearch'] = sizeof($poss) - $params[$k]['search'];
 	}
-	
+
 	//ПОСЧИТАЛИ FILTER как если бы не было выбрано в этой группе md
 	foreach ($params as $k => $prop) {
+
 		if ($prop['more']) {
 			$mymd=$md;
 		
 			$mymd['more'] = array_diff_key($md['more'], array_flip(array($prop['mdid'])));
 
-			$res=Catalog::search($mymd);
-			$poss=$res['list'];
+			$res = Catalog::search($mymd);
+			$poss = $res['list'];
 
 			foreach ($poss as &$pos){
 				
@@ -101,18 +104,18 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 					$id=mb_strtolower($idi);
 					if (!Xlsx::isSpecified($id)) continue;
 					$r=true;
-					$params[$k]['option'][$id]['filter']++;
+					$params[$k]['option'][$idi]['filter']++;
 				}
 				if ($r)	$params[$k]['filter']++;
 			}
 		} else {
-			$mymd=array_diff_key($md, array_flip(array($prop['mdid'])));
+			$mymd = array_diff_key($md, array_flip(array($prop['mdid'])));
 
-			$res=Catalog::search($mymd);
-			$poss=$res['list'];
+			$res = Catalog::search($mymd);
+			$poss = $res['list'];
 			foreach($poss as &$pos){
-				if(preg_match("/[:]/", $pos[$prop['posid']]))continue;
-				if(!Xlsx::isSpecified($pos[$prop['posid']]))continue;
+				if (preg_match("/[:]/", $pos[$prop['posid']])) continue;
+				if (!Xlsx::isSpecified($pos[$prop['posid']])) continue;
 
 				$r=false;
 				if ($prop['separator']) {
@@ -121,12 +124,12 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 					$arval=array($pos[$prop['posid']]);
 				}
 				
-				foreach($arval as $i => $value){
-					$idi=Path::encode($value);
-					$id=mb_strtolower($idi);
+				foreach ($arval as $i => $value) {
+					$idi = Path::encode($value);
+					$id = mb_strtolower($idi);
 					if (!Xlsx::isSpecified($id)) continue;
 					$r=true;
-					$params[$k]['option'][$id]['filter']++;
+					$params[$k]['option'][$idi]['filter']++;
 				}
 				if ($r)	$params[$k]['filter']++;//Позиций с этим параметром
 			}
@@ -134,6 +137,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 		//У скольки позиций в выборке у которых этот параметр не указан
 		$params[$k]['nofilter']=sizeof($poss)-$params[$k]['filter'];//
 	}
+
 	/*
 		$params промежуточный массив со всеми возможными занчениями каждого параметра
 		каждое значение характеризуется
@@ -143,16 +147,18 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 	*/
 	
 	//ДОБАВИЛИ option values
-	foreach($params as $k=>$v){
+	foreach($params as $k => $v){
 		if ($v['more']) {
-			$right=array('more', $v['mdid']);    
-			$add='more.';
+			$right = array('more', $v['mdid']);    
+			$add = 'more.';
 		}else{
-			$right=array($v['mdid']);    
-			$add='';
+			$right = array($v['mdid']);    
+			$add = '';
 		}
-		$showhard=Sequence::get($md, $right);
-		$opt=Catalog::option($params[$k]['option'], $count, $search, $showhard);
+		$showhard = Sequence::get($md, $right);
+
+		$opt = Catalog::option($params[$k]['option'], $count, $search, $showhard);
+		
 		if (!$opt) {
 			unset($params[$k]);
 		} else {
@@ -160,80 +166,82 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 		}
 	}
 				
-				
+		
 				
 	
-	$ans['params']=$params;
+	$ans['params'] = $params;
 	//$ans['params']=$params;
-	$ans['search']=$search;//Позиций найдено
-	$ans['count']=$count;//Позиций в группе
-	$ans['template']=array();
-	foreach($params as $param){
-		$block=array();
+	$ans['search'] = $search;//Позиций найдено
+	$ans['count'] = $count;//Позиций в группе
+	$ans['template'] = array();
+
+	foreach ($params as $param){
+		$block = array();
 		
 		if ($param['more']) {
-			$right=array('more', $param['mdid']);    
-			$add='more.';
+			$right = array('more', $param['mdid']);    
+			$add = 'more.';
 		}else{
-			$right=array($param['mdid']);    
+			$right = array($param['mdid']);    
 			$add='';
 		}
-		$mymd=Sequence::get($md, $right);
-		if (!$mymd) $mymd=array();
+		
+		$mymd = Sequence::get($md, $right);
+		if (!$mymd) $mymd = array();
 		
 		
-		$paramid=Sequence::short(array(Catalog::urlencode($param['mdid'])));
-		$block['checked']=!!$mymd['yes'];
+		$paramid = Sequence::short(array(Catalog::urlencode($param['mdid'])));
+		$block['checked'] = !!$mymd['yes'];
 		
 		
 		if($block['checked']){
-			$block['add']=$add.$paramid.'.yes=';
+			$block['add'] = $add.$paramid.'.yes=';
 		} else {
-			$block['add']=$add.$paramid.'.yes=1';  
+			$block['add'] = $add.$paramid.'.yes=1';  
 		}
 		
-		$block['title']=$param['title'];
-		$block['type']=$param['option']['type'];
-		$block['filter']=$param['filter'];
-		$block['search']=$param['search'];
-		$block['count']=$param['count'];
-		$block['row']=array();
-		if($param['option']['nocount']){
+		$block['title'] = $param['title'];
+		$block['type'] = $param['option']['type'];
+		$block['filter'] = $param['filter'];
+		$block['search'] = $param['search'];
+		$block['count'] = $param['count'];
+		$block['row'] = array();
 
-			$row=array(
-				'title'=>'Не указано',
-				'filter'=>$param['nofilter']
+		if ($param['option']['nocount']){
+			$row = array(
+				'title' => 'Не указано',
+				'filter' => $param['nofilter']
 			);
-			$row['checked']=!!$mymd['no'];
-			if($row['checked']){
-				$row['add']=$add.$paramid.'.no=';
+			$row['checked'] = !!$mymd['no'];
+			if ($row['checked']) {
+				$row['add'] = $add.$paramid.'.no=';
 			} else {
-				$row['add']=$add.$paramid.'.no=1';    
+				$row['add'] = $add.$paramid.'.no=1';    
 			}
-			$block['row'][]=$row;
+			$block['row'][] = $row;
 		}
-		if($block['type']=='string'){
-			foreach($param['option']['values'] as $value){
-				$row=array(
-					'title'=>$value['title'],
-					'filter'=>$value['filter']
+		
+		if ($block['type'] == 'string') {
+			foreach ($param['option']['values'] as $value) {
+				$row = array(
+					'title' => $value['title'],
+					'filter' => $value['filter']
 				);
 				$row['checked']=!!$mymd[$value['id']];
 				$valueid=Sequence::short(array(Catalog::urlencode($value['id'])));
 				if($row['checked']){
-					$row['add']=$add.$paramid.'.'.$valueid.'=';
+					$row['add'] = $add.$paramid.'.'.$valueid.'=';
 				} else {
-					$row['add']=$add.$paramid.'.'.$valueid.'=1';
+					$row['add'] = $add.$paramid.'.'.$valueid.'=1';
 				}
 				
-				$block['row'][]=$row;
+				$block['row'][] = $row;
 			}
 		}
-		if($conf['filteroneitem']||sizeof($block['row'])>1)$ans['template'][]=$block;
+		if ($conf['filteroneitem'] || sizeof($block['row'])>1) $ans['template'][] = $block;
 	}
-	
 	return $ans;
 }, $args, isset($_GET['re']));
-$ans=array_merge($ans, $res);
+$ans = array_merge($ans, $res);
 
 return Ans::ret($ans);

@@ -47,30 +47,31 @@ class Catalog
 	public static function init()
 	{
 		return self::cache('cat_init', function () {
-			$conf=Catalog::$conf;
-			$columns=array_merge(array("Наименование","Артикул","Производитель","Цена","Описание"),$conf['columns']);
-			$data=&Xlsx::init($conf['dir'], array(
+			$conf = Catalog::$conf;
+			$columns = array_merge(array("Наименование","Артикул","Производитель","Цена","Описание"),$conf['columns']);
+			$data = &Xlsx::init($conf['dir'], array(
 				'more' => true,
 				'Имя файла' => $conf['filename'],
 				'Известные колонки'=>$columns
 				)
 			);
-			Xlsx::runGroups($data,function(&$gr){
+			Xlsx::runGroups($data, function (&$gr) {
 				$gr['data']=array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
 			});
 			Extend::init($data);
 			return $data;
 		});
 	}
-	public static function getProducer($producer){
-		$producer=mb_strtolower($producer);
-		return Catalog::cache('getProducer', function &($producer){
-			$data=Catalog::init();
-			$pos=Xlsx::runPoss($data, function &($pos) use($producer) {
-				if(mb_strtolower($pos['producer'])==$producer)return $pos;
+	public static function getProducer(&$producer){
+		$sproducer = mb_strtolower($producer);
+		$pos = Catalog::cache(__FILE__.'getProducer', function &($sproducer){
+			$data = Catalog::init();
+			return Xlsx::runPoss($data, function &($pos) use ($sproducer) {
+				if (mb_strtolower($pos['producer']) == $sproducer) return $pos;
 			});
-			return $pos['Производитель'];
-		}, array($producer));
+		}, array($sproducer));
+		$producer = $pos['producer'];
+		return $pos['Производитель'];
 	}
 	public static function markData(&$md)
 	{
@@ -97,16 +98,15 @@ class Catalog
 		}
 		
 		if (isset($md['producer'])) {
-			if(!is_array($md['producer'])) $md['producer']=array();
-			$md['producer']=array_filter($md['producer']);
-			
-			$producers=array_keys($md['producer']);
-			$producers=array_filter($producers, function (&$value) {
-				if(in_array($value,array('yes','no'))) return true;
-				if(Catalog::getProducer($value))return true;
+			if(!is_array($md['producer'])) $md['producer'] = array();
+			$md['producer'] = array_filter($md['producer']);
+			$producers = array_keys($md['producer']);
+			$producers = array_filter($producers, function (&$value) {
+				if (in_array($value,array('yes','no'))) return true;
+				if (Catalog::getProducer($value)) return true;
 				return false;
 			});
-			$md['producer']=array_fill_keys($producers, 1);
+			$md['producer'] = array_fill_keys($producers, 1);
 			if (!$md['producer']) unset($md['producer']);
 		}
 		if (isset($md['reverse'])) {
@@ -183,7 +183,7 @@ class Catalog
 	* getParams Собирает в простую структуру все параметры и возможные значения фильтров для указанной группы
 	*/
 	public static function getParams($group = false){
-		return Catalog::cache('getParams', function &($group){
+		return Catalog::cache(__FILE__.'getParams', function &($group){
 			$poss = Catalog::getPoss($group);
 		
 			$params = array();//параметры
@@ -217,10 +217,10 @@ class Catalog
 				$params[$k] = array_merge($parametr, $prop);
 			}
 
-			foreach($poss as &$pos){
-				foreach($main as $k=>$prop){
+			foreach ($poss as &$pos) {
+				foreach ($main as $k=>$prop) {
 					if ($prop['more']) continue;
-					$prop=$params[$k];
+					$prop = $params[$k];
 					$val=$pos[$prop['posid']];
 					$name=$pos[$prop['posname']];
 					if (preg_match("/[:]/", $val)) continue;//Зачем?
@@ -235,8 +235,8 @@ class Catalog
 						$arname=array($name);
 					}
 					foreach($arval as $i => $value){
-						$idi=Path::encode($value);
-						$id=mb_strtolower($idi);
+						$idi = Path::encode($value);
+						$id=$idi;//mb_strtolower($idi);
 						if (!Xlsx::isSpecified($id)) continue;
 						if (!isset($params[$k]['option'][$id])) {
 							$params[$k]['option'][$id] = array_merge($option, array(
@@ -249,7 +249,8 @@ class Catalog
 					}
 					if ($r)	$params[$k]['count']++;//Позиций с этим параметром
 				}
-				if($pos['more']){
+				
+				if ($pos['more']) {
 					foreach($pos['more'] as $k=>$val){
 						if (preg_match("/[:]/", $val)) continue;
 						if (preg_match("/[:]/", $k)) continue;
@@ -273,8 +274,9 @@ class Catalog
 							$arval=array($val);
 						}
 						foreach($arval as $value){
-							$idi=Path::encode($value);
-							$id=mb_strtolower($idi);
+							$idi = Path::encode($value);
+							//$id=mb_strtolower($idi);
+							$id = $idi;
 							if (!Xlsx::isSpecified($id)) continue;
 							$r=true;
 							if (!isset($params[$k]['option'][$id])) {
@@ -290,25 +292,24 @@ class Catalog
 				}
 			}
 
-			foreach($main as $k=>$prop){
+			foreach ($main as $k=>$prop) {
 				if (!$prop['more']) continue;
 				if (empty($params[$k])) continue;
-				$prop['mdid']=$k;
+				$prop['mdid'] = $k;
 				$params[$k] = array_merge($prop, $params[$k]);
 			}
-			uasort($params,function($p1, $p2){
+			uasort($params,function ($p1, $p2) {
 				if (!empty($p1['group']) || !empty($p2['group'])) {
-					if ($p1['group']==$p2['group']) return 0;
+					if ($p1['group'] == $p2['group']) return 0;
 					if (!empty($p1['group'])) return 1;
 					if (!empty($p2['group'])) return -1;
 				}
-				if($p1['count']>$p2['count'])return -1;
-				if($p1['count']<$p2['count'])return 1;
+				if ($p1['count'] > $p2['count']) return -1;
+				if ($p1['count'] < $p2['count']) return 1;
 				return 0;
 			});
-
 			return $params;
-		},array($group),isset($_GET['re']));
+		}, array($group), isset($_GET['re']));
 	}
 	public static function getPoss($mdgroup){
 		if ($mdgroup) foreach ($mdgroup as $group=>$v) break;
@@ -757,11 +758,13 @@ class Catalog
 	}
 	public static function option($values, $count, $search, $showhard = false){
 		foreach ($values as $value => $s) break;
-		$opt=array('type' => '', 'values' => $values);
-		$min=$value;
-		$max=$value;
-		$yes=0;
-		$yesall=0;
+		$opt = array('type' => '', 'values' => $values);
+		$min = $value;
+		$max = $value;
+		$yes = 0;
+		$yesall = 0;
+		
+		
 		/*
 			$values массив со всеми возможными занчениями каждого параметра
 			каждое значение характеризуется
@@ -769,56 +772,57 @@ class Catalog
 			search - сколько всего найдено с md
 			filter - сколько найдено если данный параметр не указана в md
 		*/
-		foreach($opt['values'] as $v=>$c){
-			if(Xlsx::isSpecified($v)){
-				$yes+=$c['search'];//Сколько найдено
-				$yesall+=$c['count'];//Сколько в группе
+		foreach ($opt['values'] as $v => $c) {
+			if (Xlsx::isSpecified($v)) {
+				$yes += $c['search'];//Сколько найдено
+				$yesall += $c['count'];//Сколько в группе
 			}
 		}
-		$opt['search']=$yes;
-		$opt['count']=$yesall;
-		if(!$showhard && $count > $yesall * 10){//Если отмеченных менее 10% то такие опции не показываются
+
+		$opt['search'] = $yes;
+		$opt['count'] = $yesall;
+		if (!$showhard && $count > $yesall * 10) { //Если отмеченных менее 10% то такие опции не показываются
 			return false;
 		}
 		
-		$type=false;
-		foreach($opt['values'] as $val=>$c){//Слайдер
-			if(is_string($val)){
-				$type='string';
+		$type = false;
+		foreach ($opt['values'] as $val => $c) { //Слайдер
+			if (is_string($val)) {
+				$type = 'string';
 				break;
 			}
-			if($val<$min)$min=$val;
-			if($val>$max)$max=$val;
+			if ($val < $min) $min = $val;
+			if ($val > $max) $max = $val;
 		}
-		if(!$type){
-			$len=sizeof($opt['values']);
-			if($len>5){//Слайдер
-				$opt['min']=$min;
-				$opt['max']=$max;
-				$type='slider';
+		if (!$type) {
+			$len = sizeof($opt['values']);
+			if ($len>5) { //Слайдер
+				$opt['min'] = $min;
+				$opt['max'] = $max;
+				$type = 'slider';
 				unset($opt['values']);
-			}else{
-				$type='string';
+			} else {
+				$type = 'string';
 			}
 		}
-		$opt['type']=$type;
+		
+		$opt['type'] = $type;
 	
-		if($opt['type']=='string'){
-			if(sizeof($opt['values'])>30){
+		if($opt['type'] == 'string') {
+			$saved_values = $opt['values'];
+			if (sizeof($opt['values']) > 30) {
 				$opt['values']=array();
-				if (!$showhard) {	
-					return false;
-				}
+				if (!$showhard) return false;
 			}
 			if ($showhard) {	
-				foreach($showhard as $show => $one) {
-					$title=$show;
-					$show=mb_strtolower($show);
-					if ($show=='yes') continue;
-					if ($show=='no') continue;
+				foreach ($showhard as $show => $one) {
+					$title = $show;
+					//$show = mb_strtolower($show);
+					if ($show == 'yes') continue;
+					if ($show == 'no') continue;
 					if ($opt['values'][$show]) continue;
 					
-					$opt['values'][$show] = array('id'=>$show, 'title'=>$title);
+					$opt['values'][$show] = $saved_values[$show];//array('id'=>$show, 'title'=>$title);
 				}
 			}
 			/*foreach($opt['values'] as $v){//Когда всех значений по 1
@@ -848,13 +852,13 @@ class Catalog
 				continue;
 			}
 		}*/
-		if(!$opt['values']&&$opt['type']!='slider'){
-			if($opt['count']==$count){//Слишком много занчений но при этом у всех позиций они указаны и нет no yes
+		if (!$opt['values'] && $opt['type'] != 'slider') {
+			if ($opt['count'] == $count){//Слишком много занчений но при этом у всех позиций они указаны и нет no yes
 				return false;
 			}
 		}
-		$opt['nosearch']=$search-$opt['search']; //из общего количества вычесть количество указанных
-		$opt['nocount']=$count-$opt['count']; //из общего количества вычесть количество с yes
+		$opt['nosearch'] = $search - $opt['search']; //из общего количества вычесть количество указанных
+		$opt['nocount'] = $count - $opt['count']; //из общего количества вычесть количество с yes
 		return $opt;
 	}
 	public static function getPos(&$pos){
