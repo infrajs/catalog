@@ -5,7 +5,6 @@
 	"seojsontpl":"-catalog/search.php?seo={infrajs.names.catalog.crumb}&val=&m={infra.Crumb.get.m}",
 	"autoedittpl":{ "fast":"{infra.config(:catalog).dir}"},
 	"showanimate":true,
-	"debug":true,
 	"name":"catalog",
 	"child":{
 		"tpl":"-catalog/search.tpl",
