@@ -48,3 +48,31 @@ Excel документы в папке ```data/catalog/``` будут интер
 У групп ```descr.Наименование``` и ```title```. 
 
 Уникальность позиции определяется парой ```producer``` и ```article``` эти параметры используются для ссылки на страницу полного описания позиции ```catalog/producer/article```.
+
+## Конфиг [infrajs/config](https://github.com/infrajs/config)
+
+```
+{
+	"nds":false,
+	"dir":"~catalog/",
+	"cache":["~catalog/"],
+	"title":"Каталог",
+	"md":{ },
+	"filename":"Производитель",
+	"columns":[],
+	"filteroneitem":true,
+	"filters":{
+		"producer":{
+			"posid":"producer",
+			"posname":"Производитель",
+			"title":"Производитель",
+			"separator":false
+		},
+		"cost":{
+			"posid":"Цена",
+			"posname":"Цена",
+			"title":"Цена",
+			"separator":false
+		}
+	}
+}

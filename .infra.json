@@ -1,7 +1,8 @@
 {
-	"pub":["dir", "title"],
+	"pub":["dir", "title", "nds"],
 	"dependencies":["path"],
 	"tester":"tests/",
+	"nds":false,
 	"update":"update.php",
 	"conf":"infrajs\\catalog\\Catalog",
 	"dir":"~catalog/",
