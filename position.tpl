@@ -40,9 +40,7 @@
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px">{Описание}</div>
-		<table class="table table-striped">
-			{more::pos_more}
-		</table>
+		{Скрыть фильтры в полном описании??:print_more}
 		{texts::text}
 		{~length(files)?:files}
 		<div style="clear:left">
@@ -50,6 +48,10 @@
 			{:extend.pos-sign}
 		</div>
 	</div>
+{print_more:}
+	<table class="table table-striped">
+		{more::pos_more}
+	</table>
 {pos_more:}<tr><td>{~key}:</td><td style="text-align:left">{.}</td></tr>
 {files:}
 	<h2>Файлы для {Продажа} {Производитель} {Артикул} </h2>

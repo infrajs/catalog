@@ -48,7 +48,7 @@ class Catalog
 	{
 		return self::cache('cat_init', function () {
 			$conf = Catalog::$conf;
-			$columns = array_merge(array("Наименование","Артикул","Производитель","Цена","Описание"),$conf['columns']);
+			$columns = array_merge(array("Наименование","Артикул","Производитель","Цена","Описание","Скрыть фильтры в полном описании"),$conf['columns']);
 			$data = &Xlsx::init($conf['dir'], array(
 				'more' => true,
 				'Имя файла' => $conf['filename'],
