@@ -13,7 +13,7 @@
 		</td>
 		<td>{list::statitem}</td>
 	</tr>
-{statitem:}<a href="/{crumb.parent}{:cat.mark.client.add}search:{val}" title="от {~date(:d.m.Y,time)}">{val}</a><sup>{count}</sup>{~last()??:statsep}
+{statitem:}<a href="/{crumb.parent}{:cat.mark.client.add}search={val}" title="от {~date(:d.m.Y,time)}">{val}</a><sup>{count}</sup>{~last()??:statsep}
 {statsep:} |  
 {cat::}-catalog/cat.tpl
 {cat.mark.set:}{:cat.mark.client.set}
