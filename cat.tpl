@@ -15,7 +15,7 @@
 			font-size:140%;
 		}
 
-		@media(max-width:992px) { 	/*md*/
+		@media (max-width:992px) { 	/*md*/
 			.catgrouplist .img {
 				width:100px;
 			}
@@ -23,7 +23,7 @@
 				font-size:90%;
 			}
 		}
-		@media(max-width:768px) { 	/*sm*/
+		@media (max-width:768px) { 	/*sm*/
 			.catgrouplist .img {
 				width:120px;
 			}
