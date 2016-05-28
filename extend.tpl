@@ -31,7 +31,7 @@
 	</style>
 {pos-img:}
    <a class="thumbnail" href="/{infrajs.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">
-		<img src="/-imager/?mark=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty" />
+		<img src="/-imager/?mark=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty.png" />
 	</a>
 {pos-item:}
 	<div class="row cat_item">
@@ -72,7 +72,7 @@
 	{no:}Нет
 	{producerlogo:}
 		<a onclick="infrajs.scroll='.breadcrumb'" title="Посмотреть продукцию {Производитель}" href="/{infrajs.names.catalog.crumb}{:cat.mark.add}producer::.{producer}=1" class="pull-right" style="margin:5px 0 5px 5px">
-			<img src="/-imager/?w=100&amp;h=100&amp;src={infra.config(:strcatalog).dir}{producer}/&amp;or=-imager/empty" />
+			<img src="/-imager/?w=100&amp;h=100&amp;src={infra.config(:strcatalog).dir}{producer}/&amp;or=-imager/empty.png" />
 		</a>
 {cat::}-catalog/cat.tpl
 {strcatalog:}catalog
