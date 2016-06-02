@@ -23,13 +23,13 @@ if(isset($_GET['seo'])){
 	$link=$_GET['seo'];
 	if($md['group']){
 		foreach($md['group'] as $val => $one) break;
-		$link=$link.'&m=:group.'.$val.'=1';
+		$link=$link.'?m=:group.'.$val.'=1';
 	} else if($md['producer']){
 		foreach($md['producer'] as $val => $one) break;
-		$link=$link.'&m=:producer.'.$val.'=1';
+		$link=$link.'?m=:producer.'.$val.'=1';
 	} else if($md['search']){
 		$val=$md['search'];
-		$link=$link.'&m=:search:'.$val;
+		$link=$link.'?m=:search:'.$val;
 	}
 	
 	
