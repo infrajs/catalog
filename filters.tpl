@@ -37,7 +37,7 @@
 			{data.template::param}
 		</div>
 		<div class="space">
-			Найдено <a data-anchor=".breadcrumb" href="/catalog{:cat.mark.set}">{data.search} {~words(data.search,:pos1,:pos2,:pos5)}</a>
+			Найдено <a rel="nofollow" data-anchor=".breadcrumb" href="/catalog{:cat.mark.set}">{data.search} {~words(data.search,:pos1,:pos2,:pos5)}</a>
 		</div>
 		{pos1:}позиция
 		{pos2:}позиции

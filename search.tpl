@@ -28,7 +28,7 @@
 	{showfilter:}
 		<div class="item" data-anchor='.breadcrumb'>
 			
-			<a href="/{infrajs.names.catalog.crumb}{:cat.mark.add}{name}">
+			<a rel="nofollow" href="/{infrajs.names.catalog.crumb}{:cat.mark.add}{name}">
 				<span class="glyphicon glyphicon-remove" style="color:red; font-size:80%"></span>
 				{title}:</a> <b>{value}</b>
 			
@@ -65,7 +65,7 @@
 	<h2>{data.name}</h2>
 	{~length(data.filters)?:showfilters}
 	<p>
-		<a data-anchor='.breadcrumb' href="/{infrajs.names.catalog.crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
+		<a rel="nofollow" data-anchor='.breadcrumb' href="/{infrajs.names.catalog.crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
 	</p>
 {cat_item:}
 	<div class="position">
@@ -82,13 +82,13 @@
 	</ul>
 {pageset:}
 	<div class="clearfix"></div>
-	<a class="pull-right" onclick="infra.session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');" style="cursor:pointer"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+	<a rel="nofollow" class="pull-right" onclick="infra.session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');" style="cursor:pointer"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
 	<div class="settings alert alert-info" style="display:none">
-		Сортировать <a style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,
-			<a style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:name|:name}'>по наименованию</a>, 
-			<a style="font-weight:{data.md.sort=:art?:bold}"data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:art|:art}'>по артикулу</a>, 
-			<a style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:cost|:cost}'>по цене</a>, 
-			<a style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:change|:change}'>по дате изменений</a><br>
+		Сортировать <a rel="nofollow" style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,
+			<a rel="nofollow" style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:name|:name}'>по наименованию</a>, 
+			<a rel="nofollow" style="font-weight:{data.md.sort=:art?:bold}"data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:art|:art}'>по артикулу</a>, 
+			<a rel="nofollow" style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:cost|:cost}'>по цене</a>, 
+			<a rel="nofollow" style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:change|:change}'>по дате изменений</a><br>
 		Показывать по
 		<select onchange="ascroll.once='.pagination'; infra.Crumb.go('/{infrajs.names.catalog.crumb}{:cat.mark.add}count='+$(this).val());">
 			<option {data.md.count=:5?:selected}>5</option>
@@ -96,7 +96,7 @@
 			<option {data.md.count=:20?:selected}>20</option>
 			<option {data.md.count=:100?:selected}>100</option>
 		</select> позиций на странице<br>
-		Показать в <a style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
+		Показать в <a rel="nofollow" style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='/{infrajs.names.catalog.crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
 	</div>
 	<script>
 		domready(function () {
@@ -111,7 +111,7 @@
 		{empty?:pagenumt?:pagenuma}
 	</li>
 	{pagenumt:}<a>{title}</a>
-	{pagenuma:}<a data-anchor='.pagination' href="/{crumb}?p={num}{:cat.mark.aset}">{title}</a>
+	{pagenuma:}<a rel="nofollow" data-anchor='.pagination' href="/{crumb}?p={num}{:cat.mark.aset}">{title}</a>
 {pageact:} active
 {pagedis:} disabled
 {space:}&nbsp;
