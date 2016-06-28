@@ -53,6 +53,8 @@
 			{more::cat_more}
 		</div>
 		{Цена?:priceblock}
+		{Описание?:descrshow}
+		{descrshow:}
 		<div class="padding">
 			<span style="border-bottom:1px dashed gray; cursor:pointer" onclick="$(this).next().slideToggle();">Описание</span>
 			<div style="display:none;">
