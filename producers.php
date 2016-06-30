@@ -40,7 +40,7 @@ $list=Catalog::cache('producers.php', function ($start, $count) {
 	$data=Catalog::init();
 	$prods=array();
 	Xlsx::runPoss($data, function (&$pos) use (&$prods) {
-		@$prods[$pos['Производитель']]++;
+		@$prods[$pos['producer']]++;
 	});
 	arsort($prods, SORT_NUMERIC);
 	$prods=array_slice($prods, $start, $count);

@@ -39,7 +39,7 @@
 	<p>К сожалению позиции не найдены.</p>
 	{~length(data.filters)?:showfilters}
 	
-	{text}
+	{:text}
 {isproducer:}producer
 {isgroup:}group
 {issearch:}search
@@ -60,7 +60,7 @@
 	<hr>
 	{:pages}
 	<p>{descr}</p>
-	{text}
+	{:text}
 	<hr>
 	<h2>{data.name}</h2>
 	{~length(data.filters)?:showfilters}
@@ -100,7 +100,7 @@
 	</div>
 	<script>
 		domready(function () {
-			Event.one('Infrajs.onshow', function () {
+			Event.one('Controller.onshow', function () {
 				var show = infra.session.get('catalog.cog');
 				if (show) $('.settings').show();
 			});
@@ -117,3 +117,8 @@
 {space:}&nbsp;
 {cat::}-catalog/cat.tpl
 {extend::}-catalog/extend.tpl
+{text:}
+	{text}
+	{textinfo.gallery::textimg}
+	{textimg:}
+		<img class="img-responsive" src="/-imager/?w=1000&amp;src={...gallerydir}{.}">

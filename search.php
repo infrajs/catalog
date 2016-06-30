@@ -8,6 +8,7 @@ use infrajs\load\Load;
 use infrajs\view\View;
 use infrajs\nostore\Nostore;
 use infrajs\config\Config;
+use infrajs\rubrics\Rubrics;
 
 
 $ans=array();
@@ -130,15 +131,20 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 	$ans['list']=array_slice($ans['list'], ($page-1)*$md['count'], $md['count']);
 
 	//Text
+	
+	$src = Rubrics::find($conf['dir'].'articals/', $ans['title']);
+	if ($src) {
+		$ans['textinfo'] = Rubrics::info($src); 
+		$ans['text'] = Load::loadTEXT('-doc/get.php?src='.$src);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
+	}
 
-	$ans['text']=Load::loadTEXT('-doc/get.php?src='.$conf['dir'].'articals/'.$ans['title']);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
 	foreach($ans['list'] as $k=>$pos){
 		$pos=Catalog::getPos($pos);
 
 		unset($pos['texts']);
 		unset($pos['files']);
 		$ans['list'][$k]=$pos;
-	}
+	}	
 	return $ans;
 }, $args, $re);
 
