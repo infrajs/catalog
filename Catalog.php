@@ -56,9 +56,9 @@ class Catalog
 				)
 			);
 			
-			Xlsx::runGroups($data, function (&$gr) {
-				$gr['data']=array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
-			});
+			//Xlsx::runGroups($data, function (&$gr) {
+			//	$gr['data']=array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
+			//});
 			Extend::init($data);
 			return $data;
 		});

@@ -132,7 +132,7 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 
 	//Text
 	
-	$src = Rubrics::find($conf['dir'].'articals/', $ans['title']);
+	$src = Rubrics::find($conf['dir'].'articles/', $ans['title']);
 	if ($src) {
 		$ans['textinfo'] = Rubrics::info($src); 
 		$ans['text'] = Load::loadTEXT('-doc/get.php?src='.$src);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
