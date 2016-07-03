@@ -38,6 +38,8 @@ if(isset($_GET['seo'])) {
 	$link=$_GET['seo'];
 	$link=$link.'/'.urlencode($pos['producer']).'/'.urlencode($pos['article']);
 	$ans['external']='-catalog/seo.json';
+	$ans['title'] = $pos['Производитель'].' '.$pos['Артикул'];
+	if(!empty($pos['Наименование'])) $ans['title'] = $pos['Наименование'].' '.$ans['title'];
 	$ans['canonical']=View::getPath().$link;
 	return Ans::ans($ans);
 }

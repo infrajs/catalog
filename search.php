@@ -32,12 +32,14 @@ if(isset($_GET['seo'])){
 		$val=$md['search'];
 		$link=$link.'?m=:search:'.$val;
 	}
-	
+
+	if ($val) $ans['title'] = $val;	
 	
 	unset($ans['md']);
 	unset($ans['m']);
-	$ans['external']='-catalog/seo.json';
-	$ans['canonical']=View::getPath().$link;
+	$ans['external'] = '-catalog/seo.json';
+	$ans['canonical'] = View::getPath().$link;
+	
 	return Ans::ans($ans);
 }
 

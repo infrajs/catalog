@@ -39,7 +39,7 @@
 			{images.0?:pos-img}
 		</div>
 		<div class="col-xs-8 col-sm-9">
-			<a class="title padding" href="/{infrajs.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Наименование}</a>
+			<a class="title padding" href="/{infrajs.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Наименование|:name}</a>
 			{:producerlogo}
 			<div class="padding">
 				<b><a href="/{infrajs.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Производитель} {Артикул}</a></b>
@@ -48,6 +48,7 @@
 			{more?:havemore?:nomore}
 		</div>
 	</div>
+	{name:}{Артикул}
 	{havemore:}
 		<div class="padding" style="font-family:Tahoma; font-size:85%">    
 			{more::cat_more}
