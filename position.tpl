@@ -64,18 +64,34 @@
 		</li>
 {text:}
 	{.}
-{imgsrc:}{.}
+{bigimg:}<img class="img-responsive" src="/{images.0}">
+{strбольшая:}Большая
 {images:}
-	<div style="text-align:center; background-color:white; padding:10px; ">
+	{descr.Картинка=:strбольшая?:bigimg}
+	<div class="cat_images" style="text-align:center; background-color:white; margin-top:10px; margin-bottom:10px;">
 		{images::image}
+		<div style="clear:both"></div>
 	</div>
-	<div class="bigimage"></div>
-	{image:}<a onclick="return false" title="{..Наименование}" href="/-imager/?src={:imgsrc}"><img
-		title="{data.pos.Производитель} {data.pos.Артикул}"
-		style="cursor:pointer"
-		onclick="var img=document.getElementById('catimg{~key}'); if(img){ $(img).toggle(); return; };
-				$('.cat-position .bigimage').html('<img style=\'border-bottom:1px dotted gray;\' onclick=\'$(this).hide()\' id=\'catimg{~key}\' src=\'/-imager/?mark=1&w=590&src={:imgsrc}\' />')"
-		src="/-imager/?mark=1&h=100&src={:imgsrc}" /></a>
+	<script>
+		domready( function () {
+			var div = $('.cat-position .cat_images');
+			if (!div.magnificPopup) return console.info('Требуется magnificPopup');
+				
+			div.find('a.gallery').magnificPopup({
+				type: 'image',
+				gallery:{
+					enabled:true
+				}
+			});
+		
+		});
+	</script>
+	{image:}
+		<div class="pull-left" style="margin:5px">
+			<a class="thumbnail gallery" title="{..Наименование}" href="/-imager/?src={.}">
+				<img title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?mark=1&h=100&w=125&crop=1&src={.}" />
+			</a>
+		</div>
 {producer:}
 	<div style="float:right; background-color:white; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
 		<a onclick="infrajs.scroll='.pagination'" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer::.{producer}=1">

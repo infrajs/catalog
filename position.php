@@ -59,11 +59,13 @@ if ($pos) {
 	
 	$ans['path']=$pos['path'];
 	
-	$pos=Catalog::getPos($pos);
+	$pos = Catalog::getPos($pos);
+	$group = Catalog::getGroup($pos['group']);
+	$pos['descr']=$group['descr'];
 	
 	$ans['pos']=$pos;
 	array_map(function($p) use (&$ans){
-			$ans['breadcrumbs'][]=array('title'=>$p,'add'=>'group::group.'.$p.'=1');
+		$ans['breadcrumbs'][]=array('title'=>$p,'add'=>'group::group.'.$p.'=1');
 	}, $pos['path']);
 	$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$orig_val.'=1', 'title'=>$orig_val);
 	$ans['breadcrumbs'][]=array('title'=>$orig_art);
