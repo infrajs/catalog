@@ -22,6 +22,6 @@ $ans['breadcrumbs']=array();
 $conf=Config::get('catalog');
 $ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title']);
 $menu=Load::loadJSON('-catalog/menu.json');
-$ans['breadcrumbs'][]=array('href'=>'find','title'=>$menu['find']['title']);
+$ans['breadcrumbs'][]=array('active'=>true, 'href'=>'find','title'=>$menu['find']['title']);
 $ans['menu']=$menu;
 return Ans::ret($ans);

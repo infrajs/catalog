@@ -50,7 +50,8 @@ $ans['menu']=Load::loadJSON('-catalog/menu.json');
 $ans['list']=$list;
 
 $conf=Catalog::$conf;
+$ans['breadcrumbs'][]=array('main'=>true, 'href'=>'','title'=>'Главная','add'=>'group');
 $ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title'],'add'=>'group');
-$ans['breadcrumbs'][]=array('href'=>'producers','title'=>'Производители');
+$ans['breadcrumbs'][]=array('active'=>true, 'href'=>'producers','title'=>'Производители');
 
 return Ans::ret($ans);

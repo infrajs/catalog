@@ -58,7 +58,7 @@
 		{::brcrumb}
 	</ul>
 	{brcrumb:}
-		{~last()?:crumblast?:crumb}
+		{active?:crumblast?:crumb}
 	{crumb:}
 		<li><a data-anchor='.breadcrumb' href="{main?:hrefmain?:href}">{title}</a></li>
 	{crumblast:}

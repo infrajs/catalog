@@ -95,6 +95,7 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 		$menu=Load::loadJSON('-catalog/menu.json');
 		$ans['breadcrumbs'][]=array('href'=>'producers','title'=>$menu['producers']['title']);
 		$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$name.'=1','title'=>$name);
+		$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active'] = true;
 	} else if (!$md['group'] && $md['search']) {
 		$ans['is']='search';
 		$ans['name']=$md['search'];
@@ -103,6 +104,7 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 		$menu=Load::loadJSON('-catalog/menu.json');
 		$ans['breadcrumbs'][]=array('href'=>'find','title'=>$menu['find']['title']);
 		$ans['breadcrumbs'][]=array('title'=>$ans['name']);
+		$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active'] = true;
 	} else {
 		//is!, descr!, text!, name!, breadcrumbs!, title
 		if($md['group'])foreach ($md['group'] as $group => $v) break;
@@ -120,6 +122,10 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 		$ans['name']=$group['name'];//имя группы длинное
 		$ans['descr']=@$group['descr']['Описание группы'];
 		$ans['title']=$group['title'];
+		$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active'] = true;
+		if (!$group['path']) {
+			$ans['breadcrumbs'][]=array('href'=>'producers','title'=>'Производители');
+		}
 	}
 
 	Catalog::sort($ans['list'], $md);
@@ -146,7 +152,7 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 		unset($pos['texts']);
 		unset($pos['files']);
 		$ans['list'][$k]=$pos;
-	}	
+	}
 	return $ans;
 }, $args, $re);
 
