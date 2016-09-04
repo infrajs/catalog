@@ -1,11 +1,10 @@
-{pos-page:}{Цена?:poscostblock}
-	{poscostblock:}
+{pos-page:}{Цена?:priceblockbig}
+	{priceblockbig:}
 		<div class="alert alert-success">
 			Цена: <span style="font-size:20px">{~cost(Цена)} руб.</span>{:nds}<br> 
 			По вопросам приобретения обращайтесь по телефонам в <a href="/contacts">контактах</a>.
 		</div>
-		
-	{nds:}{Config.get(:strcatalog).nds?:nds}{nds:} c <abbr title="Налог на Добавленную Стоимость">НДС</abbr>
+	{nds:}{Config.get(:strcatalog).nds?:ndsshow}{ndsshow:} c <abbr title="Налог на Добавленную Стоимость">НДС</abbr>
 {pos-sign:}
 	<p>
 		Задать вопрос о {Производитель} {Артикул} можно с помощью <span class="a showContacts">формы для сообщений</span> или c помощью других <a href="/contacts">контактов</a>.
