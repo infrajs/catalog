@@ -52,7 +52,7 @@
 	{:pages}
 	{:pageset}
 	<hr>
-	{:extend.pos-list}
+	{:extend.pos-item-css}
 
 	{list::cat_item}
 
