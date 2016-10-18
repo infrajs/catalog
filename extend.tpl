@@ -38,7 +38,7 @@
 			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Наименование|:name}</a>
 			{:producerlogo}
 			<div class="padding">
-				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Производитель} {descr.Артикул!:Скрытый?Артикул}</a></b>
+				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</a></b>
 				<div class="pull-right" style="font-size:90%"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}{:cat.mark.add}group::.{group}=1">{Группа}</a></div>
 			</div>
 			{more?:havemore?:nomore}

@@ -148,7 +148,8 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 
 	foreach($ans['list'] as $k=>$pos){
 		$pos=Catalog::getPos($pos);
-
+		$group = Catalog::getGroup($pos['group']);
+		$pos['descr'] = $group['descr'];
 		unset($pos['texts']);
 		unset($pos['files']);
 		$ans['list'][$k]=$pos;
