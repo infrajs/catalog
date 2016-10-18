@@ -3,6 +3,12 @@
 	"dependencies":["path"],
 	"tester":"tests/",
 	"nds":false,
+	"clutch":{
+		"magnific-popup":[
+			"vendor/dimsemenov/",
+			"vendor/infrajs/catalog/"
+		]
+	},
 	"update":"update.php",
 	"conf":"infrajs\\catalog\\Catalog",
 	"dir":"~catalog/",

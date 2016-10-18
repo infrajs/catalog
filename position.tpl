@@ -36,7 +36,8 @@
 		<div style="float:right">
 			{:producer}
 		</div>
-		<h1>{Наименование}<br>{Производитель} {Артикул}</h1>
+		{}
+		<h1>{Наименование}<br>{Производитель} {descr.Артикул!:Скрытый?Артикул}</h1>
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px">{Описание}</div>
@@ -54,7 +55,7 @@
 	</table>
 {pos_more:}<tr><td>{~key}:</td><td style="text-align:left">{.}</td></tr>
 {files:}
-	<h2>Файлы для {Продажа} {Производитель} {Артикул} </h2>
+	<h2>Файлы для {Продажа} {Производитель} {descr.Артикул!:Скрытый?Артикул} </h2>
 		<ul class="files">
 			{files::file}
 		</ul>

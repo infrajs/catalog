@@ -50,17 +50,21 @@ $ans=array(//Оригинальные значения
 	'art'=>$art
 );
 $ans['breadcrumbs']=array();//Путь где я нахожусь
-$conf=Config::get();
-$ans['breadcrumbs'][]=array('title'=>$conf['catalog']['title']);
+$conf = Config::get('catalog');
+$ans['breadcrumbs'][]=array('title'=>$conf['title']);
+
+
+$active = $orig_art;
 
 if ($pos) {
-	
-	$ans['result']=1;
+
+	$group = Catalog::getGroup($pos['group']);
+	if (isset($group['descr']['Артикул']) && $group['descr']['Артикул'] == 'Скрытый') {
+		$active = $pos['Наименование'];		
+	}
 	
 	$ans['path']=$pos['path'];
-	
 	$pos = Catalog::getPos($pos);
-	$group = Catalog::getGroup($pos['group']);
 	$pos['descr']=$group['descr'];
 	
 	$ans['pos']=$pos;
@@ -68,11 +72,11 @@ if ($pos) {
 		$ans['breadcrumbs'][]=array('title'=>$p,'add'=>'group::group.'.$p.'=1');
 	}, $pos['path']);
 	$ans['breadcrumbs'][]=array('add'=>'producer::producer.'.$orig_val.'=1', 'title'=>$orig_val);
-	$ans['breadcrumbs'][]=array('active'=>true, 'title'=>$orig_art);
+	$ans['breadcrumbs'][]=array('active'=>true, 'title'=>$active);
 	return Ans::ret($ans);
 } else {
 	$ans['breadcrumbs'][]=array('href'=>'producers','title'=>'Производители');
 	$ans['breadcrumbs'][]=array('href'=>'','title'=>$orig_val,'add'=>'producer::producer.'.$orig_val.'=1');
-	$ans['breadcrumbs'][]=array('active'=>true, 'title'=>$orig_art);
+	$ans['breadcrumbs'][]=array('active'=>true, 'title'=>$active);
 	return Ans::err($ans);
 }

@@ -7,11 +7,12 @@
 	{nds:}{Config.get(:strcatalog).nds?:ndsshow}{ndsshow:} c <abbr title="Налог на Добавленную Стоимость">НДС</abbr>
 {pos-sign:}
 	<p>
-		Задать вопрос о {Производитель} {Артикул} можно с помощью <span class="a showContacts">формы для сообщений</span> или c помощью других <a href="/contacts">контактов</a>.
+		Задать вопрос о <b>{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</b> можно с помощью <span class="a showContacts">формы для сообщений</span> или c помощью других <a href="/contacts">контактов</a>.
 	</p>
 	<p>
 		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}{:cat.mark.add}group::.{group}=1">{Группа}</a><br>
 	</p>
+	{Скрытый:}Скрытый
 {pos-item-css:}
 	<style scoped>
 		.cat_item .title {
@@ -37,7 +38,7 @@
 			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Наименование|:name}</a>
 			{:producerlogo}
 			<div class="padding">
-				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Производитель} {Артикул}</a></b>
+				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Производитель} {descr.Артикул!:Скрытый?Артикул}</a></b>
 				<div class="pull-right" style="font-size:90%"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}{:cat.mark.add}group::.{group}=1">{Группа}</a></div>
 			</div>
 			{more?:havemore?:nomore}

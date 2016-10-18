@@ -39,7 +39,7 @@
 	</div>
 	{groups_group:}
 		<div class="col-sm-6">
-			<a class="thumbnail" data-anchor='.breadcrumb' href="/{infrajs.names.catalog.crumb}{:mark.add}group::.{title}=1">
+			<a class="thumbnail" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}{:mark.add}group::.{title}=1">
 				<table>
 					<tr>
 						<td class="img">
@@ -65,7 +65,7 @@
 		<li class="active">{title}</li>
 	{add:}{:mark.add}{add}
 	{hrefmain:}.
-	{href:}/{infrajs.names.catalog.crumb}{href?:/}{href}{add?:add?(nomark|:mark.set)}
+	{href:}/{Controller.names.catalog.crumb}{href?:/}{href}{add?:add?(nomark|:mark.set)}
 {mark::}-catalog/mark.tpl
 {/:}/
 {menu:}
@@ -75,4 +75,4 @@
 		</ul>
 	</div>
 	{items:}
-		<li role="presentation"><a data-anchor='.breadcrumb' href="/{infrajs.names.catalog.crumb}/{~key}{:mark.set}">{title}</a></li>
+		<li role="presentation"><a data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{~key}{:mark.set}">{title}</a></li>
