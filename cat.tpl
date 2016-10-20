@@ -64,7 +64,7 @@
 	{crumblast:}
 		<li class="active">{title}</li>
 	{add:}{:mark.add}{add}
-	{hrefmain:}.
+	{hrefmain:}/
 	{href:}/{Controller.names.catalog.crumb}{href?:/}{href}{add?:add?(nomark|:mark.set)}
 {mark::}-catalog/mark.tpl
 {/:}/
