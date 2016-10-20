@@ -1,6 +1,7 @@
 {
 	"pub":["dir", "title", "nds"],
 	"dependencies":["path"],
+	"css":"style.css",
 	"tester":"tests/",
 	"nds":false,
 	"clutch":{

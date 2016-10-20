@@ -90,7 +90,7 @@
 	{image:}
 		<div class="pull-left" style="margin:5px">
 			<a class="thumbnail gallery" title="{..Наименование}" href="/-imager/?src={.}">
-				<img title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?mark=1&h=100&w=125&crop=1&src={.}" />
+				<img title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?mark=1&h=150&w=125&crop=1&src={.}" />
 			</a>
 		</div>
 {producer:}
