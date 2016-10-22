@@ -744,7 +744,10 @@ class Catalog
 		}
 		//Filter search
 		if (!empty($md['search'])) {
-			$v=preg_split("/\s+/", mb_strtolower($md['search']));
+			$v = preg_split("/\s+/", mb_strtolower($md['search']));
+			foreach($v as $i => $s) {
+				$v[$i] = preg_replace("/ы$/","",$s);
+			}
 			$poss=array_filter($poss, function ($pos) use ($v) {
 				return Catalog::searchTest($pos, $v);
 			});
