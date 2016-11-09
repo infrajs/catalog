@@ -3,6 +3,7 @@ namespace infrajs\catalog;
 use infrajs\excel\Xlsx;
 use infrajs\path\Path;
 use infrajs\load\Load;
+use infrajs\each\Each;
 use infrajs\cache\Cache;
 use infrajs\access\Access;
 use infrajs\sequence\Sequence;
@@ -548,10 +549,11 @@ class Catalog
 				$ar[]=$pages;
 			}
 		}
-		$ar=array_filter($ar, function (&$num) use ($page) {
-			$n=$num;
-			$num=array('num'=>$n,'title'=>$n);
-			if (!$n) {
+		
+		Each::exec($ar, function (&$num) use ($page) {
+			$n = $num;
+			$num = array('num'=>$n,'title'=>$n);
+			if (!$num['num']) {
 				$num['empty']=true;
 				$num['num']='';
 				$num['title']='&nbsp;';
@@ -559,7 +561,6 @@ class Catalog
 			if ($n==$page) {
 				$num['active']=true;
 			}
-			return true;
 		});
 		if (sizeof($ar)<2) {
 			return false;
@@ -568,6 +569,7 @@ class Catalog
 		if ($page<=1) {
 			$prev['empty']=true;
 		}
+
 		array_unshift($ar, $prev);
 		$next=array('num'=>$page+1,'title'=>'&raquo;');
 		if ($page>=$pages) {

@@ -29,10 +29,14 @@
 			color:white;
 		}
 	</style>
+{pos-img:}
+		<a class="thumbnail" href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">
+			<img src="/-imager/?mark=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty.png" />
+		</a>
 {pos-item:}
 	<div class="row cat_item">
 		<div class="col-xs-4 col-sm-3">
-			{images.0?:img}
+			{images.0?:pos-img}
 		</div>
 		<div class="col-xs-8 col-sm-9">
 			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">{Наименование|:name}</a>
@@ -44,10 +48,7 @@
 			{more?:havemore?:nomore}
 		</div>
 	</div>
-	{img:}
-	   <a class="thumbnail" href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.mark.set}">
-			<img src="/-imager/?mark=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty.png" />
-		</a>
+
 	{name:}{Артикул}
 	{havemore:}
 		<div class="padding" style="font-family:Tahoma; font-size:85%; margin-bottom:10px">    
