@@ -4,7 +4,7 @@
 			Цена: <span style="font-size:20px">{~cost(Цена)} руб.</span>{:nds}<br> 
 			По вопросам приобретения обращайтесь по телефонам в <a href="/contacts">контактах</a>.
 		</div>
-	{nds:}{Config.get(:strcatalog).nds?:ndsshow}{ndsshow:} c <abbr title="Налог на Добавленную Стоимость">НДС</abbr>
+	{nds:}{~conf.catalog.nds?:ndsshow}{ndsshow:} c <abbr title="Налог на Добавленную Стоимость">НДС</abbr>
 {pos-sign:}
 	<p>
 		Задать вопрос о <b>{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</b> можно с помощью <span class="a showContacts">формы для сообщений</span> или c помощью других <a href="/contacts">контактов</a>.
