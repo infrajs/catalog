@@ -36,8 +36,7 @@
 		<div style="float:right">
 			{:producer}
 		</div>
-		{}
-		<h1>{Наименование}<br>{Производитель} {descr.Артикул!:Скрытый?Артикул}</h1>
+		<h1>{Наименование}{descr.Артикул:startart}</h1>
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px">{Описание}</div>
@@ -49,6 +48,7 @@
 			{:extend.pos-sign}
 		</div>
 	</div>
+	{startart:}<br>{Производитель} {Артикул}
 {print_more:}
 	<table class="table table-striped">
 		{more::pos_more}
