@@ -73,6 +73,7 @@ Excel документы в папке ```data/catalog/``` будут интер
 	"filename":"Производитель",
 	"columns":[],
 	"filteroneitem":true,
+	"filtershowhard":[],
 	"filters":{
 		"producer":{
 			"posid":"producer",

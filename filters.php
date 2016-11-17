@@ -12,6 +12,7 @@ use infrajs\sequence\Sequence;
 use infrajs\ans\Ans;
 
 $ans = array();
+
 $md = Catalog::initMark($ans);
 
 $args = array(Catalog::nocache($md));
@@ -154,8 +155,15 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 		}else{
 			$right = array($v['mdid']);    
 			$add = '';
+			
 		}
 		$showhard = Sequence::get($md, $right);
+		if (!is_array($conf['filtershowhard'])) $conf['filtershowhard'] = array($conf['filtershowhard']);
+		if (in_array($v['mdid'], $conf['filtershowhard'])) {
+			$showhard = true;
+		}
+		
+		
 
 		$opt = Catalog::option($params[$k]['option'], $count, $search, $showhard);
 		

@@ -151,7 +151,9 @@ class Mark
 				$src=Path::theme('~.marks/'.$that->prefix.$mark.'.json');
 				if ($src) {
 					$otherdata = file_get_contents($src);
-					$otherdata = Load::json_decode($otherdata);
+				
+					$otherdata = Load::json_decode($otherdata,true);	
+					
 				} else {
 					$otherdata = false;
 				}

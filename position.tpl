@@ -65,7 +65,7 @@
 		</li>
 {text:}
 	{.}
-{bigimg:}<img class="img-responsive" src="/{images.0}">
+{bigimg:}<img class="img-responsive" src="/-imager/?src={images.0}">
 {strбольшая:}Большая
 {images:}
 	{descr.Картинка=:strбольшая?:bigimg}

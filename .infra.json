@@ -19,6 +19,7 @@
 	"filename":"Производитель",
 	"columns":[],
 	"filteroneitem":true,
+	"filtershowhard":[],
 	"filters":{
 		"producer":{
 			"posid":"producer",

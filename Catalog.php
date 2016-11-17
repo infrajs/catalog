@@ -20,6 +20,7 @@ class Catalog
 		"filename"=>"Производитель",
 		"columns"=>array(),
 		"filteroneitem"=>true, //Показывать ли фильтр в котором только один пункт, который true для всей выборке
+		"filtershowhard" => array(), //Фильтры, которые всегда показываются
 		"filters"=>array(
 			"producer"=>array(
 				"posid"=>"producer",
@@ -581,11 +582,11 @@ class Catalog
 	public static function initMark(&$ans = array())
 	{
 		//Нельзя добавлять в скрипте к метке новые значения. так как метка приходит во многие скрипты и везде должен получится один результат и все должны получить одинаковую новую метку содержающую изменения
-		$mark=Path::toutf(Sequence::get($_GET, Sequence::right('m')));
+		$mark = Path::toutf(Sequence::get($_GET, Sequence::right('m')));
 		
-		$mark=Mark::getInstance($mark);
-		$md=$mark->getData();
-
+		$mark = Mark::getInstance($mark);
+		$md = $mark->getData();
+		
 
 		$defmd=array_merge(Catalog::$md, Catalog::$conf['md']);	
 		
@@ -594,9 +595,13 @@ class Catalog
 
 		Catalog::markData($md);
 
-		$ans['m']=$mark->setData($md);
+		$ans['m'] = $mark->setData($md);
+
+
 		$md=array_merge($defmd, $md);
 		$ans['md']=$md;
+
+
 		return $md;
 	}
 	public static function urlencode($str)
@@ -674,14 +679,13 @@ class Catalog
 					'name' => Sequence::short(array(Catalog::urlencode($prop['mdid'])))
 				);
 
-
 				$poss = array_filter($poss, function ($pos) use ($prop, $val, &$valtitles) {
 					foreach($val as $value => $one) {
-						if ($value === 'yes' && Xlsx::isSpecified($prop)) return true;
-						if ($value === 'no' && !Xlsx::isSpecified($prop)) return true;
-						
 						$option=$pos[$prop['posid']];
 						$titles=$pos[$prop['posname']];
+
+						if ($value === 'yes' && Xlsx::isSpecified($option)) return true;
+						if ($value === 'no' && !Xlsx::isSpecified($option)) return true;
 
 						if ($prop['separator']) {
 							$option=explode($prop['separator'], $option);
@@ -700,7 +704,6 @@ class Catalog
 					}
 					return false;
 				});
-
 				if ($val['no']) {
 					unset($val['no']);
 					$val['Не указано']=1;
