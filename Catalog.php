@@ -61,7 +61,9 @@ class Catalog
 			//Xlsx::runGroups($data, function (&$gr) {
 			//	$gr['data']=array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
 			//});
+
 			Extend::init($data);
+
 			return $data;
 		});
 	}
@@ -71,6 +73,7 @@ class Catalog
 			$data = Catalog::init();
 			return Xlsx::runPoss($data, function &($pos) use ($sproducer) {
 				if (mb_strtolower($pos['producer']) == $sproducer) return $pos;
+				$r = null; return $r;
 			});
 		}, array($sproducer));
 		$producer = $pos['producer'];
@@ -174,8 +177,9 @@ class Catalog
 	public static function getGroup($group){
 		return Catalog::cache('getGroup', function &($group){
 			$data=Catalog::init();
-			if($group) $data=Xlsx::runGroups($data, function &($gr) use($group) {
+			if ($group) $data=Xlsx::runGroups($data, function &($gr) use($group) {
 				if($gr['title']==$group)return $gr;
+				$r = null; return $r;
 			});
 			unset($data['childs']);
 			unset($data['data']);
@@ -215,18 +219,27 @@ class Catalog
 			//more берутся все параметры, а из main только указанные, расширенные config.catalog.filters
 			$main = Catalog::$conf['filters'];
 			foreach ($main as $k => $prop) {
-				if ($prop['more']) continue;
+				if (!empty($prop['more'])) continue;
 				$prop['mdid']=$k;
 				$params[$k] = array_merge($parametr, $prop);
 			}
 
 			foreach ($poss as &$pos) {
 				foreach ($main as $k=>$prop) {
-					if ($prop['more']) continue;
+					if (!empty($prop['more'])) continue;
 					$prop = $params[$k];
-					$val=$pos[$prop['posid']];
-					$name=$pos[$prop['posname']];
-					if (preg_match("/[:]/", $val)) continue;//Зачем?
+					if (isset($pos[$prop['posid']])) {
+						$val = $pos[$prop['posid']];
+					} else {
+						$val = null;
+					}
+					if (isset($pos[$prop['posname']])) {
+						$name=$pos[$prop['posname']];
+					} else {
+						$name = null;
+					}
+					
+					if (preg_match("/[:]/", $val)) continue;//Зачем, после : указывается парамтр?
 					if (!Xlsx::isSpecified($val)) continue;
 					
 					$r=false;
@@ -253,7 +266,7 @@ class Catalog
 					if ($r)	$params[$k]['count']++;//Позиций с этим параметром
 				}
 				
-				if ($pos['more']) {
+				if (!empty($pos['more'])) {
 					foreach($pos['more'] as $k=>$val){
 						if (preg_match("/[:]/", $val)) continue;
 						if (preg_match("/[:]/", $k)) continue;
@@ -296,7 +309,7 @@ class Catalog
 			}
 
 			foreach ($main as $k=>$prop) {
-				if (!$prop['more']) continue;
+				if (empty($prop['more'])) continue;
 				if (empty($params[$k])) continue;
 				$prop['mdid'] = $k;
 				$params[$k] = array_merge($prop, $params[$k]);
@@ -320,12 +333,14 @@ class Catalog
 		
 		return Catalog::cache('getPoss', function &($group){
 			$data=Catalog::init();
-			if($group) $data=Xlsx::runGroups($data, function &($gr) use($group) {
-				if($gr['title']==$group)return $gr;
+			if ($group) $data=Xlsx::runGroups($data, function &($gr) use($group) {
+				if ($gr['title']==$group) return $gr;
+				$r = null; return $r;
 			});
 			$poss=array();
-			Xlsx::runPoss($data, function (&$pos) use (&$poss) {
+			Xlsx::runPoss($data, function &(&$pos) use (&$poss) {
 				$poss[]=&$pos;
+				$r = null; return $r;
 			});
 			
 			return $poss;
@@ -403,13 +418,15 @@ class Catalog
 			//данный кэш один для любой страницы каталога
 			$subgroups=array();
 			$data = Catalog::init();
-			Xlsx::runGroups($data, function ($group) use (&$subgroups) {
-				if (empty($group['childs'])) return;
+			Xlsx::runGroups($data, function &($group) use (&$subgroups) {
+				$r = null;
+				if (empty($group['childs'])) return $r;
 				$subgroup=array();
 				array_walk($group['childs'], function ($g) use (&$subgroup) {
 					$subgroup[]=array('title'=>$g['title'],'name'=>$g['name']);
 				});
 				$subgroups[$group['title']]=$subgroup;
+				return $r;
 			});
 			return $subgroups;
 		});
@@ -551,7 +568,7 @@ class Catalog
 			}
 		}
 		
-		Each::exec($ar, function (&$num) use ($page) {
+		Each::exec($ar, function &(&$num) use ($page) {
 			$n = $num;
 			$num = array('num'=>$n,'title'=>$n);
 			if (!$num['num']) {
@@ -562,6 +579,8 @@ class Catalog
 			if ($n==$page) {
 				$num['active']=true;
 			}
+			$r = null;
+			return $r;
 		});
 		if (sizeof($ar)<2) {
 			return false;
@@ -582,8 +601,7 @@ class Catalog
 	public static function initMark(&$ans = array())
 	{
 		//Нельзя добавлять в скрипте к метке новые значения. так как метка приходит во многие скрипты и везде должен получится один результат и все должны получить одинаковую новую метку содержающую изменения
-		$mark = Path::toutf(Sequence::get($_GET, Sequence::right('m')));
-		
+		$mark = Path::toutf(Sequence::get($_GET, array('m')));
 		$mark = Mark::getInstance($mark);
 		$md = $mark->getData();
 		
@@ -918,8 +936,11 @@ class Catalog
 			$ans['list']=Catalog::getPoss($md['group']);
 			//ЭТАП filters list
 			$ans['filters']=Catalog::filtering($ans['list'], $md);
+
+			$now = null;
 			foreach ($md['group'] as $now => $one) break;
-			$ans['childs']=Catalog::getGroups($ans['list'], $now);
+
+			$ans['childs'] = Catalog::getGroups($ans['list'], $now);
 			
 			$ans['count']=sizeof($ans['list']);
 			

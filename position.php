@@ -22,9 +22,10 @@ $ans=array();
 
 $pos=Catalog::cache('position', function($val, $art){
 	$data=Catalog::init(); // список всей продукции
-	return Xlsx::runPoss($data, function (&$pos, $i, &$group) use (&$val, &$art) {
-		if (mb_strtolower($pos['producer'])!==$val) return;
-		if (mb_strtolower($pos['article'])!==$art) return;
+	return Xlsx::runPoss($data, function &(&$pos, $i, &$group) use (&$val, &$art) {
+		$r = null;
+		if (mb_strtolower($pos['producer'])!==$val) return $r;
+		if (mb_strtolower($pos['article'])!==$art) return $r;
 		return $pos;
 	});
 }, $args, isset($_GET['re']));
