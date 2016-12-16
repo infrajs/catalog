@@ -879,7 +879,7 @@ class Catalog
 				continue;
 			}
 		}*/
-		if (!$opt['values'] && $opt['type'] != 'slider') {
+		if (empty($opt['values']) && $opt['type'] != 'slider') {
 			if ($opt['count'] == $count){//Слишком много занчений но при этом у всех позиций они указаны и нет no yes
 				return false;
 			}

@@ -3,13 +3,12 @@
  * Блок "filters"
  */
 
-namespace infrajs\catalog;
-
 use infrajs\excel\Xlsx;
 use infrajs\config\Config;
 use infrajs\path\Path;
 use infrajs\sequence\Sequence;
 use infrajs\ans\Ans;
+use infrajs\catalog\Catalog;
 
 $ans = array();
 
@@ -34,12 +33,12 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 	foreach($params as $k=>$prop){
 		if($prop['more']){
 			foreach($poss as &$pos){
-				if(!Xlsx::isSpecified($pos['more'][$prop['posid']]))continue;
+				if (!isset($pos['more'][$prop['posid']]) || !Xlsx::isSpecified($pos['more'][$prop['posid']])) continue;
 				$r=false;
 				if ($prop['separator']) {
-					$arval=explode($prop['separator'], $pos[$prop['posid']]);
+					$arval=explode($prop['separator'], $pos['more'][$prop['posid']]);
 				} else {
-					$arval=array($pos[$prop['posid']]);
+					$arval=array($pos['more'][$prop['posid']]);
 				}
 				foreach($arval as $value){
 					$idi=Path::encode($value);
@@ -52,7 +51,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			}
 		}else{
 			foreach($poss as &$pos){
-				if(!Xlsx::isSpecified($pos[$prop['posid']]))continue;
+				if (!isset($pos[$prop['posid']]) || !Xlsx::isSpecified($pos[$prop['posid']])) continue;
 				
 				$r=false;
 				if($prop['separator']){
@@ -89,9 +88,8 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			$poss = $res['list'];
 
 			foreach ($poss as &$pos){
-				
+				if (!isset($pos['more'][$prop['posid']])) continue;
 				if (preg_match("/[:]/", $pos['more'][$prop['posid']])) continue;
-
 				if (!Xlsx::isSpecified($pos['more'][$prop['posid']])) continue;
 
 				$r=false;
@@ -115,6 +113,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			$res = Catalog::search($mymd);
 			$poss = $res['list'];
 			foreach($poss as &$pos){
+				if(!isset($pos[$prop['posid']])) continue;
 				if (preg_match("/[:]/", $pos[$prop['posid']])) continue;
 				if (!Xlsx::isSpecified($pos[$prop['posid']])) continue;
 
@@ -199,7 +198,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 		
 		
 		$paramid = Sequence::short(array(Catalog::urlencode($param['mdid'])));
-		$block['checked'] = !!$mymd['yes'];
+		$block['checked'] = !empty($mymd['yes']);
 		
 		
 		if($block['checked']){
@@ -220,7 +219,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 				'title' => 'Не указано',
 				'filter' => $param['nofilter']
 			);
-			$row['checked'] = !!$mymd['no'];
+			$row['checked'] = !empty($mymd['no']);
 			if ($row['checked']) {
 				$row['add'] = $add.$paramid.'.no=';
 			} else {
@@ -235,7 +234,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 					'title' => $value['title'],
 					'filter' => $value['filter']
 				);
-				$row['checked']=!!$mymd[$value['id']];
+				$row['checked']=!empty($mymd[$value['id']]);
 				$valueid=Sequence::short(array(Catalog::urlencode($value['id'])));
 				if($row['checked']){
 					$row['add'] = $add.$paramid.'.'.$valueid.'=';
