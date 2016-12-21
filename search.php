@@ -19,7 +19,6 @@ $val=Ans::GET('val');
 $val=Path::toutf(strip_tags($val));
 if ($val) $md['search']=$val;//Временное значение
 
-
 if(isset($_GET['seo'])){
 	$link=$_GET['seo'];
 	if($md['group']){
@@ -78,7 +77,6 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 	$ans['list']=array(); //Массив позиций
 
 	Catalog::search($md, $ans);
-
 	$conf=Catalog::$conf;
 
 	//BREADCRUMBS TITLE

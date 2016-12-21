@@ -45,9 +45,8 @@ if(isset($_GET['seo'])) {
 	return Ans::ans($ans);
 }
 
-$ans=array(//Оригинальные значения
+$ans = array(//Оригинальные значения
 	'val'=>$val,
-	'prod'=>$prod,
 	'art'=>$art
 );
 $ans['breadcrumbs']=array();//Путь где я нахожусь

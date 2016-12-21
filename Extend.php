@@ -7,10 +7,6 @@ class Extend
 	{
 	
 	}
-	public static function markData(&$md)
-	{
-		
-	}
 	public static function filtering(&$poss, $md, &$filters)
 	{
 		
