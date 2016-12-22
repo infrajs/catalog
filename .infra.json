@@ -4,6 +4,7 @@
 	"css":"style.css",
 	"tester":"tests/",
 	"nds":false,
+	"require":"infra.php",
 	"clutch":{
 		"magnific-popup":[
 			"vendor/dimsemenov/",
