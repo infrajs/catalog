@@ -354,7 +354,11 @@ class Catalog
 		
 		if (!sizeof($path)) {
 			$conf=Catalog::$conf;
-			$groupchilds=$subgroups[$conf['title']];
+			if (!empty($subgroups[$conf['title']])) {
+				$groupchilds = $subgroups[$conf['title']];
+			} else {
+				$groupchilds = array();
+			}
 		} else {
 			$g=$path[sizeof($path)-1];
 			if (isset($subgroups[$g])) {
