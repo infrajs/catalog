@@ -17,7 +17,6 @@ class Catalog
 		"dir"=>"~catalog/",
 		"cache"=>array("~catalog/"),
 		"title"=>"Каталог",
-		"md"=>array(),
 		"filename"=>"Производитель",
 		"columns"=>array(),
 		"filteroneitem"=>true, //Показывать ли фильтр в котором только один пункт, который true для всей выборке
