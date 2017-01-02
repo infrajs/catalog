@@ -135,7 +135,7 @@ class Catalog
 						$name = null;
 					}
 					
-					if (preg_match("/[:]/", $val)) continue;//Зачем, после : указывается парамтр?
+					//if (preg_match("/[:]/", $val)) continue;//Зачем, после : указывается парамтр?
 					if (!Xlsx::isSpecified($val)) continue;
 					
 					$r=false;
@@ -146,6 +146,7 @@ class Catalog
 						$arval=array($val);
 						$arname=array($name);
 					}
+
 					foreach($arval as $i => $value){
 						$idi = Path::encode($value);
 						$id=$idi;//mb_strtolower($idi);
@@ -163,9 +164,9 @@ class Catalog
 				}
 				
 				if (!empty($pos['more'])) {
-					foreach($pos['more'] as $k=>$val){
-						if (preg_match("/[:]/", $val)) continue;
-						if (preg_match("/[:]/", $k)) continue;
+					foreach ($pos['more'] as $k => $val) {
+						//if (preg_match("/[:]/", $val)) continue;
+						//if (preg_match("/[:]/", $k)) continue;
 						if (!Xlsx::isSpecified($val)) continue;
 
 						if (!isset($params[$k])) {
@@ -185,14 +186,14 @@ class Catalog
 						}else{
 							$arval=array($val);
 						}
-						foreach($arval as $value){
+						foreach ($arval as $value){
 							$idi = Path::encode($value);
 							//$id=mb_strtolower($idi);
 							$id = $idi;
 							if (!Xlsx::isSpecified($id)) continue;
 							$r=true;
 							if (!isset($params[$k]['option'][$id])) {
-								$params[$k]['option'][$id]=array_merge($option, array(
+								$params[$k]['option'][$id] = array_merge($option, array(
 									'id' => $idi,
 									'title' => trim($value)
 								));
@@ -385,17 +386,18 @@ class Catalog
 	public static function searchTest($pos, $v) {
 		$str=$pos['Артикул'];
 		$str.=' '.implode(' ', $pos['path']);
-		$str.=' '.$pos['article'];
-		$str.=' '.$pos['Наименование'];
-		$str.=' '.$pos['Производитель'];
-		$str.=' '.$pos['producer'];
-		$str.=' '.$pos['Описание'];
+
+		$params = array('article','Наименование','Производитель','producer','Описание');
+		foreach ($params as $name) {
+			if (!isset($pos[$name])) continue;
+			$str.=' '.$pos[$name];
+		}
 		
 		if (!empty($pos['more'])) {
 			$str.=' '.implode(' ', $pos['more']);
 			$str.=' '.implode(' ', array_keys($pos['more']));
 		}
-		$str=mb_strtolower($str);
+		$str = mb_strtolower($str);
 		foreach ($v as $s) {
 			if (mb_strrpos($str, $s)===false) {
 				return false;
@@ -691,6 +693,7 @@ class Catalog
 		return $filters;
 	}
 	public static function option($values, $count, $search, $showhard = false){
+		$value = '';
 		foreach ($values as $value => $s) break;
 		$opt = array('type' => '', 'values' => $values);
 		$min = $value;
@@ -748,7 +751,7 @@ class Catalog
 				$opt['values']=array();
 				if (!$showhard) return false;
 			}
-			if ($showhard) {	
+			if (is_array($showhard)) {	
 				foreach ($showhard as $show => $one) {
 					$title = $show;
 					//$show = mb_strtolower($show);

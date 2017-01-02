@@ -29,7 +29,10 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 	$poss=$res['list'];
 	$search=sizeof($poss);//Позиций найдено
 	//ПОСЧИТАЛИ FILTER со всеми md
-
+	
+	//echo '<pre>';
+	//print_r($params);
+	
 	foreach($params as $k=>$prop){
 		if($prop['more']){
 			foreach($poss as &$pos){
@@ -40,13 +43,16 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 				} else {
 					$arval=array($pos['more'][$prop['posid']]);
 				}
-				foreach($arval as $value){
-					$idi=Path::encode($value);
-					$id=mb_strtolower($idi);
+				
+				
+				foreach ($arval as $value) {
+					$idi = Path::encode($value);
+					$id = mb_strtolower($idi);
 					if (!Xlsx::isSpecified($id)) continue;
-					$r=true;
+					$r = true;
 					$params[$k]['option'][$idi]['search']++;
 				}
+
 				if ($r)	$params[$k]['search']++;
 			}
 		}else{
@@ -147,6 +153,8 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 	*/
 	
 	//ДОБАВИЛИ option values
+	if (!is_array($conf['filtershowhard'])) $conf['filtershowhard'] = array($conf['filtershowhard']);
+
 	foreach($params as $k => $v){
 		if ($v['more']) {
 			$right = array('more', $v['mdid']);    
@@ -157,7 +165,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			
 		}
 		$showhard = Sequence::get($md, $right);
-		if (!is_array($conf['filtershowhard'])) $conf['filtershowhard'] = array($conf['filtershowhard']);
+		
 		if (in_array($v['mdid'], $conf['filtershowhard'])) {
 			$showhard = true;
 		}
