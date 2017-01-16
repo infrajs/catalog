@@ -926,9 +926,9 @@ Catalog::add('cost', function () {
 	if (!is_array($val)) return false;
 	$val = array_filter($val);//Удаляет false значения
 	$values = array_keys($val);
-	$values = array_filter($values, function (&$val) {
-		if(in_array($value, array('yes','no'))) return true;
-		if (!$val) return false;
+	$values = array_filter($values, function (&$value) {
+		if (in_array($value, array('yes','no'))) return true;
+		if (!$value) return false;
 		return true;
 	});
 	$val = array_fill_keys($values, 1);
