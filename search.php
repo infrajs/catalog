@@ -118,7 +118,7 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 			array_unshift($ans['breadcrumbs'],array('main'=>true,"title"=>"Главная","nomark"=>true));
 		}
 		$ans['name']=$group['name'];//имя группы длинное
-		$ans['descr']=@$group['descr']['Описание группы'];
+		$ans['descr'] = isset($group['descr']['Описание группы']) ? $group['descr']['Описание группы'] : '';
 		$ans['title']=$group['title'];
 		$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active'] = true;
 		if (!$group['path']) {
@@ -154,5 +154,7 @@ $ans = Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 	}
 	return $ans;
 }, $args, $re);
-
+//echo '<pre>';
+//print_r($ans['childs']);
+//exit;
 return Ans::ret($ans);
