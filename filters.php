@@ -180,9 +180,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			$params[$k]['option']=$opt;
 		}
 	}
-				
-		
-				
+
 	
 	$ans['params'] = $params;
 	//$ans['params']=$params;
@@ -236,7 +234,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			$block['row'][] = $row;
 		}
 		
-		if ($block['type'] == 'string') {
+		if (in_array($block['type'], array('string','number'))) {
 			foreach ($param['option']['values'] as $value) {
 				$row = array(
 					'title' => $value['title'],

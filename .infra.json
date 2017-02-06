@@ -11,6 +11,7 @@
 			"vendor/infrajs/catalog/"
 		]
 	},
+	"foldwhen":30,
 	"update":"update.php",
 	"conf":"infrajs\\catalog\\Catalog",
 	"dir":"~catalog/",

@@ -63,7 +63,7 @@ Excel документы в папке ```data/catalog/``` будут интер
 
 ## Конфиг [infrajs/config](https://github.com/infrajs/config)
 
-```json
+```js
 {
 	"nds":false,
 	"dir":"~catalog/",
@@ -72,6 +72,7 @@ Excel документы в папке ```data/catalog/``` будут интер
 	"md":{ },
 	"filename":"Производитель",
 	"columns":[],
+	"foldwhen"=>30, //Скрывать значения фильтра если их больше
 	"filteroneitem":true,
 	"filtershowhard":[],
 	"filters":{

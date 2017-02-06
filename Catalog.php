@@ -16,6 +16,7 @@ class Catalog
 		"pub"=>array("dir", "title"),
 		"dir"=>"~catalog/",
 		"cache"=>array("~catalog/"),
+		"foldwhen"=>30, //Скрывать значения фильтра если их больше
 		"title"=>"Каталог",
 		"filename"=>"Производитель",
 		"columns"=>array(),
@@ -693,6 +694,7 @@ class Catalog
 	}
 	public static function option($values, $count, $search, $showhard = false){
 		$value = '';
+		$conf = Catalog::$conf;
 		foreach ($values as $value => $s) break;
 		$opt = array('type' => '', 'values' => $values);
 		$min = $value;
@@ -731,22 +733,21 @@ class Catalog
 			if ($val > $max) $max = $val;
 		}
 		if (!$type) {
-			$len = sizeof($opt['values']);
+			$type = 'number';
+			/*$len = sizeof($opt['values']);
 			if ($len>5) { //Слайдер
 				$opt['min'] = $min;
 				$opt['max'] = $max;
 				$type = 'slider';
 				unset($opt['values']);
-			} else {
-				$type = 'string';
-			}
+			}*/
 		}
 		
 		$opt['type'] = $type;
 	
-		if($opt['type'] == 'string') {
+		if (in_array($opt['type'], array('string','number'))) {
 			$saved_values = $opt['values'];
-			if (sizeof($opt['values']) > 30) {
+			if (sizeof($opt['values']) > $conf['foldwhen']) {
 				$opt['values']=array();
 				if (!$showhard) return false;
 			}
@@ -774,12 +775,21 @@ class Catalog
 			//}
 		}
 
-		if($opt['type']=='string'){
+		if ($opt['type'] == 'string') {
 			usort($opt['values'], function ($v1, $v2){
 				//if ($v1['filter']>$v2['filter']) return -1;
 				//if ($v1['filter']<$v2['filter']) return 1;
 				if ($v1['count']>$v2['count']) return -1;
 				if ($v1['count']<$v2['count']) return 1;
+				if ($v1['title']>$v2['title']) return -1;
+				if ($v1['title']<$v2['title']) return 1;
+			});
+		} else if ($opt['type'] == 'number') {
+			usort($opt['values'], function ($v1, $v2){
+				//if ($v1['filter']>$v2['filter']) return -1;
+				//if ($v1['filter']<$v2['filter']) return 1;
+				if ($v1['title']>$v2['title']) return 1;
+				if ($v1['title']<$v2['title']) return -1;
 			});
 		}
 		/*if(sizeof($opt['values'])==1){
