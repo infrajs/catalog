@@ -36,7 +36,7 @@
 		<div style="float:right">
 			{:producer}
 		</div>
-		<h1>{Наименование}{descr.Артикул:startart}</h1>
+		<h1>{Наименование}{descr.Артикул!:Скрытый?:startart}</h1>
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px">{Описание}</div>
