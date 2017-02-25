@@ -277,7 +277,7 @@ class Catalog
 					$a=$a['Цена'];
 					$b=$b['Цена'];
 					if ($a == $b) return 0;
-					return ($a < $b) ? $one : -$one;
+					return ($a < $b) ? -$one : $one;
 				});
 
 			} else if ($md['sort']=='change') {
