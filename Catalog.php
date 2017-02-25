@@ -256,19 +256,30 @@ class Catalog
 					$b = $b['Наименование'];
 					return strcasecmp($a, $b);
 				});
+				if ($md['reverse']) {
+					$poss=array_reverse($poss);
+				}
 			} else if ($md['sort']=='art') {
 				usort($poss, function ($a, $b) {
 					$a=$a['Артикул'];
 					$b=$b['Артикул'];
 					return strcasecmp($a, $b);
 				});
+				if ($md['reverse']) {
+					$poss=array_reverse($poss);
+				}
 			} else if ($md['sort']=='cost') {
-				usort($poss, function ($a, $b) {
+				$one = (int) $md['reverse'];
+				$one = 1 - $one*2;
+				usort($poss, function ($a, $b) use ($one){
+					if(!isset($a['Цена'])) return 1;
+					if(!isset($b['Цена'])) return -1;
 					$a=$a['Цена'];
 					$b=$b['Цена'];
 					if ($a == $b) return 0;
-					return ($a < $b) ? 1 : -1;
+					return ($a < $b) ? $one : -$one;
 				});
+
 			} else if ($md['sort']=='change') {
 				$args=array(Catalog::nocache($md));
 				
@@ -300,11 +311,12 @@ class Catalog
 					});
 					return $poss;
 				}, $args, isset($_GET['re']));
+				if ($md['reverse']) {
+					$poss = array_reverse($poss);
+				}
 			}
 		}
-		if ($md['reverse']) {
-			$poss=array_reverse($poss);
-		}
+		
 	}
 	public static function getGroups($list, $now = false) {
 		//Groups
