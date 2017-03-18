@@ -6,6 +6,7 @@ use infrajs\load\Load;
 use infrajs\each\Each;
 use infrajs\mark\Mark as Marker;
 use infrajs\cache\Cache;
+use infrajs\config\Config;
 use infrajs\access\Access;
 use infrajs\sequence\Sequence;
 
@@ -22,6 +23,7 @@ class Catalog
 		"columns"=>array(),
 		"filteroneitem"=>true, //Показывать ли фильтр в котором только один пункт, который true для всей выборке
 		"filtershowhard" => array(), //Фильтры, которые всегда показываются
+		"filterslimitpercent" => 10, //20 Процент позиций у которых должен быть указан параметр, чтобы он показался в фильтрах
 		"filters"=>array(
 			"producer"=>array(
 				"posid"=>"producer",
@@ -211,16 +213,35 @@ class Catalog
 				$prop['mdid'] = $k;
 				$params[$k] = array_merge($prop, $params[$k]);
 			}
-			uasort($params,function ($p1, $p2) {
+			$conf = Config::get('catalog');
+			if (!is_array($conf['filtershowhard'])) $conf['filtershowhard'] = array($conf['filtershowhard']);
+			$showhard = $conf['filtershowhard'];
+			uasort($params, function ($p1, $p2) use ($showhard) {
+				
+				if (in_array($p1['mdid'], $showhard) && in_array($p2['mdid'], $showhard) ) {
+					$key1 = array_search($p1['mdid'], $showhard);
+					$key2 = array_search($p2['mdid'], $showhard);
+					if ($key1 > $key2) return 1;
+					else return -1;
+				}
+
+				if (in_array($p1['mdid'], $showhard)) return -1;
+				if (in_array($p2['mdid'], $showhard)) return 1;
+				
+
+
+
 				if (!empty($p1['group']) || !empty($p2['group'])) {
 					if ($p1['group'] == $p2['group']) return 0;
 					if (!empty($p1['group'])) return 1;
 					if (!empty($p2['group'])) return -1;
 				}
+
 				if ($p1['count'] > $p2['count']) return -1;
 				if ($p1['count'] < $p2['count']) return 1;
 				return 0;
 			});
+			
 			return $params;
 		}, array($group), isset($_GET['re']));
 	}
@@ -731,7 +752,11 @@ class Catalog
 
 		$opt['search'] = $yes;
 		$opt['count'] = $yesall;
-		if (!$showhard && $count > $yesall * 10) { //Если отмеченных менее 10% то такие опции не показываются
+		
+
+
+
+		if (!$showhard && (($count * ($conf['filterslimitpercent'] / 100)) > $yesall)) { //Если отмеченных менее 10% то такие опции не показываются
 			return false;
 		}
 		

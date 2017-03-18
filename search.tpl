@@ -82,7 +82,7 @@
 	</ul>
 {pageset:}
 	<div class="clearfix"></div>
-	<a rel="nofollow" class="pull-right" onclick="Session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');" style="cursor:pointer"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+	<span rel="nofollow" class="pull-right" style="cursor:pointer; color:gray; border-bottom:none;" onclick="Session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');" style="cursor:pointer">Сортировка <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></span>
 	<div class="settings alert alert-info" style="display:none">
 		Сортировать <a rel="nofollow" style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,
 			<a rel="nofollow" style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:name|:name}'>по наименованию</a>, 

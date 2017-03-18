@@ -73,8 +73,9 @@ Excel документы в папке ```data/catalog/``` будут интер
 	"filename":"Производитель",
 	"columns":[],
 	"foldwhen"=>30, //Скрывать значения фильтра если их больше
-	"filteroneitem":true,
-	"filtershowhard":[],
+	"filteroneitem"=>true, //Показывать ли фильтр в котором только один пункт, который true для всей выборке
+	"filtershowhard" => array(), //Фильтры, которые всегда показываются
+	"filterslimitpercent" = 10, //Процент позиций у которых должен быть указан параметр, чтобы он показался в фильтрах
 	"filters":{
 		"producer":{
 			"posid":"producer",

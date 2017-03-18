@@ -20,8 +20,9 @@
 	"md":{ },
 	"filename":"Производитель",
 	"columns":[],
-	"filteroneitem":true,
-	"filtershowhard":[],
+	"filteroneitem": true,
+	"filtershowhard": [],
+	"filterslimitpercent": 10,
 	"filters":{
 		"producer":{
 			"posid":"producer",
