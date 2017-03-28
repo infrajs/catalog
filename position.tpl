@@ -96,7 +96,7 @@
 	{imagedef:}
 		<div class="pull-left" style="margin:5px">
 			<a class="thumbnail gallery" style="margin-bottom:0;" title="{..Наименование}" href="/-imager/?src={.}">
-				<img title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?mark=1&h={~key=:0?:400?:150}&top=1&src={.}" />
+				<img title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?mark=1&h={~key=:0?:321?:150}&top=1&src={.}" />
 			</a>
 		</div>
 {producer:}
