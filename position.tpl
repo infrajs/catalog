@@ -69,7 +69,7 @@
 {strбольшая:}Большая
 {images:}
 	{descr.Картинка=:strбольшая?:bigimg}
-	<div class="cat_images" style="text-align:center; background-color:white; margin-top:10px; margin-bottom:10px;">
+	<div class="cat_images" style="clear:both; text-align:center; background-color:white; margin-top:10px; margin-bottom:10px;">
 		{descr.Картинка=:strбольшая?images::image?images::imagedef}
 		<div style="clear:both"></div>
 	</div>
