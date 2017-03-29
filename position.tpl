@@ -48,14 +48,14 @@
 			{:extend.pos-sign}
 		</div>
 	</div>
-	{startart:}<br>{Производитель} {Артикул}
+	{startart:}<br><nobr>{Производитель} {Артикул}</nobr>
 {print_more:}
 	<table class="table table-striped">
 		{more::pos_more}
 	</table>
 {pos_more:}<tr><td>{~key}:</td><td style="text-align:left">{.}</td></tr>
 {files:}
-	<h2>Файлы для {Продажа} {Производитель} {descr.Артикул!:Скрытый?Артикул} </h2>
+	<h2>Файлы для {Продажа} <nobr>{Производитель} {descr.Артикул!:Скрытый?Артикул}</nobr></h2>
 		<ul class="files">
 			{files::file}
 		</ul>
