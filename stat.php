@@ -32,7 +32,7 @@ if (!$data) {
 }
 
 if (!$submit) {
-	$ans['text']=Load::loadTEXT('-doc/get.php?src='+$conf['dir'].'/articles/stat');
+	$ans['text']=Load::loadTEXT('-doc/get.php?src='.$conf['dir'].'/articles/stat');
 	$ans['stat']=$data;
 	return Ans::ret($ans);
 }
