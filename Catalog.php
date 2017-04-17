@@ -440,8 +440,8 @@ class Catalog
 	}
 	public static function cache($name, $call, $args = array(), $re = null)
 	{
-		if (is_null($re)) $re=isset($_GET['re']);
-		$conf=Catalog::$conf;
+		if (is_null($re)) $re = isset($_GET['re']);
+		$conf = Catalog::$conf;
 		return Cache::exec($conf['cache'], 'cat-'.$name, $call, $args, $re);
 	}
 	public static function numbers($page, $pages, $plen = 11)
