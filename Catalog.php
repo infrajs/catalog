@@ -845,7 +845,7 @@ class Catalog
 		return $opt;
 	}
 	public static function getPos(&$pos){
-		$args=array($pos['producer'],$pos['article']);
+		$args = array($pos['producer'],$pos['article']);
 		return Access::cache('Catalog::getPos', function() use($pos){
 			
 			Xlsx::addFiles(Catalog::$conf['dir'], $pos);
