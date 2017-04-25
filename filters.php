@@ -67,6 +67,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 					$arval=array($pos[$prop['posid']]);
 					$arname=array($pos[$prop['posname']]);
 				}
+
 				foreach($arval as $i => $value){
 					$idi=Path::encode($value);
 					$id=mb_strtolower($idi);

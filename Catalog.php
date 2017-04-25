@@ -6,14 +6,15 @@ use infrajs\load\Load;
 use infrajs\each\Each;
 use infrajs\mark\Mark as Marker;
 use infrajs\cache\Cache;
+use infrajs\once\Once;
+use infrajs\event\Event;
 use infrajs\config\Config;
 use infrajs\access\Access;
 use infrajs\sequence\Sequence;
 
-Path::req('-catalog/Extend.php');
 class Catalog
 {
-	public static $conf= array(
+	public static $conf = array(
 		"pub"=>array("dir", "title"),
 		"dir"=>"~catalog/",
 		"cache"=>array("~catalog/"),
@@ -39,23 +40,25 @@ class Catalog
 			)
 		)
 	);
+	public static $data = false; 
 	public static function init()
 	{
-		return self::cache('cat_init', function () {
+		return Catalog::cache('cat_init', function () {
 			$conf = Catalog::$conf;
 			$columns = array_merge(array("Наименование","Файлы", "Артикул","Производитель","Цена","Описание","Скрыть фильтры в полном описании"),$conf['columns']);
 			$data = &Xlsx::init($conf['dir'], array(
 				'more' => true,
 				'Имя файла' => $conf['filename'],
-				'Известные колонки'=>$columns
+				'Известные колонки' => $columns
 				)
 			);
-			
+
 			//Xlsx::runGroups($data, function (&$gr) {
 			//	$gr['data']=array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
 			//});
 
-			Extend::init($data);
+			Event::tik('Catalog.oninit');
+			Event::fire('Catalog.oninit', $data);
 
 			return $data;
 		});
@@ -409,9 +412,9 @@ class Catalog
 		if ($groupchilds) {
 			foreach ($groupchilds as $g) {
 				if (empty($groups[$g['title']])) continue;
-				$pos=Catalog::getPos($groups[$g['title']]['pos']);
-				$pos=array('article'=>$pos['article'],'producer'=>$pos['producer'],'images'=>$pos['images']);
-				$childs[]=array_merge($g, array('pos'=>$pos,'count'=>$groups[$g['title']]['count']));
+				$pos = Catalog::getPos($groups[$g['title']]['pos']);
+				$posd = array('article'=>$pos['article'],'producer'=>$pos['producer'],'images'=>$pos['images']);
+				$childs[]=array_merge($g, array('pos'=>$posd,'count'=>$groups[$g['title']]['count']));
 			}
 		}
 		return $childs;
@@ -844,50 +847,77 @@ class Catalog
 		$opt['nocount'] = $count - $opt['count']; //из общего количества вычесть количество с yes
 		return $opt;
 	}
-	public static function getPos(&$pos){
+	/**
+	 * Добавляем к позиции картинки и файлы
+	 **/
+	public static function getPos(&$pos) {
 		$args = array($pos['producer'],$pos['article']);
-		return Access::cache('Catalog::getPos', function() use($pos){
+		return Access::cache('Catalog::getPos', function($prod, $art) use ($pos) {
 			
 			Xlsx::addFiles(Catalog::$conf['dir'], $pos);
-
-			$files=explode(',', @$pos['Файлы']);
+			if (empty($pos['Файлы'])) {
+				$files = array();
+			} else {
+				$files = explode(',', $pos['Файлы']);	
+			}
+			
 			foreach ($files as $f) {
-				if (!$f) {
-					continue;
-				}
-				$f=trim($f);
+				if (!$f) continue;
+				$f = trim($f);
 				Xlsx::addFiles(Catalog::$conf['dir'], $pos, $f);
 			}
 
-			$files=array();
+			$files = array();
 			foreach ($pos['files'] as $f) {
 				if (is_string($f)) {
 					$f = Path::theme($f); //убрали звездочку
-					$d=Load::srcInfo(Path::toutf($f));
+					$d = Load::srcInfo(Path::toutf($f));
 				} else {
-					$d=$f;
-					$f=$d['src'];
+					$d = $f;
+					$f = $d['src'];
 				}
 
-				$d['size']=round(filesize(Path::tofs($f))/1000000, 2);
-				if (!$d['size']) {
-					$d['size']='0.01';
-				}
-				$d['src']=Path::pretty($d['src']);
-				$files[]=$d;
+				$d['size'] = round(filesize(Path::tofs($f))/1000000, 2);
+				if (!$d['size']) $d['size'] = '0.01';
+				$d['src'] = Path::pretty($d['src']);
+				$files[] = $d;
 			}
-			$pos['files']=$files;
+			$pos['files'] = $files;
 			if ($pos['texts']) {
 				foreach ($pos['texts'] as $k => $t) {
-					$pos['texts'][$k]=Load::loadTEXT('-doc/get.php?src='.$t);
+					$pos['texts'][$k] = Load::loadTEXT('-doc/get.php?src='.$t);
 				}
 			}
+			$dir = Catalog::$conf['dir'].$prod.'/images/';
+			$images = Catalog::getIndex($dir);
+			
+			if(isset($images[$art])) $pos['images'] = array_merge($pos['images'], $images[$art]);
 			return $pos;
-		},$args);
+		}, $args);
 	}
-	public static function search($md, &$ans=array()) {
+	public static function getIndex($dir) {
+		if (!Path::theme($dir)) return array();
+		return Once::exec(__FILE__.'getIndex', function ($dir) {
+			$list = array();
+			Config::scan($dir, function ($src, $level) use (&$list) {
+				$fd = Load::pathInfo($src);
+				if (!in_array($fd['ext'], array('jpg','png','jpeg'))) return;
+				$name = $fd['name'];
+				$p = explode(',',$name);
+				foreach ($p as $name) {
+					$name = preg_replace("/_\d*/",'',$name);
+					$name = Path::encode($name);
+					if (!$name) continue;
+					if (empty($list[$name])) $list[$name] = array();
+					$list[$name][] = $src;
+				}
+			}, true);
+			return $list;
+		}, array($dir));
+	}
+	public static function search($md, &$ans = array()) {
 		$args = array(Catalog::nocache($md));
-		$res = Catalog::cache('search.php filter list', function ($md) {
+		$res = Catalog::cache('search.php filter list', function &($md) {
 
 			$ans['list']=Catalog::getPoss($md['group']);
 			//ЭТАП filters list

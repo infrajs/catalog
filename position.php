@@ -11,17 +11,17 @@ use infrajs\config\Config;
 
 //Nostoer::on();
 
-$orig_val=Path::toutf(strip_tags($_GET['val']));
-$orig_art=Path::toutf(strip_tags($_GET['art']));
-$val=mb_strtolower($orig_val);
-$art=mb_strtolower($orig_art);
+$orig_val = Path::toutf(strip_tags(Ans::GET('val')));
+$orig_art = Path::toutf(strip_tags(Ans::GET('art')));
+$val = mb_strtolower($orig_val);
+$art = mb_strtolower($orig_art);
 
 
-$args=array($val,$art);
-$ans=array();
+$args = array($val, $art);
+$ans = array();
 
-$pos=Catalog::cache('position', function($val, $art){
-	$data=Catalog::init(); // список всей продукции
+$pos = Catalog::cache('position', function ($val, $art) {
+	$data = Catalog::init(); // список всей продукции
 	return Xlsx::runPoss($data, function &(&$pos, $i, &$group) use (&$val, &$art) {
 		$r = null;
 		if (mb_strtolower($pos['producer'])!==$val) return $r;
@@ -32,10 +32,8 @@ $pos=Catalog::cache('position', function($val, $art){
 
 
 
-if(isset($_GET['seo'])) {
-	if(!$pos){
-		return Ans::err($ans,'Position not found');
-	}
+if (isset($_GET['seo'])) {
+	if (!$pos) return Ans::err($ans,'Position not found');
 	$link=$_GET['seo'];
 	$link=$link.'/'.urlencode($pos['producer']).'/'.urlencode($pos['article']);
 	$ans['external']='-catalog/seo.json';
@@ -45,7 +43,7 @@ if(isset($_GET['seo'])) {
 	return Ans::ans($ans);
 }
 
-$ans = array(//Оригинальные значения
+$ans = array(
 	'val'=>$val,
 	'art'=>$art
 );
