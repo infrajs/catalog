@@ -891,7 +891,8 @@ class Catalog
 			$dir = Catalog::$conf['dir'].$prod.'/images/';
 			$images = Catalog::getIndex($dir);
 			
-			if(isset($images[$art])) $pos['images'] = array_merge($pos['images'], $images[$art]);
+			if (isset($images[$art])) $pos['images'] = array_merge($pos['images'], $images[$art]);
+			if (isset($images[$prod.'-'.$art])) $pos['images'] = array_merge($pos['images'], $images[$prod.'-'.$art]);
 			return $pos;
 		}, $args);
 	}
@@ -905,7 +906,8 @@ class Catalog
 				$name = $fd['name'];
 				$p = explode(',',$name);
 				foreach ($p as $name) {
-					$name = preg_replace("/_\d*/",'',$name);
+					$name = preg_replace("/_\d*$/",'',$name);
+					$name = preg_replace("/\s*\(\d*\)*$/",'',$name);
 					$name = Path::encode($name);
 					if (!$name) continue;
 					if (empty($list[$name])) $list[$name] = array();
