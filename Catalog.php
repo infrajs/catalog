@@ -272,6 +272,8 @@ class Catalog
 		return $mdnocache;
 	}
 	public static function sort(&$poss, $md) {
+		$arg = array('title'=>'Поиск', 'data'=>&$poss, 'md'=>$md);
+		Event::fire('Catalog.onsort', $arg);
 		if ($md['sort']) {
 
 			if ($md['sort']=='name') {
@@ -340,7 +342,6 @@ class Catalog
 				}
 			}
 		}
-		
 	}
 	public static function getGroups($list, $now = false) {
 		//Groups
