@@ -43,7 +43,7 @@ class Catalog
 	public static $data = false; 
 	public static function init()
 	{
-		return Catalog::cache('cat_init', function () {
+		return Catalog::cacheF('cat_init', function () {
 			$conf = Catalog::$conf;
 			$columns = array_merge(array("Наименование","Файлы", "Артикул","Производитель","Цена","Описание","Скрыть фильтры в полном описании"),$conf['columns']);
 			$data = &Xlsx::init($conf['dir'], array(
@@ -447,6 +447,12 @@ class Catalog
 		if (is_null($re)) $re = isset($_GET['re']);
 		$conf = Catalog::$conf;
 		return Cache::exec($conf['cache'], 'cat-'.$name, $call, $args, $re);
+	}
+	public static function cacheF($name, $call, $args = array(), $re = null)
+	{
+		if (is_null($re)) $re = isset($_GET['re']);
+		$conf = Catalog::$conf;
+		return Cache::execF($conf['cache'], 'cat-'.$name, $call, $args, $re);
 	}
 	public static function numbers($page, $pages, $plen = 11)
 	{
