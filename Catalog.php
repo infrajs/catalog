@@ -857,9 +857,9 @@ class Catalog
 	/**
 	 * Добавляем к позиции картинки и файлы
 	 **/
-	public static function getPos(&$pos) {
-		$args = array($pos['producer'],$pos['article']);
-		return Access::cache('Catalog::getPos', function($prod, $art) use ($pos) {
+	public static function &getPos(&$pos) {
+		$args = array($pos['producer'], $pos['article']);
+		$arr = Access::cache('Catalog::getPos', function($prod, $art) use ($pos) {
 			
 			Xlsx::addFiles(Catalog::$conf['dir'], $pos);
 			if (empty($pos['Файлы'])) {
@@ -902,6 +902,11 @@ class Catalog
 			if (isset($images[$prod.'-'.$art])) $pos['images'] = array_merge($pos['images'], $images[$prod.'-'.$art]);
 			return $pos;
 		}, $args);
+
+		$pos['images'] = $arr['images'];
+		$pos['texts'] = $arr['texts'];
+		$pos['files'] = $arr['files'];
+		return $pos;
 	}
 	public static function getIndex($dir) {
 		if (!Path::theme($dir)) return array();
