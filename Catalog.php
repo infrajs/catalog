@@ -11,6 +11,7 @@ use infrajs\event\Event;
 use infrajs\config\Config;
 use infrajs\access\Access;
 use infrajs\sequence\Sequence;
+use infrajs\rubrics\Rubrics;
 
 class Catalog
 {
@@ -892,7 +893,7 @@ class Catalog
 			$pos['files'] = $files;
 			if ($pos['texts']) {
 				foreach ($pos['texts'] as $k => $t) {
-					$pos['texts'][$k] = Load::loadTEXT('-doc/get.php?src='.$t);
+					$pos['texts'][$k] = Rubrics::article($t);
 				}
 			}
 			$dir = Catalog::$conf['dir'].$prod.'/images/';
