@@ -894,7 +894,6 @@ class Catalog
 			if ($pos['texts']) {
 				foreach ($pos['texts'] as $k => $t) {
 					$pos['texts'][$k] = Rubrics::article($t);
-						//Load::loadTEXT('-doc/get.php?src='.$t);
 				}
 			}
 			$dir = Catalog::$conf['dir'].$prod.'/images/';
