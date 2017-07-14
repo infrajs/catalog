@@ -16,28 +16,28 @@ use infrajs\rubrics\Rubrics;
 class Catalog
 {
 	public static $conf = array(
-		"pub"=>array("dir", "title"),
-		"dir"=>"~catalog/",
-		"cache"=>array("~catalog/"),
-		"foldwhen"=>30, //Скрывать значения фильтра если их больше
-		"title"=>"Каталог",
-		"filename"=>"Производитель",
-		"columns"=>array(),
-		"filteroneitem"=>true, //Показывать ли фильтр в котором только один пункт, который true для всей выборке
+		"pub" => array("dir", "title"),
+		"dir" => "~catalog/",
+		"cache" => array("~catalog/"),
+		"foldwhen" => 30, //Скрывать значения фильтра если их больше
+		"title" => "Каталог",
+		"filename" => "Производитель",
+		"columns" => array(),
+		"filteroneitem" => true, //Показывать ли фильтр в котором только один пункт, который true для всей выборке
 		"filtershowhard" => array(), //Фильтры, которые всегда показываются
 		"filterslimitpercent" => 10, //20 Процент позиций у которых должен быть указан параметр, чтобы он показался в фильтрах
-		"filters"=>array(
-			"producer"=>array(
-				"posid"=>"producer",
-				"posname"=>"Производитель",
-				"title"=>"Производитель",
-				"separator"=>false
+		"filters" => array(
+			"producer" => array(
+				"posid" => "producer",
+				"posname" => "Производитель",
+				"title" => "Производитель",
+				"separator" => false
 			),
-			"cost"=>array(
-				"posid"=>"Цена",
-				"posname"=>"Цена", //Можно ли писать комменты
-				"title"=>"Цена",
-				"separator"=>false
+			"cost" => array(
+				"posid" => "Цена",
+				"posname" => "Цена", //Можно ли писать комменты
+				"title" => "Цена",
+				"separator" => false
 			)
 		)
 	);
@@ -55,7 +55,7 @@ class Catalog
 			);
 
 			//Xlsx::runGroups($data, function (&$gr) {
-			//	$gr['data']=array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
+			//	$gr['data'] = array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
 			//});
 
 			Event::tik('Catalog.oninit');
@@ -78,9 +78,9 @@ class Catalog
 	}
 	public static function getGroup($group){
 		return Catalog::cache('getGroup', function &($group){
-			$data=Catalog::init();
+			$data = Catalog::init();
 			if ($group) $data=Xlsx::runGroups($data, function &($gr) use($group) {
-				if($gr['title']==$group)return $gr;
+				if($gr['title'] == $group)return $gr;
 				$r = null; return $r;
 			});
 			unset($data['childs']);
@@ -104,7 +104,7 @@ class Catalog
 				'mdid' => null, //art - имя в массиве параметров
 				'title' => null, //Уникальный Артикул для названия блока
 				'more' => null, 
-				'separator' => ',',
+				'separator' => ', ',
 				'count' => 0,
 				'group' => false, //Группа параметра для расположения рядом
 				'filter' => 0,
@@ -122,12 +122,12 @@ class Catalog
 			$main = Catalog::$conf['filters'];
 			foreach ($main as $k => $prop) {
 				if (!empty($prop['more'])) continue;
-				$prop['mdid']=$k;
+				$prop['mdid'] = $k;
 				$params[$k] = array_merge($parametr, $prop);
 			}
 
 			foreach ($poss as &$pos) {
-				foreach ($main as $k=>$prop) {
+				foreach ($main as $k => $prop) {
 					if (!empty($prop['more'])) continue;
 					$prop = $params[$k];
 					if (isset($pos[$prop['posid']])) {
@@ -149,8 +149,8 @@ class Catalog
 						$arval=explode($prop['separator'], $val);
 						$arname=explode($prop['separator'], $name);
 					}else{
-						$arval=array($val);
-						$arname=array($name);
+						$arval = array($val);
+						$arname = array($name);
 					}
 
 					foreach($arval as $i => $value){
@@ -190,7 +190,7 @@ class Catalog
 						if($prop['separator']){
 							$arval=explode($prop['separator'], $val);
 						}else{
-							$arval=array($val);
+							$arval = array($val);
 						}
 						foreach ($arval as $value){
 							$idi = Path::encode($value);
@@ -211,7 +211,7 @@ class Catalog
 				}
 			}
 
-			foreach ($main as $k=>$prop) {
+			foreach ($main as $k => $prop) {
 				if (empty($prop['more'])) continue;
 				if (empty($params[$k])) continue;
 				$prop['mdid'] = $k;
@@ -250,16 +250,16 @@ class Catalog
 		}, array($group), isset($_GET['re']));
 	}
 	public static function getPoss($mdgroup){
-		if ($mdgroup) foreach ($mdgroup as $group=>$v) break;
+		if ($mdgroup) foreach ($mdgroup as $group => $v) break;
 		else $group = false;
 		
 		return Catalog::cache('getPoss', function &($group){
-			$data=Catalog::init();
+			$data = Catalog::init();
 			if ($group) $data=Xlsx::runGroups($data, function &($gr) use($group) {
-				if ($gr['title']==$group) return $gr;
+				if ($gr['title'] == $group) return $gr;
 				$r = null; return $r;
 			});
-			$poss=array();
+			$poss = array();
 			Xlsx::runPoss($data, function &(&$pos) use (&$poss) {
 				$poss[]=&$pos;
 				$r = null; return $r;
@@ -269,11 +269,11 @@ class Catalog
 		}, array($group));
 	}
 	public static function nocache($md) {
-		$mdnocache=array_diff_key($md, array_flip(array("sort", "reverse", "count")));
+		$mdnocache = array_diff_key($md, array_flip(array("sort", "reverse", "count")));
 		return $mdnocache;
 	}
 	public static function sort(&$poss, $md) {
-		$arg = array('title'=>'Поиск', 'data'=>&$poss, 'md'=>$md);
+		$arg = array('title' => 'Поиск', 'data' => &$poss, 'md' => $md);
 		Event::fire('Catalog.onsort', $arg);
 		if ($md['sort']) {
 
@@ -284,7 +284,7 @@ class Catalog
 					return strcasecmp($a, $b);
 				});
 				if ($md['reverse']) {
-					$poss=array_reverse($poss);
+					$poss = array_reverse($poss);
 				}
 			} else if ($md['sort']=='art') {
 				usort($poss, function ($a, $b) {
@@ -293,7 +293,7 @@ class Catalog
 					return strcasecmp($a, $b);
 				});
 				if ($md['reverse']) {
-					$poss=array_reverse($poss);
+					$poss = array_reverse($poss);
 				}
 			} else if ($md['sort']=='cost') {
 				$one = (int) $md['reverse'];
@@ -308,9 +308,9 @@ class Catalog
 				});
 
 			} else if ($md['sort']=='change') {
-				$args=array(Catalog::nocache($md));
+				$args = array(Catalog::nocache($md));
 				
-				$poss=Catalog::cache('change', function($md) use($poss){
+				$poss = Catalog::cache('change', function($md) use($poss){
 					foreach($poss as &$pos) {
 						$conf = Catalog::$conf;
 						$dir = Path::theme($conf['dir'].$pos['producer'].'/'.$pos['article'].'/');
@@ -325,7 +325,7 @@ class Catalog
 								}
 								$t=filemtime($dir.$file);
 								if ($t>$pos['time']) {
-									$pos['time']=$t;
+									$pos['time'] = $t;
 								}
 							}, scandir($dir));
 						}
@@ -346,77 +346,78 @@ class Catalog
 	}
 	public static function getGroups($list, $now = false) {
 		//Groups
-		
-
-		$subgroups = Catalog::cache('getGroups', function () {
+		$subgroups = Catalog::cache(__FILE__.'getGroups', function () {
 			//Микро вставка всё ради того чтобы не пользоваться $data на этом уровне
 			//данный кэш один для любой страницы каталога
-			$subgroups=array();
+			$subgroups = array();
 			$data = Catalog::init();
 			Xlsx::runGroups($data, function &($group) use (&$subgroups) {
 				$r = null;
 				if (empty($group['childs'])) return $r;
-				$subgroup=array();
+				$subgroup = array();
 				array_walk($group['childs'], function ($g) use (&$subgroup) {
-					$subgroup[]=array('title'=>$g['title'],'name'=>$g['name']);
+					$subgroup[] = array('title' => $g['title'], 'name' => $g['name']);
 				});
-				$subgroups[$group['title']]=$subgroup;
+				$subgroups[$group['title']] = $subgroup;
 				return $r;
 			});
 			return $subgroups;
 		});
 		
-		$groups=array();
-		$path = array();
+		$groups = array();
 		foreach ($list as &$pos) {
 			$path = $pos['path'];
-			
-			foreach ($list as &$pos) {
-				foreach ($pos['path'] as $v) {
-					if (!isset($groups[$v])) {
-						$groups[$v]=array('pos'=>$pos, 'count'=>0);
-					};
-					$groups[$v]['count']++;
-				}
-				$rpath=array();
-				foreach ($path as $k => $p) {
-					if ($pos['path'][$k]==$p) {
-						$rpath[$k]=$p;
-					} else {
-						break;
-					}
-				}
-				$path=$rpath;
-			}
 			break;
+		}
+		foreach ($list as &$pos) {
+			foreach ($pos['path'] as $v) {
+				if (!isset($groups[$v])) {
+					$groups[$v] = array('pos' => Catalog::getPos($pos), 'count' => 0);
+				};
+				if (empty($groups[$v]['pos']['images'])) {
+					$groups[$v]['pos'] = Catalog::getPos($pos);
+				}
+				$groups[$v]['count']++;
+			}
+			$rpath = array();
+			foreach ($path as $k => $p) {
+				if ($pos['path'][$k] != $p) break;
+				$rpath[$k] = $p;
+			}
+			$path = $rpath;
 		}
 		
 		if (!sizeof($path)) {
-			$conf=Catalog::$conf;
+			$conf = Catalog::$conf;
 			if (!empty($subgroups[$conf['title']])) {
 				$groupchilds = $subgroups[$conf['title']];
 			} else {
 				$groupchilds = array();
 			}
 		} else {
-			$g=$path[sizeof($path)-1];
+			$g = $path[sizeof($path) - 1];
 			if (isset($subgroups[$g])) {
-				$groupchilds=$subgroups[$g];
+				$groupchilds = $subgroups[$g];
 			} else {
-				if(!$now||$now!=$g){
-					$groupchilds=array(array("name" => $g,"title" => $g));
+				if (!$now || $now != $g) {
+					$groupchilds = array(array("name" => $g, "title" => $g));
 				} else {
-					$groupchilds=false;
+					$groupchilds = false;
 				}
 			}
 		}
-		$childs=array();
+
+		$childs = array();
 		if ($groupchilds) {
-			foreach ($groupchilds as $g) {
+			foreach ($groupchilds as $g) { //Для правильной сортировки найденных групп.
 				if (empty($groups[$g['title']])) continue;
-				$pos = Catalog::getPos($groups[$g['title']]['pos']);
-				$posd = array('article'=>$pos['article'],'producer'=>$pos['producer'],'images'=>$pos['images']);
-				$childs[]=array_merge($g, array('pos'=>$posd,'count'=>$groups[$g['title']]['count']));
+				$pos = $groups[$g['title']]['pos'];
+				$posd = array(
+					'article' => $pos['article'], 
+					'producer' => $pos['producer'], 
+					'images' => $pos['images']
+				);
+				$childs[] = array_merge($g, array('pos' => $posd, 'count' => $groups[$g['title']]['count']));
 			}
 		}
 		return $childs;
@@ -425,7 +426,7 @@ class Catalog
 		$str=$pos['Артикул'];
 		$str.=' '.implode(' ', $pos['path']);
 
-		$params = array('article','Наименование','Производитель','producer','Описание');
+		$params = array('article', 'Наименование', 'Производитель', 'producer', 'Описание');
 		foreach ($params as $name) {
 			if (!isset($pos[$name])) continue;
 			$str.=' '.$pos[$name];
@@ -483,8 +484,8 @@ class Catalog
 		*/
 
 		if ($pages<=$plen) {
-			$ar=array_fill(0, $pages+1, 1);
-			$ar=array_keys($ar);
+			$ar = array_fill(0, $pages+1, 1);
+			$ar = array_keys($ar);
 			array_shift($ar);
 		} else {
 			$plen=$plen-1;
@@ -492,32 +493,32 @@ class Catalog
 			$rside=$pages-$lside-1;//Первая цифра после которой справа появляется переход
 			$islspace=$page>$lside;
 			$isrspace=$page<$rside+2;
-			$ar=array(1);
+			$ar = array(1);
 			if ($isrspace&&!$islspace) {
 				for ($i = 0; $i < $plen-2; $i++) {
-					$ar[]=$i+2;
+					$ar[] = $i+2;
 				}
 				$ar[]=0;
-				$ar[]=$pages;
+				$ar[] = $pages;
 			} else if (!$isrspace&&$islspace) {
 				$ar[]=0;
 				for ($i=0; $i<$plen-1; $i++) {
-					$ar[]=$pages-$plen/2+$i-3;
+					$ar[] = $pages-$plen/2+$i-3;
 				}
 			} else if ($isrspace&&$islspace) {
 				$nums=$plen/2-2;//Количество цифр показываемых сбоку от текущей когда есть $islspace далее текущая
 				$ar[]=0;
 				for ($i=0; $i<$nums*2+1; $i++) {
-					$ar[]=$page-$plen/2+$i+2;
+					$ar[] = $page-$plen/2+$i+2;
 				}
 				$ar[]=0;
-				$ar[]=$pages;
+				$ar[] = $pages;
 			}
 		}
 		
 		Each::exec($ar, function &(&$num) use ($page) {
 			$n = $num;
-			$num = array('num'=>$n,'title'=>$n);
+			$num = array('num' => $n, 'title' => $n);
 			if (!$num['num']) {
 				$num['empty']=true;
 				$num['num']='';
@@ -532,13 +533,13 @@ class Catalog
 		if (sizeof($ar)<2) {
 			return false;
 		}
-		$prev=array('num'=>$page-1,'title'=>'&laquo;');
+		$prev = array('num' => $page-1, 'title' => '&laquo;');
 		if ($page<=1) {
 			$prev['empty']=true;
 		}
 
 		array_unshift($ar, $prev);
-		$next=array('num'=>$page+1,'title'=>'&raquo;');
+		$next = array('num' => $page+1, 'title' => '&raquo;');
 		if ($page>=$pages) {
 			$next['empty']=true;
 		}
@@ -610,14 +611,14 @@ class Catalog
 							$option=explode($prop['separator'], $option);
 							$titles=explode($prop['separator'], $titles);
 						} else {
-							$option=array($option);
-							$titles=array($titles);
+							$option = array($option);
+							$titles = array($titles);
 						}
 
-						foreach($option as $k=>$opt){
+						foreach($option as $k => $opt){
 							$id=Path::encode($opt);
 							if (strcasecmp($value, $id)==0) {
-								$valtitles[$value]=$titles[$k];
+								$valtitles[$value] = $titles[$k];
 								return true;
 							}
 						}
@@ -662,13 +663,13 @@ class Catalog
 							$option=explode($prop['separator'], $option);
 							$titles=explode($prop['separator'], $titles);
 						} else {
-							$option=array($option);
-							$titles=array($titles);
+							$option = array($option);
+							$titles = array($titles);
 						}
-						foreach($option as $k=>$opt){
+						foreach($option as $k => $opt){
 							$id=Path::encode($opt);
 							if (strcasecmp($value, $id)==0) {
-								$valtitles[$value]=$titles[$k];
+								$valtitles[$value] = $titles[$k];
 								return true;
 							}
 						}
@@ -693,11 +694,11 @@ class Catalog
 		if (!empty($md[$key])) {
 			$title='Группа';
 			$val=$md[$key];
-			$filter = array('title'=>$title, 'name'=>Sequence::short(array(Catalog::urlencode($key))));
+			$filter = array('title' => $title, 'name' => Sequence::short(array(Catalog::urlencode($key))));
 
 			
 
-			$poss=array_filter($poss, function ($pos) use ($key, $val) {
+			$poss = array_filter($poss, function ($pos) use ($key, $val) {
 				$prop=$pos[$key];
 				foreach ($val as $value => $one) {
 					if ($value === 'yes') return true;
@@ -716,7 +717,7 @@ class Catalog
 				$val['Указано']=1;
 			}
 			$filter['value']=implode(', ', array_keys($val));
-			if ($md['search']) $filters[]=$filter;
+			if ($md['search']) $filters[] = $filter;
 		}
 		//Filter search
 		if (!empty($md['search'])) {
@@ -724,13 +725,13 @@ class Catalog
 			foreach($v as $i => $s) {
 				$v[$i] = preg_replace("/ы$/","",$s);
 			}
-			$poss=array_filter($poss, function ($pos) use ($v) {
+			$poss = array_filter($poss, function ($pos) use ($v) {
 				return Catalog::searchTest($pos, $v);
 			});
-			$filters[]=array(
-				'title'=>'Поиск',
-				'name'=>'search',
-				'value'=>$md['search']
+			$filters[] = array(
+				'title' => 'Поиск',
+				'name' => 'search',
+				'value' => $md['search']
 			);
 		}
 		//Extend::filtering($poss, $md, $filters);
@@ -793,10 +794,10 @@ class Catalog
 		
 		$opt['type'] = $type;
 	
-		if (in_array($opt['type'], array('string','number'))) {
+		if (in_array($opt['type'], array('string', 'number'))) {
 			$saved_values = $opt['values'];
 			if (sizeof($opt['values']) > $conf['foldwhen']) {
-				$opt['values']=array();
+				$opt['values'] = array();
 				if (!$showhard) return false;
 			}
 			if (is_array($showhard)) {	
@@ -807,19 +808,19 @@ class Catalog
 					if ($show == 'no') continue;
 					if (!empty($opt['values'][$show])) continue;
 					
-					$opt['values'][$show] = $saved_values[$show];//array('id'=>$show, 'title'=>$title);
+					$opt['values'][$show] = $saved_values[$show];//array('id' => $show, 'title' => $title);
 				}
 			}
 			/*foreach($opt['values'] as $v){//Когда всех значений по 1
 				if($v!=1){
 					//Единичные опции
-					$opt['values']=array();
+					$opt['values'] = array();
 					break;
 				}
 			}*/
 			//if(sizeof($opt['values'])>10){
-				//$opt['values_more']=array_slice($opt['values'],6,sizeof($opt['values'])-6,true);
-				//$opt['values']=array_slice($opt['values'],0,6,true);
+				//$opt['values_more'] = array_slice($opt['values'],6,sizeof($opt['values'])-6,true);
+				//$opt['values'] = array_slice($opt['values'],0,6,true);
 			//}
 		}
 
@@ -841,7 +842,7 @@ class Catalog
 			});
 		}
 		/*if(sizeof($opt['values'])==1){
-			if($opt['yes']==$count){//Значение есть у всех позиций и только один вариант
+			if($opt['yes'] == $count){//Значение есть у всех позиций и только один вариант
 				unset($params[$k]);
 				continue;
 			}
@@ -866,7 +867,7 @@ class Catalog
 			if (empty($pos['Файлы'])) {
 				$files = array();
 			} else {
-				$files = explode(',', $pos['Файлы']);	
+				$files = explode(', ', $pos['Файлы']);	
 			}
 			
 			foreach ($files as $f) {
@@ -874,7 +875,6 @@ class Catalog
 				$f = trim($f);
 				Xlsx::addFiles(Catalog::$conf['dir'], $pos, $f);
 			}
-
 			$files = array();
 			foreach ($pos['files'] as $f) {
 				if (is_string($f)) {
@@ -915,12 +915,12 @@ class Catalog
 			$list = array();
 			Config::scan($dir, function ($src, $level) use (&$list) {
 				$fd = Load::pathInfo($src);
-				if (!in_array($fd['ext'], array('jpg','png','jpeg'))) return;
+				if (!in_array($fd['ext'], array('jpg', 'png', 'jpeg'))) return;
 				$name = $fd['name'];
-				$p = explode(',',$name);
+				$p = explode(', ',$name);
 				foreach ($p as $name) {
-					$name = preg_replace("/_\d*$/",'',$name);
-					$name = preg_replace("/\s*\(\d*\)*$/",'',$name);
+					$name = preg_replace("/_\d*$/", '',$name);
+					$name = preg_replace("/\s*\(\d*\)*$/", '',$name);
 					$name = strtolower(Path::encode($name));
 					if (!$name) continue;
 					if (empty($list[$name])) $list[$name] = array();
@@ -934,19 +934,19 @@ class Catalog
 		$args = array(Catalog::nocache($md));
 		$res = Catalog::cache('search.php filter list', function &($md) {
 
-			$ans['list']=Catalog::getPoss($md['group']);
+			$ans['list'] = Catalog::getPoss($md['group']);
 			//ЭТАП filters list
-			$ans['filters']=Catalog::filtering($ans['list'], $md);
+			$ans['filters'] = Catalog::filtering($ans['list'], $md);
 			$now = null;
 			foreach ($md['group'] as $now => $one) break;
 
 			$ans['childs'] = Catalog::getGroups($ans['list'], $now);
 			
-			$ans['count']=sizeof($ans['list']);
+			$ans['count'] = sizeof($ans['list']);
 			
 			return $ans;
 		}, $args, isset($_GET['re']));
-		$ans=array_merge($ans, $res);
+		$ans = array_merge($ans, $res);
 		
 		return $ans;
 	}
@@ -969,7 +969,7 @@ Catalog::add('reverse', function () {
 Catalog::add('sort', function () {
 	return '';
 }, function ($val) {
-	return in_array($val, array('name','art', 'group','change','cost'));
+	return in_array($val, array('name', 'art', 'group', 'change', 'cost'));
 });
 Catalog::add('producer', function () {
 	return array();
@@ -978,7 +978,7 @@ Catalog::add('producer', function () {
 	$val = array_filter($val);
 	$producers = array_keys($val);
 	$producers = array_filter($producers, function (&$value) {
-		if (in_array($value,array('yes','no'))) return true;
+		if (in_array($value,array('yes', 'no'))) return true;
 		if (Catalog::getProducer($value)) return true;
 		return false;
 	});
@@ -997,7 +997,7 @@ Catalog::add('group', function () {
 	$val = array_filter($val);
 	$values = array_keys($val);
 	$values = array_filter($values, function (&$value) {
-		if(in_array($value,array('yes','no'))) return true;
+		if(in_array($value,array('yes', 'no'))) return true;
 		if(!$value)return false;
 		if(!Catalog::getGroup($value))return false;
 		return true;
@@ -1019,7 +1019,7 @@ Catalog::add('cost', function () {
 	$val = array_filter($val);//Удаляет false значения
 	$values = array_keys($val);
 	$values = array_filter($values, function (&$value) {
-		if (in_array($value, array('yes','no'))) return true;
+		if (in_array($value, array('yes', 'no'))) return true;
 		if (!$value) return false;
 		return true;
 	});
@@ -1034,7 +1034,7 @@ Catalog::add('more', function () {
 		if (!is_array($v)) {
 			unset($val[$k]);
 		} else {
-			foreach($v as $kk=>$vv){		
+			foreach($v as $kk => $vv){		
 				if (!$vv) unset($val[$k][$kk]);
 			}
 			if (!$val[$k]) unset($val[$k]);
