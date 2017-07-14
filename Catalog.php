@@ -972,6 +972,7 @@ Catalog::add('sort', function () {
 }, function ($val) {
 	return in_array($val, array('name', 'art', 'group', 'change', 'cost'));
 });
+
 Catalog::add('producer', function () {
 	return array();
 }, function (&$val) {

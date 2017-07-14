@@ -15,6 +15,8 @@ $ans = array();
 
 $md = Catalog::initMark($ans);
 
+
+
 $val = Ans::GET('val');
 $val = Path::toutf(strip_tags($val));
 if ($val) $md['search'] = $val;//Временное значение
@@ -79,9 +81,10 @@ $ans  =  Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 	Catalog::search($md, $ans);
 	$conf = Catalog::$conf;
 
+	
 	//BREADCRUMBS TITLE
 	if(!$md['group'] && $md['producer'] && sizeof($md['producer'])  ==  1) { //ПРОИЗВОДИТЕЛЬ
-		if($md['producer'])foreach ($md['producer'] as $producer  =>  $v) break;
+		if ($md['producer']) foreach ($md['producer'] as $producer  =>  $v) break;
 		else $producer = false;
 		//is!, descr!, text!, name!, breadcrumbs!
 		$ans['is'] = 'producer';
@@ -125,7 +128,7 @@ $ans  =  Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 			$ans['breadcrumbs'][] = array('href' => 'producers','title' => 'Производители');
 		}
 	}
-
+	
 	Catalog::sort($ans['list'], $md);
 
 	//Numbers
@@ -139,11 +142,11 @@ $ans  =  Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 	//Text
 	
 	$src  =  Rubrics::find($conf['dir'].'articles/', $ans['title']);
+
 	if ($src) {
 		$ans['textinfo']  =  Rubrics::info($src); 
-		$ans['text']  =  Load::loadTEXT('-doc/get.php?src = '.$src);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
+		$ans['text']  =  Load::loadTEXT('-doc/get.php?src='.$src);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
 	}
-
 	foreach($ans['list'] as $k => $pos){
 		$pos = Catalog::getPos($pos);
 		$group  =  Catalog::getGroup($pos['group']);
@@ -154,7 +157,5 @@ $ans  =  Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 	}
 	return $ans;
 }, $args, $re);
-//echo '<pre>';
-//print_r($ans['childs']);
-//exit;
+
 return Ans::ret($ans);
