@@ -365,6 +365,7 @@ class Catalog
 		});
 		
 		$groups = array();
+		$path = array();
 		foreach ($list as &$pos) {
 			$path = $pos['path'];
 			break;
