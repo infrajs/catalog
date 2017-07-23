@@ -101,7 +101,7 @@
 	<script>
 		domready(function () {
 			Event.one('Controller.onshow', function () {
-				var show = infra.session.get('catalog.cog');
+				var show = Session.get('catalog.cog');
 				if (show) $('.settings').show();
 			});
 		});
