@@ -320,11 +320,10 @@ class Catalog
 						} else {
 							$pos['time']=filemtime($dir);
 							array_map(function ($file) use (&$pos, $dir) {
-								if ($file{0}=='.') {
-									return;
-								}
-								$t=filemtime($dir.$file);
-								if ($t>$pos['time']) {
+								if ($file{0} == '.') return;
+								$file = Path::tofs($file);
+								$t = filemtime($dir.$file);
+								if ($t > $pos['time']) {
 									$pos['time'] = $t;
 								}
 							}, scandir($dir));
