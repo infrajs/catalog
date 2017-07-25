@@ -6,6 +6,7 @@ use infrajs\nostore\Nostore;
 use infrajs\excel\Xlsx;
 use infrajs\view\View;
 use infrajs\path\Path;
+use infrajs\load\Load;
 use infrajs\ans\Ans;
 use infrajs\config\Config;
 
@@ -34,12 +35,17 @@ $pos = Catalog::cache('position', function ($val, $art) {
 
 if (isset($_GET['seo'])) {
 	if (!$pos) return Ans::err($ans,'Position not found');
-	$link=$_GET['seo'];
-	$link=$link.'/'.urlencode($pos['producer']).'/'.urlencode($pos['article']);
-	$ans['external']='-catalog/seo.json';
+	$link = $_GET['seo'];
+	$link = $link.'/'.urlencode($pos['producer']).'/'.urlencode($pos['article']);
+	$ans['external']='~catalog/seo.json';
 	$ans['title'] = $pos['Производитель'].' '.$pos['Артикул'];
 	if(!empty($pos['Наименование'])) $ans['title'] = $pos['Наименование'].' '.$ans['title'];
 	$ans['canonical']=View::getPath().$link;
+	
+	$seo = Load::loadJSON('~'.$link.'/seo.json');
+	if ($seo) {
+		$ans = array_merge($ans, $seo);
+	}
 	return Ans::ans($ans);
 }
 
