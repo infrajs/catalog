@@ -37,7 +37,7 @@ if (isset($_GET['seo'])) {
 	if (!$pos) return Ans::err($ans,'Position not found');
 	$link = $_GET['seo'];
 	$link = $link.'/'.urlencode($pos['producer']).'/'.urlencode($pos['article']);
-	$ans['external']='~catalog/seo.json';
+	$ans['external']='-catalog/seo.json';
 	$ans['title'] = $pos['Производитель'].' '.$pos['Артикул'];
 	if(!empty($pos['Наименование'])) $ans['title'] = $pos['Наименование'].' '.$ans['title'];
 	$ans['canonical']=View::getPath().$link;
