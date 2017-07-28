@@ -249,7 +249,7 @@ class Catalog
 			return $params;
 		}, array($group), isset($_GET['re']));
 	}
-	public static function getPoss($mdgroup){
+	public static function getPoss($mdgroup = false){
 		if ($mdgroup) foreach ($mdgroup as $group => $v) break;
 		else $group = false;
 		

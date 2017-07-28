@@ -6,6 +6,7 @@ use infrajs\load\Load;
 use infrajs\rubrics\Rubrics;
 use infrajs\access\Access;
 use infrajs\router\Router;
+use infrajs\rest\Rest;
 use infrajs\catalog\Catalog;
 
 if (!is_file('vendor/autoload.php')) {
@@ -17,7 +18,7 @@ if (!is_file('vendor/autoload.php')) {
 $ans = Rest::get( 'pos', function ($query, $prod = false, $art = false) {
 	$ans = array();
 	if(!$prod) $ans['list'] = Catalog::getPoss();
-	return $list;
+	return $ans;
 });
 if ($ans) return Ans::ret($ans);
 
