@@ -76,15 +76,19 @@ $user['list']=array_values($user['list']);
 $search=Load::loadJSON('-catalog/search.php?val='.$val);
 array_unshift($user['list'], array('val' => $val,'time' => time(),'count' => $search['count']));
 
-if (sizeof($user['list'])>10) {
-	$user['list']=array_slice($user['list'], 0, 10);
+
+$count = 20;
+if (sizeof($user['list'])>$count) {
+	$user['list']=array_slice($user['list'], 0, $count);
 }
 array_unshift($data['users'], $user);
 
-if (sizeof($data['users'])>100) {
-	$data['users']=array_slice($data['users'], 0, 50);
+$count = 1000;
+if (sizeof($data['users']) > $count) {
+	$data['users']=array_slice($data['users'], 0, $count);
 }
+
 file_put_contents(Path::resolve('~catalog-stat.json'), Load::json_encode($data));
-$ans['data']=$data;
+$ans['data'] = $data;
 
 return Ans::ret($ans);
