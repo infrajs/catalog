@@ -16,10 +16,34 @@ if (!is_file('vendor/autoload.php')) {
 }
 
 $ans = Rest::get( 'pos', function ($query, $prod = false, $art = false) {
+
 	$ans = array();
-	if(!$prod) $ans['list'] = Catalog::getPoss();
+	$ans['producer'] = $prod;
+	$ans['article'] = $art;
+	$ans['data'] = false;
+	$list = Catalog::getPoss();
+	if (!$prod) {
+		$ans['data'] = $list;
+		return $ans;
+	}
+
+	$poss = array();
+	foreach ($list as $k => $pos) {
+		if($pos['producer'] == $prod) $poss[] = $list[$k];
+	}
+	if (!$art) {
+		$ans['data'] = $poss;
+		return $ans;	
+	}
+	foreach ($poss as $k => $pos) {
+		if ($pos['article'] == $art) {
+			$ans['data'] = Catalog::getPos($poss[$k]);
+			break;
+		}
+	}
 	return $ans;
 });
+
 if ($ans) return Ans::ret($ans);
 
 

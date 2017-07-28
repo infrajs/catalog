@@ -261,7 +261,7 @@ class Catalog
 			});
 			$poss = array();
 			Xlsx::runPoss($data, function &(&$pos) use (&$poss) {
-				$poss[]=&$pos;
+				$poss[] = &$pos;
 				$r = null; return $r;
 			});
 			
