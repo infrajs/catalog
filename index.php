@@ -14,6 +14,12 @@ if (!is_file('vendor/autoload.php')) {
 	Router::init();
 }
 
+$ans = Rest::get( 'pos', function ($query, $prod = false, $art = false) {
+	$ans = array();
+	if(!$prod) $ans['list'] = Catalog::getPoss();
+	return $list;
+});
+if ($ans) return Ans::ret($ans);
 
 
 $data = Catalog::init();
