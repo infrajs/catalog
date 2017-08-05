@@ -28,8 +28,8 @@ class Check {
 				'title' => $c
 			);
 		};
-		array_unshift($data['crumbs'], array('href'=>"-catalog/check","title"=>"Проверки"));
-		array_unshift($data['crumbs'], array('href'=>"-catalog","title"=>"Сервис каталога"));
+		array_unshift($data['crumbs'], array('href' => "-catalog/check", "title" => "Проверки"));
+		array_unshift($data['crumbs'], array('href' => "-catalog", "title" => "Сервис каталога"));
 		
 		$data['crumbs'][sizeof($data['crumbs'])-1]['active'] = true;
 
@@ -42,51 +42,56 @@ class Check {
 		echo View::html();
 	}
 	public static function repeats() {
-		$list = array();
-		$dir = Catalog::$conf['dir'];
-		array_map(function ($file) use (&$list, $dir) {
-			if ($file[0] == '.') return;
-			$ext = Path::getExt($file);
-			$fdata = Load::nameinfo($file);
-			$file = Path::toutf($file);
-			if (!in_array($ext, ['xlsx', 'xls'])) return;
-			$data = Xlsx::get($dir.$file);
-			Xlsx::runPoss( $data, function &($origpos, $i, $group) use ($fdata, &$list) {
-				$pos = array(
-					'Артикул'=>false,
-					'Производитель'=>false
-				);
-				$pos = array_intersect_key($origpos,$pos);
+		return Catalog::cache(__FILE__, function () {
+			$list = array();
+			$dir = Catalog::$conf['dir'];
+			array_map(function ($file) use (&$list, $dir) {
+				if ($file[0] == '.') return;
+				$ext = Path::getExt($file);
+				$fdata = Load::nameinfo($file);
+				$file = Path::toutf($file);
+				if (!in_array($ext, ['xlsx', 'xls'])) return;
+				$data = Xlsx::get($dir.$file);
+				Xlsx::runPoss( $data, function &($origpos, $i, $group) use ($fdata, &$list) {
+					$pos = array(
+						'Артикул'=>false,
+						'Производитель'=>false
+					);
+					$pos = array_intersect_key($origpos,$pos);
 
-				if (empty($pos['Артикул'])) $pos['Артикул'] = 'empty';
-				$pos['article'] = Path::encode($pos['Артикул']);
+					if (empty($pos['Артикул'])) $pos['Артикул'] = 'empty';
+					$pos['article'] = Path::encode($pos['Артикул']);
 
-				if (empty($pos['Производитель'])) $pos['Производитель'] = $fdata['name'];
-				$pos['producer'] = Path::encode($pos['Производитель']);
-				
-				$pos['group'] = $group['title'];
-				$pos['file'] = $fdata['file'];
-				//unset($pos['Производитель']);
+					if (empty($pos['Производитель'])) $pos['Производитель'] = $fdata['name'];
+					$pos['producer'] = Path::encode($pos['Производитель']);
+					
+					$pos['group'] = $group['title'];
+					$pos['file'] = $fdata['file'];
+					//unset($pos['Производитель']);
 
-				if(!isset($list[$pos['producer']])) $list[$pos['producer']] = array();
-				if(!isset($list[$pos['producer']][$pos['article']])) $list[$pos['producer']][$pos['article']] = array();
-				$list[$pos['producer']][$pos['article']][] = $pos;
+					if(!isset($list[$pos['producer']])) $list[$pos['producer']] = array();
+					if(!isset($list[$pos['producer']][$pos['article']])) $list[$pos['producer']][$pos['article']] = array();
+					$list[$pos['producer']][$pos['article']][] = $pos;
 
-				$r = null;
-				return $r;
-			});
-		}, scandir(Path::resolve($dir)));
-		$count = 0;
-		foreach($list as $prod => $arts) {
-			foreach($arts as $art => $poss) {
-				if (sizeof($poss) == 1) unset($list[$prod][$art]);
-				else $count ++;
+					$r = null;
+					return $r;
+				});
+			}, scandir(Path::resolve($dir)));
+			$count = 0;
+			$cp = array();
+			foreach($list as $prod => $arts) {
+				if (!isset($cp[$prod])) $cp[$prod] = 0;
+				foreach($arts as $art => $poss) {
+					$cp[$prod] += sizeof($poss);
+					if (sizeof($poss) == 1) unset($list[$prod][$art]);
+					else $count ++;
+				}
+				if (!$list[$prod]) unset($list[$prod]);
 			}
-			if (!$list[$prod]) unset($list[$prod]);
-		}
-		$data = array();
-		$data['count'] = $count;
-		$data['list'] = $list;
-		return $data;
+			$data = array();
+			$data['count'] = $count;
+			$data['list'] = $list;
+			return $data;
+		});
 	}
 }

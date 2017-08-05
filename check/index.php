@@ -10,6 +10,7 @@ use infrajs\rest\Rest;
 use infrajs\catalog\Catalog;
 use infrajs\catalog\check\Check;
 
+Access::debug(true);
 
 return Rest::get( function () {
 
