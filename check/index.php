@@ -18,6 +18,17 @@ return Rest::get( function () {
 	}, "repeats", [function () {
 		$data = Check::repeats();
 		Check::show('repeats', $data);
+	},function ($type, $producer) {
+		$data = Check::repeats();
+
+		if (!empty($data['list'][$producer])) {
+			$info = $data['list'][$producer];
+			$data['list'] = array();
+			$data['list'][$producer] = $info;
+			$data['count'] = sizeof($info);
+		}
+
+		Check::show('repeats', $data);
 	}], function () {
 		Check::show('404');
 });

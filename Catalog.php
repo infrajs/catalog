@@ -551,12 +551,16 @@ class Catalog
 	{
 		Catalog::$list[$name] = array('fndef' => $fndef, 'fncheck' => $fncheck);
 	}
-	public static function initMark(&$ans = array())
-	{
+	public static function getDefaultMark() {
 		$mark = new Marker('~auto/.catalog/');
 		foreach (Catalog::$list as $name => $v) {
 			$mark->add($name, $v['fndef'], $v['fncheck']);
 		}
+		return $mark;
+	}
+	public static function initMark(&$ans = array())
+	{
+		$mark = Catalog::getDefaultMark();
 		$m = Path::toutf(Sequence::get($_GET, array('m')));
 		$mark->setVal($m);
 		$md = $mark->getData();
