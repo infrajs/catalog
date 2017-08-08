@@ -43,7 +43,7 @@
 		{Скрыть фильтры в полном описании??:print_more}
 		{texts::text}
 		{~length(files)?:files}
-		<div style="clear:left">
+		<div style="clear:left; margin-bottom: 50px">
 			<hr>
 			{:extend.pos-sign}
 		</div>
