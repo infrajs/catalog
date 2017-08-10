@@ -275,6 +275,7 @@ class Catalog
 	public static function sort(&$poss, $md) {
 		$arg = array('title' => 'Поиск', 'data' => &$poss, 'md' => $md);
 		Event::fire('Catalog.onsort', $arg);
+		
 		if ($md['sort']) {
 
 			if ($md['sort']=='name') {
@@ -560,13 +561,17 @@ class Catalog
 	}
 	public static function initMark(&$ans = array())
 	{
-		$mark = Catalog::getDefaultMark();
 		$m = Path::toutf(Sequence::get($_GET, array('m')));
-		$mark->setVal($m);
-		$md = $mark->getData();
-		$ans['m'] = $mark->getVal();
-		$ans['md'] = $md;
-		return $md;
+		$ar = Once::exec(__FILE__, function ($m) {
+			$mark = Catalog::getDefaultMark();
+			$mark->setVal($m);
+			$md = $mark->getData();
+			$m = $mark->getVal();	
+			return array('md' => $md, 'm' => $m);
+		}, array($m));
+		$ans['m'] = $ar['m'];
+		$ans['md'] = $ar['md'];
+		return $ar['md'];
 	}
 	public static function urlencode($str)
 	{
