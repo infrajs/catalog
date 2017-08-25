@@ -136,6 +136,7 @@ $ans  =  Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 	if ($pages<$page) {
 		$page = $pages;
 	}
+
 	$ans['numbers'] = Catalog::numbers($page, $pages, 11);
 	$ans['list'] = array_slice($ans['list'], ($page-1)*$md['count'], $md['count']);
 
@@ -147,6 +148,7 @@ $ans  =  Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 		$ans['textinfo']  =  Rubrics::info($src); 
 		$ans['text']  =  Load::loadTEXT('-doc/get.php?src='.$src);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
 	}
+
 	foreach($ans['list'] as $k => $pos){
 		$pos = Catalog::getPos($pos);
 		$group  =  Catalog::getGroup($pos['group']);

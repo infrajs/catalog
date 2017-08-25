@@ -944,6 +944,7 @@ class Catalog
 		$res = Catalog::cache('search.php filter list', function &($md) {
 
 			$ans['list'] = Catalog::getPoss($md['group']);
+			
 			//ЭТАП filters list
 			$ans['filters'] = Catalog::filtering($ans['list'], $md);
 			$now = null;
