@@ -8,16 +8,22 @@ use infrajs\excel\Xlsx;
 use infrajs\load\Load;
 use infrajs\ans\Ans;
 use infrajs\view\View;
+use infrajs\path\Path;
 
 $ans=array();
-if(isset($_GET['seo'])){
-	if(empty($_GET['link'])){
-	    return Ans::err($ans,'Wrong parameters');
+if (isset($_GET['seo'])){	
+	$link = $_GET['seo'];
+	$link = $link.'/producers';
+	$seofile = '~catalog/articles/producers.json';
+	if (Path::theme($seofile)) {
+		$ans['external'] = $seofile;
+	} else {
+		$ans['title'] = 'Производители';
+		$ans['external'] = '~catalog/seo.json';
 	}
-	$link=$_GET['link'];
-	$link=$link.'/producers';
-	$ans['external']='-catalog/seo.json';
-	$ans['canonical']=View::getPath().$link;
+	
+	
+	$ans['canonical'] = View::getPath().$link;
 	return Ans::ans($ans);
 }
 $fd=Catalog::initMark($ans);
@@ -55,5 +61,4 @@ $conf=Catalog::$conf;
 $ans['breadcrumbs'][]=array('main'=>true, 'href'=>'','title'=>'Главная','add'=>'group');
 $ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title'],'add'=>'group');
 $ans['breadcrumbs'][]=array('active'=>true, 'href'=>'producers','title'=>'Производители');
-
 return Ans::ret($ans);

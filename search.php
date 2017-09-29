@@ -23,24 +23,36 @@ if ($val) $md['search'] = $val;//Временное значение
 
 if(isset($_GET['seo'])){
 	$link = $_GET['seo'];
+	
 	if($md['group']){
 		foreach($md['group'] as $val  =>  $one) break;
-		$link = $link.'?m = :group.'.$val.'=1';
+		$link = $link.'?m=:group.'.$val.'=1';
 	} else if($md['producer']){
 		foreach($md['producer'] as $val  =>  $one) break;
-		$link = $link.'?m = :producer.'.$val.'=1';
+		$link = $link.'?m=:producer.'.$val.'=1';
 	} else if($md['search']){
 		$val = $md['search'];
-		$link = $link.'?m = :search:'.$val;
+		$link = $link.'?m=:search:'.$val;
 	}
 
-	if ($val) $ans['title']  =  $val;	
 	
+	
+
 	unset($ans['md']);
 	unset($ans['m']);
-	$ans['external']  =  '~catalog/seo.json';
+
+	if ($val) {
+		$seofile = '~catalog/articles/'.$val.'.json';
+		if (Path::theme($seofile)) {
+			$ans['external']  =  '~catalog/articles/'.$val.'.json';
+		} else {
+			$ans['external']  =  '~catalog/seo.json';
+			$ans['title']  =  $val;
+		}
+	} else {
+		$ans['external']  =  '~catalog/seo.json';
+	}
 	$ans['canonical']  =  View::getPath().$link;
-	
 	return Ans::ans($ans);
 }
 
