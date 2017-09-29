@@ -38,7 +38,7 @@ if(isset($_GET['seo'])){
 	
 	unset($ans['md']);
 	unset($ans['m']);
-	$ans['external']  =  '-catalog/seo.json';
+	$ans['external']  =  '~catalog/seo.json';
 	$ans['canonical']  =  View::getPath().$link;
 	
 	return Ans::ans($ans);
