@@ -803,7 +803,7 @@ class Catalog
 		
 		$opt['type'] = $type;
 	
-		if (in_array($opt['type'], array('string', 'number'))) {
+		//if (in_array($opt['type'], array('string', 'number'))) {
 			$saved_values = $opt['values'];
 			if (sizeof($opt['values']) > $conf['foldwhen']) {
 				$opt['values'] = array();
@@ -831,31 +831,25 @@ class Catalog
 				//$opt['values_more'] = array_slice($opt['values'],6,sizeof($opt['values'])-6,true);
 				//$opt['values'] = array_slice($opt['values'],0,6,true);
 			//}
-		}
+		//}
 
 		if ($opt['type'] == 'string') {
 			usort($opt['values'], function ($v1, $v2){
 				//if ($v1['filter']>$v2['filter']) return -1;
 				//if ($v1['filter']<$v2['filter']) return 1;
-				if ($v1['count']>$v2['count']) return -1;
-				if ($v1['count']<$v2['count']) return 1;
-				if ($v1['title']>$v2['title']) return -1;
-				if ($v1['title']<$v2['title']) return 1;
+				if ($v1['count'] > $v2['count']) return -1;
+				if ($v1['count'] < $v2['count']) return 1;
+				if ($v1['title'] > $v2['title']) return -1;
+				if ($v1['title'] < $v2['title']) return 1;
 			});
 		} else if ($opt['type'] == 'number') {
 			usort($opt['values'], function ($v1, $v2){
 				//if ($v1['filter']>$v2['filter']) return -1;
 				//if ($v1['filter']<$v2['filter']) return 1;
-				if ($v1['title']>$v2['title']) return 1;
-				if ($v1['title']<$v2['title']) return -1;
+				if ($v1['title'] > $v2['title']) return 1;
+				if ($v1['title'] < $v2['title']) return -1;
 			});
 		}
-		/*if(sizeof($opt['values'])==1){
-			if($opt['yes'] == $count){//Значение есть у всех позиций и только один вариант
-				unset($params[$k]);
-				continue;
-			}
-		}*/
 		if (empty($opt['values']) && $opt['type'] != 'slider') {
 			if ($opt['count'] == $count){//Слишком много занчений но при этом у всех позиций они указаны и нет no yes
 				return false;

@@ -43,23 +43,25 @@
 		{pos2:}позиции
 		{pos5:}позиций
 {param:}
+	{:param-{type}}
+{param-number:}
+	{:param-string}
+{param-string:}
 	<div style="margin-top:5px; border-bottom:1px solid #ccc">
-		{:optionHead}
-		{row::option}
+		<div>
+			<label style="font-weight:bold;">
+			  {data.count!count?:box}
+			  {title}&nbsp;<small>{filter}</small>
+			</label>
+		</div>
+		{row::option-string}
 	</div>
-{option:}
+{option-string:}
 	<div class="{filter??:disabled}">
 		<label style="cursor:pointer">
 		  {:box} {title}&nbsp;<small>{filter}</small>
 		</label>
 	</div>
-{optionHead:}
-	<div>
-		<label style="font-weight:bold;">
-		  {data.count!count?:box}
-		  {title}&nbsp;<small>{filter}</small>
-		</label>
-	</div>
 {checked:}checked
 {disabled:}disabled
-{box:}<input onchange="ascroll.once = false; infra.Crumb.go('/catalog{:cat.mark.add}{add}')" {checked?:checked} type="checkbox">
+{box:}<input onchange="ascroll.once = false; Crumb.go('/catalog{:cat.mark.add}{add}')" {checked?:checked} type="checkbox">

@@ -8,6 +8,7 @@ use infrajs\config\Config;
 use infrajs\path\Path;
 use infrajs\sequence\Sequence;
 use infrajs\ans\Ans;
+use infrajs\event\Event;
 use infrajs\catalog\Catalog;
 
 $ans = array();
@@ -174,12 +175,14 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 		
 
 		$opt = Catalog::option($params[$k]['option'], $count, $search, $showhard);
-		
+
 		if (!$opt) {
 			unset($params[$k]);
 		} else {
-			$params[$k]['option']=$opt;
+			$params[$k]['option'] = $opt;
+			Event::fire('Catalog.option', $params[$k]);
 		}
+		
 	}
 
 	
@@ -235,7 +238,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 			$block['row'][] = $row;
 		}
 		
-		if (in_array($block['type'], array('string','number'))) {
+		//if (in_array($block['type'], array('string','number'))) {
 			foreach ($param['option']['values'] as $value) {
 				$row = array(
 					'title' => $value['title'],
@@ -251,7 +254,7 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 				
 				$block['row'][] = $row;
 			}
-		}
+		//}
 		if ($conf['filteroneitem'] || sizeof($block['row'])>1) $ans['template'][] = $block;
 	}
 	return $ans;
