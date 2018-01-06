@@ -112,12 +112,16 @@ class Catalog
 				'option' => array()
 			);
 			$option = array(
-				'id' => null,
-				'title' => null,
-				'count' => 0,
-				'filter' => 0,
-				'search' => 0
+				'id' => null, //id значения для передачи в адресе
+				'title' => null, //тайтл иллюстрирующий именно это значение
+				'count' => 0, //Количество этого значения без учёта всех фильтров
+				'search' => 0, //Количество этого значения в отфильтрованном списке позиций
+				'filter' => 0 //Количество этого значения без учёта текущего значения этого параметра
 			);
+			//count - сколько всего в группе позиций с указанным параметром
+			//search - сколько всего найдено с md
+			//filter - сколько найдено если данный параметр не указана в md
+
 			//more берутся все параметры, а из main только указанные, расширенные config.catalog.filters
 			$main = Catalog::$conf['filters'];
 			foreach ($main as $k => $prop) {
@@ -144,11 +148,11 @@ class Catalog
 					//if (preg_match("/[:]/", $val)) continue;//Зачем, после : указывается парамтр?
 					if (!Xlsx::isSpecified($val)) continue;
 					
-					$r=false;
-					if($prop['separator']){
-						$arval=explode($prop['separator'], $val);
-						$arname=explode($prop['separator'], $name);
-					}else{
+					$r = false;
+					if ($prop['separator']) {
+						$arval = explode($prop['separator'], $val);
+						$arname = explode($prop['separator'], $name);
+					} else {
 						$arval = array($val);
 						$arname = array($name);
 					}
@@ -366,10 +370,12 @@ class Catalog
 		
 		$groups = array();
 		$path = array();
+		
 		foreach ($list as &$pos) {
 			$path = $pos['path'];
 			break;
 		}
+
 		foreach ($list as &$pos) {
 			foreach ($pos['path'] as $v) {
 				if (!isset($groups[$v])) {
@@ -387,7 +393,6 @@ class Catalog
 			}
 			$path = $rpath;
 		}
-		
 		if (!sizeof($path)) {
 			$conf = Catalog::$conf;
 			if (!empty($subgroups[$conf['title']])) {
@@ -586,117 +591,87 @@ class Catalog
 		$filters = array();
 
 		foreach($params as $prop){
-
+			$valtitles = array();
+			$filter = array( 'title' => $prop['title'] );
 			if ($prop['more']) {
 				if (empty($md['more'])) continue; //Filter more
 				if (empty($md['more'][$prop['mdid']])) continue; //Filter more
-				
-				
-
-				$valtitles = array();
 				$val = $md['more'][$prop['mdid']];
-				foreach ($val as $value => $one) $valtitles[$value] = $value;
-
-				$filter = array(
-					'title' => $prop['title'], 
-					'name' => Sequence::short(array('more', Catalog::urlencode($prop['mdid'])))
-				);
-				$poss = array_filter($poss, function ($pos) use ($prop, $val, &$valtitles) {
-					foreach ($val as $value => $one) {
-						
-						if (isset($pos['more'])) $more = $pos['more'];
-						else $more = array();
-
-						if (isset($more[$prop['posid']])) $option = $more[$prop['posid']];
-						else $option = null;
-
-						if ($value === 'yes' && Xlsx::isSpecified($option)) return true;
-						if ($value === 'no' && !Xlsx::isSpecified($option)) return true;
-						
-						if (isset($more[$prop['posname']])) $titles = $more[$prop['posname']];
-						else $titles = null;
-
-						if ($prop['separator']) {
-							$option=explode($prop['separator'], $option);
-							$titles=explode($prop['separator'], $titles);
-						} else {
-							$option = array($option);
-							$titles = array($titles);
-						}
-
-						foreach($option as $k => $opt){
-							$id=Path::encode($opt);
-							if (strcasecmp($value, $id)==0) {
-								$valtitles[$value] = $titles[$k];
-								return true;
-							}
-						}
-					}
-					return false;
-				});
-				if (!empty($val['no'])) {
-					unset($val['no']);
-					$val['Не указано'] = 1;	
-				}
-				if (!empty($val['yes'])) {
-					unset($val['yes']);
-					$val['Указано'] = 1;
-				}
-
-				$filter['value'] = implode(', ', array_values($valtitles));
-				$filters[] = $filter;
-				
-				
+				$filter['name'] = Sequence::short(array('more', Catalog::urlencode($prop['mdid'])));
 			} else {
 				if (empty($md[$prop['mdid']])) continue;
 				$valtitles = array();
 				$val = $md[$prop['mdid']];
-				foreach ($val as $value => $one) $valtitles[$value] = $value;
+				$filter['name'] = Sequence::short(array(Catalog::urlencode($prop['mdid'])));
+			}
+			foreach ($val as $value => $one) {
+				if ($value === 'minmax') {
+					$r = explode('/', $one);
+					if ($r[0] == $r[1]) {
+						$valtitles[$value] = $r[0];
+					} else {
+						$valtitles[$value] = $r[0].' &mdash; '.$r[1];
+					}
+				} else if ($value === 'no') {
+					$valtitles[$value] = 'не указанно';
+				} else if ($value === 'yes') {
+					$valtitles[$value] = 'указано';
+				} else {
+					$valtitles[$value] = $value;	
+				}
+			}
 
-				$filter = array(
-					'title' => $prop['title'], 
-					'name' => Sequence::short(array(Catalog::urlencode($prop['mdid'])))
-				);
+			$poss = array_filter($poss, function ($pos) use ($prop, $val, &$valtitles) {
+				if ($prop['more']) {
+					if (isset($pos['more'])) $data = $pos['more'];
+					else $data = array();
+				} else {
+					$data = $pos;
+				}
 
-				$poss = array_filter($poss, function ($pos) use ($prop, $val, &$valtitles) {
-					foreach($val as $value => $one) {
-						
-						
-						$option = Sequence::get($pos, array($prop['posid']));
-						$titles = Sequence::get($pos, array($prop['posname']));
-						
-						if ($value === 'yes' && Xlsx::isSpecified($option)) return true;
-						if ($value === 'no' && !Xlsx::isSpecified($option)) return true;
+				foreach ($val as $value => $one) {
+					$option = Sequence::get($data, array($prop['posid']));
+					$titles = Sequence::get($data, array($prop['posname']));
+					
+					if ($value === 'yes' && Xlsx::isSpecified($option)) return true;
+					if ($value === 'no' && !Xlsx::isSpecified($option)) return true;
 
-						if ($prop['separator']) {
-							$option=explode($prop['separator'], $option);
-							$titles=explode($prop['separator'], $titles);
-						} else {
-							$option = array($option);
-							$titles = array($titles);
+					if ($prop['separator']) {
+						$option = explode($prop['separator'], $option);
+						$titles = explode($prop['separator'], $titles);
+					} else {
+						$option = array($option);
+						$titles = array($titles);
+					}
+					foreach ($option as $k => $opt){
+						$id = Path::encode($opt);
+						if (strcasecmp($value, $id) == 0) {
+							$valtitles[$value] = $titles[$k];
+							return true;
 						}
-						foreach($option as $k => $opt){
-							$id=Path::encode($opt);
-							if (strcasecmp($value, $id)==0) {
-								$valtitles[$value] = $titles[$k];
-								return true;
+						if ($value == 'minmax') {
+							$r = explode('/', $one);
+							if(sizeof($r) == 2) {
+								if ($r[0] <= $opt && $r[1] >= $opt) {
+									return true;
+								}
 							}
 						}
 					}
-					return false;
-				});
-				if (!empty($val['no'])) {
-					unset($val['no']);
-					$val['Не указано']=1;
 				}
-				if (!empty($val['yes'])) {
-					unset($val['yes']);
-					$val['Указано']=1;
-				}
+				return false;
+			});
 
-				$filter['value'] = implode(', ', array_values($valtitles));
-				$filters[] = $filter;
+			if (!empty($val['no'])) {
+				unset($val['no']);
+				$val['Не указано'] = 1;	
 			}
+			if (!empty($val['yes'])) {
+				unset($val['yes']);
+				$val['Указано'] = 1;
+			}
+			$filter['value'] = implode(', ', array_values($valtitles));
+			$filters[] = $filter;
 		}
 		//Filter group
 		$key='group';
@@ -751,8 +726,8 @@ class Catalog
 		$conf = Catalog::$conf;
 		foreach ($values as $value => $s) break;
 		$opt = array('type' => '', 'values' => $values);
-		$min = $value;
-		$max = $value;
+		//$min = $value;
+		//$max = $value;
 		$yes = 0;
 		$yesall = 0;
 		
@@ -782,55 +757,64 @@ class Catalog
 		}
 		
 		$type = false;
-		foreach ($opt['values'] as $val => $c) { //Слайдер
-			if (is_string($val)) {
-				$type = 'string';
-				break;
+		foreach ($opt['values'] as $val => $c) {
+			
+			/*$n = (float) $c['title'];
+			if ($c['title'] === "1/3") {
+				echo "1/3";
+				var_dump($n);
+				var_dump($n == $c['title']);
+				exit;
 			}
-			if ($val < $min) $min = $val;
-			if ($val > $max) $max = $val;
+			if ($n == $c['title'] && $n != '') continue;*/
+			if (is_numeric($c['title'])) continue;
+
+			$type = 'string';
+			break;
+			
+			//if ($val < $min) $min = $val;
+			//if ($val > $max) $max = $val;
 		}
 		if (!$type) {
 			$type = 'number';
 			/*$len = sizeof($opt['values']);
-			if ($len>5) { //Слайдер
-				$opt['min'] = $min;
-				$opt['max'] = $max;
-				$type = 'slider';
-				unset($opt['values']);
-			}*/
+			$opt['len'] = $len;
+			$opt['min'] = $min;
+			$opt['max'] = $max;*/
 		}
-		
 		$opt['type'] = $type;
 	
 		//if (in_array($opt['type'], array('string', 'number'))) {
-			$saved_values = $opt['values'];
-			if (sizeof($opt['values']) > $conf['foldwhen']) {
+		$saved_values = $opt['values'];
+		if (sizeof($opt['values']) > $conf['foldwhen']) {
+			//$opt['values'] = array();
+			//if (!$showhard) return false;
+		}
+		if (is_array($showhard)) {	
+			foreach ($showhard as $show => $one) {
+				$title = $show;
+				//$show = mb_strtolower($show);
+				if ($show == 'yes') continue;
+				if ($show == 'no') continue;
+				if (!empty($opt['values'][$show])) continue;
+				if (empty($saved_values[$show])) {
+					continue;
+				}
+				
+				$opt['values'][$show] = $saved_values[$show];//array('id' => $show, 'title' => $title);
+			}
+		}
+		/*foreach($opt['values'] as $v){//Когда всех значений по 1
+			if($v!=1){
+				//Единичные опции
 				$opt['values'] = array();
-				if (!$showhard) return false;
+				break;
 			}
-			if (is_array($showhard)) {	
-				foreach ($showhard as $show => $one) {
-					$title = $show;
-					//$show = mb_strtolower($show);
-					if ($show == 'yes') continue;
-					if ($show == 'no') continue;
-					if (!empty($opt['values'][$show])) continue;
-					
-					$opt['values'][$show] = $saved_values[$show];//array('id' => $show, 'title' => $title);
-				}
-			}
-			/*foreach($opt['values'] as $v){//Когда всех значений по 1
-				if($v!=1){
-					//Единичные опции
-					$opt['values'] = array();
-					break;
-				}
-			}*/
-			//if(sizeof($opt['values'])>10){
-				//$opt['values_more'] = array_slice($opt['values'],6,sizeof($opt['values'])-6,true);
-				//$opt['values'] = array_slice($opt['values'],0,6,true);
-			//}
+		}*/
+		//if(sizeof($opt['values'])>10){
+			//$opt['values_more'] = array_slice($opt['values'],6,sizeof($opt['values'])-6,true);
+			//$opt['values'] = array_slice($opt['values'],0,6,true);
+		//}
 		//}
 
 		if ($opt['type'] == 'string') {
@@ -867,12 +851,13 @@ class Catalog
 		$arr = Access::cache('Catalog::getPos', function($prod, $art) use ($pos) {
 			
 			Xlsx::addFiles(Catalog::$conf['dir'], $pos);
+
 			if (empty($pos['Файлы'])) {
 				$files = array();
 			} else {
 				$files = explode(', ', $pos['Файлы']);	
 			}
-			
+		
 			foreach ($files as $f) {
 				if (!$f) continue;
 				$f = trim($f);
@@ -885,7 +870,7 @@ class Catalog
 					$d = Load::srcInfo(Path::toutf($f));
 				} else {
 					$d = $f;
-					$f = $d['src'];
+					$f = Path::theme($d['src']);
 				}
 
 				$d['size'] = round(filesize(Path::tofs($f))/1000000, 2);
@@ -893,6 +878,7 @@ class Catalog
 				$d['src'] = Path::pretty($d['src']);
 				$files[] = $d;
 			}
+
 			$pos['files'] = $files;
 			if ($pos['texts']) {
 				foreach ($pos['texts'] as $k => $t) {
@@ -906,7 +892,7 @@ class Catalog
 			if (isset($images[strtolower($prod.'-'.$art)])) $pos['images'] = array_merge($pos['images'], $images[strtolower($prod.'-'.$art)]);
 			return $pos;
 		}, $args);
-
+		
 		$pos['images'] = $arr['images'];
 		$pos['texts'] = $arr['texts'];
 		$pos['files'] = $arr['files'];
@@ -941,109 +927,19 @@ class Catalog
 			
 			//ЭТАП filters list
 			$ans['filters'] = Catalog::filtering($ans['list'], $md);
+
 			$now = null;
 			foreach ($md['group'] as $now => $one) break;
-
+	
 			$ans['childs'] = Catalog::getGroups($ans['list'], $now);
-			
+
 			$ans['count'] = sizeof($ans['list']);
-			
+		
 			return $ans;
 		}, $args, isset($_GET['re']));
-		$ans = array_merge($ans, $res);
 		
+		$ans = array_merge($ans, $res);
+			
 		return $ans;
 	}
 }
-
-
-Catalog::add('count', function () {
-	return 10;
-}, function (&$val) {
-	$val = (int) $val;
-	if ($val < 1 || $val > 1000) return false;
-	return true;
-});
-Catalog::add('reverse', function () {
-	return false;
-}, function (&$val) {
-	$val = !!$val;
-	return true;
-});
-Catalog::add('sort', function () {
-	return '';
-}, function ($val) {
-	return in_array($val, array('name', 'art', 'group', 'change', 'cost'));
-});
-
-Catalog::add('producer', function () {
-	return array();
-}, function (&$val) {
-	if (!is_array($val)) return false;
-	$val = array_filter($val);
-	$producers = array_keys($val);
-	$producers = array_filter($producers, function (&$value) {
-		if (in_array($value,array('yes', 'no'))) return true;
-		if (Catalog::getProducer($value)) return true;
-		return false;
-	});
-	$val = array_fill_keys($producers, 1);
-	return !!$val;
-});
-
-Catalog::add('group', function () {
-	return array();
-}, function (&$val) {
-	if (!is_array($val)){
-		$s = $val;
-		$val = array();
-		$val[$s] = 1;
-	}
-	$val = array_filter($val);
-	$values = array_keys($val);
-	$values = array_filter($values, function (&$value) {
-		if(in_array($value,array('yes', 'no'))) return true;
-		if(!$value)return false;
-		if(!Catalog::getGroup($value))return false;
-		return true;
-	});
-	$val = array_fill_keys($values, 1);
-	return !!$val;
-});
-
-Catalog::add('search', function () {
-	return '';
-}, function ($val) {
-	return is_string($val);
-});
-
-Catalog::add('cost', function () {
-	return array();
-}, function (&$val) {
-	if (!is_array($val)) return false;
-	$val = array_filter($val);//Удаляет false значения
-	$values = array_keys($val);
-	$values = array_filter($values, function (&$value) {
-		if (in_array($value, array('yes', 'no'))) return true;
-		if (!$value) return false;
-		return true;
-	});
-	$val = array_fill_keys($values, 1);
-	return !!$val;
-});
-Catalog::add('more', function () {
-	return array();
-}, function (&$val) {
-	if (!is_array($val)) return;
-	foreach($val as $k => $v){
-		if (!is_array($v)) {
-			unset($val[$k]);
-		} else {
-			foreach($v as $kk => $vv){		
-				if (!$vv) unset($val[$k][$kk]);
-			}
-			if (!$val[$k]) unset($val[$k]);
-		}		
-	}
-	return !!$val;
-});
