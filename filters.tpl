@@ -37,7 +37,7 @@
 			{data.blocks::block}
 		</div>
 		<div class="space">
-			Найдено <a rel="nofollow" data-anchor=".breadcrumb" href="/catalog{:cat.mark.set}">{data.search} {~words(data.search,:pos1,:pos2,:pos5)}</a>
+			Найдено <a class="a" rel="nofollow" data-anchor="h1" href="/catalog{:cat.mark.set}">{data.search} {~words(data.search,:pos1,:pos2,:pos5)}</a>
 		</div>
 		{pos1:}позиция
 		{pos2:}позиции

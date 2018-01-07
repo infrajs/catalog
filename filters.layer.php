@@ -2,18 +2,16 @@
 
 use infrajs\ans\Ans;
 use infrajs\each\Each;
-use infrajs\config\Config;
+use infrajs\catalog\Catalog;
 
 $ans = array();
 $ans['tplsm'] = array();
 
 
-foreach (Config::$conf as $name => $ext) {
-	Each::exec($ext['catalog-filter'], function &(&$val) use (&$ans, $name) {
-		$ans['tplsm'][] = '-'.$name.'/'.$val;
-		$r = null;
-		return $r;
-	});
-}
+Each::exec(Catalog::$conf['filterstpl'], function &(&$val) use (&$ans) {
+	$ans['tplsm'][] = $val;
+	$r = null;
+	return $r;
+});
 
 return Ans::ans($ans);
