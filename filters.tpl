@@ -32,9 +32,9 @@
 	{~length(data.blocks)?:filtersbody}
 </div>
 	{filtersbody:}
-		<h1>Фильтры</h1>
+		<div style="margin-top:20px; font-size:38px; opacity: 0.2; text-transform: uppercase; font-weight: bold;">Фильтры</div>
 		<div class="space">
-			{data.blocks::block}
+			{data.blocks::layout}
 		</div>
 		<div class="space">
 			Найдено <a class="a" rel="nofollow" data-anchor="h1" href="/catalog{:cat.mark.set}">{data.search} {~words(data.search,:pos1,:pos2,:pos5)}</a>
@@ -42,9 +42,9 @@
 		{pos1:}позиция
 		{pos2:}позиции
 		{pos5:}позиций
-{block:}
-	{:blocks-{layout}}
-{blocks-default:}
+{layout:}
+	{:layout-{layout}}
+{layout-default:}
 	<div style="margin-top:5px; border-bottom:1px solid #ddd">
 		<div>
 			<label style="font-weight:bold;">

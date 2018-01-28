@@ -16,12 +16,11 @@ $ans = array();
 
 $md = Catalog::initMark($ans);
 
-$args = array(Catalog::nocache($md));
-$res = Catalog::cache('filters.php filter list', function ($md) {
+//$args = array(Catalog::nocache($md));
+//$res = Catalog::cache('filters.php filter list', function ($md) {
 	$conf = Config::get('catalog');
-	$ans = array();
+	//$ans = array();
 	$params = Catalog::getParams($md['group']);
-	
 
 	
 	$poss = Catalog::getPoss($md['group']);
@@ -213,8 +212,8 @@ $res = Catalog::cache('filters.php filter list', function ($md) {
 
 		$ans['blocks'][] = $params[$k]['block'];
 	}
-	return $ans;
-}, $args, isset($_GET['re']));
-$ans = array_merge($ans, $res);
+//	return $ans;
+//}, $args, isset($_GET['re']));
+//$ans = array_merge($ans, $res);
 
 return Ans::ret($ans);
