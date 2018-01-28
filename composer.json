@@ -1,7 +1,6 @@
 {
     "name": "infrajs/catalog",
     "description": "Catalog based on files docx and xlsx",
-    "license": "GPL3",
     "require":{
         "infrajs/router":"~1",
     	"infrajs/doc":"~1",
