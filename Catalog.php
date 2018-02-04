@@ -42,18 +42,24 @@ class Catalog
 		)
 	);
 	public static $data = false; 
-	public static function init()
-	{
-		return Catalog::cacheF('cat_init', function () {
+	public static function getOptions(){
 			$conf = Catalog::$conf;
 			$columns = array_merge(array("Наименование","Файлы", "Артикул","Производитель","Цена","Описание","Скрыть фильтры в полном описании"),$conf['columns']);
-			$data = &Xlsx::init($conf['dir'], array(
+			$options = array(
 				'more' => true,
 				'Имя файла' => $conf['filename'],
 				'Известные колонки' => $columns
-				)
-			);
-
+				);
+			return $options;
+	}
+	public static function init()
+	{
+		return Catalog::cacheF('cat_init', function () {
+			$options = Catalog::getOptions();
+			$conf = Catalog::$conf;
+			$data = &Xlsx::init($conf['dir'], $options);
+			
+			
 			//Xlsx::runGroups($data, function (&$gr) {
 			//	$gr['data'] = array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
 			//});
