@@ -43,8 +43,23 @@ class Check {
 	}
 	public static function repeats() {
 		return Catalog::cache(__FILE__, function () {
+			
+
+			$data = Catalog::init();
 			$list = array();
+			Xlsx::runPoss($data, function($pos) use (&$list){
+				$r = null;
+				if(!isset($list[$pos['producer']])) $list[$pos['producer']] = array();
+				if(!isset($list[$pos['producer']][$pos['article']])) $list[$pos['producer']][$pos['article']] = array();
+				$list[$pos['producer']][$pos['article']][] = $pos;
+				return $r;
+			});
+
+
+
+			/*$list = array();
 			$dir = Catalog::$conf['dir'];
+
 			array_map(function ($file) use (&$list, $dir) {
 				if ($file[0] == '.') return;
 				$ext = Path::getExt($file);
@@ -77,21 +92,24 @@ class Check {
 					return $r;
 				});
 			}, scandir(Path::resolve($dir)));
+			*/
+			
 			$count = 0;
-			$cp = array();
+			//$cp = array();
 			foreach($list as $prod => $arts) {
-				if (!isset($cp[$prod])) $cp[$prod] = 0;
+				//if (!isset($cp[$prod])) $cp[$prod] = 0;
 				foreach($arts as $art => $poss) {
-					$cp[$prod] += sizeof($poss);
+					//$cp[$prod] += sizeof($poss);
 					if (sizeof($poss) == 1) unset($list[$prod][$art]);
 					else $count ++;
 				}
 				if (!$list[$prod]) unset($list[$prod]);
 			}
+			
 			$data = array();
 			$data['count'] = $count;
 			$data['list'] = $list;
 			return $data;
-		});
+		},array(),isset($_GET['re']));
 	}
 }

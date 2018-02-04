@@ -195,11 +195,10 @@ class Catalog
 								'more' => true
 							));
 						}
-						
 						$prop=$params[$k];
 						$r=false;
 						
-						if ($prop['separator']){
+						if($prop['separator']){
 							$arval=explode($prop['separator'], $val);
 						}else{
 							$arval = array($val);
@@ -220,7 +219,6 @@ class Catalog
 						}
 						if ($r) $params[$k]['count']++;
 					}
-					
 				}
 			}
 
