@@ -5,7 +5,8 @@ use infrajs\path\Path;
 use infrajs\load\Load;
 use infrajs\each\Each;
 use infrajs\mark\Mark as Marker;
-use infrajs\cache\Cache;
+use akiyatkin\boo\Cache;
+use akiyatkin\boo\MemCache;
 use infrajs\once\Once;
 use infrajs\event\Event;
 use infrajs\config\Config;
@@ -54,7 +55,7 @@ class Catalog
 	}
 	public static function init()
 	{
-		return Catalog::cacheF('cat_init', function () {
+		return Catalog::cache('Каталог', function () {
 			$options = Catalog::getOptions();
 			$conf = Catalog::$conf;
 			$data = &Xlsx::init($conf['dir'], $options);
@@ -458,17 +459,29 @@ class Catalog
 		}
 		return true;
 	}
-	public static function cache($name, $call, $args = array(), $re = null)
+	/*public static function cache($name, $call, $args = array(), $re = null)
 	{
 		if (is_null($re)) $re = isset($_GET['re']);
 		$conf = Catalog::$conf;
-		return Cache::exec($conf['cache'], 'cat-'.$name, $call, $args, $re);
+		return OldCache::exec($conf['cache'], 'cat-'.$name, $call, $args, $re);
 	}
 	public static function cacheF($name, $call, $args = array(), $re = null)
 	{
 		if (is_null($re)) $re = isset($_GET['re']);
 		$conf = Catalog::$conf;
-		return Cache::execF($conf['cache'], 'cat-'.$name, $call, $args, $re);
+		return OldCache::execF($conf['cache'], 'cat-'.$name, $call, $args, $re);
+	}*/
+	public static function cache($name, $call, $args = array(), $level = 0)
+	{	
+		$level++;
+		$conf = Catalog::$conf;
+		return MemCache::exec('Каталог '.$name, $call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
+	}
+	public static function cacheF($name, $call, $args = array(), $level =0)
+	{
+		$level++;
+		$conf = Catalog::$conf;
+		return Cache::exec('Каталог '.$name, $call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
 	}
 	public static function numbers($page, $pages, $plen = 11)
 	{
