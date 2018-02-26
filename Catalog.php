@@ -55,7 +55,7 @@ class Catalog
 	}
 	public static function init()
 	{
-		return Catalog::cache('Каталог', function () {
+		return Catalog::cache('Все данные', function () {
 			$options = Catalog::getOptions();
 			$conf = Catalog::$conf;
 			$data = &Xlsx::init($conf['dir'], $options);
@@ -359,7 +359,7 @@ class Catalog
 	}
 	public static function getGroups($list, $now = false) {
 		//Groups
-		$subgroups = Catalog::cache(__FILE__.'getGroups', function () {
+		$subgroups = Catalog::cache('Все группы', function () {
 			//Микро вставка всё ради того чтобы не пользоваться $data на этом уровне
 			//данный кэш один для любой страницы каталога
 			$subgroups = array();
@@ -459,29 +459,17 @@ class Catalog
 		}
 		return true;
 	}
-	/*public static function cache($name, $call, $args = array(), $re = null)
-	{
-		if (is_null($re)) $re = isset($_GET['re']);
-		$conf = Catalog::$conf;
-		return OldCache::exec($conf['cache'], 'cat-'.$name, $call, $args, $re);
-	}
-	public static function cacheF($name, $call, $args = array(), $re = null)
-	{
-		if (is_null($re)) $re = isset($_GET['re']);
-		$conf = Catalog::$conf;
-		return OldCache::execF($conf['cache'], 'cat-'.$name, $call, $args, $re);
-	}*/
 	public static function cache($name, $call, $args = array(), $level = 0)
 	{	
 		$level++;
 		$conf = Catalog::$conf;
-		return MemCache::exec('Каталог '.$name, $call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
+		return MemCache::exec('Каталог - '.$name, $call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
 	}
 	public static function cacheF($name, $call, $args = array(), $level =0)
 	{
 		$level++;
 		$conf = Catalog::$conf;
-		return Cache::exec('Каталог '.$name, $call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
+		return Cache::exec('Каталог данны - '.$name, $call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
 	}
 	public static function numbers($page, $pages, $plen = 11)
 	{
