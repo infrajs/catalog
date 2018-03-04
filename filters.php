@@ -16,8 +16,8 @@ $ans = array();
 
 $md = Catalog::initMark($ans);
 
-//$args = array(Catalog::nocache($md));
-//$res = Catalog::cache('filters.php filter list', function ($md) {
+$args = array(Catalog::nocache($md));
+$res = Catalog::cacheH('filters.php filter list', function ($md) {
 	$conf = Config::get('catalog');
 	//$ans = array();
 	$params = Catalog::getParams($md['group']);
@@ -212,8 +212,8 @@ $md = Catalog::initMark($ans);
 
 		$ans['blocks'][] = $params[$k]['block'];
 	}
-//	return $ans;
-//}, $args, isset($_GET['re']));
-//$ans = array_merge($ans, $res);
+	return $ans;
+}, $args);
+$ans = array_merge($ans, $res);
 
 return Ans::ret($ans);

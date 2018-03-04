@@ -9,12 +9,12 @@ use infrajs\view\View;
 use infrajs\nostore\Nostore;
 use infrajs\config\Config;
 use infrajs\rubrics\Rubrics;
-
+use akiyatkin\boo\Cache;
 
 $ans = array();
 
-$md = Catalog::initMark($ans);
 
+$md = Catalog::initMark($ans);				
 
 
 $val = Ans::GET('val');
@@ -75,7 +75,7 @@ if (!$re) {
 	if ($md['more']) $re  =  true;//Не сохраняем когда есть фильтры more
 }
 
-$ans  =  Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
+$ans  =  Catalog::cacheH('найденные позиции', function ($md, $page) use($ans) {
 	//1
 	$ans['is'] = ''; //group producer search Что было найдено по запросу val (Отдельный файл is:change)
 	$ans['descr'] = '';//абзац текста в начале страницы';
@@ -140,7 +140,7 @@ $ans  =  Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 			$ans['breadcrumbs'][] = array('href' => 'producers','title' => 'Производители');
 		}
 	}
-	
+	Cache::setTitle($ans['title']);
 	Catalog::sort($ans['list'], $md);
 
 	//Numbers
@@ -170,6 +170,6 @@ $ans  =  Catalog::cache('Catalog::search.php', function ($md, $page) use($ans) {
 		$ans['list'][$k] = $pos;
 	}
 	return $ans;
-}, $args, $re);
+}, $args);
 
 return Ans::ret($ans);

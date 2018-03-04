@@ -21,7 +21,7 @@ $art = mb_strtolower($orig_art);
 $args = array($val, $art);
 $ans = array();
 
-$pos = Catalog::cache('position', function ($val, $art) {
+$pos = Catalog::cache('поиск позиции', function ($val, $art) {
 	$data = Catalog::init(); // список всей продукции
 	return Xlsx::runPoss($data, function &(&$pos, $i, &$group) use (&$val, &$art) {
 		$r = null;
@@ -29,7 +29,7 @@ $pos = Catalog::cache('position', function ($val, $art) {
 		if (mb_strtolower($pos['article'])!==$art) return $r;
 		return $pos;
 	});
-}, $args, isset($_GET['re']));
+}, $args);
 
 
 
