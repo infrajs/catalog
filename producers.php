@@ -40,7 +40,8 @@ if(sizeof($p)!=2){
 $start = (int)$p[0];
 $count = (int)$p[1];
 $args=array($start, $count);
-$list=Catalog::cache('producers.php', function ($start, $count) {
+//'producers.php',
+$list=Catalog::cache( function ($start, $count) {
 	$ans=array();
 
 	$data=Catalog::init();

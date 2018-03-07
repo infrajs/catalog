@@ -75,7 +75,8 @@ if (!$re) {
 	if ($md['more']) $re  =  true;//Не сохраняем когда есть фильтры more
 }
 
-$ans  =  Catalog::cacheH('найденные позиции', function ($md, $page) use($ans) {
+//'найденные позиции'
+$ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	//1
 	$ans['is'] = ''; //group producer search Что было найдено по запросу val (Отдельный файл is:change)
 	$ans['descr'] = '';//абзац текста в начале страницы';

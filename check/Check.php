@@ -42,7 +42,7 @@ class Check {
 		echo View::html();
 	}
 	public static function repeats() {
-		return Catalog::cache(__FILE__, function () {
+		return Catalog::cache( function () {
 			
 
 			$data = Catalog::init();
@@ -110,6 +110,6 @@ class Check {
 			$data['count'] = $count;
 			$data['list'] = $list;
 			return $data;
-		},array(),isset($_GET['re']));
+		});
 	}
 }

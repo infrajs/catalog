@@ -17,12 +17,11 @@ $ans = array();
 $md = Catalog::initMark($ans);
 
 $args = array(Catalog::nocache($md));
-$res = Catalog::cacheH('filters.php filter list', function ($md) {
+$res = Catalog::cache( function ($md) {
 	$conf = Config::get('catalog');
 	//$ans = array();
 	$params = Catalog::getParams($md['group']);
 
-	
 	$poss = Catalog::getPoss($md['group']);
 	//Поиск
 	$count = sizeof($poss);//Позиций в группе

@@ -21,7 +21,8 @@ $art = mb_strtolower($orig_art);
 $args = array($val, $art);
 $ans = array();
 
-$pos = Catalog::cache('поиск позиции', function ($val, $art) {
+//'поиск позиции',
+$pos = Catalog::cache( function ($val, $art) {
 	$data = Catalog::init(); // список всей продукции
 	return Xlsx::runPoss($data, function &(&$pos, $i, &$group) use (&$val, &$art) {
 		$r = null;

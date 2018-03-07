@@ -7,7 +7,6 @@ use infrajs\each\Each;
 use infrajs\mark\Mark as Marker;
 use akiyatkin\boo\Cache;
 use akiyatkin\boo\MemCache;
-use akiyatkin\boo\HiddenCache;
 use infrajs\once\Once;
 use infrajs\event\Event;
 use infrajs\config\Config;
@@ -56,7 +55,8 @@ class Catalog
 	}
 	public static function init()
 	{  
-		return Catalog::cacheF('все данные', function () {
+		//все данные
+		return Catalog::cacheF(function () {
 			$options = Catalog::getOptions();
 			$conf = Catalog::$conf;
 			$data = &Xlsx::init($conf['dir'], $options);
@@ -74,7 +74,8 @@ class Catalog
 	}
 	public static function getProducer(&$producer){
 		$sproducer = mb_strtolower($producer);
-		$pos = Catalog::cache('производители', function &($sproducer){
+		//'производители'
+		$pos = Catalog::cache( function &($sproducer){
 			$data = Catalog::init();
 			return Xlsx::runPoss($data, function &($pos) use ($sproducer) {
 				if (mb_strtolower($pos['producer']) == $sproducer) return $pos;
@@ -85,7 +86,8 @@ class Catalog
 		return $pos['Производитель'];
 	}
 	public static function getGroup($group){
-		return Catalog::cache('группы', function &($group){
+		//'группы'
+		return Catalog::cache( function &($group){
 			$data = Catalog::init();
 			if ($group) $data = Xlsx::runGroups($data, function &($gr) use($group) {
 				if($gr['title'] == $group)return $gr;
@@ -100,7 +102,8 @@ class Catalog
 	* getParams Собирает в простую структуру все параметры и возможные значения фильтров для указанной группы
 	*/
 	public static function getParams($group = false){
-		return Catalog::cache('все параметры', function &($group){
+		//'все параметры'
+		return Catalog::cache(function &($group){
 			$poss = Catalog::getPoss($group);
 			if (!$group) Cache::setTitle('Корень');
 			$params = array();//параметры
@@ -267,7 +270,8 @@ class Catalog
 		if ($mdgroup) foreach ($mdgroup as $group => $v) break;
 		else $group = false;
 		
-		return Catalog::cache('позиции группы', function &($group){
+		//'позиции группы'
+		return Catalog::cache( function &($group){
 			$data = Catalog::init();
 			if (!$group) Cache::setTitle('Корень');
 			if ($group) $data=Xlsx::runGroups($data, function &($gr) use($group) {
@@ -326,7 +330,8 @@ class Catalog
 			} else if ($md['sort']=='change') {
 				$args = array(Catalog::nocache($md));
 				
-				$poss = Catalog::cache('сортировка по изменениям', function($md) use ($poss) {
+				//'сортировка по изменениям'
+				$poss = Catalog::cache( function ($md) use ($poss) {
 					foreach($poss as &$pos) {
 						$conf = Catalog::$conf;
 						$dir = Path::theme($conf['dir'].$pos['producer'].'/'.$pos['article'].'/');
@@ -361,7 +366,8 @@ class Catalog
 	}
 	public static function getGroups($list, $now = false) {
 		//Groups
-		$subgroups = Catalog::cache('все группы', function () {
+		//'все группы'
+		$subgroups = Catalog::cache(function () {
 			//Микро вставка всё ради того чтобы не пользоваться $data на этом уровне
 			//данный кэш один для любой страницы каталога
 			$subgroups = array();
@@ -461,24 +467,19 @@ class Catalog
 		}
 		return true;
 	}
-	public static function cache($name, $call, $args = array(), $level = 0)
+	public static function cache($call, $args = array(), $level = 0)
 	{	
 		$level++;
 		$conf = Catalog::$conf;
-		return MemCache::exec('Каталог: '.$name, $call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
+		return MemCache::func($call, $args, null, null, $level);
+		//return MemCache::func($call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
 	}
-	public static function cacheH($name, $call, $args = array(), $level = 0)
-	{	
-		//Скрытый кэш
-		$level++;
-		$conf = Catalog::$conf;
-		return HiddenCache::exec('Каталог: '.$name, $call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
-	}
-	public static function cacheF($name, $call, $args = array(), $level = 0)
+	public static function cacheF($call, $args = array(), $level = 0)
 	{
 		$level++;
 		$conf = Catalog::$conf;
-		return Cache::exec('Каталог: '.$name, $call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
+		return Cache::func($call, $args, null, null, $level);
+		//return Cache::func($call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
 	}
 	public static function numbers($page, $pages, $plen = 11)
 	{
@@ -866,7 +867,8 @@ class Catalog
 	 **/
 	public static function &getPos(&$pos) {
 		$args = array($pos['producer'], $pos['article']);
-		$arr = Catalog::cache('позиции с картинками', function($prod, $art) use ($pos) {
+		//'позиции с картинками'
+		$arr = Catalog::cache( function($prod, $art) use ($pos) {
 			
 			Xlsx::addFiles(Catalog::$conf['dir'], $pos);
 
@@ -939,7 +941,8 @@ class Catalog
 	}
 	public static function search($md, &$ans = array()) {
 		$args = array(Catalog::nocache($md));
-		$res = Catalog::cache('поиск', function &($md) {
+		//'поиск',
+		$res = Catalog::cache( function &($md) {
 
 			$ans['list'] = Catalog::getPoss($md['group']);
 			
