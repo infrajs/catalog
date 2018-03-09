@@ -7,6 +7,7 @@ use infrajs\access\Access;
 use infrajs\router\Router;
 use infrajs\template\Template;
 use infrajs\rest\Rest;
+use akiyatkin\boo\Once;
 use infrajs\catalog\Catalog;
 
 return Rest::get([ function () {
@@ -18,8 +19,20 @@ return Rest::get([ function () {
 			'title' => "Сервис каталога",
 			'active' =>true
 		);
-
 		echo Template::parse('-catalog/index.tpl', $data);
+	},
+	"init", function () {
+		$data = Catalog::init();
+		/*echo '<pre>';
+		unset(Once::$items[Once::$lastid]['exec']['result']);
+		print_r(Once::$items['062fbe0f303e589637d068012eb392fe']);
+		print_r(Once::$items[Once::$lastid]);*/
+		//echo '<pre>';
+		//print_r($data);
+		//exit;
+		$res = array();
+		$res['size'] = sizeof($data['childs']);
+		echo Rest::parse('-catalog/index.tpl', $res, 'INIT');	
 	},
 	"pos",  [ function ($type) {
 			$ans = array();
@@ -36,7 +49,9 @@ return Rest::get([ function () {
 
 				$poss = array();
 				foreach ($list as $k => $pos) {
-					if ($pos['producer'] == $prod) $poss[] = $list[$k];
+					if ($pos['producer'] == $prod) {
+						$poss[] = $list[$k];
+					}
 				}
 				
 				$ans['data'] = $poss;

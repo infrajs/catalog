@@ -161,7 +161,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 		$ans['textinfo']  =  Rubrics::info($src); 
 		$ans['text']  =  Load::loadTEXT('-doc/get.php?src='.$src);//Изменение текста не отражается как изменение каталога, должно быть вне кэша
 	}
-
+	
 	foreach($ans['list'] as $k => $pos){
 		$pos = Catalog::getPos($pos);
 		$group  =  Catalog::getGroup($pos['group']);

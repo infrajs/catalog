@@ -273,7 +273,6 @@ class Catalog
 		//'позиции группы'
 		return Catalog::cache( function &($group){
 			$data = Catalog::init();
-			if (!$group) Cache::setTitle('Корень');
 			if ($group) $data=Xlsx::runGroups($data, function &($gr) use($group) {
 				if ($gr['title'] == $group) return $gr;
 				$r = null; return $r;
@@ -471,7 +470,7 @@ class Catalog
 	{	
 		$level++;
 		$conf = Catalog::$conf;
-		return MemCache::func($call, $args, null, null, $level);
+		return Cache::func($call, $args, null, null, $level);
 		//return MemCache::func($call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
 	}
 	public static function cacheF($call, $args = array(), $level = 0)
@@ -867,22 +866,20 @@ class Catalog
 	 **/
 	public static function &getPos(&$pos) {
 		$args = array($pos['producer'], $pos['article']);
-		//'позиции с картинками'
+		
 		$arr = Catalog::cache( function($prod, $art) use ($pos) {
-			
+					
+			if (!empty($pos['Файлы'])) {
+				$list = explode(', ', $pos['Файлы']);	
+				foreach ($list as $f) {
+					if (!$f) continue;
+					$f = trim($f);
+					Xlsx::addFiles(Catalog::$conf['dir'], $pos, $f);
+				}
+			}
+
 			Xlsx::addFiles(Catalog::$conf['dir'], $pos);
 
-			if (empty($pos['Файлы'])) {
-				$files = array();
-			} else {
-				$files = explode(', ', $pos['Файлы']);	
-			}
-		
-			foreach ($files as $f) {
-				if (!$f) continue;
-				$f = trim($f);
-				Xlsx::addFiles(Catalog::$conf['dir'], $pos, $f);
-			}
 			$files = array();
 			foreach ($pos['files'] as $f) {
 				if (is_string($f)) {
@@ -905,11 +902,12 @@ class Catalog
 					$pos['texts'][$k] = Rubrics::article($t);
 				}
 			}
+
 			$dir = Catalog::$conf['dir'].$prod.'/images/';
 			$images = Catalog::getIndex($dir);
+			if (isset($images[strtolower($art)])) $pos['images'] = array_merge($images[strtolower($art)], $pos['images']);
+			if (isset($images[strtolower($prod.'-'.$art)])) $pos['images'] = array_merge($images[strtolower($prod.'-'.$art)], $pos['images']);
 			
-			if (isset($images[strtolower($art)])) $pos['images'] = array_merge($pos['images'], $images[strtolower($art)]);
-			if (isset($images[strtolower($prod.'-'.$art)])) $pos['images'] = array_merge($pos['images'], $images[strtolower($prod.'-'.$art)]);
 			return $pos;
 		}, $args);
 		
@@ -920,7 +918,7 @@ class Catalog
 	}
 	public static function getIndex($dir) {
 		if (!Path::theme($dir)) return array();
-		return Once::exec(__FILE__.'getIndex', function ($dir) {
+		return Cache::func( function ($dir) {
 			$list = array();
 			Config::scan($dir, function ($src, $level) use (&$list) {
 				$fd = Load::pathInfo($src);
@@ -937,15 +935,15 @@ class Catalog
 				}
 			}, true);
 			return $list;
-		}, array($dir));
+		}, array($dir), ['akiyatkin\\boo\\Cache','getModifiedTime'], array($dir));
 	}
 	public static function search($md, &$ans = array()) {
 		$args = array(Catalog::nocache($md));
 		//'поиск',
-		$res = Catalog::cache( function &($md) {
+		$res = Catalog::cacheF( function &($md) {
 
 			$ans['list'] = Catalog::getPoss($md['group']);
-			
+			//if (sizeof($ans['list']) > 1000) $ans['list'] = array();
 			//ЭТАП filters list
 			$ans['filters'] = Catalog::filtering($ans['list'], $md);
 

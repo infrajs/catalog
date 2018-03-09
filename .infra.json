@@ -11,6 +11,16 @@
 			"vendor/infrajs/catalog/"
 		]
 	},
+	"startsteps":{
+		"Инициализация данных каталога":{
+			"href":"/-catalog/init",
+			"func":"Catalog::init()"
+		},
+		"Главная страница каталога":{
+			"href":"/catalog",
+			"func":"/catalog"
+		}
+	},
 	"foldwhen":30,
 	"update":"update.php",
 	"conf":"infrajs\\catalog\\Catalog",
