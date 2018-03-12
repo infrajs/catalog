@@ -76,7 +76,7 @@ if (!$re) {
 }
 
 //'найденные позиции'
-$ans  =  Catalog::cache(function ($md, $page) use($ans) {
+//$ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	//1
 	$ans['is'] = ''; //group producer search Что было найдено по запросу val (Отдельный файл is:change)
 	$ans['descr'] = '';//абзац текста в начале страницы';
@@ -170,7 +170,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 		unset($pos['files']);
 		$ans['list'][$k] = $pos;
 	}
-	return $ans;
-}, $args);
+//	return $ans;
+//}, $args);
 
 return Ans::ret($ans);
