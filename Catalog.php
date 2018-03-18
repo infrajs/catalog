@@ -866,7 +866,6 @@ class Catalog
 	 **/
 	public static function &getPos(&$pos) {
 		$args = array($pos['producer'], $pos['article']);
-		
 		$arr = Catalog::cache( function($prod, $art) use ($pos) {
 					
 			if (!empty($pos['Файлы'])) {
@@ -941,7 +940,7 @@ class Catalog
 		$args = array(Catalog::nocache($md));
 		//'поиск',
 		$res = Catalog::cacheF( function &($md) {
-
+			$ans = array();
 			$ans['list'] = Catalog::getPoss($md['group']);
 			//if (sizeof($ans['list']) > 1000) $ans['list'] = array();
 			//ЭТАП filters list

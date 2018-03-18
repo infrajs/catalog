@@ -21,6 +21,10 @@ return Rest::get([ function () {
 		);
 		echo Template::parse('-catalog/index.tpl', $data);
 	},
+	"getPoss", function( $t, $group = null ){
+		$poss = Catalog::getPoss($group);
+		echo sizeof($poss);
+	},
 	"init", function () {
 		$data = Catalog::init();
 		/*echo '<pre>';

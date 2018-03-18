@@ -2,7 +2,7 @@
 /**
  * Блок "filters"
  */
-
+use infrajs\once\Once;
 use infrajs\excel\Xlsx;
 use infrajs\config\Config;
 use infrajs\path\Path;
@@ -84,7 +84,7 @@ $res = Catalog::cache( function ($md) {
 
 		$params[$k]['nosearch'] = sizeof($poss) - $params[$k]['search'];
 	}
-
+	
 	//ПОСЧИТАЛИ FILTER как если бы не было выбрано в этой группе md
 	foreach ($params as $k => $prop) {
 
@@ -92,10 +92,10 @@ $res = Catalog::cache( function ($md) {
 			$mymd = $md;
 		
 			$mymd['more'] = array_diff_key($md['more'], array_flip(array($prop['mdid'])));
-
+			
 			$res = Catalog::search($mymd);
 			$poss = $res['list'];
-
+			
 			foreach ($poss as &$pos){
 				if (!isset($pos['more'][$prop['posid']])) continue;
 				if (preg_match("/[:]/", $pos['more'][$prop['posid']])) continue;
@@ -146,7 +146,7 @@ $res = Catalog::cache( function ($md) {
 		//У скольки позиций в выборке у которых этот параметр не указан
 		$params[$k]['nofilter']=sizeof($poss)-$params[$k]['filter'];//
 	}
-
+	
 	/*
 		$params промежуточный массив со всеми возможными занчениями каждого параметра
 		каждое значение характеризуется
