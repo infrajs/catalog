@@ -69,11 +69,7 @@ if (isset($_GET['p'])) {
 
 
 $args = array($md, $ans['page']);
-$re = isset($_GET['re']);
-if (!$re) {
-	if ($ans['page'] !=  1) $re  =  true;
-	if ($md['more']) $re  =  true;//Не сохраняем когда есть фильтры more
-}
+$page = $ans['page'];
 
 //'найденные позиции'
 $ans  =  Catalog::cache(function ($md, $page) use($ans) {
@@ -171,5 +167,12 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	}
 	return $ans;
 }, $args);
+
+$re = false;
+if ($ans['page'] !=  1) $re  =  true;
+if ($md['more']) $re  =  true;//Не сохраняем когда есть фильтры more
+if ($re) {
+	Once::$items[Once::$lastid]['nostore'] = true;
+}
 
 return Ans::ret($ans);

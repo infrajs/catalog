@@ -470,7 +470,7 @@ class Catalog
 	{	
 		$level++;
 		$conf = Catalog::$conf;
-		return MemCache::func($call, $args, null, null, $level);
+		return Cache::func($call, $args, null, null, $level);
 		//return MemCache::func($call, $args, array('akiyatkin\boo\Cache','getModifiedTime'), $conf['cache'], $level);
 	}
 	public static function cacheF($call, $args = array(), $level = 0)

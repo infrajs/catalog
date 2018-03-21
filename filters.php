@@ -214,5 +214,11 @@ $res = Catalog::cache( function ($md) {
 	return $ans;
 }, $args);
 $ans = array_merge($ans, $res);
+$re = false;
+if ($ans['page'] !=  1) $re  =  true;
+if ($md['more']) $re  =  true;//Не сохраняем когда есть фильтры more
+if ($re) {
+	Once::$items[Once::$lastid]['nostore'] = true;
+}
 
 return Ans::ret($ans);
