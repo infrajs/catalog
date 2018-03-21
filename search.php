@@ -10,6 +10,7 @@ use infrajs\nostore\Nostore;
 use infrajs\config\Config;
 use infrajs\rubrics\Rubrics;
 use akiyatkin\boo\Cache;
+use infrajs\once\Once;
 
 $ans = array();
 
@@ -37,8 +38,6 @@ if(isset($_GET['seo'])){
 	}
 
 	
-	
-
 	unset($ans['md']);
 	unset($ans['m']);
 
@@ -145,7 +144,9 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	if ($pages<$page) {
 		$page = $pages;
 	}
-
+	/*echo '<pre>';
+	print_r($ans);
+	exit;*/
 	$ans['numbers'] = Catalog::numbers($page, $pages, 11);
 	$ans['list'] = array_slice($ans['list'], ($page-1)*$md['count'], $md['count']);
 
