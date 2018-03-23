@@ -5,10 +5,13 @@ use infrajs\load\Load;
 use infrajs\rubrics\Rubrics;
 use infrajs\access\Access;
 use infrajs\router\Router;
+use infrajs\nostore\Nostore;
 use infrajs\template\Template;
 use infrajs\rest\Rest;
 use akiyatkin\boo\Once;
 use infrajs\catalog\Catalog;
+
+Nostore::on();
 
 return Rest::get([ function () {
 		$data = array();
