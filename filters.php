@@ -21,7 +21,7 @@ $args = array(Catalog::nocache($md));
 $res = Catalog::cache( function ($md) {
 	if ($md['more']) {
 		//Не сохраняем когда есть фильтры more
-		Nostore::on();
+		Cache::ignore();
 	}
 	$conf = Config::get('catalog');
 	//$ans = array();

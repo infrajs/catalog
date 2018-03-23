@@ -77,7 +77,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	if ($ans['page'] !=  1) $re  =  true;
 	if ($md['more']) $re  =  true;//Не сохраняем когда есть фильтры more
 	if ($re) {
-		Nostore::on();
+		Cache::ignore();
 	}
 	//1
 	$ans['is'] = ''; //group producer search Что было найдено по запросу val (Отдельный файл is:change)
