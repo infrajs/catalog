@@ -73,6 +73,12 @@ $page = $ans['page'];
 
 //'найденные позиции'
 $ans  =  Catalog::cache(function ($md, $page) use($ans) {
+	$re = false;
+	if ($ans['page'] !=  1) $re  =  true;
+	if ($md['more']) $re  =  true;//Не сохраняем когда есть фильтры more
+	if ($re) {
+		Nostore::on();
+	}
 	//1
 	$ans['is'] = ''; //group producer search Что было найдено по запросу val (Отдельный файл is:change)
 	$ans['descr'] = '';//абзац текста в начале страницы';
@@ -170,11 +176,6 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	return $ans;
 }, $args);
 
-$re = false;
-if ($ans['page'] !=  1) $re  =  true;
-if ($md['more']) $re  =  true;//Не сохраняем когда есть фильтры more
-if ($re) {
-	Once::$items[Once::$lastid]['nostore'] = true;
-}
+
 
 return Ans::ret($ans);

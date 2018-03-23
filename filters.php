@@ -8,6 +8,7 @@ use infrajs\config\Config;
 use infrajs\path\Path;
 use infrajs\sequence\Sequence;
 use infrajs\ans\Ans;
+use infrajs\nostore\Nostore;
 use infrajs\event\Event;
 use infrajs\access\Access;
 use infrajs\catalog\Catalog;
@@ -18,6 +19,10 @@ $md = Catalog::initMark($ans);
 
 $args = array(Catalog::nocache($md));
 $res = Catalog::cache( function ($md) {
+	if ($md['more']) {
+		//Не сохраняем когда есть фильтры more
+		Nostore::on();
+	}
 	$conf = Config::get('catalog');
 	//$ans = array();
 	$params = Catalog::getParams($md['group']);
@@ -214,10 +219,6 @@ $res = Catalog::cache( function ($md) {
 	return $ans;
 }, $args);
 $ans = array_merge($ans, $res);
-$re = false;
-if ($md['more']) $re  =  true;//Не сохраняем когда есть фильтры more
-if ($re) {
-	Once::$items[Once::$lastid]['nostore'] = true;
-}
+
 
 return Ans::ret($ans);
