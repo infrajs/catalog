@@ -16,32 +16,7 @@ use infrajs\rubrics\Rubrics;
 
 class Catalog
 {
-	public static $conf = array(
-		"pub" => array("dir", "title"),
-		"dir" => "~catalog/",
-		"cache" => array("~catalog/"),
-		"foldwhen" => 30, //Скрывать значения фильтра если их больше
-		"title" => "Каталог",
-		"filename" => "Производитель",
-		"columns" => array(),
-		"filteroneitem" => true, //Показывать ли фильтр в котором только один пункт, который true для всей выборке
-		"filtershowhard" => array(), //Фильтры, которые всегда показываются
-		"filterslimitpercent" => 10, //20 Процент позиций у которых должен быть указан параметр, чтобы он показался в фильтрах
-		"filters" => array(
-			"producer" => array(
-				"posid" => "producer",
-				"posname" => "Производитель",
-				"title" => "Производитель",
-				"separator" => false
-			),
-			"cost" => array(
-				"posid" => "Цена",
-				"posname" => "Цена", //Можно ли писать комменты
-				"title" => "Цена",
-				"separator" => false
-			)
-		)
-	);
+	public static $conf = array();
 	public static $data = false; 
 	public static function getOptions(){
 			$conf = Catalog::$conf;

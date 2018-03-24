@@ -77,7 +77,8 @@ Event::handler('Catalog.option', function (&$param) {
 
 
 Catalog::add('count', function () {
-	return 10;
+	$conf = Catalog::$conf;
+	return $conf['countonpage'];
 }, function (&$val) {
 	$val = (int) $val;
 	if ($val < 1 || $val > 1000) return false;

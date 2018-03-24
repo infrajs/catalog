@@ -8,6 +8,7 @@ use infrajs\config\Config;
 use infrajs\path\Path;
 use infrajs\sequence\Sequence;
 use infrajs\ans\Ans;
+use akiyatkin\boo\Cache;
 use infrajs\nostore\Nostore;
 use infrajs\event\Event;
 use infrajs\access\Access;

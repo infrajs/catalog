@@ -48,6 +48,7 @@
 {issearch:}search
 {searchgood:}
 	<h1>{data.name}</h1>
+	<div id="filgroups"></div>
 	<p>{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</p>
 	{~length(data.filters)?:showfilters}
 	

@@ -5,6 +5,8 @@
 	"tester":"tests/",
 	"nds":false,
 	"require":"infra.php",
+	"filgroups":[],
+	"countonpage":10,
 	"clutch":{
 		"magnific-popup":[
 			"vendor/dimsemenov/",
