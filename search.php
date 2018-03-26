@@ -114,7 +114,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	} else if (!$md['group'] && $md['search']) {
 		$ans['is'] = 'search';
 		$ans['name'] = $md['search'];
-		$ans['title'] = Path::encode($md['search']);
+		$ans['title'] = Path::encode($md['search'], true);
 		$ans['breadcrumbs'][] = array('title' => $conf['title'], 'add' => 'search:');
 		$menu = Load::loadJSON('-catalog/menu.json');
 		$ans['breadcrumbs'][] = array('href' => 'find','title' => $menu['find']['title']);

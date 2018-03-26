@@ -3,7 +3,7 @@
 	<h1>Поиск по каталогу</h1>
 	<form style="margin-bottom:30px" class="form-horizontal" onsubmit="
 		var val=$(this).find('[type=text]').val();
-		val=infra.forFS(val);
+		val=Path.enode(val,true);
 		var layer=infrajs.names.catalog;
 		
 		if (infra.Crumb.get.m) {

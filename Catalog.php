@@ -698,7 +698,7 @@ class Catalog
 		}
 		//Filter search
 		if (!empty($md['search'])) {
-			$v = preg_split("/\s+/", mb_strtolower($md['search']));
+			$v = preg_split("/[\s\-]+/", mb_strtolower($md['search']));
 			foreach($v as $i => $s) {
 				$v[$i] = preg_replace("/ы$/","",$s);
 			}
