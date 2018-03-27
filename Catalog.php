@@ -842,7 +842,7 @@ class Catalog
 	public static function &getPos(&$pos) {
 		$args = array($pos['producer'], $pos['article']);
 		$arr = Catalog::cache( function($prod, $art) use ($pos) {
-					
+			Cache::addCond(['akiyatkin\\boo\\Cache','getModifiedTime'],[Catalog::$conf['dir']]);
 			if (!empty($pos['Файлы'])) {
 				$list = explode(', ', $pos['Файлы']);	
 				foreach ($list as $f) {
