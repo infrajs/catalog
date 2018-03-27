@@ -35,7 +35,10 @@ $pos = Catalog::cache( function ($val, $art) {
 
 
 if (isset($_GET['seo'])) {
-	if (!$pos) return Ans::err($ans,'Position not found');
+	if (!$pos) {
+		http_response_code(404);
+		return Ans::err($ans,'Position not found');
+	}
 	$link = $_GET['seo'];
 	$link = $link.'/'.urlencode($pos['producer']).'/'.urlencode($pos['article']);
 	$ans['external']='-catalog/seo.json';
