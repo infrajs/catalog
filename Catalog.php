@@ -399,7 +399,7 @@ class Catalog
 
 			$g = $path[sizeof($path) - 1];
 			if (!empty($subgroups[$g]['childs'])) {
-				$groupchilds = $subgroups[$g]['childs'];
+				$groupchilds = $subgroups[$g];
 			} else {
 				if (!$now || $now != $g) {
 					$groupchilds = [$subgroups[$g]];
