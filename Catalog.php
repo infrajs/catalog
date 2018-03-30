@@ -346,19 +346,23 @@ class Catalog
 			//данный кэш один для любой страницы каталога
 			$subgroups = array();
 			$data = Catalog::init();
+			
 			Xlsx::runGroups($data, function &($group) use (&$subgroups) {
 				$r = null;
+				$subgroups[$group['title']] = array(
+					'title' => $group['title'], 
+					'name' => $group['name']
+				);
 				if (empty($group['childs'])) return $r;
-				$subgroup = array();
-				array_walk($group['childs'], function ($g) use (&$subgroup) {
-					$subgroup[] = array('title' => $g['title'], 'name' => $g['name']);
+				$childs = array();
+				array_walk($group['childs'], function ($g) use (&$childs) {
+					$childs[] = array('title' => $g['title'], 'name' => $g['name']);
 				});
-				$subgroups[$group['title']] = $subgroup;
+				$subgroups[$group['title']]['childs'] = $childs;
 				return $r;
 			});
 			return $subgroups;
 		});
-		
 		$groups = array();
 		$path = array();
 		
@@ -386,18 +390,19 @@ class Catalog
 		}
 		if (!sizeof($path)) {
 			$conf = Catalog::$conf;
-			if (!empty($subgroups[$conf['title']])) {
+			if (!empty($subgroups[$conf['title']]['childs'])) {
 				$groupchilds = $subgroups[$conf['title']];
 			} else {
 				$groupchilds = array();
 			}
 		} else {
+
 			$g = $path[sizeof($path) - 1];
-			if (isset($subgroups[$g])) {
-				$groupchilds = $subgroups[$g];
+			if (!empty($subgroups[$g]['childs'])) {
+				$groupchilds = $subgroups[$g]['childs'];
 			} else {
 				if (!$now || $now != $g) {
-					$groupchilds = array(array("name" => $g, "title" => $g));
+					$groupchilds = [$subgroups[$g]];
 				} else {
 					$groupchilds = false;
 				}
@@ -417,6 +422,7 @@ class Catalog
 				$childs[] = array_merge($g, array('pos' => $posd, 'count' => $groups[$g['title']]['count']));
 			}
 		}
+		
 		return $childs;
 	}
 	public static function searchTest($pos, $v) {
@@ -914,7 +920,7 @@ class Catalog
 	public static function search($md, &$ans = array()) {
 		$args = array(Catalog::nocache($md));
 		//'поиск',
-		$res = Catalog::cacheF( function &($md) {
+		$res = Catalog::cache( function &($md) {
 			$ans = array();
 			$ans['list'] = Catalog::getPoss($md['group']);
 			//if (sizeof($ans['list']) > 1000) $ans['list'] = array();
@@ -935,7 +941,7 @@ class Catalog
 		}, $args);
 		
 		$ans = array_merge($ans, $res);
-			
+
 		return $ans;
 	}
 }
