@@ -346,7 +346,7 @@ class Catalog
 			//данный кэш один для любой страницы каталога
 			$subgroups = array();
 			$data = Catalog::init();
-			
+				
 			Xlsx::runGroups($data, function &($group) use (&$subgroups) {
 				$r = null;
 				$subgroups[$group['title']] = array(
@@ -363,6 +363,7 @@ class Catalog
 			});
 			return $subgroups;
 		});
+
 		$groups = array();
 		$path = array();
 		
@@ -422,7 +423,6 @@ class Catalog
 				$childs[] = array_merge($g, array('pos' => $posd, 'count' => $groups[$g['title']]['count']));
 			}
 		}
-		
 		return $childs;
 	}
 	public static function searchTest($pos, $v) {
