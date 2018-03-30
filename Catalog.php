@@ -408,10 +408,10 @@ class Catalog
 				}
 			}
 		}
-
+		
 		$childs = array();
 		if ($groupchilds) {
-			foreach ($groupchilds as $g) { //Для правильной сортировки найденных групп.
+			foreach ($groupchilds['childs'] as $g) { //Для правильной сортировки найденных групп.
 				if (empty($groups[$g['title']])) continue;
 				$pos = $groups[$g['title']]['pos'];
 				$posd = array(
