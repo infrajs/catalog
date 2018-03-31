@@ -403,7 +403,7 @@ class Catalog
 				$groupchilds = $subgroups[$g];
 			} else {
 				if (!$now || $now != $g) {
-					$groupchilds = [$subgroups[$g]];
+					$groupchilds = ['childs'=>[$subgroups[$g]]];
 				} else {
 					$groupchilds = false;
 				}
@@ -412,6 +412,7 @@ class Catalog
 		
 		$childs = array();
 		if ($groupchilds) {
+
 			foreach ($groupchilds['childs'] as $g) { //Для правильной сортировки найденных групп.
 				if (empty($groups[$g['title']])) continue;
 				$pos = $groups[$g['title']]['pos'];
