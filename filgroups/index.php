@@ -10,5 +10,3 @@ return Rest::get( function (){
 	$ans['filgroups'] = Catalog::$conf['filgroups'];
 	return Ans::ret($ans);
 });
-
-

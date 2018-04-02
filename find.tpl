@@ -3,16 +3,16 @@
 	<h1>Поиск по каталогу</h1>
 	<form style="margin-bottom:30px" class="form-horizontal" onsubmit="
 		var val=$(this).find('[type=text]').val();
-		val=Path.enode(val,true);
-		var layer=infrajs.names.catalog;
+		val=Path.encode(val,true);
+		var layer=Controller.names.catalog;
 		
-		if (infra.Crumb.get.m) {
-			var params='?m='+infra.Crumb.get.m;
+		if (Crumb.get.m) {
+			var params='?m=' + Crumb.get.m;
 		} else {
 			var params='?m=';
 		}
 		params+=':search='+val;
-		infra.Crumb.go('/'+infrajs.names.catalog.crumb.toString()+params);
+		Crumb.go('/'+Controller.names.catalog.crumb.toString()+params);
 		setTimeout(function(){
 			$.getJSON('/-catalog/stat.php?submit=1&amp;val='+val);
 		},1);

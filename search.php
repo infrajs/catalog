@@ -15,7 +15,6 @@ use infrajs\once\Once;
 $ans = array();
 
 
-
 $md = Catalog::initMark($ans);				
 
 
@@ -94,6 +93,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	$ans['list'] = array(); //Массив позиций
 	
 	Catalog::search($md, $ans);
+
 	$conf = Catalog::$conf;
 	
 	//BREADCRUMBS TITLE
@@ -167,7 +167,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	
 	foreach($ans['list'] as $k => $pos){
 		$pos = Catalog::getPos($pos);
-		$group  =  Catalog::getGroup($pos['group']);
+		$group = Catalog::getGroup($pos['group']);
 		$pos['descr']  =  $group['descr'];
 		unset($pos['texts']);
 		unset($pos['files']);

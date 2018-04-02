@@ -39,6 +39,7 @@
 {cat.mark.add:}{:cat.mark.server.add}
 {searchbad:}
 	<h1>{title}</h1>
+	<div id="filgroups"></div>
 	<p>К сожалению позиции не найдены.</p>
 	{~length(data.filters)?:showfilters}
 	
@@ -49,9 +50,9 @@
 {searchgood:}
 	<h1>{data.name}</h1>
 	<div id="filgroups"></div>
-	<p>{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</p>
+	<p class="pull-right">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</p>
 	{~length(data.filters)?:showfilters}
-	
+		
 	{data.childs:cat.groups}
 	{:pages}
 	{:pageset}

@@ -30,6 +30,7 @@ return Rest::get([ function () {
 	},
 	"init", function () {
 		$data = Catalog::init();
+		
 		/*echo '<pre>';
 		unset(Once::$items[Once::$lastid]['exec']['result']);
 		print_r(Once::$items['062fbe0f303e589637d068012eb392fe']);

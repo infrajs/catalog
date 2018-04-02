@@ -22,6 +22,7 @@ class Catalog
 			$conf = Catalog::$conf;
 			$columns = array_merge(array("Наименование","Файлы", "Артикул","Производитель","Цена","Описание","Скрыть фильтры в полном описании"),$conf['columns']);
 			$options = array(
+				'root' => $conf['title'],
 				'more' => true,
 				'Имя файла' => $conf['filename'],
 				'Известные колонки' => $columns
@@ -117,87 +118,90 @@ class Catalog
 				$params[$k] = array_merge($parametr, $prop);
 			}
 			
-			foreach ($poss as &$pos) {
-				foreach ($main as $k => $prop) {
-					if (!empty($prop['more'])) continue;
-					$prop = $params[$k];
-					if (isset($pos[$prop['posid']])) {
-						$val = $pos[$prop['posid']];
-					} else {
-						$val = null;
-					}
-					if (isset($pos[$prop['posname']])) {
-						$name=$pos[$prop['posname']];
-					} else {
-						$name = null;
-					}
-					
-					//if (preg_match("/[:]/", $val)) continue;//Зачем, после : указывается парамтр?
-					if (!Xlsx::isSpecified($val)) continue;
-					
-					$r = false;
-					if ($prop['separator']) {
-						$arval = explode($prop['separator'], $val);
-						$arname = explode($prop['separator'], $name);
-					} else {
-						$arval = array($val);
-						$arname = array($name);
-					}
-
-					foreach($arval as $i => $value){
-						$idi = Path::encode($value);
-						$id=$idi;//mb_strtolower($idi);
-						if (!Xlsx::isSpecified($id)) continue;
-						if (!isset($params[$k]['option'][$id])) {
-							$params[$k]['option'][$id] = array_merge($option, array(
-								'id' => $idi,
-								'title' => $arname[$i]
-							));
+			foreach ($poss as $tpos) {
+				$items = Xlsx::getItemsFromPos($tpos);
+				foreach ($items as $pos) {
+					foreach ($main as $k => $prop) {
+						if (!empty($prop['more'])) continue;
+						$prop = $params[$k];
+						if (isset($pos[$prop['posid']])) {
+							$val = $pos[$prop['posid']];
+						} else {
+							$val = null;
 						}
-						$r=true;
-						$params[$k]['option'][$id]['count']++;
-					}
-					if ($r)	$params[$k]['count']++;//Позиций с этим параметром
-				}
-				
-				if (!empty($pos['more'])) {
-					foreach ($pos['more'] as $k => $val) {
-						//if (preg_match("/[:]/", $val)) continue;
-						//if (preg_match("/[:]/", $k)) continue;
-						if (!Xlsx::isSpecified($val)) continue;
-
-						if (!isset($params[$k])) {
-							$params[$k] = array_merge($parametr,array(
-								'posname' => $k,
-								'posid' => $k,
-								'mdid' => $k,
-								'title' => $k,
-								'more' => true
-							));
+						if (isset($pos[$prop['posname']])) {
+							$name=$pos[$prop['posname']];
+						} else {
+							$name = null;
 						}
-						$prop=$params[$k];
-						$r=false;
 						
-						if($prop['separator']){
-							$arval=explode($prop['separator'], $val);
-						}else{
+						//if (preg_match("/[:]/", $val)) continue;//Зачем, после : указывается парамтр?
+						if (!Xlsx::isSpecified($val)) continue;
+						
+						$r = false;
+						if ($prop['separator']) {
+							$arval = explode($prop['separator'], $val);
+							$arname = explode($prop['separator'], $name);
+						} else {
 							$arval = array($val);
+							$arname = array($name);
 						}
-						foreach ($arval as $value){
+
+						foreach($arval as $i => $value){
 							$idi = Path::encode($value);
-							//$id=mb_strtolower($idi);
-							$id = $idi;
+							$id=$idi;//mb_strtolower($idi);
 							if (!Xlsx::isSpecified($id)) continue;
-							$r=true;
 							if (!isset($params[$k]['option'][$id])) {
 								$params[$k]['option'][$id] = array_merge($option, array(
 									'id' => $idi,
-									'title' => trim($value)
+									'title' => $arname[$i]
 								));
 							}
+							$r=true;
 							$params[$k]['option'][$id]['count']++;
 						}
-						if ($r) $params[$k]['count']++;
+						if ($r)	$params[$k]['count']++;//Позиций с этим параметром
+					}
+					
+					if (!empty($pos['more'])) {
+						foreach ($pos['more'] as $k => $val) {
+							//if (preg_match("/[:]/", $val)) continue;
+							//if (preg_match("/[:]/", $k)) continue;
+							if (!Xlsx::isSpecified($val)) continue;
+
+							if (!isset($params[$k])) {
+								$params[$k] = array_merge($parametr,array(
+									'posname' => $k,
+									'posid' => $k,
+									'mdid' => $k,
+									'title' => $k,
+									'more' => true
+								));
+							}
+							$prop=$params[$k];
+							$r=false;
+							
+							if($prop['separator']){
+								$arval=explode($prop['separator'], $val);
+							}else{
+								$arval = array($val);
+							}
+							foreach ($arval as $value){
+								$idi = Path::encode($value);
+								//$id=mb_strtolower($idi);
+								$id = $idi;
+								if (!Xlsx::isSpecified($id)) continue;
+								$r=true;
+								if (!isset($params[$k]['option'][$id])) {
+									$params[$k]['option'][$id] = array_merge($option, array(
+										'id' => $idi,
+										'title' => trim($value)
+									));
+								}
+								$params[$k]['option'][$id]['count']++;
+							}
+							if ($r) $params[$k]['count']++;
+						}
 					}
 				}
 			}
@@ -440,6 +444,16 @@ class Catalog
 			$str.=' '.implode(' ', $pos['more']);
 			$str.=' '.implode(' ', array_keys($pos['more']));
 		}
+
+		/*if (!empty($pos['items'])) {
+			foreach ($pos['items'] as $i => $p) {
+				if (isset($p['more'])) {
+					$str.=' '.implode(' ', $p['more']);
+					unset($p['more']);
+				}
+				$str.=' '.implode(' ', $p);
+			}
+		}*/
 		$str = mb_strtolower($str);
 		foreach ($v as $s) {
 			if (mb_strrpos($str, $s)===false) {
@@ -567,7 +581,7 @@ class Catalog
 	public static function initMark(&$ans = array())
 	{
 		$m = Path::toutf(Sequence::get($_GET, array('m')));
-		$ar = Once::exec(__FILE__, function ($m) {
+		$ar = Once::func( function ($m) {
 			$mark = Catalog::getDefaultMark();
 			$mark->setVal($m);
 			$md = $mark->getData();
@@ -620,48 +634,63 @@ class Catalog
 					$valtitles[$value] = $value;	
 				}
 			}
-
-			$poss = array_filter($poss, function ($pos) use ($prop, $val, &$valtitles) {
-				if ($prop['more']) {
-					if (isset($pos['more'])) $data = $pos['more'];
-					else $data = array();
-				} else {
-					$data = $pos;
-				}
-
-				foreach ($val as $value => $one) {
-					$option = Sequence::get($data, array($prop['posid']));
-					$titles = Sequence::get($data, array($prop['posname']));
-					
-					if ($value === 'yes' && Xlsx::isSpecified($option)) return true;
-					if ($value === 'no' && !Xlsx::isSpecified($option)) return true;
-
-					if ($prop['separator']) {
-						$option = explode($prop['separator'], $option);
-						$titles = explode($prop['separator'], $titles);
+			
+			array_walk($poss, function (&$pos, $ind) use ($prop, $val, &$valtitles, &$poss) {
+				//Нужно найти те позиции которые удовлетворяют условию.
+				//Заполнить модель первым вхождением и остальные сохранить в items
+				$items = Xlsx::getItemsFromPos($pos);
+			
+				$items = array_filter($items, function ($pos) use ($prop, $val, &$valtitles) {
+					if ($prop['more']) {
+						if (isset($pos['more'])) $data = $pos['more'];
+						else $data = array();
 					} else {
-						$option = array($option);
-						$titles = array($titles);
+						$data = $pos;
 					}
-					foreach ($option as $k => $opt){
-						$id = Path::encode($opt);
-						if (strcasecmp($value, $id) == 0) {
-							$valtitles[$value] = $titles[$k];
-							return true;
+
+					foreach ($val as $value => $one) {
+						$option = Sequence::get($data, array($prop['posid']));
+						$titles = Sequence::get($data, array($prop['posname']));
+						
+						
+						if ($value === 'yes' && Xlsx::isSpecified($option)) return true;
+						if ($value === 'no' && !Xlsx::isSpecified($option)) return true;
+						
+						if ($prop['separator']) {
+							$option = explode($prop['separator'], $option);
+							$titles = explode($prop['separator'], $titles);
+						} else {
+							$option = array($option);
+							$titles = array($titles);
 						}
-						if ($value == 'minmax') {
-							$r = explode('/', $one);
-							if(sizeof($r) == 2) {
-								if ($r[0] <= $opt && $r[1] >= $opt) {
-									return true;
+						foreach ($option as $k => $opt){
+							$id = Path::encode($opt);
+							if (strcasecmp($value, $id) == 0) {
+								$valtitles[$value] = $titles[$k];
+								return true;
+							}
+							if ($value == 'minmax') {
+								$r = explode('/', $one);
+								if(sizeof($r) == 2) {
+									if ($r[0] <= $opt && $r[1] >= $opt) {
+										return true;
+									}
 								}
 							}
 						}
 					}
+					return false;
+				});
+					
+				if (!$items) {
+					unset($poss[$ind]);
+					return false;
 				}
-				return false;
+				$items = array_values($items);
+				$pos = Xlsx::makePosFromItems($items);
+				return true;
 			});
-
+			$poss = array_values($poss);
 			if (!empty($val['no'])) {
 				unset($val['no']);
 				$val['Не указано'] = 1;	
@@ -674,7 +703,7 @@ class Catalog
 			$filters[] = $filter;
 		}
 		//Filter group
-		$key='group';
+		$key = 'group';
 		if (!empty($md[$key])) {
 			$title='Группа';
 			$val=$md[$key];
@@ -847,8 +876,9 @@ class Catalog
 	 * Добавляем к позиции картинки и файлы
 	 **/
 	public static function &getPos(&$pos) {
-		$args = array($pos['producer'], $pos['article']);
-		$arr = Catalog::cache( function($prod, $art) use ($pos) {
+		$args = array($pos['producer'], $pos['article'], $pos['index']);
+		$arr = Catalog::cache( function($prod, $art, $index) use ($pos) {
+			
 			Cache::addCond(['akiyatkin\\boo\\Cache','getModifiedTime'],[Catalog::$conf['dir']]);
 			if (!empty($pos['Файлы'])) {
 				$list = explode(', ', $pos['Файлы']);	
@@ -927,7 +957,8 @@ class Catalog
 			//if (sizeof($ans['list']) > 1000) $ans['list'] = array();
 			//ЭТАП filters list
 			$ans['filters'] = Catalog::filtering($ans['list'], $md);
-
+			
+			
 			$now = null;
 			foreach ($md['group'] as $now => $one) break;
 
@@ -937,12 +968,15 @@ class Catalog
 			$ans['childs'] = Catalog::getGroups($ans['list'], $now);
 
 			$ans['count'] = sizeof($ans['list']);
-		
+
 			return $ans;
 		}, $args);
 		
 		$ans = array_merge($ans, $res);
-
+		
+		
+		
+		
 		return $ans;
 	}
 }
