@@ -430,7 +430,19 @@ class Catalog
 		}
 		return $childs;
 	}
-	public static function searchTest($pos, $v) {
+	public static function getItemRowValue($pos) {
+		$row = [];
+		if (empty($pos['itemrows'])) return '';
+		foreach ($pos['itemrows'] as $key => $i) {
+			if (isset($pos[$key])) continue;
+			$r = $key.': ';
+			$r .= $pos['more'][$key];
+			$row[] = $r;
+		}
+		return implode(', ', $row);
+
+	}
+	public static function searchTestItem($pos, $v) {
 		$str=$pos['Артикул'];
 		$str.=' '.implode(' ', $pos['path']);
 
@@ -604,7 +616,7 @@ class Catalog
 		$params = Catalog::getParams();
 		$filters = array();
 
-		foreach($params as $prop){
+		foreach ($params as $prop) {
 			$valtitles = array();
 			$filter = array( 'title' => $prop['title'] );
 			if ($prop['more']) {
@@ -639,7 +651,7 @@ class Catalog
 				//Нужно найти те позиции которые удовлетворяют условию.
 				//Заполнить модель первым вхождением и остальные сохранить в items
 				$items = Xlsx::getItemsFromPos($pos);
-			
+
 				$items = array_filter($items, function ($pos) use ($prop, $val, &$valtitles) {
 					if ($prop['more']) {
 						if (isset($pos['more'])) $data = $pos['more'];
@@ -681,11 +693,12 @@ class Catalog
 					}
 					return false;
 				});
-					
+				
 				if (!$items) {
 					unset($poss[$ind]);
 					return false;
 				}
+
 				$items = array_values($items);
 				$pos = Xlsx::makePosFromItems($items);
 				return true;
@@ -739,7 +752,7 @@ class Catalog
 				$v[$i] = preg_replace("/ы$/","",$s);
 			}
 			$poss = array_filter($poss, function ($pos) use ($v) {
-				return Catalog::searchTest($pos, $v);
+				return Catalog::searchTestItem($pos, $v);
 			});
 			$filters[] = array(
 				'title' => 'Поиск',
@@ -878,7 +891,6 @@ class Catalog
 	public static function &getPos(&$pos) {
 		$args = array($pos['producer'], $pos['article'], $pos['index']);
 		$arr = Catalog::cache( function($prod, $art, $index) use ($pos) {
-			
 			Cache::addCond(['akiyatkin\\boo\\Cache','getModifiedTime'],[Catalog::$conf['dir']]);
 			if (!empty($pos['Файлы'])) {
 				$list = explode(', ', $pos['Файлы']);	
@@ -913,7 +925,7 @@ class Catalog
 					$pos['texts'][$k] = Rubrics::article($t);
 				}
 			}
-
+			$pos['itemrow'] = Catalog::getItemRowValue($pos);
 			$dir = Catalog::$conf['dir'].$prod.'/images/';
 			$images = Catalog::getIndex($dir);
 			if (isset($images[strtolower($art)])) $pos['images'] = array_merge($images[strtolower($art)], $pos['images']);
@@ -922,6 +934,7 @@ class Catalog
 			return $pos;
 		}, $args);
 		
+		$pos['itemrow'] = $arr['itemrow']; 
 		$pos['images'] = $arr['images'];
 		$pos['texts'] = $arr['texts'];
 		$pos['files'] = $arr['files'];

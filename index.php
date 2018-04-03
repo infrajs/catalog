@@ -87,8 +87,16 @@ return Rest::get([ function () {
 			}, function ($type, $prod = false, $art = false, $index = 0) {
 
 				$ans = Load::loadJSON('-catalog/pos/'.$prod.'/'.$art);
+				$md = Catalog::initMark($ans);	
+				$list = [&$ans['data']];
+				$md = Catalog::nocache($md);
+
+				Catalog::filtering($list, $md);
+				
 				Xlsx::setItem($ans['data'], $index);
-				$pos = Catalog::getPos($pos);
+				
+				
+				$ans['data'] = Catalog::getPos($ans['data']);
 				return Ans::ret($ans);
 			}]
 		]
