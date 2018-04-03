@@ -5,6 +5,7 @@ use infrajs\load\Load;
 use infrajs\rubrics\Rubrics;
 use infrajs\access\Access;
 use infrajs\router\Router;
+use infrajs\excel\Xlsx;
 use infrajs\nostore\Nostore;
 use infrajs\template\Template;
 use infrajs\rest\Rest;
@@ -64,7 +65,7 @@ return Rest::get([ function () {
 				
 				$ans['data'] = $poss;
 				return Ans::ret($ans);
-			}, function ($type, $prod = false, $art = false) {
+			}, [function ($type, $prod = false, $art = false) {
 
 				$ans = array();
 				$ans['producer'] = $prod;
@@ -83,7 +84,13 @@ return Rest::get([ function () {
 					}
 				}
 				return Ans::ret($ans);
-			}
+			}, function ($type, $prod = false, $art = false, $index = 0) {
+
+				$ans = Load::loadJSON('-catalog/pos/'.$prod.'/'.$art);
+				Xlsx::setItem($ans['data'], $index);
+				$pos = Catalog::getPos($pos);
+				return Ans::ret($ans);
+			}]
 		]
 	]
 ]);
