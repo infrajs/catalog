@@ -37,10 +37,13 @@
 			{:producer}
 		</div>
 		<h1>{Наименование}{descr.Артикул!:Скрытый?:startart}</h1>
+		<p>{itemrow}</p>
 		{~length(images)?:images}
 		{:extend.pos-page}
+
 		<div style="color:gray; margin-bottom:30px">{Описание}</div>
 		{Скрыть фильтры в полном описании??:print_more}
+		{items?:showitems}
 		{texts::text}
 		{~length(files)?:files}
 		<div style="clear:left; margin-bottom: 50px">
@@ -49,11 +52,26 @@
 		</div>
 	</div>
 	{startart:}<br><nobr>{Производитель} {Артикул}</nobr>
+{showitems:}
+	<table class="table table-striped table-hover">
+		<tr class="info">
+			{items.0.more::ihead}<th>Цена</th>
+		</tr>
+		{items::item}
+	</table>
+	{ihead:}<th>{~key}</th>
+	{item:}
+		<tr style="cursor:pointer" onclick="Crumb.go('/{crumb}{:cat.indexsl}{:cat.mark.set}')">
+			{more::imore}
+			<td>{~cost(Цена)}&nbsp;руб.</td>
+		</tr>
+		{imore:}<td>{.}</td>
 {print_more:}
-	<table class="table table-striped">
+	<table class="table table-striped" style="width:auto">
 		{more::pos_more}
 	</table>
-{pos_more:}<tr><td>{~key}:</td><td style="text-align:left">{.}</td></tr>
+	
+{pos_more:}<tr><td>{~key}:</td><th style="text-align:left">{.}</th></tr>
 {files:}
 	<h2>Файлы для {Продажа} <nobr>{Производитель} {descr.Артикул!:Скрытый?Артикул}</nobr></h2>
 		<ul class="files">
@@ -101,14 +119,15 @@
 		</div>
 {producer:}
 	<div style="float:right; background-color:white; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
-		<a onclick="infrajs.scroll='.pagination'" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer::.{producer}=1">
-			<img style="margin-left:5px" src="/-imager/?w=160&h=100&src={infra.config(:catalog).dir}{producer}/&or=-imager/empty.png" />
+		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer::.{producer}=1">
+			<img style="margin-left:5px" src="/-imager/?w=160&h=100&src={Config.get(:strcatalog).dir}{producer}/&or=-imager/empty.png" />
 		</a>
 	</div>
 <!--	<div style="text-align:right; font-size: 11px; margin-top:5px;">
 		{producer.Страна|}
 	</div>
 	-->
+{strcatalog:}catalog
 {cat::}-catalog/cat.tpl
 {cat.mark.set:}{:cat.mark.client.set}
 {cat.mark.add:}{:cat.mark.client.add}

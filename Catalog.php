@@ -698,7 +698,7 @@ class Catalog
 					unset($poss[$ind]);
 					return false;
 				}
-
+	
 				$items = array_values($items);
 				$pos = Xlsx::makePosFromItems($items);
 				return true;
@@ -891,6 +891,9 @@ class Catalog
 	public static function &getPos(&$pos) {
 		$args = array($pos['producer'], $pos['article'], $pos['index']);
 		$arr = Catalog::cache( function($prod, $art, $index) use ($pos) {
+			$pos['images'] = array();
+			$pos['texts'] = array();
+			$pos['files'] = array();
 			Cache::addCond(['akiyatkin\\boo\\Cache','getModifiedTime'],[Catalog::$conf['dir']]);
 			if (!empty($pos['Файлы'])) {
 				$list = explode(', ', $pos['Файлы']);	

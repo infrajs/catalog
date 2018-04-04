@@ -12,8 +12,8 @@
 		"seojsontpl":"-catalog/search.php?seo={Controller.names.catalog.crumb}&val=&m={Crumb.get.m}",
 		"child":{
 			"tpl":"-catalog/position.tpl",
-			"jsontpl":"-catalog/position.php?val={crumb.parent.name}&art={crumb.name}",
-			"seojsontpl":"-catalog/position.php?seo={Controller.names.catalog.crumb}&val={crumb.parent.name}&art={crumb.name}"
+			"jsontpl":"-catalog/position.php?val={crumb.parent.name}&art={crumb.name}&index={crumb.child.name}&m={Crumb.get.m}",
+			"seojsontpl":"-catalog/position.php?seo={Controller.names.catalog.crumb}&val={crumb.parent.name}&art={crumb.name}&m={Crumb.get.m}"
 		}
 	},
 	"childs":{

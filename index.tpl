@@ -2,7 +2,7 @@
 	{:html}
 	<h1>REST сервис</h1>
 	<ul>
-		<li>JSON <a href="/{root}/pos">{root}pos/{{producer}}/{{article}}</a></li>
+		<li>JSON <a href="/{root}/pos">{root}pos/{{producer}}/{{article}}/{{index}}</a></li>
 		<li>HTML <a href="/{root}/check">Проверить каталог</li>
 	</ul>
 	{:/html}

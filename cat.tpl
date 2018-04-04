@@ -76,3 +76,7 @@
 	</div>
 	{items:}
 		<li role="presentation"><a data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{~key}{:mark.set}">{title}</a></li>
+{indexsp:}{index?:sp}{index?index}
+{sp:} 
+{indexsl:}{index?:sl}{index?index}
+{sl:}/
