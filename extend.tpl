@@ -30,7 +30,7 @@
 		}
 	</style>
 {pos-img:}
-		<a class="thumbnail" href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.indexsl}{:cat.mark.set}">
+		<a class="thumbnail" href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">
 			<img src="/-imager/?mark=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty.png" />
 		</a>
 {pos-item:}
@@ -39,10 +39,10 @@
 			{images.0?:pos-img}
 		</div>
 		<div class="col-xs-8 col-sm-9">
-			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.indexsl}{:cat.mark.set}">{Наименование|:name}</a>
+			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">{Наименование|:name}</a>
 			{:producerlogo}
 			<div class="padding">
-				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.indexsl}{:cat.mark.set}">{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</a></b>
+				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</a></b>
 				<div class="pull-right" style="font-size:90%"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}{:cat.mark.add}group::.{group}=1">{Группа}</a></div>
 			</div>
 			{more?:havemore?:nomore}
@@ -61,14 +61,14 @@
 			<span style="border-bottom:1px dashed gray; cursor:pointer" onclick="$(this).next().slideToggle();">Описание</span>
 			<div style="display:none;">
 				{Описание}
-				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.indexsl}{:cat.mark.set}">Подробнее</a></b>
+				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">Подробнее</a></b>
 			</div>
 		</div>
 	{nomore:}
 		<div class="padding">
 			<div style="font-family:Tahoma; font-size:85%; margin-bottom:10px">{Описание}</div>
 			{Цена?:priceblock}
-			<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.indexsl}{:cat.mark.set}">Подробнее</a></b>
+			<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">Подробнее</a></b>
 		</div>
 	{cat_more:}{(.&(.!:no))?:more}
 	{more:}{~key}:&nbsp;{.}{~last()|:comma}
@@ -76,7 +76,7 @@
 	{no:}Нет
 	{producerlogo:}
 		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {Производитель}" href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer::.{producer}=1" class="pull-right" style="margin:5px 0 5px 5px">
-			<img src="/-imager/?w=100&amp;h=100&amp;src={infra.config(:strcatalog).dir}{producer}/&amp;or=-imager/empty.png" />
+			<img src="/-imager/?w=100&amp;h=100&amp;src={Config.get(:strcatalog).dir}{producer}/&amp;or=-imager/empty.png" />
 		</a>
 	{cat::}-catalog/cat.tpl
 	{strcatalog:}catalog

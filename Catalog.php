@@ -889,8 +889,8 @@ class Catalog
 	 * Добавляем к позиции картинки и файлы
 	 **/
 	public static function &getPos(&$pos) {
-		$args = array($pos['producer'], $pos['article'], $pos['index']);
-		$arr = Catalog::cache( function($prod, $art, $index) use ($pos) {
+		$args = array($pos['producer'], $pos['article'], $pos['id']);
+		$arr = Catalog::cache( function($prod, $art, $id) use ($pos) {
 			$pos['images'] = array();
 			$pos['texts'] = array();
 			$pos['files'] = array();

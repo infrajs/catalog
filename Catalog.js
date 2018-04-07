@@ -1,6 +1,6 @@
 window.Catalog = {
-	choiсe: function (producer, article, index, divcatitem, m) {
-		var ans = Load.loadJSON('-catalog/pos/'+producer+'/'+article+'/'+index+'?m='+m);
+	choiсe: function (producer, article, id, divcatitem, m) {
+		var ans = Load.loadJSON('-catalog/pos/'+producer+'/'+article+'/'+id+'?m='+m);
 		//var pos = ans['data'];
 		//var m = ans['m'];
 

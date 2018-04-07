@@ -61,7 +61,7 @@
 	</table>
 	{ihead:}<th>{~key}</th>
 	{item:}
-		<tr style="cursor:pointer" onclick="Crumb.go('/{crumb}{:cat.indexsl}{:cat.mark.set}')">
+		<tr style="cursor:pointer" onclick="Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}')">
 			{more::imore}
 			<td>{~cost(Цена)}&nbsp;руб.</td>
 		</tr>

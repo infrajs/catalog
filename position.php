@@ -14,7 +14,7 @@ use infrajs\config\Config;
 
 $orig_val = Path::toutf(strip_tags(Ans::GET('val')));
 $orig_art = Path::toutf(strip_tags(Ans::GET('art')));
-$index = Path::toutf(strip_tags(Ans::GET('index')));
+$id = Path::toutf(strip_tags(Ans::GET('id')));
 $val = mb_strtolower($orig_val);
 $art = mb_strtolower($orig_art);
 
@@ -37,13 +37,10 @@ if ($pos) {
 	$md = Catalog::initMark($ans);	
 	$md = Catalog::nocache($md);
 	$list = [&$pos];
-
 	Catalog::filtering($list, $md);
-	
-	if ($index) {
-		Xlsx::setItem($pos, $index);
+	if ($id) {
+		Xlsx::setItem($pos, $id);
 	}
-	
 }
 
 
