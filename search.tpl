@@ -50,7 +50,7 @@
 {searchgood:}
 	<h1>{data.name}</h1>
 	<div id="filgroups"></div>
-	<p class="pull-right">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</p>
+	<p class="text-right">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</p>
 	{~length(data.filters)?:showfilters}
 		
 	{data.childs:cat.groups}

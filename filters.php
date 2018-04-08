@@ -68,15 +68,15 @@ $res = Catalog::cache( function ($md) {
 				if (!isset($pos[$prop['posid']]) || !Xlsx::isSpecified($pos[$prop['posid']])) continue;
 				
 				$r=false;
-				if($prop['separator']){
+				if ($prop['separator']) {
 					$arval=explode($prop['separator'], $pos[$prop['posid']]);
 					$arname=explode($prop['separator'], $pos[$prop['posname']]);
-				}else{
-					$arval=array($pos[$prop['posid']]);
-					$arname=array($pos[$prop['posname']]);
+				} else {
+					$arval = array($pos[$prop['posid']]);
+					$arname = array($pos[$prop['posname']]);
 				}
 
-				foreach($arval as $i => $value){
+				foreach ($arval as $i => $value) {
 					$idi=Path::encode($value);
 					$id=mb_strtolower($idi);
 

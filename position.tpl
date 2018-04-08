@@ -37,13 +37,15 @@
 			{:producer}
 		</div>
 		<h1>{Наименование}{descr.Артикул!:Скрытый?:startart}</h1>
-		<p>{itemrow}</p>
+		<p onclick="$(this).next().slideToggle('slow')">{itemrow}</p>
+		<div style="display:none">
+			{items?:showitems}
+		</div>
 		{~length(images)?:images}
 		{:extend.pos-page}
-
 		<div style="color:gray; margin-bottom:30px">{Описание}</div>
 		{Скрыть фильтры в полном описании??:print_more}
-		{items?:showitems}
+		
 		{texts::text}
 		{~length(files)?:files}
 		<div style="clear:left; margin-bottom: 50px">
@@ -55,17 +57,20 @@
 {showitems:}
 	<table class="table table-striped table-hover">
 		<tr class="info">
-			{items.0.more::ihead}<th>Цена</th>
+			{itemrows::ihead}
 		</tr>
-		{items::item}
-	</table>
-	{ihead:}<th>{~key}</th>
-	{item:}
 		<tr style="cursor:pointer" onclick="Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}')">
-			{more::imore}
-			<td>{~cost(Цена)}&nbsp;руб.</td>
+			{~obj(:itemrows,itemrows,:pos,.).itemrows::imore}
 		</tr>
-		{imore:}<td>{.}</td>
+		{items::iitem}
+	</table>
+	{iitem:}
+		<tr style="cursor:pointer" onclick="Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}')">
+			{~obj(:itemrows,...itemrows,:itm,.,:pos,...).itemrows::imore}
+		</tr>
+		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
+
+	{ihead:}<th>{~key}</th>
 {print_more:}
 	<table class="table table-striped" style="width:auto">
 		{more::pos_more}
