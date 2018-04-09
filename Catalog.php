@@ -616,7 +616,9 @@ class Catalog
 		$params = Catalog::getParams();
 		$filters = array();
 
+
 		foreach ($params as $prop) {
+			
 			$valtitles = array();
 			$filter = array( 'title' => $prop['title'] );
 			if ($prop['more']) {
@@ -647,7 +649,7 @@ class Catalog
 				}
 			}
 			
-			array_walk($poss, function (&$pos, $ind) use ($prop, $val, &$valtitles, &$poss) {
+			$poss = array_filter($poss, function (&$pos) use ($prop, $val, &$valtitles, &$poss) {
 				//Нужно найти те позиции которые удовлетворяют условию.
 				//Заполнить модель первым вхождением и остальные сохранить в items
 				$items = Xlsx::getItemsFromPos($pos);
@@ -694,10 +696,7 @@ class Catalog
 					return false;
 				});
 				
-				if (!$items) {
-					unset($poss[$ind]);
-					return false;
-				}
+				if (!$items) return false;
 	
 				$items = array_values($items);
 				$pos = Xlsx::makePosFromItems($items);
@@ -714,6 +713,8 @@ class Catalog
 			}
 			$filter['value'] = implode(', ', array_values($valtitles));
 			$filters[] = $filter;
+
+
 		}
 		//Filter group
 		$key = 'group';
@@ -973,7 +974,6 @@ class Catalog
 			//if (sizeof($ans['list']) > 1000) $ans['list'] = array();
 			//ЭТАП filters list
 			$ans['filters'] = Catalog::filtering($ans['list'], $md);
-			
 			
 			$now = null;
 			foreach ($md['group'] as $now => $one) break;
