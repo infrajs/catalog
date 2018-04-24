@@ -109,9 +109,6 @@ class Check {
 			$data = array();
 			$data['count'] = $count;
 			$data['list'] = $list;
-			echo '<pre>';
-			print_r($list);
-			exit;
 			return $data;
 		});
 	}
