@@ -946,7 +946,7 @@ class Catalog
 	}
 	public static function getIndex($dir) {
 		if (!Path::theme($dir)) return array();
-		return Cache::func( function ($dir) {
+		return Access::func( function ($dir) {
 			$list = array();
 			Config::scan($dir, function ($src, $level) use (&$list) {
 				$fd = Load::pathInfo($src);
@@ -963,12 +963,12 @@ class Catalog
 				}
 			}, true);
 			return $list;
-		}, array($dir), ['akiyatkin\\boo\\Cache','getModifiedTime'], array($dir));
+		}, array($dir));
 	}
 	public static function search($md, &$ans = array()) {
 		$args = array(Catalog::nocache($md));
 		//'поиск',
-		$res = Catalog::cache( function &($md) {
+		$res = Once::func( function &($md) {
 			$ans = array();
 			$ans['list'] = Catalog::getPoss($md['group']);
 			//if (sizeof($ans['list']) > 1000) $ans['list'] = array();
