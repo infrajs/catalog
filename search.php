@@ -93,7 +93,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	$ans['list'] = array(); //Массив позиций
 	
 	Catalog::search($md, $ans);
-
+	
 	$conf = Catalog::$conf;
 	
 	//BREADCRUMBS TITLE

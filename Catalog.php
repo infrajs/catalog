@@ -250,20 +250,22 @@ class Catalog
 		else $group = false;
 		
 		//'позиции группы'
-		return Catalog::cache( function &($group){
+		$poss = Catalog::cache( function ($group){
 			$data = Catalog::init();
-			if ($group) $data=Xlsx::runGroups($data, function &($gr) use($group) {
+			if ($group) $data = Xlsx::runGroups($data, function &($gr) use($group) {
 				if ($gr['title'] == $group) return $gr;
 				$r = null; return $r;
 			});
 			$poss = array();
 			Xlsx::runPoss($data, function &(&$pos) use (&$poss) {
-				$poss[] = &$pos;
+				$poss[] = $pos;
 				$r = null; return $r;
 			});
 			
+			
 			return $poss;
 		}, array($group));
+		return $poss;
 	}
 	public static function nocache($md) {
 		$mdnocache = array_diff_key($md, array_flip(array("sort", "reverse", "count")));
@@ -616,7 +618,6 @@ class Catalog
 		$params = Catalog::getParams();
 		$filters = array();
 
-
 		foreach ($params as $prop) {
 			
 			$valtitles = array();
@@ -648,8 +649,60 @@ class Catalog
 					$valtitles[$value] = $value;	
 				}
 			}
-			
-			$poss = array_filter($poss, function (&$pos) use ($prop, $val, &$valtitles, &$poss) {
+
+			$fposs = array();
+			foreach ($poss as $pos) {
+				$items = Xlsx::getItemsFromPos($pos);
+				$items = array_filter($items, function ($pos) use ($prop, $val, &$valtitles) {
+					if ($prop['more']) {
+						if (isset($pos['more'])) $data = $pos['more'];
+						else $data = array();
+					} else {
+						$data = $pos;
+					}
+
+					foreach ($val as $value => $one) {
+						$option = Sequence::get($data, array($prop['posid']));
+						$titles = Sequence::get($data, array($prop['posname']));
+						
+						
+						if ($value === 'yes' && Xlsx::isSpecified($option)) return true;
+						if ($value === 'no' && !Xlsx::isSpecified($option)) return true;
+						
+						if ($prop['separator']) {
+							$option = explode($prop['separator'], $option);
+							$titles = explode($prop['separator'], $titles);
+						} else {
+							$option = array($option);
+							$titles = array($titles);
+						}
+						foreach ($option as $k => $opt){
+							$id = Path::encode($opt);
+							if (strcasecmp($value, $id) == 0) {
+								$valtitles[$value] = $titles[$k];
+								return true;
+							}
+							if ($value == 'minmax') {
+								$r = explode('/', $one);
+								if(sizeof($r) == 2) {
+									if ($r[0] <= $opt && $r[1] >= $opt) {
+										return true;
+									}
+								}
+							}
+						}
+					}
+					return false;
+				});
+				
+				if (!$items) continue;
+
+	
+				$items = array_values($items);
+				$pos = Xlsx::makePosFromItems($items);
+				$fposs[] = $pos;
+			}
+			/*$poss = array_filter($poss, function (&$pos) use ($prop, $val, &$valtitles) {
 				//Нужно найти те позиции которые удовлетворяют условию.
 				//Заполнить модель первым вхождением и остальные сохранить в items
 				$items = Xlsx::getItemsFromPos($pos);
@@ -697,12 +750,14 @@ class Catalog
 				});
 				
 				if (!$items) return false;
-	
+				
 				$items = array_values($items);
 				$pos = Xlsx::makePosFromItems($items);
+				
 				return true;
-			});
-			$poss = array_values($poss);
+			});*/
+
+			$poss = array_values($fposs);
 			if (!empty($val['no'])) {
 				unset($val['no']);
 				$val['Не указано'] = 1;	
@@ -973,6 +1028,8 @@ class Catalog
 			$ans['list'] = Catalog::getPoss($md['group']);
 			//if (sizeof($ans['list']) > 1000) $ans['list'] = array();
 			//ЭТАП filters list
+			//echo '<pre>'; print_r($ans['list']);
+
 			$ans['filters'] = Catalog::filtering($ans['list'], $md);
 			
 			$now = null;
@@ -980,11 +1037,9 @@ class Catalog
 
 		//	if ($now) Cache::setTitle($now);
 		//	else Cache::setTitle('Корень');
-	
 			$ans['childs'] = Catalog::getGroups($ans['list'], $now);
-
 			$ans['count'] = sizeof($ans['list']);
-
+			
 			return $ans;
 		}, $args);
 		
