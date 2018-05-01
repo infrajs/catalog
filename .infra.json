@@ -5,7 +5,7 @@
 	"tester":"tests/",
 	"nds":false,
 	"require":"infra.php",
-	"js":"Catalog.js",
+	"js":["Catalog.js","infra.js"],
 	"filgroups":[],
 	"countonpage":10,
 	"clutch":{

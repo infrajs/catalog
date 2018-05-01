@@ -37,10 +37,11 @@
 			{:producer}
 		</div>
 		<h1>{Наименование}{descr.Артикул!:Скрытый?:startart}</h1>
-		<p onclick="$(this).next().slideToggle('slow')">{itemrow}</p>
+		<span class="a gagarin">{itemrow}</span>
 		<div style="display:none">
 			{items?:showitems}
 		</div>
+		
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px">{Описание}</div>
@@ -57,16 +58,22 @@
 {showitems:}
 	<table class="table table-striped table-hover">
 		<tr class="info">
-			{itemrows::ihead}
+			{items.0.more::ihead}
+			<th>Цена</th>
 		</tr>
-		<tr style="cursor:pointer" onclick="Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}')">
-			{~obj(:itemrows,itemrows,:pos,.).itemrows::imore}
-		</tr>
-		{items::iitem}
+		<tbody style="cursor:pointer;">
+			<tr class="warning" onclick="Ascroll.ignore = '.gagarin'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
+				{~obj(:more,items.0.more,:pos,.).more::imore}
+				<td>{~cost(Цена)}&nbsp;руб.</td>
+			</tr>
+		
+			{items::iitem}
+		</tbody>
 	</table>
 	{iitem:}
-		<tr style="cursor:pointer" onclick="Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}')">
-			{~obj(:itemrows,...itemrows,:itm,.,:pos,...).itemrows::imore}
+		<tr style="cursor:pointer" onclick="Ascroll.once = '.gagarin'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
+			{~obj(:more,more,:itm,.,:pos,...).more::imore}
+			<td>{~cost(Цена|...Цена)}&nbsp;руб.</td>
 		</tr>
 		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
 

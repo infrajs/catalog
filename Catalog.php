@@ -432,16 +432,22 @@ class Catalog
 		}
 		return $childs;
 	}
-	public static function getItemRowValue($pos) {
+	public static function setItemRowValue(&$pos) {
 		$row = [];
-		if (empty($pos['itemrows'])) return '';
+		if (empty($pos['itemrows'])) {
+			$pos['itemrow'] = '';
+			return;
+		}
+		//$pos['itemshow'] = [];
 		foreach ($pos['itemrows'] as $key => $i) {
 			if (isset($pos[$key])) continue;
 			$r = $key.': ';
 			$r .= $pos['more'][$key];
 			$row[] = $r;
+			//$pos['itemshow'][] = $key;
 		}
-		return implode(', ', $row);
+
+		$pos['itemrow'] = implode(', ', $row);
 
 	}
 	public static function searchTestItem($pos, $v) {
@@ -984,7 +990,7 @@ class Catalog
 					$pos['texts'][$k] = Rubrics::article($t);
 				}
 			}
-			$pos['itemrow'] = Catalog::getItemRowValue($pos);
+			Catalog::setItemRowValue($pos);
 			$dir = Catalog::$conf['dir'].$prod.'/images/';
 			$images = Catalog::getIndex($dir);
 			if (isset($images[strtolower($art)])) $pos['images'] = array_merge($images[strtolower($art)], $pos['images']);
