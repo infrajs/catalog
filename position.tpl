@@ -57,12 +57,14 @@
 	{startart:}<br><nobr>{Производитель} {Артикул}</nobr>
 {showitems:}
 	<table class="table table-striped table-hover">
-		<tr class="info">
-			{items.0.more::ihead}
-			<th>Цена</th>
-		</tr>
+		<thead>
+			<tr>
+				{items.0.more::ihead}
+				<th>Цена</th>
+			</tr>
+		</thead>
 		<tbody style="cursor:pointer;">
-			<tr class="warning" onclick="Ascroll.ignore = '.gagarin'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
+			<tr class="success" onclick="Ascroll.ignore = '.gagarin'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 				{~obj(:more,items.0.more,:pos,.).more::imore}
 				<td>{~cost(Цена)}&nbsp;руб.</td>
 			</tr>
