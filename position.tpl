@@ -54,7 +54,7 @@
 			{:extend.pos-sign}
 		</div>
 	</div>
-	{startart:}<br><nobr>{Производитель} {Артикул}</nobr>
+	{startart:}<nobr>{Производитель} {Артикул}</nobr>
 {showitems:}
 	<table class="table table-striped table-hover">
 		<thead>
