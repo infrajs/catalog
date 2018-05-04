@@ -54,7 +54,7 @@
 			{:extend.pos-sign}
 		</div>
 	</div>
-	{startart:}<nobr>{Производитель} {Артикул}</nobr>
+	{startart:}{Производитель} {Артикул}
 {showitems:}
 	<table class="table table-striped table-hover">
 		<thead>
@@ -87,7 +87,7 @@
 	
 {pos_more:}<tr><td>{~key}:</td><th style="text-align:left">{.}</th></tr>
 {files:}
-	<h2>Файлы для {Продажа} <nobr>{Производитель} {descr.Артикул!:Скрытый?Артикул}</nobr></h2>
+	<h2>Файлы для {Продажа} {Производитель} {descr.Артикул!:Скрытый?Артикул}</h2>
 		<ul class="files">
 			{files::file}
 		</ul>
