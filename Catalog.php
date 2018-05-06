@@ -252,10 +252,12 @@ class Catalog
 		//'позиции группы'
 		$poss = Catalog::cache( function ($group){
 			$data = Catalog::init();
+			
 			if ($group) $data = Xlsx::runGroups($data, function &($gr) use($group) {
 				if ($gr['title'] == $group) return $gr;
 				$r = null; return $r;
 			});
+
 			$poss = array();
 			Xlsx::runPoss($data, function &(&$pos) use (&$poss) {
 				$poss[] = $pos;
@@ -779,9 +781,12 @@ class Catalog
 		}
 		//Filter group
 		$key = 'group';
+	
 		if (!empty($md[$key])) {
 			$title='Группа';
 			$val=$md[$key];
+
+			
 			$filter = array('title' => $title, 'name' => Sequence::short(array(Catalog::urlencode($key))));
 
 			
@@ -790,12 +795,14 @@ class Catalog
 				$prop=$pos[$key];
 				foreach ($val as $value => $one) {
 					if ($value === 'yes') return true;
+					if ($pos[$key] === $value) return true;
 					foreach($pos['path'] as $path){
 						if ((string)$value === $path) return true;
 					}
 				}
 				return false;
 			});
+
 			if (!empty($val['no'])) {
 				unset($val['no']);
 				$val['Не указано']=1;
@@ -1035,7 +1042,7 @@ class Catalog
 			//if (sizeof($ans['list']) > 1000) $ans['list'] = array();
 			//ЭТАП filters list
 			//echo '<pre>'; print_r($ans['list']);
-
+			
 			$ans['filters'] = Catalog::filtering($ans['list'], $md);
 			
 			$now = null;
