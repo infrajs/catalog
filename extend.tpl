@@ -7,10 +7,7 @@
 	{nds:}{~conf.catalog.nds?:ndsshow}{ndsshow:} c <abbr title="Налог на Добавленную Стоимость">НДС</abbr>
 {pos-sign:}
 	<p>
-		Задать вопрос о <b>{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</b> можно с помощью <span class="a showContacts">формы для сообщений</span> или c помощью других <a href="/contacts">контактов</a>.
-	</p>
-	<p>
-		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}{:cat.mark.add}group::.{group}=1">{Группа}</a><br>
+		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}{:cat.mark.add}group::.{group}=1">{group}</a><br>
 	</p>
 	{Скрытый:}Скрытый
 {pos-item-css:}
@@ -54,7 +51,9 @@
 		<div class="padding" style="font-family:Tahoma; font-size:85%; margin-bottom:10px">    
 			{more::cat_more}
 		</div>
-		{Цена?:priceblock}
+		<div class="padding">
+			{Цена?:priceblock}
+		</div>
 		{Описание?:descrshow}
 		{descrshow:}
 		<div class="padding">

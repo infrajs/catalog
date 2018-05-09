@@ -1,12 +1,4 @@
 {root:}
-	<style scoped>
-		.href {
-			text-decoration:none;
-		}
-		.position {
-			margin-bottom:40px;
-		}
-	</style>
 	{data.breadcrumbs:cat.breadcrumbs}
 	<div class="pull-right">{data.is=:isproducer?:Производитель}{data.is=:isgroup?:Группа}{data.is=:issearch?:Поиск}</div>
 	{~length(data.list)?data:searchgood?data:searchbad}
@@ -56,13 +48,10 @@
 	{data.childs:cat.groups}
 	{:pages}
 	{:pageset}
-	<hr>
 	{:extend.pos-item-css}
 
 	{list::cat_item}
 
-
-	<hr>
 	{:pages}
 	<p>{descr}</p>
 	{:text}
@@ -73,15 +62,15 @@
 		<a rel="nofollow" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
 	</p>
 {cat_item:}
-	<div class="position">
+	<div class="position" style="margin-bottom:40px;"">
 		<div style="text-align:right">{time?~date(:j F Y,time)}</div>
 		{:extend.pos-item}
 	</div>
 {pages:}
-
 {data.numbers?:pagenumbers}
 
 {pagenumbers:}
+	<hr>
 	<ul class="pagination">
 		{data.numbers::pagenum}
 	</ul>
