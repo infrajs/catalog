@@ -13,22 +13,26 @@ use infrajs\nostore\Nostore;
 use infrajs\event\Event;
 use infrajs\access\Access;
 use infrajs\catalog\Catalog;
+use infrajs\akiyatkin\Boo;
 
 $ans = array();
 
 $md = Catalog::initMark($ans);
 
 $args = array(Catalog::nocache($md));
-$res = Catalog::cache( function ($md) {
-	if ($md['more']) {
+$res = Once::func( function ($md) {
+	$ans = array();
+	//if ($md['more']) {
 		//Не сохраняем когда есть фильтры more
-		Cache::ignore();
-	}
-	$conf = Config::get('catalog');
-	//$ans = array();
-	$params = Catalog::getParams($md['group']);
-
+	//	Cache::ignore();
+	//}
 	$poss = Catalog::getPoss($md['group']);
+	if (sizeof($poss) > 1000) return $ans;
+
+	$params = Catalog::getParams($md['group']);
+	
+	$conf = Config::get('catalog');
+	
 	//Поиск
 	$count = sizeof($poss);//Позиций в группе
 	

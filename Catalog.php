@@ -1019,6 +1019,7 @@ class Catalog
 			Config::scan($dir, function ($src, $level) use (&$list) {
 				$fd = Load::pathInfo($src);
 				if (!in_array($fd['ext'], array('jpg', 'png', 'jpeg'))) return;
+				//$name = Path::toutf($fd['name']);
 				$name = $fd['name'];
 				$p = explode(', ',$name);
 				foreach ($p as $name) {
