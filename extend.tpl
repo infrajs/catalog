@@ -52,7 +52,7 @@
 			{more::cat_more}
 		</div>
 		<div class="padding">
-			{Цена?:priceblock}
+			{Цена?:priceblockbig}
 		</div>
 		{Описание?:descrshow}
 		{descrshow:}
@@ -66,7 +66,7 @@
 	{nomore:}
 		<div class="padding">
 			<div style="font-family:Tahoma; font-size:85%; margin-bottom:10px">{Описание}</div>
-			{Цена?:priceblock}
+			{Цена?:priceblockbig}
 			<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">Подробнее</a></b>
 		</div>
 	{cat_more:}{(.&(.!:no))?:more}
@@ -80,3 +80,14 @@
 	{cat::}-catalog/cat.tpl
 	{strcatalog:}catalog
 	{priceblock:}<div class="alert alert-success" style="clear:right; font-size:140%; padding:5px 10px; margin:15px 0;">{~cost(Цена)}&nbsp;руб.</div>
+{nalichie:}<span class="label {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-default)))}">
+		{Наличие на складе}</span>
+	{strnal:}В наличии
+	{stract:}Акция
+	{strras:}Распродажа
+	{strzak:}На заказ
+	{strpri:}label-primary
+	{label-success:}label-success
+	{label-info:}label-info
+	{label-default:}label-default
+	{label-danger:}label-danger
