@@ -27,7 +27,7 @@ $res = Once::func( function ($md) {
 	//	Cache::ignore();
 	//}
 	$poss = Catalog::getPoss($md['group']);
-	if (sizeof($poss) > 1000) return $ans;
+	if (sizeof($poss) > 500) return $ans;
 
 	$params = Catalog::getParams($md['group']);
 	

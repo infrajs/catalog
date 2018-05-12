@@ -1019,13 +1019,12 @@ class Catalog
 			Config::scan($dir, function ($src, $level) use (&$list) {
 				$fd = Load::pathInfo($src);
 				if (!in_array($fd['ext'], array('jpg', 'png', 'jpeg'))) return;
-				//$name = Path::toutf($fd['name']);
 				$name = $fd['name'];
 				$p = explode(', ',$name);
 				foreach ($p as $name) {
 					$name = preg_replace("/_\d*$/", '',$name);
 					$name = preg_replace("/\s*\(\d*\)*$/", '',$name);
-					$name = strtolower(Path::encode($name));
+					$name = mb_strtolower(Path::encode($name));
 					if (!$name) continue;
 					if (empty($list[$name])) $list[$name] = array();
 					$list[$name][] = $src;

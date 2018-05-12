@@ -44,7 +44,7 @@
 		
 		{~length(images)?:images}
 		{:extend.pos-page}
-		<div style="color:gray; margin-bottom:30px">{Описание}</div>
+		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
 		{Скрыть фильтры в полном описании??:print_more}
 		
 		{texts::text}
