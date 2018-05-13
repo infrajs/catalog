@@ -63,12 +63,14 @@ class Catalog
 	}
 	public static function getGroup($group){
 		//'группы'
-		return Catalog::cache( function &($group){
+		return MemCache::func( function ($group){
 			$data = Catalog::init();
-			if ($group) $data = Xlsx::runGroups($data, function &($gr) use($group) {
-				if($gr['title'] == $group)return $gr;
+			if ($group) $data = Xlsx::runGroups($data, function &($gr) use ($group) {
+				if ($gr['title'] == $group) return $gr;
 				$r = null; return $r;
 			});
+			$data['childscount'] = sizeof($data['childs']);
+			$data['datacount'] = sizeof($data['data']);
 			unset($data['childs']);
 			unset($data['data']);
 			return $data;

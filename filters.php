@@ -26,8 +26,16 @@ $res = Once::func( function ($md) {
 		//Не сохраняем когда есть фильтры more
 	//	Cache::ignore();
 	//}
+	
+	
+
+	if ($md['group']) foreach ($md['group'] as $group => $v) break;
+	else $group = false;
+
+	$group = Catalog::getGroup($group);
+	
 	$poss = Catalog::getPoss($md['group']);
-	if (sizeof($poss) > 500) return $ans;
+	if (sizeof($poss) > 200 && $group['childscount']) return $ans;
 
 	$params = Catalog::getParams($md['group']);
 	
