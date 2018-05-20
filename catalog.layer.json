@@ -8,12 +8,12 @@
 	"name":"catalog",
 	"child":{
 		"tpl":"-catalog/search.tpl",
-		"jsontpl":"-catalog/search.php?val={crumb.name}&m={Crumb.get.m}&p={Crumb.get.p}",
-		"seojsontpl":"-catalog/search.php?val={crumb.name}&seo={Controller.names.catalog.crumb}&m={Crumb.get.m}",
+		"jsontpl":"-catalog/search.php?val={~encode(crumb.name)}&m={Crumb.get.m}&p={Crumb.get.p}",
+		"seojsontpl":"-catalog/search.php?val={~encode(crumb.name)}&seo={Controller.names.catalog.crumb}&m={Crumb.get.m}",
 		"child":{
 			"tpl":"-catalog/position.tpl",
-			"jsontpl":"-catalog/position.php?val={crumb.parent.name}&art={crumb.name}&id={crumb.child.name}&m={Crumb.get.m}",
-			"seojsontpl":"-catalog/position.php?seo={Controller.names.catalog.crumb}&val={crumb.parent.name}&art={crumb.name}&m={Crumb.get.m}"
+			"jsontpl":"-catalog/position.php?val={~encode(crumb.parent.name)}&art={crumb.name}&id={crumb.child.name}&m={Crumb.get.m}",
+			"seojsontpl":"-catalog/position.php?seo={Controller.names.catalog.crumb}&val={~encode(crumb.parent.name)}&art={crumb.name}&m={Crumb.get.m}"
 		}
 	},
 	"childs":{
