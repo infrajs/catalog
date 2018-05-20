@@ -1,19 +1,19 @@
 {
 	"domready":true,
 	"tpl":"-catalog/search.tpl",
-	"jsontpl":"-catalog/search.php?val=&m={Crumb.get.m}&p={Crumb.get.p}",
-	"seojsontpl":"-catalog/search.php?seo={Controller.names.catalog.crumb}&val=&m={Crumb.get.m}",
+	"jsontpl":"-catalog/search.php?val=&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",
+	"seojsontpl":"-catalog/search.php?seo={Controller.names.catalog.crumb}&val=&m={~encode(Crumb.get.m)}",
 	"autoedittpl":{ "fast":"{Config(:catalog).dir}"},
 	"showanimate":true,
 	"name":"catalog",
 	"child":{
 		"tpl":"-catalog/search.tpl",
-		"jsontpl":"-catalog/search.php?val={~encode(crumb.name)}&m={Crumb.get.m}&p={Crumb.get.p}",
-		"seojsontpl":"-catalog/search.php?val={~encode(crumb.name)}&seo={Controller.names.catalog.crumb}&m={Crumb.get.m}",
+		"jsontpl":"-catalog/search.php?val={~encode(crumb.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",
+		"seojsontpl":"-catalog/search.php?val={~encode(crumb.name)}&seo={Controller.names.catalog.crumb}&m={~encode(Crumb.get.m)}",
 		"child":{
 			"tpl":"-catalog/position.tpl",
-			"jsontpl":"-catalog/position.php?val={~encode(crumb.parent.name)}&art={crumb.name}&id={crumb.child.name}&m={Crumb.get.m}",
-			"seojsontpl":"-catalog/position.php?seo={Controller.names.catalog.crumb}&val={~encode(crumb.parent.name)}&art={crumb.name}&m={Crumb.get.m}"
+			"jsontpl":"-catalog/position.php?val={~encode(crumb.parent.name)}&art={crumb.name}&id={crumb.child.name}&m={~encode(Crumb.get.m)}",
+			"seojsontpl":"-catalog/position.php?seo={Controller.names.catalog.crumb}&val={~encode(crumb.parent.name)}&art={crumb.name}&m={~encode(Crumb.get.m)}"
 		}
 	},
 	"childs":{
@@ -25,7 +25,7 @@
 		},
 		"producers":{
 			"tpl":"-catalog/producers.tpl",
-			"jsontpl":"-catalog/producers.php?lim=0,200&m={Crumb.get.m}",
+			"jsontpl":"-catalog/producers.php?lim=0,200&m={~encode(Crumb.get.m)}",
 			"seojsontpl":"-catalog/producers.php?seo={Controller.names.catalog.crumb}",
 			"autoedit":{ "fast":"{Config(:catalog).dir}article/Производители"}
 		},
