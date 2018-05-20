@@ -3,5 +3,5 @@
     "tplroot":"filters",
     "showanimate":false,
     "external":"-catalog/filters.layer.php",
-    "jsontpl":"-catalog/filters.php?m={Crumb.get.m}"
+    "jsontpl":"-catalog/filters.php?val={~encode(crumb.child.name)}&m={Crumb.get.m}"
 }
