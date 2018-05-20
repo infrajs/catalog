@@ -15,25 +15,40 @@ use infrajs\once\Once;
 $ans = array();
 
 
-$md = Catalog::initMark($ans);				
+	
 
 
 $val = Ans::GET('val');
 $val = Path::toutf(strip_tags($val));
-if ($val) $md['search'] = $val;//Временное значение
+if ($val) {
+	$group = Catalog::getGroup($val);
+	if (!isset($_GET['m'])) $_GET['m'] = '';
+	if ($group) {
+		$_GET['m'].=':group::.'.$val.'=1';
+	} else {
+		$producer = Catalog::getProducer($val);
+		if ($producer) {
+			$_GET['m'].=':producer::.'.$val.'=1';
+		} else {
+			$_GET['m'].=':search='.$val;
+		}
+	}
+}
+
+$md = Catalog::initMark($ans);
 
 if(isset($_GET['seo'])){
 	$link = $_GET['seo'];
 	
 	if($md['group']){
-		foreach($md['group'] as $val  =>  $one) break;
-		$link = $link.'?m=:group.'.$val.'=1';
+		foreach($md['group'] as $val => $one) break;
+		$link = $link.'/'.$val;
 	} else if($md['producer']){
-		foreach($md['producer'] as $val  =>  $one) break;
-		$link = $link.'?m=:producer.'.$val.'=1';
+		foreach($md['producer'] as $val => $one) break;
+		$link = $link.'/'.$val;
 	} else if($md['search']){
 		$val = $md['search'];
-		$link = $link.'?m=:search:'.$val;
+		$link = $link.'/'.$val;
 	}
 
 	
@@ -109,7 +124,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 		$ans['breadcrumbs'][] = array('title' => $conf['title'], 'add' => 'producer:');
 		$menu = Load::loadJSON('-catalog/menu.json');
 		$ans['breadcrumbs'][] = array('href' => 'producers','title' => $menu['producers']['title']);
-		$ans['breadcrumbs'][] = array('add' => 'producer::producer.'.$name.'=1','title' => $name);
+		$ans['breadcrumbs'][] = array('href' => $name,'title' => $name);
 		$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active']  =  true;
 	} else if (!$md['group'] && $md['search']) {
 		$ans['is'] = 'search';
@@ -122,14 +137,14 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 		$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active']  =  true;
 	} else {
 		//is!, descr!, text!, name!, breadcrumbs!, title
-		if($md['group'])foreach ($md['group'] as $group  =>  $v) break;
+		if ($md['group']) foreach ($md['group'] as $group  =>  $v) break;
 		else $group = false;
 		$group = Catalog::getGroup($group);
 		$ans['is'] = 'group';	
 		$ans['breadcrumbs'][] = array('href' => '','title' => $conf['title'], 'add' => 'group:');
 		array_map(function ($p) use (&$ans) {
 			$group = Catalog::getGroup($p);
-			$ans['breadcrumbs'][] = array('href' => '','title' => $group['name'], 'add' => 'group::group.'.$p.'=1');
+			$ans['breadcrumbs'][] = array('href' => $p,'title' => $group['name']);
 		}, $group['path']);
 		if (sizeof($ans['breadcrumbs']) == 1) {
 			array_unshift($ans['breadcrumbs'],array('main' => true,"title" => "Главная","nomark" => true));

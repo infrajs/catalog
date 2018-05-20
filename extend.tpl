@@ -7,7 +7,7 @@
 	{nds:}{~conf.catalog.nds?:ndsshow}{ndsshow:} c <abbr title="Налог на Добавленную Стоимость">НДС</abbr>
 {pos-sign:}
 	<p>
-		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}{:cat.mark.add}group::.{group}=1">{group}</a><br>
+		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}/{group}{:cat.mark.set}">{group}</a><br>
 	</p>
 	{Скрытый:}Скрытый
 {pos-item-css:}
@@ -40,7 +40,7 @@
 			{:producerlogo}
 			<div class="padding">
 				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</a></b>
-				<div class="pull-right" style="font-size:90%"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}{:cat.mark.add}group::.{group}=1">{Группа}</a></div>
+				<div class="pull-right" style="font-size:90%"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{group}{:cat.mark.set}">{Группа}</a></div>
 			</div>
 			{more?:havemore?:nomore}
 		</div>
@@ -74,7 +74,7 @@
 	{comma:}, 
 	{no:}Нет
 	{producerlogo:}
-		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {Производитель}" href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer::.{producer}=1" class="pull-right" style="margin:5px 0 5px 5px">
+		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {Производитель}" href="/{Controller.names.catalog.crumb}/{producer}{:cat.mark.set}" class="pull-right" style="margin:5px 0 5px 5px">
 			<img src="/-imager/?w=100&amp;h=100&amp;src={Config.get(:strcatalog).dir}{producer}/&amp;or=-imager/empty.png" />
 		</a>
 	{cat::}-catalog/cat.tpl

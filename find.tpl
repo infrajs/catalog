@@ -9,10 +9,10 @@
 		if (Crumb.get.m) {
 			var params='?m=' + Crumb.get.m;
 		} else {
-			var params='?m=';
+			var params='';
 		}
-		params+=':search='+val;
-		Crumb.go('/'+Controller.names.catalog.crumb.toString()+params);
+		//params+=':search='+val;
+		Crumb.go('/'+Controller.names.catalog.crumb.toString()+'/'+val+params);
 		setTimeout(function(){
 			$.getJSON('/-catalog/stat.php?submit=1&amp;val='+val);
 		},1);

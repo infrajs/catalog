@@ -48,7 +48,7 @@ class Catalog
 			return $data;
 		});
 	}
-	public static function getProducer(&$producer){
+	public static function getProducer($producer){
 		$sproducer = mb_strtolower($producer);
 		//'производители'
 		$pos = Catalog::cache( function &($sproducer){
@@ -69,6 +69,7 @@ class Catalog
 				if ($gr['title'] == $group) return $gr;
 				$r = null; return $r;
 			});
+			if (!$data) return array();
 			$data['childscount'] = sizeof($data['childs']);
 			$data['datacount'] = sizeof($data['data']);
 			unset($data['childs']);
@@ -616,6 +617,12 @@ class Catalog
 		$ans['md'] = $ar['md'];
 		return $ar['md'];
 	}
+	/*public static function checkMark(&$ans)
+	{
+		$mark = Catalog::getDefaultMark();
+		$mark->setData($ans['md']);
+		$ans['m'] = $mark->getVal();
+	}*/
 	public static function urlencode($str)
 	{
 		$str = preg_replace("/\+/", "%2B", $str);
