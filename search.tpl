@@ -41,8 +41,8 @@
 {issearch:}search
 {searchgood:}
 	<h1>{data.name}</h1>
-	<div id="filgroups"></div>
 	<p class="text-right">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</p>
+	<div id="filgroups"></div>
 	{~length(data.filters)?:showfilters}
 		
 	{data.childs:cat.groups}
@@ -70,7 +70,6 @@
 {data.numbers?:pagenumbers}
 
 {pagenumbers:}
-	<hr>
 	<ul class="pagination">
 		{data.numbers::pagenum}
 	</ul>

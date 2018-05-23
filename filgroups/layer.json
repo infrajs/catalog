@@ -1,4 +1,4 @@
 {
-	"jsontpl":"-catalog/filgroups/?m={Crumb.get.m}",
+	"jsontpl":"-catalog/filgroups/?m={Crumb.get.m}&val={crumb.child.name}",
 	"tpl":"-catalog/filgroups/layout.tpl"
 }
