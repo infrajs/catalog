@@ -1,6 +1,6 @@
 {
 	"pub":["dir", "title", "nds"],
-	"dependencies":["path"],
+	"dependencies":["path","event"],
 	"css":"style.css",
 	"tester":"tests/",
 	"nds":false,
