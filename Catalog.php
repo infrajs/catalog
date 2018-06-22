@@ -284,8 +284,8 @@ class Catalog
 
 			if ($md['sort']=='name') {
 				usort($poss, function ($a, $b) {
-					$a = $a['Наименование'];
-					$b = $b['Наименование'];
+					$a = @$a['Наименование'];
+					$b = @$b['Наименование'];
 					return strcasecmp($a, $b);
 				});
 				if ($md['reverse']) {

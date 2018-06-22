@@ -36,7 +36,7 @@
 		<div style="float:right">
 			{:producer}
 		</div>
-		<h1>{Наименование}{descr.Артикул!:Скрытый?:startart}</h1>
+		<h1 style="text-align:left">{Наименование}{descr.Артикул!:Скрытый?:startart}</h1>
 		<span class="a gagarin">{itemrow}</span>
 		<div style="display:none">
 			{items?:showitems}
@@ -54,7 +54,7 @@
 			{:extend.pos-sign}
 		</div>
 	</div>
-	{startart:} {Производитель} {Артикул}
+	{startart:} <nobr>{Производитель}</nobr> <nobr>{Артикул}</nobr>
 {showitems:}
 	<table class="table table-striped table-hover">
 		<thead>
