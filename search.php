@@ -108,8 +108,13 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	$ans['list'] = array(); //Массив позиций
 	
 	Catalog::search($md, $ans);
-	
+
 	$conf = Catalog::$conf;
+	if (empty($conf['alwaysshowposs'])) {
+		if (sizeof($ans['childs']) > 0) $ans['list'] = array();
+	}
+	
+	
 	
 	//BREADCRUMBS TITLE
 	if(!$md['group'] && $md['producer'] && sizeof($md['producer'])  ==  1) { //ПРОИЗВОДИТЕЛЬ

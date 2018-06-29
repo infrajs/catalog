@@ -1,7 +1,7 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
 	<div class="pull-right">{data.is=:isproducer?:Производитель}{data.is=:isgroup?:Группа}{data.is=:issearch?:Поиск}</div>
-	{~length(data.list)?data:searchgood?data:searchbad}
+	{data.count?data:searchgood?data:searchbad}
 	{Группа:}Группа
 	{Поиск:}Поиск
 	{Производитель:}Производитель

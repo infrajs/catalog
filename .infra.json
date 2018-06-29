@@ -30,6 +30,7 @@
 	"dir":"~catalog/",
 	"cache":["~catalog/"],
 	"title":"Каталог",
+	"alwaysshowposs":true,
 	"md":{ },
 	"filename":"Производитель",
 	"columns":[],
