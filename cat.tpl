@@ -4,14 +4,14 @@
 	</div>
 	{groups_group:}
 		<div class="col-sm-6">
-			<a class="thumbnail" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{title}{:mark.set}">
+			<a class="thumbnail" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{id}{:mark.set}">
 				<table>
 					<tr>
 						<td class="img">
 							{pos.images.0?:gimg}
 						</td>
 						<td class="name">
-							{name}
+							{title}
 						</td>
 					</tr>
 				</table>

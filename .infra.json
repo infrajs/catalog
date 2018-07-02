@@ -45,6 +45,7 @@
 			"title":"Производитель",
 			"separator":false
 		},
+		
 		"cost":{
 			"posid":"Цена",
 			"posname":"Цена",

@@ -67,6 +67,7 @@ class Catalog
 			$data = Catalog::init();
 			if ($group) $data = Xlsx::runGroups($data, function &($gr) use ($group) {
 				if ($gr['title'] == $group) return $gr;
+				if ($gr['id'] == $group) return $gr;
 				$r = null; return $r;
 			});
 			if (!$data) return array();
@@ -258,6 +259,7 @@ class Catalog
 			
 			if ($group) $data = Xlsx::runGroups($data, function &($gr) use($group) {
 				if ($gr['title'] == $group) return $gr;
+				if ($gr['id'] == $group) return $gr;
 				$r = null; return $r;
 			});
 
@@ -352,6 +354,7 @@ class Catalog
 	public static function getGroups($list, $now = false) {
 		//Groups
 		//'все группы'
+	
 		$subgroups = Catalog::cache(function () {
 			//Микро вставка всё ради того чтобы не пользоваться $data на этом уровне
 			//данный кэш один для любой страницы каталога
@@ -360,16 +363,17 @@ class Catalog
 				
 			Xlsx::runGroups($data, function &($group) use (&$subgroups) {
 				$r = null;
-				$subgroups[$group['title']] = array(
+				$subgroups[$group['id']] = array(
 					'title' => $group['title'], 
+					'id' => $group['id'], 
 					'name' => $group['name']
 				);
 				if (empty($group['childs'])) return $r;
 				$childs = array();
 				array_walk($group['childs'], function ($g) use (&$childs) {
-					$childs[] = array('title' => $g['title'], 'name' => $g['name']);
+					$childs[] = array('title' => $g['title'], 'name' => $g['name'], 'id' => $g['id'], );
 				});
-				$subgroups[$group['title']]['childs'] = $childs;
+				$subgroups[$group['id']]['childs'] = $childs;
 				return $r;
 			});
 			return $subgroups;
@@ -402,8 +406,8 @@ class Catalog
 		}
 		if (!sizeof($path)) {
 			$conf = Catalog::$conf;
-			if (!empty($subgroups[$conf['title']]['childs'])) {
-				$groupchilds = $subgroups[$conf['title']];
+			if (!empty($subgroups[Path::encode($conf['title'])]['childs'])) {
+				$groupchilds = $subgroups[Path::encode($conf['title'])];
 			} else {
 				$groupchilds = array();
 			}
@@ -420,19 +424,18 @@ class Catalog
 				}
 			}
 		}
-		
 		$childs = array();
 		if ($groupchilds) {
 
 			foreach ($groupchilds['childs'] as $g) { //Для правильной сортировки найденных групп.
-				if (empty($groups[$g['title']])) continue;
-				$pos = $groups[$g['title']]['pos'];
+				if (empty($groups[$g['id']])) continue;
+				$pos = $groups[$g['id']]['pos'];
 				$posd = array(
 					'article' => $pos['article'], 
 					'producer' => $pos['producer'], 
 					'images' => $pos['images']
 				);
-				$childs[] = array_merge($g, array('pos' => $posd, 'count' => $groups[$g['title']]['count']));
+				$childs[] = array_merge($g, array('pos' => $posd, 'count' => $groups[$g['id']]['count']));
 			}
 		}
 		return $childs;
@@ -636,7 +639,6 @@ class Catalog
 		$filters = array();
 
 		foreach ($params as $prop) {
-			
 			$valtitles = array();
 			$filter = array( 'title' => $prop['title'] );
 			if ($prop['more']) {
@@ -677,6 +679,7 @@ class Catalog
 					} else {
 						$data = $pos;
 					}
+						
 
 					foreach ($val as $value => $one) {
 						$option = Sequence::get($data, array($prop['posid']));
@@ -790,21 +793,20 @@ class Catalog
 		}
 		//Filter group
 		$key = 'group';
-	
+		$sid = 'gid';
 		if (!empty($md[$key])) {
-			$title='Группа';
-			$val=$md[$key];
+			$title = 'Группа';
+			$val = $md[$key];
 
-			
-			$filter = array('title' => $title, 'name' => Sequence::short(array(Catalog::urlencode($key))));
+			$filter = array(
+				'title' => $title, 
+				'name' => $key
+			);
 
-			
-
-			$poss = array_filter($poss, function ($pos) use ($key, $val) {
-				$prop=$pos[$key];
+			$poss = array_filter($poss, function ($pos) use ($key, $val, $sid) {
 				foreach ($val as $value => $one) {
 					if ($value === 'yes') return true;
-					if ($pos[$key] === $value) return true;
+					if ($pos[$sid] === $value) return true;
 					foreach($pos['path'] as $path){
 						if ((string)$value === $path) return true;
 					}
@@ -814,13 +816,13 @@ class Catalog
 
 			if (!empty($val['no'])) {
 				unset($val['no']);
-				$val['Не указано']=1;
+				$val['Не указано'] = 1;
 			}
 			if (!empty($val['yes'])) {
 				unset($val['yes']);
-				$val['Указано']=1;
+				$val['Указано'] = 1;
 			}
-			$filter['value']=implode(', ', array_keys($val));
+			$filter['value'] = implode(', ', array_keys($val));
 			if ($md['search']) $filters[] = $filter;
 		}
 		//Filter search
@@ -1045,6 +1047,7 @@ class Catalog
 	public static function search($md, &$ans = array()) {
 		$args = array(Catalog::nocache($md));
 		//'поиск',
+
 		$res = Once::func( function &($md) {
 			$ans = array();
 			$ans['list'] = Catalog::getPoss($md['group']);
@@ -1053,7 +1056,7 @@ class Catalog
 			//echo '<pre>'; print_r($ans['list']);
 			
 			$ans['filters'] = Catalog::filtering($ans['list'], $md);
-			
+
 			$now = null;
 			foreach ($md['group'] as $now => $one) break;
 

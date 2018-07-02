@@ -51,7 +51,6 @@ if(isset($_GET['seo'])){
 		$link = $link.'/'.$val;
 	}
 
-	
 	unset($ans['md']);
 	unset($ans['m']);
 
@@ -84,7 +83,6 @@ if (isset($_GET['p'])) {
 
 $args = array($md, $ans['page']);
 $page = $ans['page'];
-
 //'найденные позиции'
 $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	$re = false;
@@ -108,7 +106,6 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	$ans['list'] = array(); //Массив позиций
 	
 	Catalog::search($md, $ans);
-
 	$conf = Catalog::$conf;
 	if (empty($conf['alwaysshowposs'])) {
 		if (sizeof($ans['childs']) > 0) $ans['list'] = array();

@@ -62,7 +62,7 @@
 		<a rel="nofollow" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
 	</p>
 {cat_item:}
-	<div class="position" style="margin-bottom:40px;"">
+	<div class="position" style="margin-bottom:40px;">
 		<div style="text-align:right">{time?~date(:j F Y,time)}</div>
 		{:extend.pos-item}
 	</div>

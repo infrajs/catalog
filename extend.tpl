@@ -7,7 +7,7 @@
 	{nds:}{~conf.catalog.nds?:ndsshow}{ndsshow:} c <abbr title="Налог на Добавленную Стоимость">НДС</abbr>
 {pos-sign:}
 	<p>
-		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}/{group}{:cat.mark.set}">{group}</a><br>
+		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}/{group}{:cat.mark.set}">{Группа}</a><br>
 	</p>
 	{Скрытый:}Скрытый
 {pos-item-css:}
@@ -40,7 +40,7 @@
 			{:producerlogo}
 			<div class="padding">
 				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</a></b>
-				<div class="pull-right" style="font-size:90%"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{group}{:cat.mark.set}">{Группа}</a></div>
+				<div class="pull-right" style="font-size:90%"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{gid}{:cat.mark.set}">{group}</a></div>
 			</div>
 			{more?:havemore?:nomore}
 		</div>
