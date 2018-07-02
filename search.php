@@ -19,7 +19,7 @@ $ans = array();
 
 
 $val = Ans::GET('val');
-$val = Path::toutf(strip_tags($val));
+$val = Path::encode(Path::toutf(strip_tags($val)));
 if ($val) {
 	$group = Catalog::getGroup($val);
 	if (!isset($_GET['m'])) $_GET['m'] = '';

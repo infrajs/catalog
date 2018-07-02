@@ -85,6 +85,7 @@ class Catalog
 		//'все параметры'
 		return Catalog::cache(function &($group){
 			$poss = Catalog::getPoss($group);
+
 			if (!$group) Cache::setTitle('Корень');
 			$params = array();//параметры
 			//ПОСЧИТАЛИ COUNT
@@ -791,28 +792,32 @@ class Catalog
 
 
 		}
+		
 		//Filter group
 		$key = 'group';
 		$sid = 'gid';
 		if (!empty($md[$key])) {
 			$title = 'Группа';
 			$val = $md[$key];
-
 			$filter = array(
 				'title' => $title, 
 				'name' => $key
 			);
 
-			$poss = array_filter($poss, function ($pos) use ($key, $val, $sid) {
-				foreach ($val as $value => $one) {
-					if ($value === 'yes') return true;
-					if ($pos[$sid] === $value) return true;
-					foreach($pos['path'] as $path){
-						if ((string)$value === $path) return true;
+			if (empty($val[Catalog::$conf['title']]) && empty($val[Path::encode(Catalog::$conf['title'])])) {
+				
+				$poss = array_filter($poss, function ($pos) use ($key, $val, $sid) {
+					foreach ($val as $value => $one) {
+						if ($value === 'yes') return true;
+						if ($pos[$sid] === $value) return true;
+						foreach($pos['path'] as $path){
+							if ((string)$value === $path) return true;
+						}
 					}
-				}
-				return false;
-			});
+					return false;
+				});
+				
+			}
 
 			if (!empty($val['no'])) {
 				unset($val['no']);
