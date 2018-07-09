@@ -25,9 +25,9 @@
 	{brcrumb:}
 		{active?:crumblast?:crumb}
 	{crumb:}
-		<li><a data-anchor='.breadcrumb' href="{main?:hrefmain?:href}">{title}</a></li>
+		<li class="breadcrumb-item"><a data-anchor='.breadcrumb' href="{main?:hrefmain?:href}">{title}</a></li>
 	{crumblast:}
-		<li class="active">{title}</li>
+		<li class="breadcrumb-item active">{title}</li>
 	{add:}{:mark.add}{add}
 	{hrefmain:}/
 	{href:}/{Controller.names.catalog.crumb}{href?:/}{href}{add?:add?(nomark|:mark.set)}
