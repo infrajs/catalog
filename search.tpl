@@ -46,6 +46,18 @@
 	{~length(data.filters)?:showfilters}
 		
 	{data.childs:cat.groups}
+
+	{~length(list)?:cat_showlist}
+	
+	<p>{descr}</p>
+	{:text}
+	
+	<!--<h2>{data.name}</h2>
+	{~length(data.filters)?:showfilters}
+	<p>
+		<a rel="nofollow" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
+	</p>-->
+{cat_showlist:}
 	{:pages}
 	{:pageset}
 	{:extend.pos-item-css}
@@ -53,14 +65,6 @@
 	{list::cat_item}
 
 	{:pages}
-	<p>{descr}</p>
-	{:text}
-	<hr>
-	<h2>{data.name}</h2>
-	{~length(data.filters)?:showfilters}
-	<p>
-		<a rel="nofollow" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
-	</p>
 {cat_item:}
 	<div class="position" style="margin-bottom:40px;">
 		<div style="text-align:right">{time?~date(:j F Y,time)}</div>
@@ -74,8 +78,10 @@
 		{data.numbers::pagenum}
 	</ul>
 {pageset:}
-	<div class="clearfix"></div>
-	<span rel="nofollow" class="pull-right" style="cursor:pointer; color:gray; border-bottom:none;" onclick="Session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');" style="cursor:pointer">Сортировка <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></span>
+	
+
+	<div rel="nofollow" class="pull-right a mr-1 mb-4" style="z-index:1; position:relative; cursor:pointer;" onclick="Session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');">Сортировка</div>
+
 	<div class="settings alert alert-info" style="display:none">
 		Сортировать <a rel="nofollow" style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,
 			<a rel="nofollow" style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:name|:name}'>по наименованию</a>, 
@@ -91,6 +97,7 @@
 		</select> позиций на странице<br>
 		Показать в <a rel="nofollow" style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
 	</div>
+	<div style="clear:both"></div>
 	<script>
 		domready(function () {
 			Event.one('Controller.onshow', function () {
@@ -100,11 +107,11 @@
 		});
 	</script>
 {pagenum:}
-	<li class="{active?:pageact}{empty?:pagedis}" style="padding-top:10px">
+	<li class="page-item {active?:pageact}{empty?:pagedis}" style="padding-top:10px">
 		{empty?:pagenumt?:pagenuma}
 	</li>
-	{pagenumt:}<a>{title}</a>
-	{pagenuma:}<a rel="nofollow" data-anchor='.pagination' href="/{crumb}?p={num}{:cat.mark.aset}">{title}</a>
+	{pagenumt:}<a class="page-link">{title}</a>
+	{pagenuma:}<a class="page-link" rel="nofollow" data-anchor='.pagination' href="/{crumb}?p={num}{:cat.mark.aset}">{title}</a>
 {pageact:} active
 {pagedis:} disabled
 {space:}&nbsp;

@@ -1,23 +1,69 @@
 {groups:}
+	<style>
+		.catgrouplist .img {
+		vertical-align:middle;
+		text-align:center;
+		width:120px;
+		padding-right:10px;
+		padding-left:0;
+		height:90px;
+		background-color:white;
+	}
+	.catgrouplist .name {
+		text-align:left;
+		vertical-align:middle;
+		font-size:140%;
+	}
+	.catgrouplist a {
+		font-size:130%;
+		border:solid 1px rgba(0,0,0,0.1);
+	}
+	.catgrouplist a:hover {
+		border-color:gray;
+	}
+	@media (max-width: 1200px) { 
+		.catgrouplist a {
+			font-size:150%;
+		}
+	}
+	@media (max-width:992px) { 	/*md*/
+		.catgrouplist a {
+			font-size:130%;
+		}
+		.catgrouplist .img {
+			width:100px;
+		}
+		.catgrouplist .name {
+			font-size:90%;
+		}
+	}
+	@media (max-width:768px) { 	/*sm*/
+		.catgrouplist a {
+			font-size: 100%
+		}
+		.catgrouplist .img {
+			width:120px;
+		}
+		.catgrouplist .name {
+			font-size:120%;
+		}
+	}
+	</style>
 	<div class="catgrouplist row">
 		{::groups_group}
 	</div>
 	{groups_group:}
-		<div class="col-sm-6">
-			<a class="thumbnail" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{id}{:mark.set}">
-				<table>
-					<tr>
-						<td class="img">
-							{pos.images.0?:gimg}
-						</td>
-						<td class="name">
-							{title}
-						</td>
-					</tr>
-				</table>
+		<div class="col-sm-6 col-xl-4 mb-4">
+			<a class="d-flex p-1 rounded" style="align-items:center; min-height:92;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{id}{:mark.set}">
+				<div style="flex-basis: 130px; text-align:center">
+					{pos.images.0?:gimg}
+				</div>
+				<div style="flex:1;">
+					{title}
+				</div>
 			</a>
 		</div>
-		{gimg:}<img src="/-imager/?src={pos.images.0}&w=110&h=80">
+		{gimg:}<img src="/-imager/?src={pos.images.0}&w=130&h=90">
 {breadcrumbs:}
 	<ul class="breadcrumb">
 		{::brcrumb}
