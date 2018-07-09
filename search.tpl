@@ -61,7 +61,7 @@
 	{:pages}
 	{:pageset}
 	{:extend.pos-item-css}
-
+	<div style="clear:both"></div>
 	{list::cat_item}
 
 	{:pages}
