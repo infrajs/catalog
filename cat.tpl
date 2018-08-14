@@ -15,7 +15,7 @@
 		font-size:140%;
 	}
 	.catgrouplist a {
-		font-size:130%;
+		font-size:1.2rem;
 		border:solid 1px rgba(0,0,0,0.1);
 	}
 	.catgrouplist a:hover {
