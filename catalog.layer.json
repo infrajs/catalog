@@ -1,6 +1,7 @@
 {
 	"domready":true,
 	"tpl":"-catalog/search.tpl",
+	"nocache":true,
 	"jsontpl":"-catalog/search.php?val=&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",
 	"seojsontpl":"-catalog/search.php?seo={Controller.names.catalog.crumb}&val=&m={~encode(Crumb.get.m)}",
 	"autoedittpl":{ "fast":"{Config(:catalog).dir}"},
