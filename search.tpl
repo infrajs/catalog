@@ -22,9 +22,8 @@
 	</div>
 	{showfilter:}
 		<div class="item" data-anchor='.breadcrumb'>
-			
 			<a rel="nofollow" href="/{Controller.names.catalog.crumb}{:cat.mark.add}{name}">
-				<span class="glyphicon glyphicon-remove" style="color:red; font-size:80%"></span>
+				<span style="color:red; font-family:Tahoma; font-weight:bold">&times;</span>
 				{title}:</a> <b>{value}</b>
 			
 		</div>
