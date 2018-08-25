@@ -120,4 +120,4 @@
 	{text}
 	{textinfo.gallery::textimg}
 	{textimg:}
-		<img class="img-responsive" src="/-imager/?w=1000&amp;src={...gallerydir}{.}">
+		<img class="img-fluid" src="/-imager/?w=1000&amp;src={...gallerydir}{.}">

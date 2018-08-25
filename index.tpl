@@ -18,8 +18,8 @@
 			{crumbs::li}
 		</ul>
 		{li:}{active?:liactive?:lijust}
-		{lijust:}<li><a href="/{href}">{title}</a></li>
-		{liactive:}<li class="active">{title}</li>
+		{lijust:}<li class="breadcrumb-item"><a href="/{href}">{title}</a></li>
+		{liactive:}<li class="breadcrumb-item active">{title}</li>
 {/html:}
 	</div></body></html>
 {page:}
