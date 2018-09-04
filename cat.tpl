@@ -23,12 +23,12 @@
 	}
 	@media (max-width: 1200px) { 
 		.catgrouplist a {
-			font-size:150%;
+			/*font-size:150%;*/
 		}
 	}
 	@media (max-width:992px) { 	/*md*/
 		.catgrouplist a {
-			font-size:130%;
+			/*font-size:130%;*/
 		}
 		.catgrouplist .img {
 			width:100px;
