@@ -53,7 +53,7 @@
 		{::groups_group}
 	</div>
 	{groups_group:}
-		<div class="col-sm-6 col-xl-4 mb-4">
+		<div class="col-sm-6 mb-4">
 			<a class="d-flex p-1 rounded" style="align-items:center; min-height:92;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{id}{:mark.set}">
 				<div style="flex-basis: 130px; text-align:center">
 					{pos.images.0?:gimg}
