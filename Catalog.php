@@ -44,7 +44,7 @@ class Catalog
 			//});
 			Event::tik('Catalog.oninit');
 			Event::fire('Catalog.oninit', $data);
-			
+
 			return $data;
 		});
 	}
@@ -1016,8 +1016,8 @@ class Catalog
 			Catalog::setItemRowValue($pos);
 			$dir = Catalog::$conf['dir'].$prod.'/images/';
 			$images = Catalog::getIndex($dir);
-			if (isset($images[strtolower($art)])) $pos['images'] = array_merge($images[strtolower($art)], $pos['images']);
-			if (isset($images[strtolower($prod.'-'.$art)])) $pos['images'] = array_merge($images[strtolower($prod.'-'.$art)], $pos['images']);
+			if (isset($images[mb_strtolower($art)])) $pos['images'] = array_merge($images[mb_strtolower($art)], $pos['images']);
+			if (isset($images[mb_strtolower($prod.'-'.$art)])) $pos['images'] = array_merge($images[mb_strtolower($prod.'-'.$art)], $pos['images']);
 			
 			return $pos;
 		}, $args);
