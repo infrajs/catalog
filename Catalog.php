@@ -14,6 +14,8 @@ use infrajs\access\Access;
 use infrajs\sequence\Sequence;
 use infrajs\rubrics\Rubrics;
 
+global $TESTDATA;
+$TESTDATA = array();
 class Catalog
 {
 	public static $conf = array();
@@ -35,16 +37,14 @@ class Catalog
 		return Catalog::cacheF(function () {
 			$options = Catalog::getOptions();
 			$conf = Catalog::$conf;
-			$data = &Xlsx::init($conf['dir'], $options);
-			
+			$data = Xlsx::init($conf['dir'], $options);
 			
 			//Xlsx::runGroups($data, function (&$gr) {
 			//	$gr['data'] = array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
 			//});
-
 			Event::tik('Catalog.oninit');
 			Event::fire('Catalog.oninit', $data);
-
+			
 			return $data;
 		});
 	}
