@@ -37,7 +37,7 @@ class Catalog
 		return Catalog::cacheF(function () {
 			$options = Catalog::getOptions();
 			$conf = Catalog::$conf;
-			$data = Xlsx::init($conf['dir'], $options);
+			$data = Xlsx::init([$conf['dir'], $conf['dir'].'tables2/'], $options);
 			
 			//Xlsx::runGroups($data, function (&$gr) {
 			//	$gr['data'] = array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
