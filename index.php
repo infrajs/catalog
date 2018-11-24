@@ -23,7 +23,7 @@ return Rest::get([ function () {
 			'title' => "Сервис каталога",
 			'active' =>true
 		);
-		echo Template::parse('-catalog/index.tpl', $data);
+		echo Rest::parse('-catalog/index.tpl', $data);
 	},
 	"getPoss", function( $t, $group = null ){
 		$poss = Catalog::getPoss($group);
@@ -32,16 +32,12 @@ return Rest::get([ function () {
 	"init", function () {
 		$data = Catalog::init();
 		
-		/*echo '<pre>';
-		unset(Once::$items[Once::$lastid]['exec']['result']);
-		print_r(Once::$items['062fbe0f303e589637d068012eb392fe']);
-		print_r(Once::$items[Once::$lastid]);*/
-		//echo '<pre>';
-		//print_r($data);
-		//exit;
+
 		$res = array();
 		$res['size'] = sizeof($data['childs']);
 		echo Rest::parse('-catalog/index.tpl', $res, 'INIT');	
+		echo '<pre>';
+		print_r($data);
 	},
 	"pos",  [ function ($type) {
 			$ans = array();

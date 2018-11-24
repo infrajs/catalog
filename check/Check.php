@@ -33,13 +33,8 @@ class Check {
 		
 		$data['crumbs'][sizeof($data['crumbs'])-1]['active'] = true;
 
-	
+		echo Rest::parse('-catalog/check/layout.tpl', $data, $root);
 
-		$page = Template::parse('-catalog/index.tpl', $data, 'page');
-		View::html($page);
-		$html = Template::parse('-catalog/check/layout.tpl', $data, $root);
-		View::html($html, 'page');
-		echo View::html();
 	}
 	public static function repeats() {
 		return Catalog::cache( function () {
