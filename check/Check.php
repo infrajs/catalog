@@ -5,6 +5,8 @@ use infrajs\template\Template;
 use infrajs\view\View;
 use infrajs\rest\Rest;
 use infrajs\load\Load;
+use infrajs\config\Config;
+use akiyatkin\fs\FS;
 use infrajs\path\Path;
 use infrajs\sequence\Sequence;
 use infrajs\catalog\Catalog;
@@ -35,6 +37,66 @@ class Check {
 
 		echo Rest::parse('-catalog/check/layout.tpl', $data, $root);
 
+	}
+	public static function misfiles() {
+		$dir = Catalog::$conf['dir'];
+		$ans = array();
+		$data = Catalog::init();
+
+		$producers = array();
+		Xlsx::runPoss($data, function &(&$pos) use (&$producers) {
+			$prod = mb_strtolower($pos['producer']);
+			$art =  mb_strtolower($pos['article']);
+			if (empty($producers[$prod])) $producers[$prod] = array();
+			$producers[$prod][$art] = true;
+			$r = null;
+			return $r;
+		});
+
+		
+		$mis = array();
+		
+		Config::scan($dir, function($src, $level) use (&$producers, &$mis){
+			//return false - Выходим из этой папки и другие файлы не обрабатываем
+			//return true - не заходим вглубь
+			$r = explode('/', $src);
+			$folder = $r[sizeof($r) - 2];
+			if ($level == 0) {
+				if ($folder == 'images') return true;
+				if ($folder == 'tables') return true;
+				if ($folder == 'articles') return true;
+				if (preg_match('/.*backup/u',$folder)) return true; 
+				$prod = mb_strtolower($folder);
+				if (empty($producers[$prod])) {
+					$mis[] = $src;
+					return true;
+				}
+				return null;
+			}
+			if ($level == 1) {
+				if ($folder == 'images') return true;
+				$prod = mb_strtolower($r[sizeof($r) - 3]);
+				$art = mb_strtolower($folder);
+				if (empty($producers[$prod][$art])) {
+					$mis[] = $src;
+					return true;
+				}
+				return true;
+			}	
+		});
+		if (!empty($mis)) {
+			
+			$bname = date('ymd').'-backup/';
+			FS::mkdir($dir.$bname);
+			foreach ($mis as $src) {
+				$bsrc = str_replace($dir,'',$src);
+				FS::rename($src,$dir.$bname.$bsrc);
+			}
+		}
+		$ans['mis'] = $mis;
+		$ans['msg'] = 'Проверка выполнена, все неиспользуемые файлы перемещены в папку backup';
+		$ans['result'] = 1;
+		return $ans;
 	}
 	public static function repeats() {
 		return Catalog::cache( function () {

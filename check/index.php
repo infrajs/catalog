@@ -13,22 +13,28 @@ use infrajs\catalog\check\Check;
 Access::debug(true);
 
 return Rest::get( function () {
-
 		Check::show('root');
-	}, "repeats", [function () {
-		$data = Check::repeats();
-		Check::show('repeats', $data);
-	},function ($type, $producer) {
-		$data = Check::repeats();
+	}, "repeats", [
+		function ($key) {
+			$data = Check::repeats();
+			Check::show($key, $data);
+		}, function ($type, $producer) {
+			$data = Check::repeats();
 
-		if (!empty($data['list'][$producer])) {
-			$info = $data['list'][$producer];
-			$data['list'] = array();
-			$data['list'][$producer] = $info;
-			$data['count'] = sizeof($info);
+			if (!empty($data['list'][$producer])) {
+				$info = $data['list'][$producer];
+				$data['list'] = array();
+				$data['list'][$producer] = $info;
+				$data['count'] = sizeof($info);
+			}
+
+			Check::show('repeats', $data);
 		}
-
-		Check::show('repeats', $data);
-	}], function () {
+	],
+	"misfiles", function ($key) {
+		$ans = Check::misfiles();
+		Check::show($key, $ans);
+	}, function () {
 		Check::show('404');
-});
+	}
+);
