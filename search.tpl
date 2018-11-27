@@ -1,6 +1,6 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
-	<div class="pull-right">{data.is=:isproducer?:Производитель}{data.is=:isgroup?:Группа}{data.is=:issearch?:Поиск}</div>
+	<div class="float-right">{data.is=:isproducer?:Производитель}{data.is=:isgroup?:Группа}{data.is=:issearch?:Поиск}</div>
 	{data.count?data:searchgood?data:searchbad}
 	{Группа:}Группа
 	{Поиск:}Поиск
@@ -79,7 +79,7 @@
 {pageset:}
 	
 
-	<div rel="nofollow" class="pull-right a mr-1 mb-4" style="z-index:1; position:relative; cursor:pointer;" onclick="Session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');">Сортировка</div>
+	<div rel="nofollow" class="float-right a mr-1 mb-4" style="z-index:1; position:relative; cursor:pointer;" onclick="Session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');">Сортировка</div>
 
 	<div class="settings alert alert-info" style="display:none">
 		Сортировать <a rel="nofollow" style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,

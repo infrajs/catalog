@@ -40,7 +40,7 @@
 			{:producerlogo}
 			<div class="padding">
 				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</a></b>
-				<div class="pull-right" style="font-size:90%; margin-left:10px"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{gid}{:cat.mark.set}">{group}</a></div>
+				<div class="float-right" style="font-size:90%; margin-left:10px"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{gid}{:cat.mark.set}">{group}</a></div>
 			</div>
 			{more?:havemore?:nomore}
 		</div>
@@ -74,7 +74,7 @@
 	{comma:}, 
 	{no:}Нет
 	{producerlogo:}
-		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {Производитель}" href="/{Controller.names.catalog.crumb}/{producer}{:cat.mark.set}" class="pull-right" style="margin:5px 0 5px 5px">
+		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {Производитель}" href="/{Controller.names.catalog.crumb}/{producer}{:cat.mark.set}" class="float-right" style="margin:5px 0 5px 5px">
 			<img src="/-imager/?w=100&amp;h=100&amp;src={Config.get(:strcatalog).dir}{producer}/&amp;or=-imager/empty.png" />
 		</a>
 	{cat::}-catalog/cat.tpl
