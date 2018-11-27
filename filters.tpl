@@ -3,7 +3,7 @@
 	<ul>
 		{data.list::prodlist}
 	</ul>
-	<div class="visible-xs visible-sm">
+	<div class="d-block d-lg-none">
 		<a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}{:cat.mark.set}">Показать</a>
 	</div>
 	{prodlist:}
