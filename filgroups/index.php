@@ -1,30 +1,38 @@
 <?php
 use infrajs\catalog\Catalog;
 use infrajs\ans\Ans;
-use infrajs\path\Path;
 use infrajs\rest\Rest;
+use infrajs\load\Load;
 
 
-return Rest::get( function (){
+return Rest::get( function () {
 	$ans = array();
-	$val = Ans::GET('val');
-	$val = Path::toutf(strip_tags($val));
-	if ($val) {
-		$group = Catalog::getGroup($val);
-		if (!isset($_GET['m'])) $_GET['m'] = '';
-		if ($group) {
-			$_GET['m'].=':group::.'.$val.'=1';
-		} else {
-			$producer = Catalog::getProducer($val);
-			if ($producer) {
-				$_GET['m'].=':producer::.'.$val.'=1';
-			} else {
-				$_GET['m'].=':search='.$val;
-			}
-		}
-	}
 	$md = Catalog::initMark($ans);
 
-	$ans['filgroups'] = Catalog::$conf['filgroups'];
+	$group = '';
+	foreach ($md['group'] as $group => $one) break;
+	$ar = Catalog::$conf['filgroups'];
+
+	if (isset($ar[$group])) {
+		$ar = $ar[$group];
+	} else {
+		$ar = array();
+	}
+
+	$list = array();
+	
+	if ($ar) {
+		$params = Catalog::getParams($md['group']);
+		Catalog::calcParams($params, $md);
+
+		foreach ($ar as $name) {
+			if (!isset($params[$name])) continue;
+			$list[$name] = $params[$name];
+		}
+		foreach ($list as &$opt) {
+			ksort($opt['option']);
+		}
+	}
+	$ans['list'] = $list;
 	return Ans::ret($ans);
 });

@@ -1,12 +1,14 @@
 {
-	"pub":["dir", "title", "nds"],
+	"pub":["dir", "title", "nds","pageset","showmore"],
 	"dependencies":["path","event"],
 	"css":"style.css",
 	"tester":"tests/",
 	"nds":false,
 	"require":"infra.php",
 	"js":["Catalog.js","infra.js"],
-	"filgroups":[],
+	"filgroups":{
+		"Светильники-и-прожектора":["Источник света","Степень защиты","Рассеиватель","Отражатель","Мощность, Вт", "Серия", "Линза, º"]
+	},
 	"countonpage":10,
 	"clutch":{
 		"magnific-popup":[
@@ -24,12 +26,17 @@
 			"func":"/catalog"
 		}
 	},
+	
 	"foldwhen":30,
 	"update":"update.php",
 	"conf":"infrajs\\catalog\\Catalog",
 	"dir":"~catalog/",
 	"cache":["~catalog/"],
 	"title":"Каталог",
+	"pageset":false,
+	"showmore":true,
+	"listreverse":false,
+	"ignorelistname":false,
 	"alwaysshowposs":true,
 	"md":{ },
 	"filename":"Производитель",

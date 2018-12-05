@@ -40,8 +40,8 @@
 {issearch:}search
 {searchgood:}
 	<h1>{data.name}</h1>
-	<p class="text-right">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</p>
 	<div id="filgroups"></div>
+	<p class="text-right">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</p>
 	{~length(data.filters)?:showfilters}
 		
 	{data.childs:cat.groups}
@@ -58,7 +58,7 @@
 	</p>-->
 {cat_showlist:}
 	{:pages}
-	{:pageset}
+	{~conf.catalog.pageset?:pageset}
 	{:extend.pos-item-css}
 	<div style="clear:both"></div>
 	{list::cat_item}

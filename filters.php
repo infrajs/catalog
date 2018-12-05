@@ -42,143 +42,20 @@ $res = Once::func( function ($md) {
 	//	Cache::ignore();
 	//}
 	
-	
 
 	if ($md['group']) foreach ($md['group'] as $group => $v) break;
 	else $group = false;
-
 	$group = Catalog::getGroup($group);
-	
 	$poss = Catalog::getPoss($md['group']);
-	if (sizeof($poss) > 200 && $group['childscount']) return $ans;
+	if (sizeof($poss) > 200 && $group['childscount']) return $ans; //Нет фильтров если есть подгруппы
 
-	$params = Catalog::getParams($md['group']);
+
+	$params = Catalog::getParams($md['group']);	
+
 	
-	$conf = Config::get('catalog');
-	
-	//Поиск
-	$count = sizeof($poss);//Позиций в группе
-	
-	$res = Catalog::search($md);
-	
-	$poss = $res['list'];
-	$search = sizeof($poss);//Позиций найдено
 	//ПОСЧИТАЛИ FILTER со всеми md
+	Catalog::calcParams($params, $md);
 	
-	//echo '<pre>';
-	//print_r($params);
-	
-	foreach ($params as $k=>$prop) {
-		if ($prop['more']){
-			foreach ($poss as &$pos) {
-				if (!isset($pos['more'][$prop['posid']]) || !Xlsx::isSpecified($pos['more'][$prop['posid']])) continue;
-				$r=false;
-				if ($prop['separator']) {
-					$arval=explode($prop['separator'], $pos['more'][$prop['posid']]);
-				} else {
-					$arval=array($pos['more'][$prop['posid']]);
-				}
-				
-				
-				foreach ($arval as $value) {
-					$idi = Path::encode($value);
-					$id = mb_strtolower($idi);
-					if (!Xlsx::isSpecified($id)) continue;
-					$r = true;
-					$params[$k]['option'][$idi]['search']++;
-				}
-
-				if ($r)	$params[$k]['search']++;
-			}
-		}else{
-			foreach($poss as &$pos){
-				if (!isset($pos[$prop['posid']]) || !Xlsx::isSpecified($pos[$prop['posid']])) continue;
-				
-				$r=false;
-				if ($prop['separator']) {
-					$arval=explode($prop['separator'], $pos[$prop['posid']]);
-					$arname=explode($prop['separator'], $pos[$prop['posname']]);
-				} else {
-					$arval = array($pos[$prop['posid']]);
-					$arname = array($pos[$prop['posname']]);
-				}
-
-				foreach ($arval as $i => $value) {
-					$idi=Path::encode($value);
-					$id=mb_strtolower($idi);
-
-					if (!Xlsx::isSpecified($id)) continue;
-					$r=true;
-					$params[$k]['option'][$idi]['search']++;
-				}
-				if ($r)	$params[$k]['search']++;//Позиций с этим параметром
-			}
-		}
-
-		$params[$k]['nosearch'] = sizeof($poss) - $params[$k]['search'];
-	}
-	
-	//ПОСЧИТАЛИ FILTER как если бы не было выбрано в этой группе md
-	foreach ($params as $k => $prop) {
-
-		if ($prop['more']) {
-			$mymd = $md;
-		
-			$mymd['more'] = array_diff_key($md['more'], array_flip(array($prop['mdid'])));
-			
-			$res = Catalog::search($mymd);
-			$poss = $res['list'];
-			
-			foreach ($poss as &$pos){
-				if (!isset($pos['more'][$prop['posid']])) continue;
-				if (preg_match("/[:]/", $pos['more'][$prop['posid']])) continue;
-				if (!Xlsx::isSpecified($pos['more'][$prop['posid']])) continue;
-
-				$r=false;
-				if ($prop['separator']) {
-					$arval = explode($prop['separator'], $pos['more'][$prop['posid']]);
-				} else {
-					$arval = array($pos['more'][$prop['posid']]);
-				}
-				foreach($arval as $value){
-					$idi=Path::encode($value);
-					$id=mb_strtolower($idi);
-					if (!Xlsx::isSpecified($id)) continue;
-					$r=true;
-					$params[$k]['option'][$idi]['filter']++;
-				}
-				if ($r)	$params[$k]['filter']++;
-			}
-		} else {
-			$mymd = array_diff_key($md, array_flip(array($prop['mdid'])));
-
-			$res = Catalog::search($mymd);
-			$poss = $res['list'];
-			foreach($poss as &$pos){
-				if(!isset($pos[$prop['posid']])) continue;
-				if (preg_match("/[:]/", $pos[$prop['posid']])) continue;
-				if (!Xlsx::isSpecified($pos[$prop['posid']])) continue;
-
-				$r=false;
-				if ($prop['separator']) {
-					$arval=explode($prop['separator'], $pos[$prop['posid']]);
-				} else {
-					$arval=array($pos[$prop['posid']]);
-				}
-				
-				foreach ($arval as $i => $value) {
-					$idi = Path::encode($value);
-					$id = mb_strtolower($idi);
-					if (!Xlsx::isSpecified($id)) continue;
-					$r=true;
-					$params[$k]['option'][$idi]['filter']++;
-				}
-				if ($r)	$params[$k]['filter']++;//Позиций с этим параметром
-			}
-		}
-		//У скольки позиций в выборке у которых этот параметр не указан
-		$params[$k]['nofilter']=sizeof($poss)-$params[$k]['filter'];//
-	}
 	
 	/*
 		$params промежуточный массив со всеми возможными занчениями каждого параметра
@@ -187,7 +64,7 @@ $res = Once::func( function ($md) {
 		search - сколько всего найдено с md
 		filter - сколько найдено если данный параметр не указана в md
 	*/
-	
+	$conf = Config::get('catalog');
 	//ДОБАВИЛИ option values
 	if (!is_array($conf['filtershowhard'])) $conf['filtershowhard'] = array($conf['filtershowhard']);
 

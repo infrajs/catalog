@@ -37,16 +37,18 @@
 			{:producer}
 		</div>
 		<h1 style="text-align:left">{Наименование}{descr.Артикул!:Скрытый?:startart}</h1>
-		<span class="a gagarin">{itemrow}</span>
-		<div style="display:none">
-			{items?:showitems}
-		</div>
-		
+		<div><small class="text-muted">{itemrow}</small></div>
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
 		{Скрыть фильтры в полном описании??:print_more}
 		
+		<!--<div><small class="text-muted">{itemrow}</small></div>-->
+		<span class="a gagarin">Показать все модификации</span>
+		<div style="display:none">
+			{items?:showitems}
+		</div>
+
 		{texts::text}
 		{~length(files)?:files}
 		<div style="clear:left; margin-bottom: 50px">
@@ -60,22 +62,24 @@
 		<thead>
 			<tr>
 				{items.0.more::ihead}
-				<th>Цена</th>
+				{Цена?:headcost}
 			</tr>
 		</thead>
 		<tbody style="cursor:pointer;">
-			<tr class="success" onclick="Ascroll.ignore = '.gagarin'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
+			<tr class="success" onclick="Ascroll.ignore = '.cat-position'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 				{~obj(:more,items.0.more,:pos,.).more::imore}
-				<td>{~cost(Цена)}&nbsp;руб.</td>
+				{...Цена?:prcost}
 			</tr>
 		
 			{items::iitem}
 		</tbody>
 	</table>
+	{prcost:}<td>{~cost(Цена|...Цена)}&nbsp;руб.</td>
+	{headcost:}<th>Цена</th>
 	{iitem:}
-		<tr style="cursor:pointer" onclick="Ascroll.once = '.gagarin'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
+		<tr style="cursor:pointer" onclick="Ascroll.once = '.cat-position'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 			{~obj(:more,more,:itm,.,:pos,...).more::imore}
-			<td>{~cost(Цена|...Цена)}&nbsp;руб.</td>
+			{Цена?:prcost}
 		</tr>
 		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
 

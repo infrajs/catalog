@@ -1,9 +1,25 @@
-
-<a class="btn btn-sm {data.md.more.Рамок.10?:stroff?:stron}" 
-	href="/catalog{:cat.mark.add}more.Рамок::.10=1">
-10 рамок</a>
-
-<a class="btn btn-sm {data.md.more.Рамок.12?:stroff?:stron}" href="/catalog{:cat.mark.add}more.Рамок::.12=1">12 рамок</a>
+{root:}
+{:ROWS}
+{ROWS:}
+<table class="table">
+{data.list::param}
+</table>
+{param:}
+	<tr>
+		<td style="white-space: nowrap;">{title}</td>
+		<td>{more?option::optmore?option::optmain}</td>
+	</tr>
+	{optmore:}
+		<a data-anchor=".table" class="btn mb-1 btn-sm {:ismore?:stron?:stroff}" 
+		href="/catalog{:cat.mark.add}more.{...mdid}::.{id}={:ismore??:str1}">{title}</a>
+	{optmain:}
+		<a data-anchor=".table" class="btn mb-1 btn-sm {:ismain?:stron?:stroff}" 
+		href="/catalog{:cat.mark.add}{...mdid}::.{id}={:ismain??:str1}">{title}</a>
+{ismore:}{data.md.more[...mdid][id]?:yes}
+{ismain:}{data.md[...mdid][id]?:yes}
+{str1:}1
+{str2:}1:more.{...mdid}.no=1
 {cat::}-catalog/cat.tpl
-{stroff:}btn-success
-{stron:}btn-danger
+{stron:}btn-success
+{stroff:}{search?:strsecondary}
+{strsecondary:}btn-secondary

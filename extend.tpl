@@ -42,7 +42,7 @@
 				<b><a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">{Производитель} {descr.Артикул!:Скрытый?Артикул?Наименование}</a></b>
 				<div class="float-right" style="font-size:90%; margin-left:10px"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{gid}{:cat.mark.set}">{group}</a></div>
 			</div>
-			{more?:havemore?:nomore}
+			{(more&~conf.catalog.showmore)?:havemore?:nomore}
 		</div>
 	</div>
 

@@ -13,6 +13,8 @@ use infrajs\config\Config;
 use infrajs\access\Access;
 use infrajs\sequence\Sequence;
 use infrajs\rubrics\Rubrics;
+use infrajs\ans\Ans;
+use akiyatkin\dabudi\Dabudi;
 
 global $TESTDATA;
 $TESTDATA = array();
@@ -27,6 +29,8 @@ class Catalog
 				'root' => $conf['title'],
 				'more' => true,
 				'Имя файла' => $conf['filename'],
+				'Игнорировать имя листа' => $conf['ignorelistname'],
+				'listreverse' => $conf['listreverse'],
 				'Известные колонки' => $columns
 				);
 			return $options;
@@ -249,6 +253,132 @@ class Catalog
 			
 			return $params;
 		}, array($group));
+	}
+	public static function calcParams(&$params, $md) {
+		//Поиск
+		$poss = Catalog::getPoss($md['group']);
+		$count = sizeof($poss); //Позиций в группах
+		
+		$res = Catalog::search($md);
+		
+		$poss = $res['list'];
+		$search = sizeof($poss); //Позиций найдено
+		
+		foreach ($params as $k => &$prop) {
+			if ($prop['more']){
+				foreach ($poss as &$pos) {
+					Dabudi::runItems($pos, function($pos) use (&$prop) {
+						if (!isset($pos['more'][$prop['posid']]) || !Xlsx::isSpecified($pos['more'][$prop['posid']])) return false;
+						if ($prop['separator']) {
+							$arval = explode($prop['separator'], $pos['more'][$prop['posid']]);
+						} else {
+							$arval = array($pos['more'][$prop['posid']]);
+						}
+						$r = false;
+						foreach ($arval as $value) {
+							$idi = Path::encode($value);
+							$id = mb_strtolower($idi);
+							if (!Xlsx::isSpecified($id)) continue;
+							$r = true;
+							$prop['option'][$idi]['search']++;
+						}
+
+						if ($r)	$prop['search']++;
+						//if (!isset($pos['items']['more'][$prop['posid']])) return false;
+					});
+				}
+			} else {
+				foreach ($poss as &$pos){
+					if (!isset($pos[$prop['posid']]) || !Xlsx::isSpecified($pos[$prop['posid']])) continue;
+					
+					if ($prop['separator']) {
+						$arval = explode($prop['separator'], $pos[$prop['posid']]);
+						$arname = explode($prop['separator'], $pos[$prop['posname']]);
+					} else {
+						$arval = array($pos[$prop['posid']]);
+						$arname = array($pos[$prop['posname']]);
+					}
+
+					$r = false;
+					foreach ($arval as $i => $value) {
+						$idi=Path::encode($value);
+						$id=mb_strtolower($idi);
+
+						if (!Xlsx::isSpecified($id)) continue;
+						$r = true;
+						$params[$k]['option'][$idi]['search']++;
+					}
+					if ($r)	$params[$k]['search']++;//Позиций с этим параметром
+				}
+			}
+
+			$params[$k]['nosearch'] = sizeof($poss) - $params[$k]['search'];
+		}
+		
+		//ПОСЧИТАЛИ FILTER как если бы не было выбрано в этой группе md
+		foreach ($params as $k => &$prop) {
+
+			if ($prop['more']) {
+				$mymd = $md;
+			
+				$mymd['more'] = array_diff_key($md['more'], array_flip(array($prop['mdid'])));
+				
+				$res = Catalog::search($mymd);
+				$poss = $res['list'];
+				
+				foreach ($poss as &$pos){
+					Dabudi::runItems($pos, function($pos) use (&$prop) {
+						if (!isset($pos['more'][$prop['posid']])) return false;
+						if (preg_match("/[:]/", $pos['more'][$prop['posid']])) return;
+						if (!Xlsx::isSpecified($pos['more'][$prop['posid']])) return;
+
+						$r = false;
+						if ($prop['separator']) {
+							$arval = explode($prop['separator'], $pos['more'][$prop['posid']]);
+						} else {
+							$arval = array($pos['more'][$prop['posid']]);
+						}
+						foreach ($arval as $value){
+							$idi = Path::encode($value);
+							$id = mb_strtolower($idi);
+							if (!Xlsx::isSpecified($id)) continue;
+							$r = true;
+							$prop['option'][$idi]['filter']++;
+						}
+						if ($r)	$prop['filter']++;
+						//if (!isset($pos['items']['more'][$prop['posid']])) return false;
+					});
+				}
+			} else {
+				$mymd = array_diff_key($md, array_flip(array($prop['mdid'])));
+
+				$res = Catalog::search($mymd);
+				$poss = $res['list'];
+				foreach($poss as &$pos){
+					if(!isset($pos[$prop['posid']])) continue;
+					if (preg_match("/[:]/", $pos[$prop['posid']])) continue;
+					if (!Xlsx::isSpecified($pos[$prop['posid']])) continue;
+
+					$r=false;
+					if ($prop['separator']) {
+						$arval=explode($prop['separator'], $pos[$prop['posid']]);
+					} else {
+						$arval=array($pos[$prop['posid']]);
+					}
+					
+					foreach ($arval as $i => $value) {
+						$idi = Path::encode($value);
+						$id = mb_strtolower($idi);
+						if (!Xlsx::isSpecified($id)) continue;
+						$r=true;
+						$params[$k]['option'][$idi]['filter']++;
+					}
+					if ($r)	$params[$k]['filter']++;//Позиций с этим параметром
+				}
+			}
+			//У скольки позиций в выборке у которых этот параметр не указан
+			$params[$k]['nofilter']=sizeof($poss)-$params[$k]['filter'];//
+		}
 	}
 	public static function getPoss($mdgroup = false){
 		if ($mdgroup) foreach ($mdgroup as $group => $v) break;
@@ -609,6 +739,23 @@ class Catalog
 	}
 	public static function initMark(&$ans = array())
 	{
+		$val = Ans::GET('val');
+		$val = Path::encode(Path::toutf(strip_tags($val)));
+		if ($val) {
+			$group = Catalog::getGroup($val);
+			if (!isset($_GET['m'])) $_GET['m'] = '';
+			if ($group) {
+				$_GET['m'].=':group::.'.$val.'=1';
+			} else {
+				$producer = Catalog::getProducer($val);
+				if ($producer) {
+					$_GET['m'].=':producer::.'.$val.'=1';
+				} else {
+					$_GET['m'].=':search='.$val;
+				}
+			}
+		}
+
 		$m = Path::toutf(Sequence::get($_GET, array('m')));
 		$ar = Once::func( function ($m) {
 			$mark = Catalog::getDefaultMark();

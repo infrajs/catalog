@@ -14,27 +14,8 @@ use infrajs\once\Once;
 
 $ans = array();
 
-
-	
-
-
 $val = Ans::GET('val');
 $val = Path::encode(Path::toutf(strip_tags($val)));
-if ($val) {
-	$group = Catalog::getGroup($val);
-	if (!isset($_GET['m'])) $_GET['m'] = '';
-	if ($group) {
-		$_GET['m'].=':group::.'.$val.'=1';
-	} else {
-		$producer = Catalog::getProducer($val);
-		if ($producer) {
-			$_GET['m'].=':producer::.'.$val.'=1';
-		} else {
-			$_GET['m'].=':search='.$val;
-		}
-	}
-}
-
 $md = Catalog::initMark($ans);
 
 if(isset($_GET['seo'])){

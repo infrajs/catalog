@@ -28,8 +28,9 @@ $ans['breadcrumbs'][]=array('href'=>'stat','title'=>'Статистика пои
 
 $data = Load::loadJSON('~catalog-stat.json');
 if (!$data) {
-	$data=array('users' => array(),'cat_id' => 0,'time' => time());//100 10 user list array('val'=>$val,'time'=>time())
+	$data=array('users' => array(),'cat_id' => 0);//100 10 user list array('val'=>$val,'time'=>time())
 }
+if (!isset($data['time'])) $data['time'] = time();
 
 if (!$submit) {
 	$ans['text']=Load::loadTEXT('-doc/get.php?src='.$conf['dir'].'/articles/stat');
