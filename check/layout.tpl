@@ -18,15 +18,10 @@
 	
 	{olditems:}
 		<div class="mb-3">
-			{Производитель} {Артикул} <i>{Код?Код}</i><br>
+			<a href="/catalog/{producer}/{article}">{Производитель} {Артикул}</a> <i>{Код?Код}</i><br>
 			<small>{path}</small><br>
-			<small class="a" data-toggle="collapse" data-target="#print{~key}">{Наименование|Артикул}</small><br>
-			
-			<div id="print{~key}" class="collapse card">
-				<div class="card-body">{~print(.)}</div>
-			</div>
-			{~inArray(producer,provs)?producer}
-		</div>
+			<small>{Наименование}</small>
+	</div>
 {misfiles:}
 	<h1>Поиск неиспользуемых файлов</h1>
 	{.:ans.msg}
