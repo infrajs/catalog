@@ -43,8 +43,7 @@
 		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
 		{Скрыть фильтры в полном описании??:print_more}
 		
-		<!--<div><small class="text-muted">{itemrow}</small></div>-->
-		<span class="a gagarin">Показать все модификации</span>
+		<small class="text-muted a gagarin">{itemrow}</small>
 		<div style="display:none">
 			{items?:showitems}
 		</div>
