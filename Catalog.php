@@ -254,7 +254,7 @@ class Catalog
 			return $params;
 		}, array($group));
 	}
-	public static function calcParams(&$params, $md) {
+	public static function calcParams(&$params, $md, &$ans = array()) {
 		//Поиск
 		$poss = Catalog::getPoss($md['group']);
 		$count = sizeof($poss); //Позиций в группах
@@ -264,6 +264,9 @@ class Catalog
 		$poss = $res['list'];
 		$search = sizeof($poss); //Позиций найдено
 		
+		$ans['search'] = $search;//Позиций найдено
+		$ans['count'] = $count;//Позиций в группе
+
 		foreach ($params as $k => &$prop) {
 			if ($prop['more']){
 				foreach ($poss as &$pos) {

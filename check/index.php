@@ -31,6 +31,10 @@ return Rest::get( function () {
 			Check::show('repeats', $data);
 		}
 	],
+	"oldpos", function ($key) {
+		$ans = Check::oldpos();
+		Check::show($key, $ans);
+	},
 	"misfiles", function ($key) {
 		$ans = Check::misfiles();
 		Check::show($key, $ans);

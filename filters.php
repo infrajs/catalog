@@ -54,7 +54,7 @@ $res = Once::func( function ($md) {
 
 	
 	//ПОСЧИТАЛИ FILTER со всеми md
-	Catalog::calcParams($params, $md);
+	Catalog::calcParams($params, $md, $ans);
 	
 	
 	/*
@@ -69,13 +69,6 @@ $res = Once::func( function ($md) {
 	if (!is_array($conf['filtershowhard'])) $conf['filtershowhard'] = array($conf['filtershowhard']);
 
 
-	//if (Access::debug()) {
-	//	$ans['debug'] = $params;
-	//}
-	//$ans['params']=$params;
-	$ans['search'] = $search;//Позиций найдено
-	$ans['count'] = $count;//Позиций в группе
-
 	foreach ($params as $k => $param) {
 		if ($param['more']) {
 			$right = array('more', $param['mdid']);    
@@ -88,7 +81,7 @@ $res = Once::func( function ($md) {
 		if (in_array($param['mdid'], $conf['filtershowhard'])) {
 			$showhard = true;
 		}
-		$opt = Catalog::option($params[$k]['option'], $count, $search, $showhard);
+		$opt = Catalog::option($params[$k]['option'], $ans['count'], $ans['search'], $showhard);
 		
 		if (!$opt) {
 			unset($params[$k]);

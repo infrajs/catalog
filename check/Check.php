@@ -5,6 +5,7 @@ use infrajs\template\Template;
 use infrajs\view\View;
 use infrajs\rest\Rest;
 use infrajs\load\Load;
+use akiyatkin\prices\Prices;
 use infrajs\config\Config;
 use akiyatkin\fs\FS;
 use infrajs\path\Path;
@@ -37,6 +38,28 @@ class Check {
 
 		echo Rest::parse('-catalog/check/layout.tpl', $data, $root);
 
+	}
+	
+	public static function oldpos() {
+		$ans = array();
+		$data = Catalog::init();
+		$list = array();
+		$provs = Prices::getList();
+		$provs = array_keys($provs);
+		$ans['provs'] = $provs;
+		Xlsx::runPoss($data, function &(&$pos) use (&$list) {
+			//Если позиция есть в Прайсе1C, Синхронизация = Да
+			//Если позиция есть в прайсе поставщика, то prices = true
+			$r = null;
+			if (!empty($pos['Синхронизация']) && $pos['Синхронизация'] === 'Да') return $r;
+			if (!empty($pos['prices'])) return $r;
+			$pos['path'] = implode(', ', $pos['path']);
+			$list[] = $pos;
+			return $r;
+		});
+		$ans['list'] = $list;
+		$ans['result'] = 1;
+		return $ans;
 	}
 	public static function misfiles() {
 		$dir = Catalog::$conf['dir'];
