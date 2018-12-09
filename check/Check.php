@@ -47,16 +47,27 @@ class Check {
 		$provs = Prices::getList();
 		$provs = array_keys($provs);
 		$ans['provs'] = $provs;
-		Xlsx::runPoss($data, function &($pos) use (&$list) {
+		$prods = array();
+		Xlsx::runPoss($data, function &($pos) use (&$list, &$prods) {
 			//Если позиция есть в Прайсе1C, Синхронизация = Да
 			//Если позиция есть в прайсе поставщика, то prices = true
 			$r = null;
-			if (!empty($pos['Синхронизация']) && $pos['Синхронизация'] === 'Да') return $r;
+			if (!empty($pos['Синхронизация']) && $pos['Синхронизация'] === 'Да' 
+				&& ($pos['Наличие на складе'] != "На заказ" 
+					&& $pos['Наличие на складе'] != "Снято с производства")) return $r;
 			if (!empty($pos['prices'])) return $r;
 			$pos['path'] = implode(', ', $pos['path']);
 			$list[] = $pos;
+			$prods[$pos['producer']] = true;
 			return $r;
 		});
+
+
+		$prods = array_keys($prods);
+		$noprovs = array_values(array_diff($prods, $provs));
+		$ans['noprovs'] = $noprovs;
+
+
 		$ans['list'] = $list;
 		$ans['result'] = 1;
 		return $ans;

@@ -11,6 +11,10 @@
 	</p>
 {oldpos:}
 	<h1>Старые позиции</h1>
+	<h2>Прайсы поставщиков</h2>
+	{~print(provs)}
+	<h2>Производители без прайсов поставщиков со старыми позициями</h2>
+	{~print(noprovs)}
 	<p>Позиции, которых нет в выгрузке из 1С и нет в прайсах поставщиков.</p>
 	{msg?:ans.msg}
 	<p><b>{~length(list)} {~words(:позиция,:позиции,:позиций)}</b></p>
@@ -18,9 +22,10 @@
 	
 	{olditems:}
 		<div class="mb-3">
-			<a href="/catalog/{producer}/{article}">{Производитель} {Артикул}</a> <i>{Код?Код}</i><br>
+			<a href="/catalog/{producer}/{article}">{Производитель} {Артикул}</a> <i>{Код?Код}</i> <i>{Остатки?Остатки}</i><br>
 			<small>{path}</small><br>
-			<small>{Наименование}</small>
+			<small data-toggle="collapse" data-target="#col{~key}" class="a">{Наименование}</small>
+			<div class="collapse" id="col{~key}">{~print(.)}</div>
 	</div>
 {misfiles:}
 	<h1>Поиск неиспользуемых файлов</h1>
