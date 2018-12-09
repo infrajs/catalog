@@ -47,7 +47,7 @@ class Check {
 		$provs = Prices::getList();
 		$provs = array_keys($provs);
 		$ans['provs'] = $provs;
-		Xlsx::runPoss($data, function &(&$pos) use (&$list) {
+		Xlsx::runPoss($data, function &($pos) use (&$list) {
 			//Если позиция есть в Прайсе1C, Синхронизация = Да
 			//Если позиция есть в прайсе поставщика, то prices = true
 			$r = null;
