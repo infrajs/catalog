@@ -1,5 +1,5 @@
 {
-	"pub":["dir", "title", "nds","pageset","showmore"],
+	"pub":["dir", "title", "nds","pageset","showmore","filtermemory"],
 	"dependencies":["path","event"],
 	"css":"style.css",
 	"tester":"tests/",
@@ -41,6 +41,7 @@
 	"md":{ },
 	"filename":"Производитель",
 	"columns":[],
+	"filtermemory":true,
 	"filterstpl":[],
 	"filteroneitem": true,
 	"filtershowhard": [],

@@ -135,9 +135,20 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 		$ans['name'] = $group['name'];//имя группы длинное
 		$ans['descr']  =  isset($group['descr']['Описание группы']) ? $group['descr']['Описание группы'] : '';
 		$ans['title'] = $group['title'];
-		$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active']  =  true;
+		
+		
+		
 		if (!$group['path']) {
+			if (sizeof($ans['filters'])) { //Если есть выбранные фильтры, ссылка на каталог сбрасывает выбор
+				$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['href'] = '';
+				$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['add'] = false;
+				$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['nomark'] = true;
+			} else {
+				$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active'] =  true;
+			}
 			$ans['breadcrumbs'][] = array('href' => 'producers','title' => 'Производители');
+		} else {
+			$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active'] =  true;	
 		}
 	}
 	Cache::setTitle($ans['title']);

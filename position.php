@@ -87,7 +87,8 @@ if ($pos) {
 	
 	$ans['pos']=$pos;
 	array_map(function($p) use (&$ans){
-		$ans['breadcrumbs'][]=array('title'=>$p,'href'=>$p);
+		$group = Catalog::getGroup($p);
+		$ans['breadcrumbs'][]=array('title'=>$group['title'],'href'=>$p);
 	}, $pos['path']);
 	$ans['breadcrumbs'][]=array('href'=>$orig_val, 'title'=>$orig_val);
 	$ans['breadcrumbs'][]=array('active'=>true, 'title'=>$active);
