@@ -225,6 +225,7 @@ class Catalog
 			if (!is_array($conf['filtershowhard'])) $conf['filtershowhard'] = array($conf['filtershowhard']);
 			$showhard = $conf['filtershowhard'];
 
+			
 			uasort($params, function ($p1, $p2) use ($showhard) {
 				
 				if (in_array($p1['mdid'], $showhard) && in_array($p2['mdid'], $showhard) ) {

@@ -29,9 +29,10 @@ return Rest::get( function () {
 			if (!isset($params[$name])) continue;
 			$list[$name] = $params[$name];
 		}
-		foreach ($list as &$opt) {
-			ksort($opt['option']);
-		}
+
+		//foreach ($list as &$opt) {
+		//	ksort($opt['option']);
+		//}
 	}
 	$ans['list'] = $list;
 	return Ans::ret($ans);
