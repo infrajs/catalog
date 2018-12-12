@@ -20,6 +20,6 @@
 {str1:}1
 {str2:}1:more.{...mdid}.no=1
 {cat::}-catalog/cat.tpl
-{stron:}btn-success
+{stron:}btn-warning
 {stroff:}{search?:strsecondary}
 {strsecondary:}btn-secondary
