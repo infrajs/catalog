@@ -48,7 +48,7 @@
 
 	{name:}{Артикул}
 	{havemore:}
-		<div class="padding" style="font-family:Tahoma; font-size:85%; margin-bottom:10px">    
+		<div class="padding" style="font-family:Tahoma; font-size:85%; margin-bottom:4px">    
 			{more::cat_more}
 		</div>
 		<div class="padding">
