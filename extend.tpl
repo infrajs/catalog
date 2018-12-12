@@ -54,7 +54,7 @@
 		<div class="padding">
 			{Цена?:priceblockbig}
 		</div>
-		{Описание?:descrshow}
+		{#Описание?:descrshow}
 		{descrshow:}
 		<div class="padding">
 			<span style="border-bottom:1px dashed gray; cursor:pointer" onclick="$(this).next().slideToggle();">Описание</span>

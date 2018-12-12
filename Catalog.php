@@ -1129,6 +1129,7 @@ class Catalog
 			$pos['images'] = array();
 			$pos['texts'] = array();
 			$pos['files'] = array();
+			$pos['video'] = array();
 			Cache::addCond(['akiyatkin\\boo\\Cache','getModifiedTime'],[Catalog::$conf['dir']]);
 			if (!empty($pos['Файлы'])) {
 				$list = explode(', ', $pos['Файлы']);	
@@ -1176,6 +1177,7 @@ class Catalog
 		$pos['images'] = $arr['images'];
 		$pos['texts'] = $arr['texts'];
 		$pos['files'] = $arr['files'];
+		$pos['video'] = $arr['video'];
 		return $pos;
 	}
 	public static function getIndex($dir) {
