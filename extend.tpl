@@ -4,7 +4,7 @@
 			Цена: <span style="font-size:20px">{~cost(Цена)} руб.</span>{:nds}<br> 
 			<!--По вопросам приобретения обращайтесь по телефонам в <a href="/contacts">контактах</a>.-->
 		</div>
-	{nds:}{~conf.catalog.nds?:ndsshow}{ndsshow:} c <abbr title="Налог на Добавленную Стоимость">НДС</abbr>
+	{nds:}{~conf.catalog.nds?:ndsshow}{ndsshow:} c НДС
 {pos-sign:}
 	<p>
 		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}/{group}{:cat.mark.set}">{Группа}</a><br>
