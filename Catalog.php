@@ -24,7 +24,7 @@ class Catalog
 	public static $data = false; 
 	public static function getOptions(){
 			$conf = Catalog::$conf;
-			$columns = array_merge(array("Наименование","Файлы", "Артикул","Производитель","Цена","Описание","Скрыть фильтры в полном описании"),$conf['columns']);
+			$columns = array_merge(array("Наименование","Файлы","Фото","Артикул","Производитель","Цена","Описание","Скрыть фильтры в полном описании"),$conf['columns']);
 			$options = array(
 				'root' => $conf['title'],
 				'more' => true,
@@ -1168,6 +1168,11 @@ class Catalog
 			Catalog::setItemRowValue($pos);
 			$dir = Catalog::$conf['dir'].$prod.'/images/';
 			$images = Catalog::getIndex($dir);
+			if (isset($pos['Фото'])) {
+				$key = mb_strtolower(Path::encode($pos['Фото']));
+				if (isset($images[mb_strtolower($key)])) $pos['images'] = array_merge($images[mb_strtolower($key)], $pos['images']);
+				if (isset($images[mb_strtolower($prod.'-'.$key)])) $pos['images'] = array_merge($images[mb_strtolower($prod.'-'.$key)], $pos['images']);
+			}
 			if (isset($images[mb_strtolower($art)])) $pos['images'] = array_merge($images[mb_strtolower($art)], $pos['images']);
 			if (isset($images[mb_strtolower($prod.'-'.$art)])) $pos['images'] = array_merge($images[mb_strtolower($prod.'-'.$art)], $pos['images']);
 			

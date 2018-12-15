@@ -104,7 +104,7 @@
 {strбольшая:}Большая
 {images:}
 	{descr.Картинка=:strбольшая?:bigimg}
-	<div class="cat_images" style="clear:both; text-align:center; background-color:white; margin-top:10px; margin-bottom:10px;">
+	<div class="cat_images" style="clear:both; text-align:center; margin-top:10px; margin-bottom:10px;">
 		{descr.Картинка=:strбольшая?(~length(images)>:1?images::image)?images::imagedef}
 		<div style="clear:both"></div>
 	</div>
@@ -135,7 +135,7 @@
 			</a>
 		</div>
 {producer:}
-	<div style="float:right; background-color:white; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
+	<div style="float:right; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
 		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}/{producer}{:cat.mark.set}">
 			<img style="margin-left:5px" src="/-imager/?w=160&h=100&src={Config.get(:strcatalog).dir}{producer}/&or=-imager/empty.png" />
 		</a>
