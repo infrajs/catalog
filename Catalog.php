@@ -29,7 +29,7 @@ class Catalog
 				'root' => $conf['title'],
 				'more' => true,
 				'Имя файла' => $conf['filename'],
-				'Игнорировать имя листа' => $conf['ignorelistname'],
+				'Игнорировать имена листов' => $conf['ignorelistname'],
 				'listreverse' => $conf['listreverse'],
 				'Известные колонки' => $columns
 				);
