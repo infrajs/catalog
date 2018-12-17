@@ -500,13 +500,19 @@ class Catalog
 				$r = null;
 				$subgroups[$group['id']] = array(
 					'title' => $group['title'], 
+					'count' => sizeof(Catalog::getPoss([$group['id'] => 1])),
 					'id' => $group['id'], 
 					'name' => $group['name']
 				);
 				if (empty($group['childs'])) return $r;
 				$childs = array();
 				array_walk($group['childs'], function ($g) use (&$childs) {
-					$childs[] = array('title' => $g['title'], 'name' => $g['name'], 'id' => $g['id'], );
+					$childs[] = array(
+						'title' => $g['title'], 
+						'count' => sizeof(Catalog::getPoss([$g['id'] => 1])),
+						'name' => $g['name'], 
+						'id' => $g['id']
+					);
 				});
 				$subgroups[$group['id']]['childs'] = $childs;
 				return $r;
@@ -526,10 +532,10 @@ class Catalog
 			foreach ($pos['path'] as $v) {
 				if (!isset($groups[$v])) {
 					$groups[$v] = array('pos' => Catalog::getPos($pos), 'count' => 0);
+					if (empty($groups[$v]['pos']['images'])) {
+						$groups[$v]['pos'] = Catalog::getPos($pos);
+					}
 				};
-				if (empty($groups[$v]['pos']['images'])) {
-					$groups[$v]['pos'] = Catalog::getPos($pos);
-				}
 				$groups[$v]['count']++;
 			}
 			$rpath = array();
@@ -539,6 +545,7 @@ class Catalog
 			}
 			$path = $rpath;
 		}
+
 		if (!sizeof($path)) {
 			$conf = Catalog::$conf;
 			if (!empty($subgroups[Path::encode($conf['title'])]['childs'])) {
@@ -570,9 +577,25 @@ class Catalog
 					'producer' => $pos['producer'], 
 					'images' => $pos['images']
 				);
-				$childs[] = array_merge($g, array('pos' => $posd, 'count' => $groups[$g['id']]['count']));
+				if (!empty($subgroups[$g['id']]['childs'])) {
+					$g['childs'] = $subgroups[$g['id']]['childs'];
+				} else {
+					$g['childs'] = array();
+				}
+				
+				foreach ($g['childs'] as $k => $gc) {
+					if (!$subgroups[$gc['id']]['count']) {
+						unset($g['childs'][$k]);
+					}
+				}
+				$g['childs'] = array_values($g['childs']);
+				$childs[] = array_merge($g, array(
+					'pos' => $posd, 
+					'count' => $groups[$g['id']]['count'])
+				);
 			}
 		}
+		
 		return $childs;
 	}
 	public static function setItemRowValue(&$pos) {

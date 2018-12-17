@@ -1,17 +1,9 @@
 <?php
-
-namespace infrajs\catalog;
 use infrajs\excel\Xlsx;
 use infrajs\load\Load;
 use infrajs\ans\Ans;
+use infrajs\catalog\Catalog;
 use infrajs\router\Router;
-
-
-if (!is_file('vendor/autoload.php')) {
-	chdir('../../../');
-	require_once('vendor/autoload.php');
-	Router::init();
-}
 
 
 $ans=array();
