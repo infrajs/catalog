@@ -1,6 +1,9 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
-	<div class="float-right">{data.is=:isproducer?:Производитель}{data.is=:isgroup?:Группа}{data.is=:issearch?:Поиск}</div>
+	<div class="float-right">
+		{data.is=:isproducer?:Производитель}{data.is=:isgroup?:Группа}{data.is=:issearch?:Поиск}, 
+		{data.count} {~words(data.count,:позиция,:позиции,:позиций)}
+	</div>
 	{data.count?data:searchgood?data:searchbad}
 	{Группа:}Группа
 	{Поиск:}Поиск
@@ -40,8 +43,8 @@
 {issearch:}search
 {searchgood:}
 	<h1>{data.name}</h1>
+	<div style="clear:both"></div>
 	<div id="filgroups"></div>
-	<p class="text-right">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</p>
 	{~length(data.filters)?:showfilters}
 		
 	{data.childs:cat.groups}
@@ -110,7 +113,7 @@
 		{empty?:pagenumt?:pagenuma}
 	</li>
 	{pagenumt:}<a class="page-link">{title}</a>
-	{pagenuma:}<a class="page-link" rel="nofollow" data-anchor='.catgrouplist' href="/{crumb}?p={num}{:cat.mark.aset}">{title}</a>
+	{pagenuma:}<a class="page-link" rel="nofollow" data-anchor='#filgroups' href="/{crumb}?p={num}{:cat.mark.aset}">{title}</a>
 {pageact:} active
 {pagedis:} disabled
 {space:}&nbsp;

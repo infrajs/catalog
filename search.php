@@ -92,8 +92,26 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 		if (sizeof($ans['childs']) > 0) $ans['list'] = array();
 	}
 	
-	
-	
+	if ($conf['showgroupsalways'] && sizeof($ans['childs']) == 0) { 
+		// Если нет влжоенных групп, показываем группы с предыдущего уровня
+		if ($md['group']) {
+			foreach($md['group'] as $g => $one) break;
+			$g = Catalog::getGroup($g);
+
+			$newmd = $md;
+			$newmd['group'] = array();
+			if (sizeof($g['path'])>1) {
+				$newg = $g['path'][sizeof($g['path'])-2];
+				
+				$newmd['group'][$newg] = 1;
+			}
+			$newans = array();
+			Catalog::search($newmd, $newans);
+			$ans['childs'] = $newans['childs'];
+			
+		}
+	}
+
 	//BREADCRUMBS TITLE
 	if(!$md['group'] && $md['producer'] && sizeof($md['producer'])  ==  1) { //ПРОИЗВОДИТЕЛЬ
 		if ($md['producer']) foreach ($md['producer'] as $producer  =>  $v) break;

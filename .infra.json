@@ -41,6 +41,7 @@
 	"md":{ },
 	"filename":"Производитель",
 	"columns":[],
+	"showgroupsalways":false,
 	"filtermemory":true,
 	"filterstpl":[],
 	"filteroneitem": true,

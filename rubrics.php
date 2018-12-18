@@ -11,7 +11,7 @@ $ans=array();
 $fd=Catalog::initMark($ans);
 //На главной странице каталога показываются
 
-$data=Load::loadJSON('-catalog/search.php?m='.$ans['m']);
+$data = Load::loadJSON('-catalog/search.php?m='.$ans['m']);
 
 $ans['childs']=$data['childs'];
 
