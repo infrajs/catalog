@@ -63,7 +63,7 @@
 				</div>
 			</a>
 		</div>
-		{gimg:}<img src="/-imager/?src={pos.images.0}&w=130&h=90">
+		{gimg:}<img src="/-imager/?src={~conf.catalog.dir}images/{id}.jpg&or={pos.images.0}&w=130&h=90">
 {breadcrumbs:}
 	<ul class="breadcrumb">
 		{::brcrumb}
