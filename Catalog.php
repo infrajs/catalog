@@ -532,10 +532,21 @@ class Catalog
 			foreach ($pos['path'] as $v) {
 				if (!isset($groups[$v])) {
 					$groups[$v] = array('pos' => Catalog::getPos($pos), 'count' => 0);
-					if (empty($groups[$v]['pos']['images'])) {
-						$groups[$v]['pos'] = Catalog::getPos($pos);
+					$img = Path::theme(Catalog::$conf['dir'].'images/'.$v.'.jpg');
+					if(!$img) $img = Path::theme(Catalog::$conf['dir'].'images/'.$v.'.png');
+					if ($img) $groups[$v]['img'] = Path::pretty(Path::toutf($img));
+					else if(isset($groups[$v]['pos']['images'][0])) {
+						$groups[$v]['img'] = $groups[$v]['pos']['images'][0];
+					} else {
+						$groups[$v]['img'] = false;
 					}
 				};
+				if (empty($groups[$v]['pos']['images'])) {
+					$groups[$v]['pos'] = Catalog::getPos($pos);
+					if(isset($groups[$v]['pos']['images'][0])) {
+						$groups[$v]['img'] = $groups[$v]['pos']['images'][0];
+					}
+				}
 				$groups[$v]['count']++;
 			}
 			$rpath = array();
@@ -577,6 +588,7 @@ class Catalog
 					'producer' => $pos['producer'], 
 					'images' => $pos['images']
 				);
+				$g['img'] = $groups[$g['id']]['img'];
 				if (!empty($subgroups[$g['id']]['childs'])) {
 					$g['childs'] = $subgroups[$g['id']]['childs'];
 				} else {

@@ -56,7 +56,7 @@
 		<div class="col-sm-6 mb-4">
 			<a class="d-flex p-1 rounded" style="align-items:center; min-height:92;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{id}{:mark.set}">
 				<div style="flex-basis: 130px; text-align:center">
-					{pos.images.0?:gimg}
+					{img?:gimg}
 				</div>
 				<div style="flex:1; padding-left: 5px;">
 					{title}

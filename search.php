@@ -85,7 +85,6 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 	$ans['producers'] = array();
 	$ans['numbers'] = array(); //Данные для построения интерфейса постраничной разбивки
 	$ans['list'] = array(); //Массив позиций
-	
 	Catalog::search($md, $ans);
 	$conf = Catalog::$conf;
 	if (empty($conf['alwaysshowposs'])) {
@@ -119,6 +118,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 		//is!, descr!, text!, name!, breadcrumbs!
 		$ans['is'] = 'producer';
 		$name = Catalog::getProducer($producer);
+		
 		$ans['name'] = $name;
 		$ans['title'] = $name;
 		$conf = Config::get('catalog');
@@ -170,6 +170,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 		}
 	}
 	Cache::setTitle($ans['title']);
+	
 	Catalog::sort($ans['list'], $md);
 
 	//Numbers
