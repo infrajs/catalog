@@ -24,7 +24,7 @@
 		<div class="mb-3">
 			<a href="/catalog/{producer}/{article}">{Производитель} {Артикул}</a><br>
 			<small data-toggle="collapse" data-target="#col{~key}" class="a">{path}</small>
-			<div class="collapse" id="col{~key}">{Наименование} {more.Арт} {Арт} {Остатки} {Код} {~print}</div>
+			<div class="collapse" id="col{~key}">{Наименование} {more.Арт} {Арт} {Остатки} {Код}</div>
 	</div>
 {misfiles:}
 	<h1>Поиск неиспользуемых файлов</h1>
