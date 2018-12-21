@@ -36,7 +36,7 @@
 		<div style="float:right">
 			{:producer}
 		</div>
-		<h1 style="text-align:left">{Наименование}{descr.Артикул!:Скрытый?:startart}</h1>
+		<h1 style="text-align:left">{Наименование}{descr.Артикул!:strСкрытый?:startart}</h1>
 		<div><small class="text-muted">{itemrow}</small></div>
 		{~length(images)?:images}
 		{:extend.pos-page}
@@ -55,6 +55,7 @@
 			{:extend.pos-sign}
 		</div>
 	</div>
+	{strСкрытый:}Скрытый
 	{startart:} <nobr>{Производитель}</nobr> <nobr>{Артикул}</nobr>
 {showitems:}
 	<table class="table table-striped table-hover">
