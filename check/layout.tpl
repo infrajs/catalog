@@ -22,10 +22,9 @@
 	
 	{olditems:}
 		<div class="mb-3">
-			<a href="/catalog/{producer}/{article}">{Производитель} {Артикул}</a> <i>{Код?Код}</i> <i>{Остатки?Остатки}</i><br>
-			<small>{path}</small><br>
-			<small data-toggle="collapse" data-target="#col{~key}" class="a">{Наименование}</small>
-			<div class="collapse" id="col{~key}">{~print(.)}</div>
+			<a href="/catalog/{producer}/{article}">{Производитель} {Артикул}</a><br>
+			<small data-toggle="collapse" data-target="#col{~key}" class="a">{path}</small>
+			<div class="collapse" id="col{~key}">{Наименование} {more.Арт} {Арт} {Остатки} {Код} {~print}</div>
 	</div>
 {misfiles:}
 	<h1>Поиск неиспользуемых файлов</h1>
