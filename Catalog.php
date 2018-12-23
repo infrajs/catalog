@@ -24,7 +24,7 @@ class Catalog
 	public static $data = false; 
 	public static function getOptions(){
 			$conf = Catalog::$conf;
-			$columns = array_merge(array("Наименование","Файлы","Фото","Артикул","Производитель","Цена","Описание","Скрыть фильтры в полном описании"),$conf['columns']);
+			$columns = array_merge(array("Наименование","Файлы","Фото","prod2","Артикул","Производитель","Цена","Описание","Скрыть фильтры в полном описании"),$conf['columns']);
 			$options = array(
 				'root' => $conf['title'],
 				'more' => true,
@@ -1201,15 +1201,11 @@ class Catalog
 				}
 			}
 			Catalog::setItemRowValue($pos);
-			$dir = Catalog::$conf['dir'].$prod.'/images/';
-			$images = Catalog::getIndex($dir);
-			if (isset($pos['Фото'])) {
-				$key = mb_strtolower(Path::encode($pos['Фото']));
-				if (isset($images[mb_strtolower($key)])) $pos['images'] = array_merge($images[mb_strtolower($key)], $pos['images']);
-				if (isset($images[mb_strtolower($prod.'-'.$key)])) $pos['images'] = array_merge($images[mb_strtolower($prod.'-'.$key)], $pos['images']);
+			
+			Catalog::searchImages($pos, $prod, $art);
+			if (isset($pos['prod2'])) {
+				Catalog::searchImages($pos, $pos['prod2'], $art);
 			}
-			if (isset($images[mb_strtolower($art)])) $pos['images'] = array_merge($images[mb_strtolower($art)], $pos['images']);
-			if (isset($images[mb_strtolower($prod.'-'.$art)])) $pos['images'] = array_merge($images[mb_strtolower($prod.'-'.$art)], $pos['images']);
 			
 			return $pos;
 		}, $args);
@@ -1220,6 +1216,17 @@ class Catalog
 		$pos['files'] = $arr['files'];
 		$pos['video'] = $arr['video'];
 		return $pos;
+	}
+	public static function searchImages(&$pos, $prod, $art) {
+		$dir = Catalog::$conf['dir'].$prod.'/images/';
+		$images = Catalog::getIndex($dir);
+		if (isset($pos['Фото'])) {
+			$key = mb_strtolower(Path::encode($pos['Фото']));
+			if (isset($images[mb_strtolower($key)])) $pos['images'] = array_merge($images[mb_strtolower($key)], $pos['images']);
+			if (isset($images[mb_strtolower($prod.'-'.$key)])) $pos['images'] = array_merge($images[mb_strtolower($prod.'-'.$key)], $pos['images']);
+		}
+		if (isset($images[mb_strtolower($art)])) $pos['images'] = array_merge($images[mb_strtolower($art)], $pos['images']);
+		if (isset($images[mb_strtolower($prod.'-'.$art)])) $pos['images'] = array_merge($images[mb_strtolower($prod.'-'.$art)], $pos['images']);
 	}
 	public static function getIndex($dir) {
 		if (!Path::theme($dir)) return array();
