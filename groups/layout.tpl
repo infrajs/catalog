@@ -3,6 +3,9 @@
 		.-catalog-groups .fa {
 			cursor:pointer;
 		}
+		.-catalog-groups a {
+			font-size:120%;
+		}
 	</style>
 	<h1>{~conf.catalog.title}</h1>
 	{data.groups[~conf.catalog.title]childs::child}
