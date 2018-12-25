@@ -26,5 +26,6 @@ if ($group) {
 	foreach ($group['path'] as $k => $g) {
 		$ans['groups'][$g]['active'] = true;
 	}
+	$ans['path'] = $group['path'];
 }
 return Ans::ret($ans);

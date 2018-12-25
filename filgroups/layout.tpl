@@ -1,12 +1,12 @@
 {root:}
 {:ROWS}
 {ROWS:}
-<table class="table m-0">
+<table class="table m-0 w-auto">
 {data.list::param}
 </table>
 {param:}
 	<tr>
-		<td style="white-space: nowrap;">{title}</td>
+		<td style="white-space: nowrap;" class="pt-3">{title}</td>
 		<td>{more?option::optmore?option::optmain}</td>
 	</tr>
 	{optmore:}

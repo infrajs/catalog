@@ -7,7 +7,7 @@
 			font-size:120%;
 		}
 	</style>
-	<h1>{~conf.catalog.title}</h1>
+	{data.path?:h1link?:h1}
 	{data.groups[~conf.catalog.title]childs::child}
 	<script>
 		domready(function(){
@@ -17,9 +17,12 @@
 			})
 		})
 	</script>
+	{h1link:}<a href="/catalog"><h1>{~conf.catalog.title}</h1></a>
+	{h1:}<h1>{~conf.catalog.title}</h1>
 </div>
+{cat::}-catalog/cat.tpl
 {group:}
-	{childs?:gr}<a data-anchor=".-catalog-groups" href="/catalog/{id}" class="{active?:clsactive}">{title}</a><br>
+	{childs?:gr}<a data-anchor=".-catalog-groups" href="/catalog/{id}{:cat.mark.server.add}" class="{active?:clsactive}">{title}</a><br>
 	<div class="pl-4 childs" style="{active??:strnone}">
 		{childs::child}
 	</div>

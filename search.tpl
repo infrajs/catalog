@@ -3,6 +3,7 @@
 	
 	<div class="float-right">{:showcount}</div>
 	{data.count?data:searchgood?data:searchbad}
+	{:text}
 	{Группа:}Группа
 	{Поиск:}Поиск
 	{Производитель:}Производитель
@@ -37,8 +38,7 @@
 	<div id="filgroups"></div>
 	<p>К сожалению позиции не найдены.</p>
 	{~length(data.filters)?:showfilters}
-	
-	{:text}
+
 {isproducer:}producer
 {isgroup:}group
 {issearch:}search
@@ -53,7 +53,7 @@
 	{~length(list)?:cat_showlist}
 	
 	<p>{descr}</p>
-	{:text}
+	
 	
 	<!--<h2>{data.name}</h2>
 	{~length(data.filters)?:showfilters}
