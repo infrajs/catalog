@@ -1,13 +1,14 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
-	<div class="float-right">
-		{data.is=:isproducer?:Производитель}{data.is=:isgroup?:Группа}{data.is=:issearch?:Поиск}, 
-		{data.count} {~words(data.count,:позиция,:позиции,:позиций)}
-	</div>
+	
+	<div class="float-right">{:showcount}</div>
 	{data.count?data:searchgood?data:searchbad}
 	{Группа:}Группа
 	{Поиск:}Поиск
 	{Производитель:}Производитель
+{showcount:}
+	{data.is=:isproducer?:Производитель}{data.is=:isgroup?:Группа}{data.is=:issearch?:Поиск}, 
+	{data.count} {~words(data.count,:позиция,:позиции,:позиций)}
 {showfilters:}
 	<style scoped>
 		.showfilters a {

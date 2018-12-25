@@ -1,7 +1,7 @@
 {root:}
 {:ROWS}
 {ROWS:}
-<table class="table">
+<table class="table m-0">
 {data.list::param}
 </table>
 {param:}

@@ -486,11 +486,8 @@ class Catalog
 			}
 		}
 	}
-	public static function getGroups($list, $now = false) {
-		//Groups
-		//'все группы'
-	
-		$subgroups = Catalog::cache(function () {
+	public static function getSubgroups() {
+		return Catalog::cache(function () {
 			//Микро вставка всё ради того чтобы не пользоваться $data на этом уровне
 			//данный кэш один для любой страницы каталога
 			$subgroups = array();
@@ -519,6 +516,12 @@ class Catalog
 			});
 			return $subgroups;
 		});
+	}
+	public static function getGroups($list, $now = false) {
+		//Groups
+		//'все группы'
+	
+		$subgroups = Catalog::getSubgroups();
 
 		$groups = array();
 		$path = array();
