@@ -17,9 +17,9 @@
 			})
 		})
 	</script>
-	{h1link:}<a href="/catalog"><h1>{~conf.catalog.title}</h1></a>
-	{h1:}<h1>{~conf.catalog.title}</h1>
 </div>
+	{h1link:}<h1><a href="/catalog">{~conf.catalog.title}</a></h1>
+	{h1:}<h1>{~conf.catalog.title}</h1>
 {cat::}-catalog/cat.tpl
 {group:}
 	{childs?:gr}<a data-anchor=".-catalog-groups" href="/catalog/{id}{:cat.mark.server.add}" class="{active?:clsactive}">{title}</a><br>
