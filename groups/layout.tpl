@@ -1,9 +1,9 @@
 <div class="-catalog-groups">
 	<style>
-		.-catalog-groups .fa {
+		.-catalog-groups .far {
 			cursor:pointer;
 		}
-		.-catalog-groups a {
+		.-catalog-groups {
 			font-size:120%;
 		}
 	</style>
@@ -12,7 +12,7 @@
 	<script>
 		domready(function(){
 			var div = $('.-catalog-groups');
-			div.find('.fa').click( function () {
+			div.find('.far').click( function () {
 				$(this).toggleClass('fa-minus-square').toggleClass('fa-plus-square').parent().find('.childs:first').slideToggle('slow');
 			})
 		})
@@ -29,7 +29,7 @@
 	{strnone:}display:none;
 	{clsactive:}font-weight-bold
 	{gr:}{active?:minus?:plus}
-	{plus:}<span class="text-muted fa fa-plus-square fa-sm"></span> 
-	{minus:}<span class="text-muted fa fa-minus-square fa-sm"></span> 
+	{plus:}<span class="text-muted far fa-plus-square"></span> 
+	{minus:}<span class="text-muted far fa-minus-square"></span> 
 {child:}
 	<div>{data.groups[id]:group}</div>
