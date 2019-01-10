@@ -164,7 +164,7 @@ $ans  =  Catalog::cache(function ($md, $page) use($ans) {
 			} else {
 				$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active'] =  true;
 			}
-			$ans['breadcrumbs'][] = array('href' => 'producers','title' => 'Производители');
+			//$ans['breadcrumbs'][] = array('href' => 'producers','title' => 'Производители');
 		} else {
 			$ans['breadcrumbs'][sizeof($ans['breadcrumbs'])-1]['active'] =  true;	
 		}

@@ -1,7 +1,9 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
-	
 	<div class="float-right">{:showcount}</div>
+	<h1>{data.name|title}</h1>
+	<div style="clear:both"></div>
+	<div id="filgroups"></div>
 	{data.count?data:searchgood?data:searchbad}
 	{:text}
 	{Группа:}Группа
@@ -34,8 +36,7 @@
 		</div>
 {cat.mark.add:}{:cat.mark.server.add}
 {searchbad:}
-	<h1>{title}</h1>
-	<div id="filgroups"></div>
+	<div class="mb-4"></div>
 	<p>К сожалению позиции не найдены.</p>
 	{~length(data.filters)?:showfilters}
 
@@ -43,9 +44,6 @@
 {isgroup:}group
 {issearch:}search
 {searchgood:}
-	<h1>{data.name}</h1>
-	<div style="clear:both"></div>
-	<div id="filgroups"></div>
 	{~length(data.filters)?:showfilters}
 		
 	{data.childs:cat.groups}

@@ -132,9 +132,12 @@
 	{imagedef:}
 		<div class="float-left" style="margin:5px">
 			<a class="gallery" style="margin-bottom:0;" title="{..Наименование}" href="/-imager/?src={.}">
-				<img class="img-thumbnail" title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?mark=1&h={~key=:0?:320?:150}&top=1&src={.}" />
+				<img class="img-thumbnail" title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?mark=1&h={~key=:0?:str320?:str150}&top=1&src={.}" />
 			</a>
 		</div>
+	{str0:}0
+	{str320:}320
+	{str150:}150
 {producer:}
 	<div style="float:right; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
 		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}/{producer}{:cat.mark.set}">
