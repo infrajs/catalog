@@ -37,7 +37,7 @@
 {cat.mark.add:}{:cat.mark.server.add}
 {searchbad:}
 	<div class="mb-4"></div>
-	<p>К сожалению позиции не найдены.</p>
+	<p>К сожалению, позиции не найдены.</p>
 	{~length(data.filters)?:showfilters}
 
 {isproducer:}producer
