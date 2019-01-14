@@ -31,25 +31,21 @@ return Rest::get( function () {
 			$ar = $arlist[Catalog::$conf['title']];
 		} 
 	}
-	
-	
-
-	
 
 	$list = array();
 	
 	if ($ar) {
 		$params = Catalog::getParams($md['group']);
 		Catalog::calcParams($params, $md);
-
 		foreach ($ar as $name) {
 			if (!isset($params[$name])) continue;
 			$list[$name] = $params[$name];
 		}
-
-		//foreach ($list as &$opt) {
-		//	ksort($opt['option']);
-		//}
+		if (Catalog::$conf['filgroupsissort']) {
+			foreach ($list as &$opt) {
+				ksort($opt['option']);
+			}
+		}
 	}
 	$ans['list'] = $list;
 	return Ans::ret($ans);
