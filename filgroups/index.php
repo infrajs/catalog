@@ -44,6 +44,11 @@ return Rest::get( function () {
 		if (Catalog::$conf['filgroupsissort']) {
 			foreach ($list as &$opt) {
 				ksort($opt['option']);
+				$newopt = array();
+				foreach ($opt['option'] as $k=>$val) {
+					$newopt[$k.'a'] = $val; //Каждый ключ должен быть строкой не по типу а по значению иначе javascript меняет порядок свойств var obj3 = {"12-5": {},"13": {} } первым свойством в цикле будет 13
+				}
+				$opt['option'] = $newopt;
 			}
 		}
 	}

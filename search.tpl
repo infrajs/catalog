@@ -119,7 +119,7 @@
 {cat::}-catalog/cat.tpl
 {extend::}-catalog/extend.tpl
 {text:}
-	{text}
-	{textinfo.gallery::textimg}
+	{data.text}
+	{data.textinfo.gallery::textimg}
 	{textimg:}
 		<img class="img-fluid" src="/-imager/?w=1000&amp;src={...gallerydir}{.}">
