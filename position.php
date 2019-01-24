@@ -49,13 +49,17 @@ if (isset($_GET['seo'])) {
 		http_response_code(404);
 		return Ans::err($ans,'Position not found');
 	}
+	$pos = Catalog::getPos($pos);
 	$link = $_GET['seo'];
 	$link = $link.'/'.urlencode($pos['producer']).'/'.urlencode($pos['article']);
 	$ans['external']='-catalog/seo.json';
 	$ans['title'] = $pos['Производитель'].' '.$pos['Артикул'];
 	if(!empty($pos['Наименование'])) $ans['title'] = $pos['Наименование'].' '.$ans['title'];
-	$ans['canonical']=View::getPath().$link;
+	$ans['canonical'] = View::getPath().$link;
 	
+	if (isset($pos['images'][0])) {
+		$ans['image_src'] = '/-imager/?w=400&src='.$pos['images'][0];	
+	}
 	$seo = Load::loadJSON('~'.$link.'/seo.json');
 	if ($seo) {
 		$ans = array_merge($ans, $seo);
