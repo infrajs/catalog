@@ -1,33 +1,36 @@
-<style scoped>
-	.cat-position .bigimage {
-		border-top:1px dotted gray;
-		text-align:center;
-		padding-top:10px;
-		padding-bottom:10px;
-	}
+{root:}
+	{:css}
+	{data.breadcrumbs:cat.breadcrumbs}
+	{data.result?data.pos:start?:error}
+{css:}
+	<style scoped>
+		.cat-position .bigimage {
+			border-top:1px dotted gray;
+			text-align:center;
+			padding-top:10px;
+			padding-bottom:10px;
+		}
 
-	.cat-position .files {
-		margin:0;padding:0;
-		list-style: none;
-		margin-top: 6px;
-	}
-		.cat-position .files li {
+		.cat-position .files {
+			margin:0;padding:0;
+			list-style: none;
+			margin-top: 6px;
+		}
+			.cat-position .files li {
+				line-height: 18px;
+				padding-left: 25px;
+			}
+			.cat-position .files .ico {
+				/*background-image: url("images/pdf_icon.png");*/
+				background-repeat: no-repeat;
+				background-position: 0px 1px;
+			}
+		/*.cat-position .information {
 			line-height: 18px;
-			padding-left: 25px;
-		}
-		.cat-position .files .ico {
-			/*background-image: url("images/pdf_icon.png");*/
-			background-repeat: no-repeat;
-			background-position: 0px 1px;
-		}
-	/*.cat-position .information {
-		line-height: 18px;
-		margin-top: 25px;
-		font-weight: bold;
-	}*/
-</style>
-{data.breadcrumbs:cat.breadcrumbs}
-{data.result?data.pos:start?:error}
+			margin-top: 25px;
+			font-weight: bold;
+		}*/
+	</style>
 {error:}
 	<div class="alert alert-danger">Позиция <b>{crumb.parent.name} {crumb.name}</b> не найдена!</div>
 {extend::}-catalog/extend.tpl
