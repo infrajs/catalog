@@ -1,7 +1,11 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
 	<h1>Поиск по каталогу</h1>
-	<form style="margin-bottom:30px" class="form-horizontal" onsubmit="
+	{:find}
+	{data.childs:cat.groups}
+	{data.menu:cat.menu}
+{find:}
+	<form class="form-horizontal" onsubmit="
 		var val=$(this).find('[type=text]').val();
 		val=Path.encode(val,true);
 		var layer=Controller.names.catalog;
@@ -18,17 +22,14 @@
 		},1);
 		return false;">
 
-			<div class="row">
-				<div class="col-md-6 col-sm-9" style="margin-bottom:15px;">
-					<input class="form-control input-lg" name="search" type="text" placeholder="Поиск по каталогу">
-				</div>
-				<div class="col-md-3 col-sm-3" style="margin-bottom:15px">
-					<input class="btn btn-primary btn-lg" type="submit" value="Искать">
+			<div class="input-group" style="margin-bottom:15px;">
+				
+				<input class="form-control form-control" name="search" type="text" placeholder="Поиск по каталогу">
+				<div class="input-group-append">
+					<input class="btn btn-primary btn" type="submit" value="Искать">
 				</div>
 			</div>
 	</form>
-	{data.childs:cat.groups}
-	{data.menu:cat.menu}
 {cat::}-catalog/cat.tpl
 {cat.mark.set:}{:cat.mark.client.set}
 {cat.mark.add:}{:cat.mark.client.add}

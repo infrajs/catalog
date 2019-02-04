@@ -1,5 +1,5 @@
 {
-	"pub":["dir", "title", "nds","pageset","showmore","filtermemory"],
+	"pub":["dir", "title", "nds","searchingroups","pageset","showmore","filtermemory"],
 	"dependencies":["path","event"],
 	"css":"style.css",
 	"tester":"tests/",
@@ -27,7 +27,7 @@
 			"func":"/catalog"
 		}
 	},
-	
+	"searchingroups":true,
 	"foldwhen":30,
 	"update":"update.php",
 	"conf":"infrajs\\catalog\\Catalog",

@@ -8,6 +8,7 @@
 		}
 	</style>
 	{data.path?:h1link?:h1}
+	{~conf.catalog.searchingroups?:search}
 	{data.groups[~conf.catalog.title]childs::child}
 	<script>
 		domready(function(){
@@ -18,6 +19,8 @@
 		})
 	</script>
 </div>
+	{find::}-catalog/find.tpl
+	{search:}{:find.find}
 	{h1link:}<h1><a href="/catalog">{~conf.catalog.title}</a></h1>
 	{h1:}<h1>{~conf.catalog.title}</h1>
 {cat::}-catalog/cat.tpl
