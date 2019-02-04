@@ -104,7 +104,7 @@
 		</li>
 {text:}
 	{.}
-{bigimg:}<img class="img-fluid" src="/-imager/?src={images.0}">
+{bigimg:}<img class="img-fluid" src="/-imager/?m=1&src={images.0}">
 {strбольшая:}Большая
 {images:}
 	{descr.Картинка=:strбольшая?:bigimg}
@@ -128,14 +128,14 @@
 	</script>
 	{image:}
 		<div class="float-left" style="margin:5px">
-			<a class="gallery" title="{..Наименование}" href="/-imager/?src={.}">
-				<img class="img-thumbnail" title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?mark=1&h=150&top=1&src={.}" />
+			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
+				<img class="img-thumbnail" title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?m=1&h=150&top=1&src={.}" />
 			</a>
 		</div>
 	{imagedef:}
 		<div class="float-left" style="margin:5px">
-			<a class="gallery" style="margin-bottom:0;" title="{..Наименование}" href="/-imager/?src={.}">
-				<img class="img-thumbnail" title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?mark=1&h={~key=:0?:str320?:str150}&top=1&src={.}" />
+			<a class="gallery" style="margin-bottom:0;" title="{..Наименование}" href="/-imager/?m=1&src={.}">
+				<img class="img-thumbnail" title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?m=1&h={~key=:0?:str320?:str150}&top=1&src={.}" />
 			</a>
 		</div>
 	{str0:}0

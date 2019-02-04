@@ -28,7 +28,7 @@
 	</style>
 {pos-img:}
 		<a href="/{Controller.names.catalog.crumb}/{producer}/{article}{:cat.idsl}{:cat.mark.set}">
-			<img class="img-thumbnail" src="/-imager/?mark=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty.png" />
+			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty.png" />
 		</a>
 {pos-item:}
 	<div class="row cat_item">
