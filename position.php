@@ -82,7 +82,12 @@ if ($pos) {
 
 	$group = Catalog::getGroup($pos['group']);
 	if (isset($group['descr']['Артикул']) && $group['descr']['Артикул'] == 'Скрытый') {
-		$active = $pos['Наименование'];		
+		if(isset($pos['Наименование'])) {
+			$active = $pos['Наименование'];
+		} else {
+			$active = $pos['Артикул'];		
+		}
+		
 	}
 	
 	$ans['path']=$pos['path'];
