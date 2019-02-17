@@ -774,6 +774,7 @@ class Catalog
 	}
 	public static function getDefaultMark() {
 		$mark = new Marker('~auto/.catalog/');
+		$mark->len = 5;
 		foreach (Catalog::$list as $name => $v) {
 			$mark->add($name, $v['fndef'], $v['fncheck']);
 		}

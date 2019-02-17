@@ -3,6 +3,9 @@
 		.-catalog-groups .far {
 			cursor:pointer;
 		}
+		.-catalog-groups .childs .child {
+			margin-bottom:5px;
+		}
 		.-catalog-groups {
 			font-size:120%;
 		}
@@ -35,4 +38,4 @@
 	{plus:}<span class="text-muted far fa-plus-square"></span> 
 	{minus:}<span class="text-muted far fa-minus-square"></span> 
 {child:}
-	<div>{data.groups[id]:group}</div>
+	<div class="child">{data.groups[id]:group}</div>
