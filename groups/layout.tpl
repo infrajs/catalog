@@ -7,7 +7,11 @@
 			margin-bottom:5px;
 		}
 		.-catalog-groups {
-			font-size:120%;
+			/*font-size:100%;*/
+		}
+		.-catalog-groups .point {
+			cursor: pointer;
+			font-size:80%;
 		}
 	</style>
 	{data.path?:h1link?:h1}
@@ -16,8 +20,8 @@
 	<script>
 		domready(function(){
 			var div = $('.-catalog-groups');
-			div.find('.far').click( function () {
-				$(this).toggleClass('fa-minus-square').toggleClass('fa-plus-square').parent().find('.childs:first').slideToggle('slow');
+			div.find('.point').click( function () {
+				$(this).toggleClass('fa-minus').toggleClass('fa-plus').parent().find('.childs:first').slideToggle('slow');
 			})
 		})
 	</script>
@@ -35,7 +39,7 @@
 	{strnone:}display:none;
 	{clsactive:}font-weight-bold
 	{gr:}{active?:minus?:plus}
-	{plus:}<span class="text-muted far fa-plus-square"></span> 
-	{minus:}<span class="text-muted far fa-minus-square"></span> 
+	{plus:}<span style="color:#aaa" class="point fas fa-plus"></span> 
+	{minus:}<span style="color:#aaa" class="point fas fa-minus"></span> 
 {child:}
 	<div class="child">{data.groups[id]:group}</div>
