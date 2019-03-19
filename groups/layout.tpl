@@ -32,7 +32,7 @@
 	{h1:}<h1>{~conf.catalog.title}</h1>
 {cat::}-catalog/cat.tpl
 {group:}
-	{childs?:gr}<a data-anchor=".-catalog-groups" href="/catalog/{id}{:cat.mark.server.add}" class="{active?:clsactive}">{title}</a><br>
+	{childs?:gr}<a data-anchor=".-catalog-groups" href="/catalog/{id}{:cat.mark.server.set}" class="{active?:clsactive}">{title}</a><br>
 	<div class="pl-4 childs" style="{active??:strnone}">
 		{childs::child}
 	</div>

@@ -784,7 +784,8 @@ class Catalog
 	{
 		$val = Ans::GET('val');
 		$val = Path::encode(Path::toutf(strip_tags($val)));
-		if ($val) {
+		$art = Ans::GET('art');
+		if ($val && !$art) {
 			$group = Catalog::getGroup($val);
 			if (!isset($_GET['m'])) $_GET['m'] = '';
 			if ($group) {
