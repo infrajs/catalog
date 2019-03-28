@@ -41,7 +41,10 @@ if(isset($_GET['seo'])){
 			$ans['external']  =  '~catalog/articles/'.$val.'.json';
 		} else {
 			$ans['external']  =  '~catalog/seo.json';
-			$ans['title']  =  $val;
+			$title = $val;
+			$g = Catalog::getGroup($val);
+			if ($g) $title = $g['title'];
+			$ans['title']  =  $title;
 		}
 	} else {
 		$ans['external']  =  '~catalog/seo.json';
