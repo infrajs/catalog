@@ -42,13 +42,11 @@ class Catalog
 			$options = Catalog::getOptions();
 			$conf = Catalog::$conf;
 			$data = Xlsx::init([$conf['dir'], $conf['dir'].'tables/'], $options);
-			
 			//Xlsx::runGroups($data, function (&$gr) {
 			//	$gr['data'] = array_reverse($gr['data']); // Возвращает массив с элементами в обратном порядке
 			//});
 			Event::tik('Catalog.oninit');
 			Event::fire('Catalog.oninit', $data);
-
 			return $data;
 		});
 	}
@@ -82,11 +80,13 @@ class Catalog
 			return $data;
 		}, array($group));
 	}
+
 	/*
 	* getParams Собирает в простую структуру все параметры и возможные значения фильтров для указанной группы
 	*/
 	public static function getParams($group = false){
 		//'все параметры'
+
 		return Catalog::cache(function &($group){
 			$poss = Catalog::getPoss($group);
 
@@ -107,13 +107,13 @@ class Catalog
 				'search' => 0,
 				'option' => array()
 			);
-			$option = array(
+			/*$option = array(
 				'id' => null, //id значения для передачи в адресе
 				'title' => null, //тайтл иллюстрирующий именно это значение
 				'count' => 0, //Количество этого значения без учёта всех фильтров
 				'search' => 0, //Количество этого значения в отфильтрованном списке позиций
 				'filter' => 0 //Количество этого значения без учёта текущего значения этого параметра
-			);
+			);*/
 			//count - сколько всего в группе позиций с указанным параметром
 			//search - сколько всего найдено с md
 			//filter - сколько найдено если данный параметр не указана в md
@@ -126,11 +126,12 @@ class Catalog
 				$prop['mdid'] = $k;
 				$params[$k] = array_merge($parametr, $prop);
 			}
-			
+			$ignores = [];
 			foreach ($poss as $tpos) {
 				$items = Xlsx::getItemsFromPos($tpos);
 				foreach ($items as $pos) {
 					foreach ($main as $k => $prop) {
+						if (isset($ignores[$k])) continue;
 						if (!empty($prop['more'])) continue;
 						$prop = $params[$k];
 						if (isset($pos[$prop['posid']])) {
@@ -161,19 +162,33 @@ class Catalog
 							$id=$idi;//mb_strtolower($idi);
 							if (!Xlsx::isSpecified($id)) continue;
 							if (!isset($params[$k]['option'][$id])) {
-								$params[$k]['option'][$id] = array_merge($option, array(
+								$params[$k]['option'][$id] = array(
+									'count' => 0, //Количество этого значения без учёта всех фильтров
+									'search' => 0, //Количество этого значения в отфильтрованном списке позиций
+									'filter' => 0, //Количество этого значения без учёта текущего значения этого параметра
 									'id' => $idi,
-									'title' => $arname[$i]
-								));
+									'title' => trim($arname[$i])
+								);
 							}
 							$r=true;
 							$params[$k]['option'][$id]['count']++;
 						}
-						if ($r)	$params[$k]['count']++;//Позиций с этим параметром
+						
+						if ($r) {
+							$params[$k]['count']++;//Позиций с этим параметром
+							if ($params[$k]['count'] > 50) {
+								$ignores[$k] = true;
+								unset($params[$k]);
+							} else if ($params[$k]['count'] > 20 && $params[$k]['count'] * 0.5 <= sizeof($params[$k]['option'])) {
+								//Если совпадений меньше 20%
+								$ignores[$k] = true;
+								unset($params[$k]);
+							}
+						}
 					}
-					
 					if (!empty($pos['more'])) {
 						foreach ($pos['more'] as $k => $val) {
+							if (isset($ignores[$k])) continue;
 							//if (preg_match("/[:]/", $val)) continue;
 							//if (preg_match("/[:]/", $k)) continue;
 							if (!Xlsx::isSpecified($val)) continue;
@@ -187,12 +202,12 @@ class Catalog
 									'more' => true
 								));
 							}
-							$prop=$params[$k];
-							$r=false;
+							$prop = $params[$k];
+							$r = false;
 							
-							if($prop['separator']){
+							if ($prop['separator']) {
 								$arval=explode($prop['separator'], $val);
-							}else{
+							} else {
 								$arval = array($val);
 							}
 							foreach ($arval as $value){
@@ -200,21 +215,36 @@ class Catalog
 								//$id=mb_strtolower($idi);
 								$id = $idi;
 								if (!Xlsx::isSpecified($id)) continue;
-								$r=true;
+								$r = true;
 								if (!isset($params[$k]['option'][$id])) {
-									$params[$k]['option'][$id] = array_merge($option, array(
+									$params[$k]['option'][$id] = array(
+										'count' => 0, //Количество этого значения без учёта всех фильтров
+										'search' => 0, //Количество этого значения в отфильтрованном списке позиций
+										'filter' => 0, //Количество этого значения без учёта текущего значения этого параметра
 										'id' => $idi,
 										'title' => trim($value)
-									));
+									);
 								}
 								$params[$k]['option'][$id]['count']++;
 							}
-							if ($r) $params[$k]['count']++;
+							if ($r) {
+								$params[$k]['count']++;
+								if ($params[$k]['count'] > 30) {
+									$ignores[$k] = true;
+									unset($params[$k]);
+								}/* else if ($params[$k]['count'] > 20 && $params[$k]['count'] * 0.5 <= sizeof($params[$k]['option'])) {
+									//Если совпадений меньше 20%
+									$ignores[$k] = true;
+									unset($params[$k]);
+								}*/
+							}
 						}
 					}
 				}
 			}
-
+			/*echo '<pre>';
+			print_r($params);
+			exit;*/
 			foreach ($main as $k => $prop) {
 				if (empty($prop['more'])) continue;
 				if (empty($params[$k])) continue;
@@ -799,7 +829,6 @@ class Catalog
 				}
 			}
 		}
-
 		$m = Path::toutf(Sequence::get($_GET, array('m')));
 		$ar = Once::func( function ($m) {
 			$mark = Catalog::getDefaultMark();
@@ -1261,12 +1290,12 @@ class Catalog
 		$res = Once::func( function &($md) {
 			$ans = array();
 			$ans['list'] = Catalog::getPoss($md['group']);
+
 			//if (sizeof($ans['list']) > 1000) $ans['list'] = array();
 			//ЭТАП filters list
 			//echo '<pre>'; print_r($ans['list']);
 			
 			$ans['filters'] = Catalog::filtering($ans['list'], $md);
-
 			$now = null;
 			foreach ($md['group'] as $now => $one) break;
 
