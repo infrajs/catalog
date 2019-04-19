@@ -18,7 +18,7 @@ $val = Ans::GET('val');
 $val = Path::encode(Path::toutf(strip_tags($val)));
 $md = Catalog::initMark($ans);
 
-if(isset($_GET['seo'])){
+if (isset($_GET['seo'])){
 	$link = $_GET['seo'];
 	
 	if($md['group']){
