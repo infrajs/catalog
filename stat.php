@@ -7,6 +7,7 @@ use infrajs\ans\Ans;
 use infrajs\path\Path;
 use infrajs\nostore\Nostore;
 use infrajs\view\View;
+use akiyatkin\showcase\Showcase;
 
 $ans=array();
 if(isset($_GET['seo'])){
@@ -22,18 +23,18 @@ if(isset($_GET['seo'])){
 $ans['menu']=Load::loadJSON('-catalog/menu.json');
 $submit=!empty($_GET['submit']); // сбор статистики
 
-$conf=Catalog::$conf;
+$conf=Showcase::$conf;
 $ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title'],'add'=>'group');
 $ans['breadcrumbs'][]=array('href'=>'stat','title'=>'Статистика поиска');
 
 $data = Load::loadJSON('~catalog-stat.json');
 if (!$data) {
-	$data=array('users' => array(),'cat_id' => 0);//100 10 user list array('val'=>$val,'time'=>time())
+	$data = array('users' => array(),'cat_id' => 0);//100 10 user list array('val'=>$val,'time'=>time())
 }
 if (!isset($data['time'])) $data['time'] = time();
 
 if (!$submit) {
-	$ans['text']=Load::loadTEXT('-doc/get.php?src='.$conf['dir'].'/articles/stat');
+	$ans['text']=Load::loadTEXT('-doc/get.php?src='.$conf['grouparticles'].'stat');
 	$ans['stat']=$data;
 	return Ans::ret($ans);
 }
@@ -74,7 +75,7 @@ foreach ($user['list'] as $k => $v) {
 	}
 }
 $user['list']=array_values($user['list']);
-$search=Load::loadJSON('-catalog/search.php?val='.$val);
+$search=Load::loadJSON('-showcase/api/search?val='.$val);
 array_unshift($user['list'], array('val' => $val,'time' => time(),'count' => $search['count']));
 
 
@@ -90,6 +91,6 @@ if (sizeof($data['users']) > $count) {
 }
 
 file_put_contents(Path::resolve('~catalog-stat.json'), Load::json_encode($data));
-$ans['data'] = $data;
+//$ans['data'] = $data;
 
 return Ans::ret($ans);

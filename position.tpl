@@ -39,7 +39,7 @@
 		<div style="float:right">
 			{:producer}
 		</div>
-		<h1 style="text-align:left">{Наименование}{descr.Артикул!:strСкрытый?:startart}</h1>
+		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
 		<div><small class="text-muted">{itemrow}</small></div>
 		{~length(images)?:images}
 		{:extend.pos-page}
@@ -59,7 +59,7 @@
 		</div>
 	</div>
 	{strСкрытый:}Скрытый
-	{startart:} <nobr>{Производитель}</nobr> <nobr>{Артикул}</nobr>
+	{startart:} <nobr>{producer}</nobr> <nobr>{article}</nobr>
 {showitems:}
 	<table class="table table-striped table-hover">
 		<thead>
@@ -94,13 +94,13 @@
 	
 {pos_more:}<tr><td>{~key}:</td><th style="text-align:left">{.}</th></tr>
 {files:}
-	<h2>Файлы для {Продажа} {Производитель} {descr.Артикул!:Скрытый?Артикул}</h2>
+	<h2>Файлы для {Продажа} {producer} {~conf.showcase.hiddenarticle??article}</h2>
 		<ul class="files">
 			{files::file}
 		</ul>
 	{file:}
 		<li class="ico" style="background-image:url('/-autoedit/icons/{ext}.png')">
-			<a href="/{src}">{name}</a> {size}&nbsp;Mb
+			<a href="/{path}">{name}</a> {size}&nbsp;Mb
 		</li>
 {text:}
 	{.}

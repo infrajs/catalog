@@ -65,16 +65,16 @@
 	</div>
 	{groups_group:}
 		<div class="col-sm-6">
-			<a class="d-flex p-1 bg-white" style="align-items:center; min-height:92px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{id}{:mark.set}">
+			<a class="d-flex p-1 bg-white" style="align-items:center; min-height:92px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{group_nick}{:mark.set}">
 				<div style="flex-basis: 130px; text-align:center">
 					{img?:gimg}
 				</div>
 				<div style="flex:1; padding-left: 5px;">
-					{title}
+					{group}
 				</div>
 			</a>
 		</div>
-		{gimg:}<img src="/-imager/?src={~conf.catalog.dir}images/{id}.jpg&or={pos.images.0}&w=130&h=90">
+		{gimg:}<img src="/-imager/?src={img}&w=130&h=90">
 {breadcrumbs:}
 	<ul class="breadcrumb">
 		{::brcrumb}
@@ -93,13 +93,13 @@
 {/:}/
 {menu:}
 	<div style="margin-top:10px">
-		<ul class="nav nav-pills">
-			{::items}
-		</ul>
+		
+		{::items}
+		
 	</div>
 	{items:}
-		<li role="presentation"><a data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{~key}{:mark.set}">{title}</a></li>
-{idsp:}{id?:sp}{id}
+		<a class="badge badge-pills" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{~key}{:mark.set}">{title}</a>
+{idsp:}{item_nick?:sp}{item_nick}
 {sp:} 
-{idsl:}{id?:sl}{id}
+{idsl:}{item_nick?:sl}{item_nick}
 {sl:}/
