@@ -39,6 +39,7 @@ return Rest::get( function () {
 	$columns = Showcase::getColumns();
 	foreach ($ar as $prop_nick) {
 		$row = Data::fetch('SELECT prop_id, prop from showcase_props where prop_nick = ?',[$prop_nick]);
+		if(!$row) continue;
 		list($prop_id, $prop) = array_values($row);
 		
 		if(!$prop_id) continue;
