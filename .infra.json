@@ -4,8 +4,9 @@
 	"css":"style.css",
 	"tester":"tests/",
 	"nds":false,
+	"bigimage":["Мониторы"],
 	"require":"infra.php",
-	"js":["Catalog.js","infra.js"],
+	"js":["infra.js"],
 	"filgroupsissort":false,
 	"filgroups":{
 		"Светильники-и-прожектора":["Источник света","Степень защиты","Рассеиватель","Отражатель","Мощность, Вт", "Серия", "Линза, º"]

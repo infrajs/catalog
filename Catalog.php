@@ -37,6 +37,9 @@ class Catalog
 	}
 	public static function init()
 	{  
+		echo '<pre>';
+		debug_print_backtrace();
+		exit;
 		//все данные
 		return Catalog::cacheF(function () {
 			$options = Catalog::getOptions();

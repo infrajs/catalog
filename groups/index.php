@@ -1,31 +1,26 @@
 <?php
 
-use infrajs\catalog\Catalog;
+use akiyatkin\showcase\Showcase;
 use infrajs\ans\Ans;
+use infrajs\excel\Xlsx;
 
 $ans = array();
-$md = Catalog::initMark($ans);
-$ans['groups'] = Catalog::getSubgroups();
-$group = false;
-foreach($ans['groups'] as $k => $val) {
-	if (!$val['count']) {
-		unset($ans['groups'][$k]);
-		continue;
-	}
-	if (empty($val['childs'])) continue;
-	foreach ($val['childs'] as $i => $ch) {
-		if (!$ch['count']) unset($ans['groups'][$k]['childs'][$i]);
-	}
-	$ans['groups'][$k]['childs'] = array_values($ans['groups'][$k]['childs']);
-	if (empty($ans['groups'][$k]['childs'])) unset($ans['groups'][$k]['childs']);
-}
+$md = Showcase::initMark($ans);
+$ans['root'] = Showcase::getGroup();
 
+$group = false;
 foreach ($md['group'] as $group => $one) break;
 if ($group) {
-	$group = Catalog::getGroup($group);
-	foreach ($group['path'] as $k => $g) {
-		$ans['groups'][$g]['active'] = true;
-	}
+	$group = Showcase::getGroup($group);
+	$path = $group['path'];
+
+	Xlsx::runGroups($ans['root'], function &(&$group) use ($path) {
+		$r = null;
+		if (in_array($group['group_nick'], $path)) {
+			$group['active'] = true;
+		}
+		return $r;
+	}, true);
 	$ans['path'] = $group['path'];
 }
 return Ans::ret($ans);

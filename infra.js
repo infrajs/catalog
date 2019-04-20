@@ -1,4 +1,5 @@
  Event.handler('Controller.onshow', function () {
+ 	//На любой элемент вешаем класс gagarin и data-name указываем имя для элемента который надо будет скрыть у которого класс gagarin{name}
  	var ctrls = document.getElementsByClassName('gagarin');
  	var hand = function () {
  		var div = this.dataset.div;

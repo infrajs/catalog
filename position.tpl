@@ -45,7 +45,6 @@
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
 		{Скрыть фильтры в полном описании??:print_more}
-		
 		<small class="text-muted a gagarin">{itemrow}</small>
 		<div style="display:none">
 			{items?:showitems}
@@ -105,11 +104,10 @@
 {text:}
 	{.}
 {bigimg:}<img class="img-fluid" src="/-imager/?m=1&src={images.0}">
-{strбольшая:}Большая
 {images:}
-	{descr.Картинка=:strбольшая?:bigimg}
+	{~inArray(group_nick,~conf.catalog.bigimage)?:bigimg}
 	<div class="cat_images" style="clear:both; text-align:center; margin-top:10px; margin-bottom:10px;">
-		{descr.Картинка=:strбольшая?(~length(images)>:1?images::image)?images::imagedef}
+		{~inArray(group_nick,~conf.catalog.bigimage)?(~length(images)>:1?images::image)?images::imagedef}
 		<div style="clear:both"></div>
 	</div>
 	<script>
