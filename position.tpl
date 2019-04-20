@@ -40,12 +40,12 @@
 			{:producer}
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
-		<div><small class="text-muted">{itemrow}</small></div>
+		<div><small class="text-muted">{item}</small></div>
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
 		{Скрыть фильтры в полном описании??:print_more}
-		<small class="text-muted a gagarin">{itemrow}</small>
+		<small class="text-muted a gagarin">{item}</small>
 		<div style="display:none">
 			{items?:showitems}
 		</div>
@@ -65,6 +65,7 @@
 			<tr>
 				{items.0.more::ihead}
 				{Цена?:headcost}
+				{Описание?:headdescr}
 			</tr>
 		</thead>
 		<tbody style="cursor:pointer;">
@@ -78,13 +79,16 @@
 	</table>
 	{prcost:}<td>{~cost(Цена|...Цена)}&nbsp;руб.</td>
 	{headcost:}<th>Цена</th>
+	{headdescr:}<th>Описание</th>
+	{prdescr:}<th>{Описание|...Описание}</th>
 	{iitem:}
 		<tr style="cursor:pointer" onclick="Ascroll.once = '.cat-position'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 			{~obj(:more,more,:itm,.,:pos,...).more::imore}
 			{Цена?:prcost}
+			{Описание?:prdescr}
 		</tr>
-		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
 
+		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
 	{ihead:}<th>{~key}</th>
 {print_more:}
 	<table class="table table-striped" style="width:auto">
