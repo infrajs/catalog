@@ -25,8 +25,6 @@ return Rest::get( function () {
 		$g = $group['path'][$i];
 		if (!isset($arlist[$g])) continue;
 		$ar = array_merge($ar,$arlist[$g]);
-		
-
 	}
 	
 	if (!$ar && isset($arlist[Showcase::$conf['title']])) {
