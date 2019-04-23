@@ -5,22 +5,7 @@
 	{data.childs:cat.groups}
 	{data.menu:cat.menu}
 {find:}
-	<form class="form-horizontal" onsubmit="
-		var val=$(this).find('[type=text]').val();
-		val=Path.encode(val,true);
-		var layer=Controller.names.catalog;
-		
-		if (Crumb.get.m) {
-			var params='?m=' + Crumb.get.m;
-		} else {
-			var params='';
-		}
-		//params+=':search='+val;
-		Crumb.go('/'+Controller.names.catalog.crumb.toString()+'/'+val+params);
-		setTimeout(function(){
-			$.getJSON('/-catalog/stat.php?submit=1&amp;val='+val);
-		},1);
-		return false;">
+	<form class="form-horizontal" onsubmit="return Catalog.search($(this).find('[type=text]').val())">
 
 			<div class="input-group" style="margin-bottom:15px;">
 				

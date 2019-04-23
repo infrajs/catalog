@@ -6,7 +6,7 @@
 	"nds":false,
 	"bigimage":["Мониторы"],
 	"require":"infra.php",
-	"js":["infra.js"],
+	"js":["Catalog.js","infra.js"],
 	"filgroupsissort":false,
 	"filgroups":{
 		"Светильники-и-прожектора":["Источник света","Степень защиты","Рассеиватель","Отражатель","Мощность, Вт", "Серия", "Линза, º"]
