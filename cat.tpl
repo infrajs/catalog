@@ -88,7 +88,7 @@
 	{add:}{:mark.add}{add}
 	{set:}?m={add}
 	{hrefmain:}/
-	{href:}/{Controller.names.catalog.crumb}{href?:/}{href}{add?(~conf.catalog.filtermemory?:add?:set)?(~conf.catalog.filtermemory?(nomark)|mark.set)}
+	{href:}/{Controller.names.catalog.crumb}{href?:/}{href}{add?(~conf.catalog.filtermemory?:add?:set)?(~conf.catalog.filtermemory?:mark.set|(nomark))}
 {mark::}-catalog/mark.tpl
 {/:}/
 {menu:}
