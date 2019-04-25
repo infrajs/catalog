@@ -26,8 +26,21 @@
 			color:white;
 		}
 	</style>
+{nalichie:}
+<span style="position:absolute; right:0px;" class="m-2 badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-default)))}">
+		{Наличие на складе}</span>
+	{strnal:}В наличии
+	{stract:}Акция
+	{strras:}Распродажа
+	{strzak:}На заказ
+	{strpri:}badge-primary
+	{label-success:}badge-success
+	{label-info:}badge-info
+	{label-default:}badge-secondary
+	{label-danger:}badge-danger
 {pos-img:}
-		<a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+		<a style="position: relative" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+			{Наличие на складе?:nalichie}
 			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty.png" />
 		</a>
 {pos-item:}
@@ -80,14 +93,3 @@
 	{cat::}-catalog/cat.tpl
 	{strcatalog:}catalog
 	{priceblock:}<div class="alert alert-success" style="clear:right; font-size:140%; padding:5px 10px; margin:15px 0;">{~cost(Цена)}&nbsp;руб.</div>
-{nalichie:}<span class="badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-default)))}">
-		{Наличие на складе}</span>
-	{strnal:}В наличии
-	{stract:}Акция
-	{strras:}Распродажа
-	{strzak:}На заказ
-	{strpri:}badge-primary
-	{label-success:}badge-success
-	{label-info:}badge-info
-	{label-default:}badge-secondary
-	{label-danger:}badge-danger
