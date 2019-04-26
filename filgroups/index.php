@@ -35,9 +35,9 @@ return Rest::get( function () {
 
 	$groups = Showcase::getGroupsIn($md);
 	if ($groups) {
-		$groups = implode(',', $groups);
+		$groups = 'inner join showcase_models m on (m.model_id = mv.model_id and m.group_id in ('.implode(',', $groups).'))';
 	} else {
-		$groups = 'true';
+		$groups = '';
 	}
 
 	foreach ($ar as $prop_nick) {
@@ -51,7 +51,7 @@ return Rest::get( function () {
 		if ($type == 'value') {
 			$options = Data::all('SELECT v.value, v.value_nick, count(*) as count FROM showcase_mvalues mv
 			left join showcase_values v on v.value_id = mv.value_id
-			inner join showcase_models m on (m.model_id = mv.model_id and m.group_id in ('.$groups.'))
+			'.$groups.'
 			where mv.prop_id = :prop_id
 			group by mv.value_id
 			',[':prop_id'=>$prop_id]);
