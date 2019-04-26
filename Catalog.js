@@ -14,7 +14,7 @@ window.Catalog = {
 		var params = (Crumb.get.m) ? '?m=' + Crumb.get.m : '';
 		Crumb.go('/'+Controller.names.catalog.crumb.toString()+'/'+val+params);
 		setTimeout( function () {
-			$.getJSON('/-catalog/stat.php?submit=1&amp;val=' + val);
+			$.getJSON('/-catalog/stat.php?submit=1&val=' + val);
 		}, 1);
 		return false;
 	},

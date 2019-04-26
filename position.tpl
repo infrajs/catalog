@@ -37,7 +37,7 @@
 {start:}
 	<div class="cat-position">
 		<div style="float:right">
-			{:producer}
+			{logo?:producer}
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
 		<div><small class="text-muted">{item}</small></div>
@@ -58,7 +58,7 @@
 		</div>
 	</div>
 	{strСкрытый:}Скрытый
-	{startart:} <nobr>{producer}</nobr> <nobr>{article}</nobr>
+	{startart:}<br><small><nobr>{producer}</nobr> <nobr>{article}</nobr></small>
 {showitems:}
 	<table class="table table-striped table-hover">
 		<thead>
@@ -146,7 +146,7 @@
 {producer:}
 	<div style="float:right; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
 		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}/{producer}{:cat.mark.set}">
-			<img style="margin-left:5px" src="/-imager/?w=160&h=100&src={Config.get(:strcatalog).dir}{producer}/&or=-imager/empty.png" />
+			<img width="160" style="margin-left:5px" src="/-imager/?w=160&h=100&src={logo}" />
 		</a>
 	</div>
 <!--	<div style="text-align:right; font-size: 11px; margin-top:5px;">

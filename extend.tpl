@@ -7,7 +7,7 @@
 	{nds:}{~conf.catalog.nds?:ndsshow}{ndsshow:} c НДС 20%
 {pos-sign:}
 	<p>
-		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}/{group}{:cat.mark.set}">{Группа}</a><br>
+		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}/{group_nick}{:cat.mark.set}">{group}</a><br>
 	</p>
 	{Скрытый:}Скрытый
 {pos-item-css:}
@@ -50,7 +50,7 @@
 		</div>
 		<div class="col-8 col-md-9">
 			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|:name}</a>
-			{:producerlogo}
+			{logo?:producerlogo}
 			<div class="padding">
 				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {~conf.showcase.hiddenarticle??article}</a></b>
 				<div class="float-right" style="font-size:90%; margin-left:10px"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
@@ -88,7 +88,7 @@
 	{no:}Нет
 	{producerlogo:}
 		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}/{producer}{:cat.mark.set}" class="float-right" style="margin:5px 0 5px 5px">
-			<img src="/-imager/?w=100&amp;h=100&amp;src={Config.get(:strcatalog).dir}{producer}/&amp;or=-imager/empty.png" />
+			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 		</a>
 	{cat::}-catalog/cat.tpl
 	{strcatalog:}catalog

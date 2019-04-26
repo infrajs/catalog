@@ -14,7 +14,9 @@
 {comma:},
 {point:}.
 {catprod:}
-	<a href='/{crumb.parent}/{producer_nick}{:cat.mark.set}' title="{producer} {.}"><img alt="{producer}" style="margin-bottom:10px" src="/-imager/?w=100&src={~conf.showcase.dir}{producer_nick}/&or=-imager/empty.png"></a>
+	{logo?:catprodlogo}
+{catprodlogo:}
+	<a href='/{crumb.parent}/{producer_nick}{:cat.mark.set}' title="{producer} {.}"><img alt="{producer}" width="100" style="margin-bottom:10px" src="/-imager/?w=100&src={logo}"></a>
 {cat::}-catalog/cat.tpl
 {cat.mark.set:}{:cat.mark.client.set}
 {cat.mark.add:}{:cat.mark.client.add}
