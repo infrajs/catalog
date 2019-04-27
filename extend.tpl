@@ -27,7 +27,7 @@
 		}
 	</style>
 {nalichie:}
-<span style="position:absolute; right:0px;" class="m-2 badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-default)))}">
+<span style="position:absolute; right:0px;" class="m-1 badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-default)))}">
 		{Наличие на складе}</span>
 	{strnal:}В наличии
 	{stract:}Акция
