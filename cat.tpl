@@ -19,7 +19,7 @@
 				
 			}
 			.catgrouplist a {
-				font-size:1.2rem;
+				font-size:1.1rem;
 				outline:solid 1px rgba(0,0,0,0.1);
 			}
 			/*.catgrouplist :last-child a {
@@ -33,12 +33,17 @@
 			}
 			@media (max-width: 1200px) { 
 				.catgrouplist a {
-					/*font-size:150%;*/
+					/*font-size:100%;*/
+				}
+			}
+			@media (max-width: 1092px) { 
+				.catgrouplist a {
+					/*font-size:95%;*/
 				}
 			}
 			@media (max-width:992px) { 	/*md*/
 				.catgrouplist a {
-					/*font-size:130%;*/
+					font-size:1rem;
 				}
 				.catgrouplist .img {
 					width:100px;
@@ -49,7 +54,7 @@
 			}
 			@media (max-width:768px) { 	/*sm*/
 				.catgrouplist a {
-					font-size: 100%
+					/*font-size: 85%*/
 				}
 				.catgrouplist .img {
 					width:120px;
