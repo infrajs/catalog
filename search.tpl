@@ -112,7 +112,7 @@
 		{empty?:pagenumt?:pagenuma}
 	</li>
 	{pagenumt:}<a class="page-link">{title}</a>
-	{pagenuma:}<a class="page-link" rel="nofollow" data-anchor='#filgroups' href="/{crumb}?p={num}{:cat.mark.aset}">{title}</a>
+	{pagenuma:}<a class="page-link" rel="nofollow" data-anchor='.pagination' href="/{crumb}?p={num}{:cat.mark.aset}">{title}</a>
 {pageact:} active
 {pagedis:} disabled
 {space:}&nbsp;
