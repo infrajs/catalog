@@ -27,7 +27,7 @@
 		}
 	</style>
 {nalichie:}
-<span style="position:absolute; right:0px;" class="m-1 badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-default)))}">
+<span style="position:absolute; right:0px;" class="m-1 badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-secondary)))}">
 		{Наличие на складе}</span>
 	{strnal:}В наличии
 	{stract:}Акция
@@ -36,7 +36,7 @@
 	{strpri:}badge-primary
 	{label-success:}badge-success
 	{label-info:}badge-info
-	{label-default:}badge-secondary
+	{label-secondary:}badge-secondary
 	{label-danger:}badge-danger
 {pos-img:}
 		<a style="position: relative" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
