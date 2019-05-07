@@ -9,12 +9,12 @@
 	{h1:}<h1>{~conf.catalog.title}</h1>
 {cat::}-catalog/cat.tpl
 {GROUPS:}
-	<div class="-catalog-groups">
+	<div class="-catalog-groups child">
 		<style>
 			.-catalog-groups .far {
 				cursor:pointer;
 			}
-			.-catalog-groups .childs .child {
+			.-catalog-groups .child {
 				margin-bottom:5px;
 			}
 			.-catalog-groups {
@@ -30,20 +30,21 @@
 			domready(function(){
 				var div = $('.-catalog-groups');
 				div.find('.point').click( function () {
-					$(this).toggleClass('fa-minus').toggleClass('fa-plus').parent().find('.childs:first').slideToggle('slow');
+					$(this).toggleClass('fa-minus').toggleClass('fa-plus').parent().find('.childs:first').slideToggle('fast');
 				})
 			})
 		</script>
 	</div>
 {group:}
-	{childs?:gr}<a data-anchor=".-catalog-groups" href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group}</a><br>
+	{childs?:gr?:it}<a data-anchor=".-catalog-groups" href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group}</a><br>
 	<div class="pl-4 childs" style="{active??:strnone}">
 		{childs::child}
 	</div>
 	{strnone:}display:none;
 	{clsactive:}font-weight-bold
 	{gr:}{active?:minus?:plus}
-	{plus:}<span style="color:#aaa" class="point fas fa-plus"></span> 
-	{minus:}<span style="color:#aaa" class="point fas fa-minus"></span> 
+	{it:}<span style="color:#ccc" class="point far fa-fw fa-2x"></span> 
+	{plus:}<span style="color:#ccc" class="point fas fa-plus fa-fw fa-2x"></span> 
+	{minus:}<span style="color:#ccc" class="point fas fa-minus fa-fw fa-2x"></span> 
 {child:}
 	<div class="child">{.:group}</div>
