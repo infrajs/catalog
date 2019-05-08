@@ -70,7 +70,7 @@
 	</div>
 	{groups_group:}
 		<div class="col-sm-6">
-			<a class="d-flex p-1 bg-white" style="align-items:center; min-height:92px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{group_nick}{:mark.set}">
+			<a class="d-flex p-1 bg-white" style="align-items:center; min-height:98px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{group_nick}{:mark.set}">
 				<div style="flex-basis: 130px; text-align:center">
 					{img?:gimg}
 				</div>

@@ -14,6 +14,9 @@
 			.-catalog-groups .far {
 				cursor:pointer;
 			}
+			.-catalog-groups .childs {
+				margin-top:5px;
+			}
 			.-catalog-groups .child {
 				margin-bottom:5px;
 			}
