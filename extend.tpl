@@ -27,8 +27,8 @@
 		}
 	</style>
 {nalichie:}
-<span style="position:absolute; right:0px;" class="m-1 badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-secondary)))}">
-		{Наличие на складе}</span>
+	<a href="/catalog{:cat.mark.add}more.Наличие-на-складе::.{Наличие на складе}=1" style="position:absolute; right:15px; z-index:1" class="m-1 badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-secondary)))}">
+		{Наличие на складе}</a>
 	{strnal:}В наличии
 	{stract:}Акция
 	{strras:}Распродажа
@@ -39,8 +39,8 @@
 	{label-secondary:}badge-secondary
 	{label-danger:}badge-danger
 {pos-img:}
+		{Наличие на складе?:nalichie}
 		<a style="position: relative" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
-			{Наличие на складе?:nalichie}
 			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty.png" />
 		</a>
 {pos-item:}

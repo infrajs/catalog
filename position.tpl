@@ -39,9 +39,8 @@
 		<div style="float:right">
 			{logo?:producer}
 		</div>
-		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}<a href="/catalog{:cat.mark.add}more.Наличие-на-складе::.{Наличие на складе}=1">{:extend.nalichie}</a></h1>
+		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
 		<div><small class="text-muted">{item}</small></div>
-
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
