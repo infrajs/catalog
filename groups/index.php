@@ -7,6 +7,13 @@ use infrajs\excel\Xlsx;
 $ans = array();
 $md = Showcase::initMark($ans);
 $ans['root'] = Showcase::getGroup();
+Xlsx::runGroups($ans['root'], function &(&$group, $i, &$parent) {
+	if ($parent && empty($group['childs']) && !$group['count']) {
+		unset($parent['childs'][$i]);
+	}
+	$r = null;
+	return $r;
+}, true);
 
 $group = false;
 foreach ($md['group'] as $group => $one) break;
