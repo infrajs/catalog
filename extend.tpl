@@ -27,7 +27,9 @@
 		}
 	</style>
 {nalichie:}
-	<a href="/catalog{:cat.mark.add}more.Наличие-на-складе::.{Наличие на складе}=1" style="position:absolute; right:15px; z-index:1" class="m-1 badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-secondary)))}">
+	<div style="position:absolute; left:15px; z-index:1" class="m-1">{:badgenalichie}</div>
+{badgenalichie:}
+<a href="/catalog{:cat.mark.add}more.Наличие-на-складе::.{Наличие на складе}=1" class="badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-secondary)))}">
 		{Наличие на складе}</a>
 	{strnal:}В наличии
 	{stract:}Акция
