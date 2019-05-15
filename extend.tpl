@@ -1,7 +1,7 @@
 {pos-page:}{Цена?:priceblockbig}
 	{priceblockbig:}
 		<div class="alert alert-success">
-			Цена: <span style="font-size:20px">{~cost(Цена)} руб.</span>{:nds}<br> 
+			Цена: <span class="cost" style="font-size:20px">{~cost(Цена)}{:unit}</span>{:nds}<br> 
 			<!--По вопросам приобретения обращайтесь по телефонам в <a href="/contacts">контактах</a>.-->
 		</div>
 	{nds:}{~conf.catalog.nds?:ndsshow}{ndsshow:} c НДС 20%
@@ -92,4 +92,5 @@
 		</a>
 	{cat::}-catalog/cat.tpl
 	{strcatalog:}catalog
-	{priceblock:}<div class="alert alert-success" style="clear:right; font-size:140%; padding:5px 10px; margin:15px 0;">{~cost(Цена)}&nbsp;руб.</div>
+	{priceblock:}<div class="alert alert-success cost" style="clear:right; font-size:140%; padding:5px 10px; margin:15px 0;">{~cost(Цена)}{:unit}</div>
+	{unit:}<small>&nbsp;руб.</small>
