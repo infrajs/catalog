@@ -1,5 +1,5 @@
 {
 	"autosavename":"catalog",
 	"tpl":"-catalog/groups/layout.tpl",
-	"jsontpl":"-catalog/groups?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}&art={~encode(crumb.child.child.name)}"
+	"jsontpl":"-showcase/api/groups?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}&art={~encode(crumb.child.child.name)}"
 }
