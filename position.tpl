@@ -65,15 +65,9 @@
 			<tr>
 				{items.0.more::ihead}
 				{Цена?:headcost}
-				{Описание?:headdescr}
 			</tr>
 		</thead>
 		<tbody style="cursor:pointer;">
-			<tr class="success" onclick="Ascroll.ignore = '.cat-position'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
-				{~obj(:more,items.0.more,:pos,.).more::imore}
-				{...Цена?:prcost}
-			</tr>
-		
 			{items::iitem}
 		</tbody>
 	</table>
@@ -82,10 +76,9 @@
 	{headdescr:}<th>Описание</th>
 	{prdescr:}<th>{Описание|...Описание}</th>
 	{iitem:}
-		<tr style="cursor:pointer" onclick="Ascroll.once = '.cat-position'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
+		<tr style="cursor:pointer" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat-position'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 			{~obj(:more,more,:itm,.,:pos,...).more::imore}
 			{Цена?:prcost}
-			{Описание?:prdescr}
 		</tr>
 
 		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
