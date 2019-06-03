@@ -40,7 +40,11 @@
 			{logo?:producer}
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
-		<div><small class="text-muted">{item}</small></div>
+		<div><small class="text-muted a gagarin">{item}</small>
+			<div style="display:none">
+				{items?:showitems}
+			</div>
+		</div>
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
@@ -65,6 +69,7 @@
 			<tr>
 				{items.0.more::ihead}
 				{Цена?:headcost}
+				{Описание?:headdescr}
 			</tr>
 		</thead>
 		<tbody style="cursor:pointer;">
@@ -79,6 +84,7 @@
 		<tr style="cursor:pointer" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat-position'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 			{~obj(:more,more,:itm,.,:pos,...).more::imore}
 			{Цена?:prcost}
+			{Описание?:prdescr}
 		</tr>
 
 		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
