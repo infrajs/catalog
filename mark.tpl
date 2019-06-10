@@ -1,9 +1,9 @@
 
-{client.set:}{infra.Crumb.get.m?:client}
-{client.aset:}{infra.Crumb.get.m?:aclient}
+{client.set:}{Crumb.get.m?:client}
+{client.aset:}{Crumb.get.m?:aclient}
 {client.add:}{:client}:
-    {client:}?m={infra.Crumb.get.m}
-    {aclient:}&amp;m={infra.Crumb.get.m}
+    {client:}?m={Crumb.get.m}
+    {aclient:}&amp;m={Crumb.get.m}
 {server.set:}{data.m?:server}
 {server.add:}{:server}:
     {server:}?m={data.m}

@@ -10,3 +10,11 @@
 .catfilters .space {
 	margin-bottom:20px;
 }
+table {
+	font-size:inherit;
+}
+.props .line {
+	margin-right:10px;
+	border-bottom: 1px dotted #ccc; 
+	width:100%
+}

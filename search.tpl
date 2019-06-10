@@ -90,7 +90,7 @@
 			<a rel="nofollow" style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:cost|:cost}'>по цене</a>, 
 			<a rel="nofollow" style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:change|:change}'>по дате изменений</a><br>
 		Показывать по
-		<select onchange="ascroll.once='.pagination'; infra.Crumb.go('/{Controller.names.catalog.crumb}{:cat.mark.add}count='+$(this).val());">
+		<select onchange="ascroll.once='.pagination'; Crumb.go('/{Controller.names.catalog.crumb}{:cat.mark.add}count='+$(this).val());">
 			<option {data.md.count=:5?:selected}>5</option>
 			<option {data.md.count=:10?:selected}>10</option>
 			<option {data.md.count=:20?:selected}>20</option>
