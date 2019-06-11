@@ -13,13 +13,13 @@
 			.catgrouplist .name {
 				text-align:left;
 				vertical-align:middle;
-				font-size:140%;
+				font-size:120%;
 			}
 			.catgrouplist {
 				
 			}
 			.catgrouplist a {
-				font-size:1.1rem;
+				font-size:1rem;
 				outline:solid 1px rgba(0,0,0,0.1);
 			}
 			/*.catgrouplist :last-child a {
@@ -57,7 +57,7 @@
 					/*font-size: 85%*/
 				}
 				.catgrouplist .img {
-					width:120px;
+					width:100px;
 				}
 				.catgrouplist .name {
 					font-size:120%;
@@ -69,9 +69,9 @@
 		</div>
 	</div>
 	{groups_group:}
-		<div class="col-sm-6">
-			<a class="d-flex p-1 bg-white" style="align-items:center; min-height:98px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{group_nick}{:mark.set}">
-				<div style="flex-basis: 130px; text-align:center">
+		<div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
+			<a class="d-flex p-1 bg-white" style="align-items:center; height:88px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{group_nick}{:mark.set}">
+				<div style="text-align:center; width:70px">
 					{img?:gimg}
 				</div>
 				<div style="flex:1; padding-left: 5px;">
@@ -79,7 +79,7 @@
 				</div>
 			</a>
 		</div>
-		{gimg:}<img src="/-imager/?src={img}&w=130&h=90">
+		{gimg:}<img class="img-fluid" src="/-imager/?src={img}&w=130&h=90">
 {breadcrumbs:}
 	<ul class="breadcrumb">
 		{::brcrumb}
