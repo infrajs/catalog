@@ -70,11 +70,11 @@
 	</div>
 	{groups_group:}
 		<div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-			<a class="d-flex p-1 bg-white" style="align-items:center; height:88px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{group_nick}{:mark.set}">
+			<a class="d-flex p-1 bg-white" style="align-items:center; height:68px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{group_nick}{:mark.set}">
 				<div style="text-align:center; width:70px">
 					{img?:gimg}
 				</div>
-				<div style="flex:1; padding-left: 5px;">
+				<div style="padding-left: 5px; padding-right:3px; text-align:center;">
 					{group}
 				</div>
 			</a>
