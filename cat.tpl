@@ -20,7 +20,7 @@
 			}
 			.catgrouplist a {
 				font-size:1rem;
-				outline:solid 1px rgba(0,0,0,0.1);
+				border:solid 1px rgba(0,0,0,0.1);
 			}
 			/*.catgrouplist :last-child a {
 				outline-offset: -1px;
@@ -64,13 +64,13 @@
 				}
 			}
 		</style>
-		<div class="catgrouplist row no-gutters mb-4">
+		<div class="catgrouplist row no-gutters mb-4" style="margin-left:-5px; margin-right:-5px">
 			{::groups_group}
 		</div>
 	</div>
 	{groups_group:}
-		<div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
-			<a class="d-flex p-1 bg-white" style="align-items:center; height:68px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{group_nick}{:mark.set}">
+		<div class="col-sm-6 col-md-4 col-lg-6 col-xl-4" style="padding:5px">
+			<a class="d-flex p-1 bg-white rounded" style="align-items:center; height:68px;" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{group_nick}{:mark.set}">
 				<div style="text-align:center; width:70px">
 					{img?:gimg}
 				</div>
