@@ -18,3 +18,8 @@ table {
 	border-bottom: 1px dotted #ccc; 
 	width:100%
 }
+.cart .catgrouplist .title {
+	padding-left: 5px;
+	padding-right: 3px; 
+	text-align: left;
+}

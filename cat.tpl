@@ -1,5 +1,5 @@
 {groups:}
-	<div>
+	<div class="cart">
 		<style>
 			.catgrouplist .img {
 				vertical-align:middle;
@@ -74,7 +74,7 @@
 				<div style="text-align:center; width:70px">
 					{img?:gimg}
 				</div>
-				<div style="padding-left: 5px; padding-right:3px; text-align:center;">
+				<div class="title">
 					{group}
 				</div>
 			</a>
