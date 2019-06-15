@@ -19,7 +19,7 @@
 		],
 		"nouislider":[
 			"vendor/leongersen/",
-			"vendor/akiyatkin/catalog-cost/"
+			"vendor/infrajs/catalog/"
 		]
 	},
 	"searchingroups":true,
