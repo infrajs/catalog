@@ -39,7 +39,7 @@
 		</script>
 	</div>
 {group:}
-	{childs?:gr?:it}<a data-anchor=".-catalog-groups" href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group} {catalog}</a><br>
+	{childs?:gr?:it}<a data-anchor=".-catalog-groups" href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group}</a><br>
 	<div class="pl-4 childs" style="{active??:strnone}">
 		{childs::child}
 	</div>

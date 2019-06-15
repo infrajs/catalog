@@ -16,17 +16,11 @@
 		"magnific-popup":[
 			"vendor/dimsemenov/",
 			"vendor/infrajs/catalog/"
+		],
+		"nouislider":[
+			"vendor/leongersen/",
+			"vendor/akiyatkin/catalog-cost/"
 		]
-	},
-	"startsteps":{
-		"Инициализация данных каталога":{
-			"href":"/-catalog/init",
-			"func":"Catalog::init()"
-		},
-		"Главная страница каталога":{
-			"href":"/catalog",
-			"func":"/catalog"
-		}
 	},
 	"searchingroups":true,
 	"foldwhen":30,

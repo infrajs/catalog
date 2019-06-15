@@ -18,6 +18,7 @@
         "infrajs/layer-autosave":"~1",
         "infrajs/autoedit":"~1",
         "infrajs/rubrics":"~1",
+        "leongersen/noUiSlider":"~12",
         "dimsemenov/magnific-popup":"~1"
     },
     "autoload":{
