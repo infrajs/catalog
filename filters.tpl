@@ -1,12 +1,11 @@
 {root:}
 	{~length(data.list)>:0?data.list::showmf}
 	{showmf:}
-		{~key=:producer?:showmfprod?(~length(data.md.group)?:{tpl})}
-	
+		{:{tpl}}
 	{prop-select:}
 		<select 
 		style="margin-top:3px" 
-		onchange="Crumb.go('/catalog/{:cat.mark.add}more.{prop_nick}::.'+this.value+'=1')" 
+		onchange="Crumb.go('/catalog/{:get}'+this.value+'=1')" 
 		class="custom-select form-control mb-0 shadow-over">
 			<option>{prop}</option>
 			{values::fopt}
@@ -24,7 +23,7 @@
 		{va:}<span 
 		onclick="Crumb.go('/catalog/{:cat.mark.add}more.{...prop_nick}::.{value_nick}{:is??:one}')" 
 		class="a {:is?:font-weight-bold}">{value}</span><br>
-	{showmfprod:}
+	{*showmfprod:}
 		<select 
 		style="margin-top:3px" 
 		onchange="Crumb.go('/catalog/'+this.value+'{:cat.mark.set}')" 
@@ -32,11 +31,12 @@
 			<option>{prop}</option>
 			{values::fopt}
 		</select>
-		{fopt:}<option {data.md.more[...prop_nick][value_nick]?:selected} value="{value_nick}">{value}</option>
-		{fbtn:}<label class="btn btn-secondary {data.md.more[...prop_nick][value_nick]?:active}">
-					<input type="radio" name="options" id="option1" autocomplete="off" {data.md.more[...prop_nick][value_nick]?:checked}> {value}
+		{fopt:}<option {:is?:selected} value="{value_nick}">{value}</option>
+		{fbtn:}<label class="btn btn-secondary {:is?:active}">
+					<input type="radio" name="options" id="option1" autocomplete="off" {:is?:checked}> {value}
 				</label>
 	{is:}{(data.md.more[...prop_nick][value_nick]|data.md[...prop_nick][value_nick])?:yes}
+	{get:}{:cat.mark.add}{more?:more.}{prop_nick}::.
 	{one:}=1
 
 	{prop-cost:}

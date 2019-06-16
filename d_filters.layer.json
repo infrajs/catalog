@@ -1,0 +1,7 @@
+{
+    "tpl":"-catalog/filters.tpl",
+    "tplroot":"filters",
+    "showanimate":false,
+    "external":"-catalog/filters.layer.php",
+    "jsontpl":"-catalog/filters.php?val={~encode(crumb.child.name)}&m={Crumb.get.m}"
+}
