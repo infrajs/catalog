@@ -21,22 +21,16 @@
 			{values::va}
 		</div>
 		{va:}<span 
-		onclick="Crumb.go('/catalog/{:cat.mark.add}more.{...prop_nick}::.{value_nick}{:is??:one}')" 
+		onclick="Crumb.go('/catalog/{:getv}{value_nick}{:is??:one}')" 
 		class="a {:is?:font-weight-bold}">{value}</span><br>
-	{*showmfprod:}
-		<select 
-		style="margin-top:3px" 
-		onchange="Crumb.go('/catalog/'+this.value+'{:cat.mark.set}')" 
-		class="custom-select form-control mb-0 shadow-over">
-			<option>{prop}</option>
-			{values::fopt}
-		</select>
-		{fopt:}<option {:is?:selected} value="{value_nick}">{value}</option>
-		{fbtn:}<label class="btn btn-secondary {:is?:active}">
-					<input type="radio" name="options" id="option1" autocomplete="off" {:is?:checked}> {value}
-				</label>
+	
+	{fopt:}<option {:is?:selected} value="{value_nick}">{value}</option>
+	{fbtn:}<label class="btn btn-secondary {:is?:active}">
+				<input type="radio" name="options" id="option1" autocomplete="off" {:is?:checked}> {value}
+			</label>
 	{is:}{(data.md.more[...prop_nick][value_nick]|data.md[...prop_nick][value_nick])?:yes}
 	{get:}{:cat.mark.add}{more?:more.}{prop_nick}::.
+	{getv:}{:cat.mark.add}{...more?:more.}{...prop_nick}::.
 	{one:}=1
 
 	{prop-cost:}
