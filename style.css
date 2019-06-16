@@ -23,3 +23,6 @@ table {
 	padding-right: 3px; 
 	text-align: left;
 }
+.shadow-over {
+	transition-duration: 0.5s
+}
