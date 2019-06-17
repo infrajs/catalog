@@ -11,26 +11,34 @@
 			{values::fopt}
 		</select>
 	{prop-buttons:}
-		<div class="mt-3">
+		<div class="my-3">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				{values::fbtn}
 			</div>
+		</div>
+	{prop-image:}
+		<div class="my-3 text-center">
+			{values::prodimg}
 		</div>
 	{prop-a:}
 		<div class="my-3">
 			{values::va}
 		</div>
 		{va:}<span 
-		onclick="Crumb.go('/catalog/{:getv}{value_nick}{:is??:one}')" 
+		onclick="Crumb.go('/catalog/{:getv}')" 
 		class="a {:is?:font-weight-bold}">{value}</span><br>
-	
+	{prodimg:}
+		<a href="/catalog/{:getv}"><img class="img-fluid m-1" src="/-imager?w=115&src={...src}&name={value}"></a>
+		
 	{fopt:}<option {:is?:selected} value="{value_nick}">{value}</option>
 	{fbtn:}<label class="btn btn-secondary {:is?:active}">
 				<input type="radio" name="options" id="option1" autocomplete="off" {:is?:checked}> {value}
 			</label>
 	{is:}{(data.md.more[...prop_nick][value_nick]|data.md[...prop_nick][value_nick])?:yes}
 	{get:}{:cat.mark.add}{more?:more.}{prop_nick}::.
-	{getv:}{:cat.mark.add}{...more?:more.}{...prop_nick}::.
+	{getv:}{...prop_nick=:producer?:getvinu?:getvinm}
+	{getvinm:}{:cat.mark.add}{...more?:more.}{...prop_nick}::.{value_nick}{:is??:one}
+	{getvinu:}{value_nick}{:cat.mark.set}
 	{one:}=1
 
 	{prop-cost:}
