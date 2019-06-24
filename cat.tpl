@@ -79,7 +79,7 @@
 				</div>
 			</a>
 		</div>
-		{gimg:}<img class="img-fluid" src="/-imager/?src={img}&w=130&h=60">
+		{gimg:}<img class="img-fluid" src="/-imager/?src={icon|img}&w=130&h=60">
 {breadcrumbs:}
 	<ul class="breadcrumb">
 		{::brcrumb}
