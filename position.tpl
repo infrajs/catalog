@@ -68,8 +68,8 @@
 		<thead>
 			<tr>
 				{items.0.more::ihead}
-				{Наименование?:headname}
-				{Цена?:headcost}
+				{items.0.Наименование?:headname}
+				{items.0.Цена?:headcost}
 			</tr>
 		</thead>
 		<tbody style="cursor:pointer;">
