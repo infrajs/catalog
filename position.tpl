@@ -68,6 +68,7 @@
 		<thead>
 			<tr>
 				{items.0.more::ihead}
+				{Наименование?:headname}
 				{Цена?:headcost}
 				{Описание?:headdescr}
 			</tr>
@@ -79,14 +80,18 @@
 	{prcost:}<td>{~cost(Цена|...Цена)}&nbsp;руб.</td>
 	{headcost:}<th>Цена</th>
 	{headdescr:}<th>Описание</th>
+	{headname:}<th>Наименование</th>
 	{prdescr:}<th>{Описание|...Описание}</th>
+	{prname:}<th>{Наименование|...Наименование}</th>
 	{iitem:}
 		<tr style="cursor:pointer" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat-position'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 			{~obj(:more,more,:itm,.,:pos,...).more::imore}
+			{Наименование?:prname}
 			{Цена?:prcost}
 			{Описание?:prdescr}
-		</tr>
 
+		</tr>
+		{table-success:}table-success
 		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
 	{ihead:}<th>{~key}</th>
 {print_more:}
