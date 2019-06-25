@@ -70,7 +70,6 @@
 				{items.0.more::ihead}
 				{Наименование?:headname}
 				{Цена?:headcost}
-				{Описание?:headdescr}
 			</tr>
 		</thead>
 		<tbody style="cursor:pointer;">
@@ -88,8 +87,6 @@
 			{~obj(:more,more,:itm,.,:pos,...).more::imore}
 			{Наименование?:prname}
 			{Цена?:prcost}
-			{Описание?:prdescr}
-
 		</tr>
 		{table-success:}table-success
 		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
