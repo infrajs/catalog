@@ -28,7 +28,7 @@
 		onclick="Crumb.go('/catalog/{:getv}')" 
 		class="a {:is?:font-weight-bold}">{value}</span><br>
 	{prodimg:}
-		<a href="/catalog/{:getv}"><img class="img-fluid my-3 mr-3" src="/-imager?w=200&src={...src}&name={value}"></a>
+		<a href="/catalog/{:getv}"><img class="img-fluid mb-4 mr-4" src="/-imager?w=200&src={...src}&name={value}"></a>
 		
 	{fopt:}<option {:is?:selected} value="{value_nick}">{value}</option>
 	{fbtn:}<label class="btn btn-secondary {:is?:active}">
