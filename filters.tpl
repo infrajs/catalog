@@ -2,6 +2,8 @@
 	{~length(data.list)>:0?data.list::showmf}
 	{showmf:}
 		{:{tpl}}
+	{prop-default:}
+		{:prop-select}
 	{prop-select:}
 		<select 
 		style="margin-top:3px" 
@@ -10,6 +12,66 @@
 			<option>{prop}</option>
 			{values::fopt}
 		</select>
+
+	{prop-chain:}
+		<div class="alert alert-success" style="margin-bottom:3px">
+			<b>Выбрать автомобиль</b>
+			{chain:prop-select-chain}
+		</div>
+		{prop-select-chain:}
+			{~length(childs)>:0?:prop-select-chain-show}
+			{prop-select-chain-show:}
+				<select 
+				style="margin-top:3px" 
+				onchange="
+					
+					var value = this.value;
+					var layer = Controller.ids['{id}'];
+					var root = Sequence.right('{~dataroot()}');
+					var prop_nick = root[2];
+					var key = '{key}';
+					var param = layer.data.list[prop_nick];
+					var option = Sequence.get(Sequence.get(layer, root),['childs',value]);
+					
+					
+					var count = 0;
+					if (option && option.childs) {
+						for (var i in option.childs) count++;
+						if (count == 1) {
+							if (i == value) count = 0;
+						}
+					}
+
+					if (option && (count<1)) {
+						var src = '/catalog/?m=' + layer.data.m + ':';
+							src += param.more?'more.':'';
+						if (!option.childs) {
+							src += prop_nick+'::.'+value+'=1';
+						} else {
+							while (option.childs) {
+								for (var i in option.childs) break;
+								option = option.childs[i];
+							}
+							src += prop_nick+'::.'+i+'=1';
+						}
+						Session.set('cat-chain.{key}');
+						Crumb.go(src);
+
+					} else {
+						Session.set('cat-chain.{key}', value); 
+						layer.parsed='{counter}'; 
+						Controller.check();
+					}
+					
+				" 
+				class="custom-select form-control mb-0 shadow-over">
+					<option>{key}</option>
+					{childs::foptkey}
+				</select>
+				{Session.get(:cat-chain.{key})?childs[Session.get(:cat-chain.{key})]:prop-select-chain}
+				
+				{foptkey:}<option {:isch?:selected} value="{nick}">{value}</option>
+				{isch:}{Session.get(:cat-chain.{...key})=nick?:yes}
 	{prop-buttons:}
 		<div class="my-3">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
