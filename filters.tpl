@@ -15,7 +15,7 @@
 
 	{prop-chain:}
 		<div class="alert alert-success" style="margin-bottom:3px">
-			<b>Выбрать автомобиль</b>
+			<b>{prop}</b>
 			{chain:prop-select-chain}
 		</div>
 		{prop-select-chain:}
@@ -30,8 +30,9 @@
 					var root = Sequence.right('{~dataroot()}');
 					var prop_nick = root[2];
 					var key = '{key}';
-					var param = layer.data.list[prop_nick];
-					var option = Sequence.get(Sequence.get(layer, root),['childs',value]);
+					var data = Load.loadJSON(layer.json);
+					var param = data.list[prop_nick];
+					var option = Sequence.get(Sequence.get({ data: data }, root),['childs',value]);
 					
 					
 					var count = 0;
@@ -43,7 +44,7 @@
 					}
 
 					if (option && (count<1)) {
-						var src = '/catalog/?m=' + layer.data.m + ':';
+						var src = '/catalog/?m=' + data.m + ':';
 							src += param.more?'more.':'';
 						if (!option.childs) {
 							src += prop_nick+'::.'+value+'=1';
