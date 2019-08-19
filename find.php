@@ -14,9 +14,7 @@ if (isset($_GET['seo'])){
 	}
 	$link = $_GET['link'];
 	$link = $link.'/find';
-	$seojson = $conf['grouparticles'].'seo.json';
-	if(Path::theme($seojson)) $ans['external'] = $seojson;
-	$ans['canonical']=View::getPath().$link;
+	$ans['canonical'] = View::getPath().$link;
 	return Ans::ans($ans);
 }
 $ans = Load::loadJSON('-showcase/api/search');

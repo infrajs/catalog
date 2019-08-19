@@ -34,7 +34,6 @@ if (!$data) {
 if (!isset($data['time'])) $data['time'] = time();
 
 if (!$submit) {
-	$ans['text']=Load::loadTEXT('-doc/get.php?src='.$conf['grouparticles'].'stat');
 	$ans['stat']=$data;
 	return Ans::ret($ans);
 }
