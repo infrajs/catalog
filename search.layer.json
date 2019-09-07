@@ -1,0 +1,7 @@
+{
+	"tpl":"-catalog/search.tpl",
+	"nocache":true,
+	"jsontpl":"-showcase/api/search?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",
+	"seojsontpl":"-showcase/api/search/seo?seo={Controller.names.catalog.crumb}&val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}",
+	"name":"catalog"
+}

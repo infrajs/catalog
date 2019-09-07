@@ -29,7 +29,7 @@
 	</div>
 	{showfilter:}
 		<div class="item" data-anchor='.breadcrumb'>
-			<a rel="nofollow" href="/{Controller.names.catalog.crumb}{:cat.mark.add}{name}">
+			<a rel="nofollow" href="/{crumb}{:cat.mark.add}{name}">
 				<span style="color:red; font-family:Tahoma; font-weight:bold">&times;</span>
 				{title}:</a> <b>{value}</b>
 			
@@ -56,7 +56,7 @@
 	<!--<h2>{data.name}</h2>
 	{~length(data.filters)?:showfilters}
 	<p>
-		<a rel="nofollow" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
+		<a rel="nofollow" data-anchor='.breadcrumb' href="/{crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
 	</p>-->
 {cat_showlist:}
 	{:pages}
@@ -84,19 +84,19 @@
 	<div rel="nofollow" class="float-right a mr-1 mb-4" style="z-index:1; position:relative; cursor:pointer;" onclick="Session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');">Сортировка</div>
 
 	<div class="settings alert alert-info" style="display:none">
-		Сортировать <a rel="nofollow" style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,
-			<a rel="nofollow" style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:name|:name}'>по наименованию</a>, 
-			<a rel="nofollow" style="font-weight:{data.md.sort=:art?:bold}"data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:art|:art}'>по артикулу</a>, 
-			<a rel="nofollow" style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:cost|:cost}'>по цене</a>, 
-			<a rel="nofollow" style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:change|:change}'>по дате изменений</a><br>
+		Сортировать <a rel="nofollow" style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{crumb}{:cat.mark.add}sort'>по умолчанию</a>,
+			<a rel="nofollow" style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{crumb}{:cat.mark.add}sort={data.md.sort=:name|:name}'>по наименованию</a>, 
+			<a rel="nofollow" style="font-weight:{data.md.sort=:art?:bold}"data-anchor='.pagination' href='/{crumb}{:cat.mark.add}sort={data.md.sort=:art|:art}'>по артикулу</a>, 
+			<a rel="nofollow" style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='/{crumb}{:cat.mark.add}sort={data.md.sort=:cost|:cost}'>по цене</a>, 
+			<a rel="nofollow" style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='/{crumb}{:cat.mark.add}sort={data.md.sort=:change|:change}'>по дате изменений</a><br>
 		Показывать по
-		<select onchange="ascroll.once='.pagination'; Crumb.go('/{Controller.names.catalog.crumb}{:cat.mark.add}count='+$(this).val());">
+		<select onchange="ascroll.once='.pagination'; Crumb.go('/{crumb}{:cat.mark.add}count='+$(this).val());">
 			<option {data.md.count=:5?:selected}>5</option>
 			<option {data.md.count=:10?:selected}>10</option>
 			<option {data.md.count=:20?:selected}>20</option>
 			<option {data.md.count=:100?:selected}>100</option>
 		</select> позиций на странице<br>
-		Показать в <a rel="nofollow" style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
+		Показать в <a rel="nofollow" style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='/{crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
 	</div>
 	<div style="clear:both"></div>
 	<script>
