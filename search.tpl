@@ -45,30 +45,76 @@
 {issearch:}search
 {searchgood:}
 	{~length(data.filters)?:showfilters}
-		
 	{data.childs:cat.groups}
-
-	{~length(list)?:cat_showlist}
-	
+	{~length(data.md.group)?(~length(list)?:cat_showlist)}
 	<p>{descr}</p>
-	
-	
-	<!--<h2>{data.name}</h2>
-	{~length(data.filters)?:showfilters}
-	<p>
-		<a rel="nofollow" data-anchor='.breadcrumb' href="/{crumb}{:cat.mark.set}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a>
-	</p>-->
 {cat_showlist:}
 	{:pages}
 	{~conf.catalog.pageset?:pageset}
+	{:search-{(group.showcase.tplsearch|~conf.catalog.tplsearch)}}
+	{:pages}
+{search-rows:}
 	{:extend.pos-item-css}
 	<div style="clear:both"></div>
 	{list::cat_item}
-
-	{:pages}
+{search-columns:}
+	<style scoped>
+		.cat_item .title {
+			display:block;
+			background-color:#EFEFEF;
+			text-decoration: none;
+			color:#222222;
+		}
+		.cat_item .padding {
+			padding:4px 8px;
+		}
+		.cat_item .title:hover {
+			background-color:gray;
+			color:white;
+		}
+		.cat_item .nobr {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	</style>
+	
+	<div class="row cat_item"  style="margin-bottom:40px; clear:both">
+		{list::cat-item-columns}
+	</div>
+{cat-item-columns:}
+	
+			{:pos-item-columns}
+		
+{pos-item-columns:}
+	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4 d-flex flex-column justify-content-between">
+		<div class="flex-grow-1">
+			<a class="title p-2 nobr" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|article}</a>
+			<div class="p-2 nobr">
+				<b><a href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {article}</a></b>
+			</div>
+			{Наличие на складе?:extend.nalichie}
+			{images.0?:posimg?:noimg}
+			
+		</div>
+		<div class="px-2">
+			{Цена?:extend.priceblockbig}
+		</div>
+	</div>
+	{producerlogo:}
+		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{crumb}/{producer}{:cat.mark.set}" class="float-right p-2">
+			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
+		</a>
+{posimg:}
+	<a style="position: relative" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+		<img class="img-fluid border" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
+	</a>
+{noimg:}
+	<a style="position: relative" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+		<img class="img-fluid border" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
+	</a>
 {cat_item:}
 	<div class="position" style="margin-bottom:40px;">
-		<div style="text-align:right">{time?~date(:j F Y,time)}</div>
 		{:extend.pos-item}
 	</div>
 {pages:}

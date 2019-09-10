@@ -1,17 +1,8 @@
 {
-	"pub":["dir", "title", "nds","searchingroups","pageset","showmore","filtermemory"],
+	"pub":["dir", "title", "tplsearch", "nds","searchingroups","pageset","showmore","filtermemory"],
 	"dependencies":["path","event"],
 	"css":"style.css",
-	"d_tester":"tests/",
-	"nds":false,
-	"bigimage":["Мониторы"],
-	"d_require":"infra.php",
 	"js":["Catalog.js","infra.js"],
-	"filgroupsissort":false,
-	"filgroups":{
-		"Светильники-и-прожектора":["Источник света","Степень защиты","Рассеиватель","Отражатель","Мощность, Вт", "Серия", "Линза, º"]
-	},
-	"countonpage":10,
 	"clutch":{
 		"magnific-popup":[
 			"vendor/dimsemenov/",
@@ -22,40 +13,54 @@
 			"vendor/infrajs/catalog/"
 		]
 	},
-	"searchingroups":true,
-	"foldwhen":30,
-	"d_update":"update.php",
-	"d_conf":"infrajs\\catalog\\Catalog",
-	"d_dir":"~catalog/",
-	"cache":["~catalog/"],
-	"title":"Каталог",
+	"tplsearch":"rows",
 	"pageset":false,
 	"showmore":true,
-	"listreverse":false,
-	"ignorelistname":false,
-	"alwaysshowposs":true,
-	"md":{ },
-	"filename":"Производитель",
-	"columns":[],
-	"showgroupsalways":false,
-	"filtermemory":true,
-	"filterstpl":[],
-	"filteroneitem": true,
-	"filtershowhard": [],
-	"filterslimitpercent": 10,
-	"filters":{
-		"producer":{
-			"posid":"producer",
-			"posname":"Производитель",
-			"title":"Производитель",
-			"separator":false
+	"old":{
+		"bigimage":["Мониторы"],
+		"filgroups":{
+			"Светильники-и-прожектора":["Источник света","Степень защиты","Рассеиватель","Отражатель","Мощность, Вт", "Серия", "Линза, º"]
 		},
+		"countonpage":10,
+		"filgroupsissort":false,
+		"d_require":"infra.php",
+		"searchingroups":true,
+		"foldwhen":30,
+		"d_update":"update.php",
+		"d_conf":"infrajs\\catalog\\Catalog",
+		"d_dir":"~catalog/",
+		"cache":["~catalog/"],
+		"title":"Каталог",
 		
-		"cost":{
-			"posid":"Цена",
-			"posname":"Цена",
-			"title":"Цена",
-			"separator":false
+		
+		"listreverse":false,
+		"ignorelistname":false,
+		"alwaysshowposs":true,
+		"md":{ },
+		"d_tester":"tests/",
+		"nds":false,
+		"filename":"Производитель",
+		"columns":[],
+		"showgroupsalways":false,
+		"filtermemory":true,
+		"filterstpl":[],
+		"filteroneitem": true,
+		"filtershowhard": [],
+		"filterslimitpercent": 10,
+		"filters":{
+			"producer":{
+				"posid":"producer",
+				"posname":"Производитель",
+				"title":"Производитель",
+				"separator":false
+			},
+			
+			"cost":{
+				"posid":"Цена",
+				"posname":"Цена",
+				"title":"Цена",
+				"separator":false
+			}
 		}
 	}
 }

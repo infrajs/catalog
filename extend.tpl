@@ -45,24 +45,26 @@
 {pos-img:}
 		{Наличие на складе?:nalichie}
 		<a style="position: relative" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
-			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=256&amp;h=256&amp;src={images.0}&amp;or=-imager/empty.png" />
+			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=528&amp;src={images.0}" />
 		</a>
 {pos-item:}
 	<div class="row cat_item">
-		<div class="col-4 col-md-3">
-			{images.0?:pos-img}
+		<div class="{images.0??:mobimghide}col-12 col-sm-4 col-md-3">
+			{images.0?:pos-img?:pos-img}
 		</div>
-		<div class="col-8 col-md-9">
+		<div class="col-12 col-sm-8 col-md-9">
 			<a class="title padding" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|:name}</a>
 			{logo?:producerlogo}
 			<div class="padding">
 				<b><a href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {~conf.showcase.hiddenarticle??article}</a></b>
-				<div class="float-right" style="font-size:90%; margin-left:10px"><a data-anchor=".breadcrumb" href="/{crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+				<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a data-anchor=".breadcrumb" href="/{crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
 			</div>
+			
 			{(more&~conf.catalog.showmore)?:havemore?:nomore}
+			
 		</div>
 	</div>
-
+	{mobimghide:}d-none d-sm-block 
 	{name:}{article}
 	{havemore:}
 		<div class="padding" style="font-family:Tahoma; font-size:85%; margin-bottom:4px">    
