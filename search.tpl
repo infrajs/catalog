@@ -1,16 +1,15 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
 	<div class="float-right">{:showcount}</div>
-	<h1>{data.name|title}</h1>
-	<div style="clear:both"></div>
-	<div id="filgroups"></div>
+	<h1><a href="/{crumb}/{data.group.parent}{:cat.mark.set}">{data.group.parent}</a>{data.group.parent?:tire} {data.title|data.name}</h1>
 	{data.count?data:searchgood?data:searchbad}
 	{:text}
-	{Группа:}Группа
-	{Поиск:}Поиск
-	{Производитель:}Производитель
+	{tire:} &mdash; 
+	{Группа:}Группа, 
+	{Поиск:}Поиск, 
+	{Производитель:}Производитель, 
 {showcount:}
-	{data.is=:isproducer?:Производитель}{data.is=:isgroup?:Группа}{data.is=:issearch?:Поиск}, 
+	{data.is=:isproducer?:Производитель}{data.is=:issearch?:Поиск}
 	{data.count} {~words(data.count,:позиция,:позиции,:позиций)}
 {showfilters:}
 	<style scoped>
@@ -23,7 +22,7 @@
 			text-decoration:none;
 		}
 	</style>
-	<div class="showfilters alert alert-success" role="alert">
+	<div class="showfilters alert alert-{~conf.catalog.showfilterscls}" role="alert">
 		Фильтры:
 		{data.filters::showfilter}
 	</div>
@@ -36,18 +35,83 @@
 		</div>
 {cat.mark.add:}{:cat.mark.server.add}
 {searchbad:}
+	<div id="filgroups"></div>
 	<div class="mb-4"></div>
 	<p>К сожалению, позиции не найдены.</p>
 	{~length(data.filters)?:showfilters}
-
-{isproducer:}producer
-{isgroup:}group
-{issearch:}search
+	{isproducer:}producer
+	{isgroup:}group
+	{issearch:}search
 {searchgood:}
-	{~length(data.filters)?:showfilters}
-	{data.childs:cat.groups}
-	{~length(data.md.group)?(~length(list)?:cat_showlist)}
+	
+	{:groups-{(group.showcase.tplgroups|~conf.catalog.tplgroups)}}
+	{(data.count<:limit)|~length(data.childs)<:1?:cat_showlist?:cat_notshow}
 	<p>{descr}</p>
+	{limit:}500
+	{1:}1
+	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:позиция,:позиции,:позиций)} &mdash; выберите группу.
+	{groups-default:}
+		<div id="filgroups"></div>
+		{~length(data.filters)?:showfilters}
+		{data.childs:cat.groups}
+	{groups-info:}
+		{~length(data.childs)?:showgroups?:nogroups}
+		{showgroups:}
+		<div class="row catgroups mt-4 mb-1">
+			<style>
+				.catgroups ul { 
+					list-style: none inside;
+					padding-left: 0.5rem;
+				} 
+				.catgroups ul > li:before {
+					content: "—"; 
+					margin-left: -1ex; 
+					margin-right: 1ex; 
+				}
+			</style>
+			<div class="order-2 order-md-1 col-md-8 col-lg-8 col-xl-9 mb-3">
+				<div class="row">
+					{data.childs::groups_group}
+				</div>
+				{~length(data.filters)?:showfilters}
+			</div>
+			<div class="order-1 order-md-2 col-md-4 col-lg-4 col-xl-3 mb-3">
+				<div id="filgroups"></div>
+			</div>
+		</div>
+		{nogroups:}
+			<div class="row catgroups mt-4">
+				<div class="col-md-6 mb-3">
+					<div id="filgroups"></div>
+					{~length(data.filters)?:showfilters}
+				</div>
+			</div>
+			
+	{groups_group:}
+		<div class="col-lg-12 col-lg-6 col-xl-6 d-flex mb-3">
+			<div class="mr-2" style="min-width:100px; text-align:center">
+				<a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{(img|icon)?:gimg}</a>
+			</div>
+			<div class="flex-grow-1">
+				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+				{~length(childs)?:subgrs2?:subposs}
+			</div>
+		</div>
+		{subposs:}
+			<div>{min?(min!max?:showcost?:onecost)?:nocost}</div>
+			{showcost:}Цены от&nbsp;{~cost(min)}&nbsp;руб. до&nbsp;{~cost(max)}&nbsp;руб.
+			{nocost:}
+			{onecost:}Цена {~cost(min)}&nbsp;руб.
+		{subgrs2:}
+			<div>{childs::subgr2}</div>
+			{subgr2:}<a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a>{~last()|:comma}
+			{comma:}, 
+		{subgrs:}
+			<ul>
+				{childs::subgr}
+			</ul>
+			{subgr:}<li><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></li>
+		{gimg:}<img src="/-imager/?w=100&h=100&src={icon|img}">
 {cat_showlist:}
 	{:pages}
 	{~conf.catalog.pageset?:pageset}
@@ -87,7 +151,7 @@
 			{:pos-item-columns}
 		
 {pos-item-columns:}
-	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4 d-flex flex-column justify-content-between">
+	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-3 d-flex flex-column justify-content-between">
 		<div class="flex-grow-1">
 			<a class="title p-2 nobr" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|article}</a>
 			<div class="p-2 nobr">
@@ -111,7 +175,7 @@
 	</a>
 {noimg:}
 	<a style="position: relative" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
-		<img class="img-fluid border" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
+		<img class="img-fluid" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
 	</a>
 {cat_item:}
 	<div class="position" style="margin-bottom:40px;">

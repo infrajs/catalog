@@ -96,9 +96,11 @@ class Check {
 			$r = explode('/', $src);
 			$folder = $r[sizeof($r) - 2];
 			if ($level == 0) {
+				//Папки внутри производителя не артикулы
 				if ($folder == 'images') return true;
 				if ($folder == 'tables') return true;
 				if ($folder == 'articles') return true;
+				if ($folder == 'groups') return true;
 				if (preg_match('/.*backup/u',$folder)) return true; 
 				$prod = mb_strtolower($folder);
 				if (empty($producers[$prod])) {

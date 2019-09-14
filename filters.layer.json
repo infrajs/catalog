@@ -1,0 +1,6 @@
+{
+	"istpl":"{crumb.child.child??:yes}",
+	"showanimate":false,
+	"jsontpl":"-showcase/api/filters?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}",
+	"tpl":"-catalog/filters.tpl"
+}

@@ -79,10 +79,21 @@
 				{values::fbtn}
 			</div>
 		</div>
+		{fbtn:}<label onclick="Crumb.go('/catalog/{:getv}')" class="btn btn-secondary {:is?:active}">
+				<input type="radio" name="options" id="option1" autocomplete="off" {:is?:checked}> {value}
+			</label>
 	{prop-image:}
 		<div class="my-3 text-left">
 			{values::prodimg}
 		</div>
+	{prop-row:}
+		<div class="mb-3">
+			<div><b>{prop}</b></div>{values::varow}
+		</div>
+		{varow:}<span 
+		onclick="Crumb.go('/catalog/{:getv}')" 
+		class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
+		{comma:}, 
 	{prop-a:}
 		<div class="my-3">
 			{values::va}
@@ -94,18 +105,16 @@
 		<a href="/catalog/{:getv}"><img class="img-fluid mb-4 mr-4" src="/-imager?w=200&src={...src}&name={value}"></a>
 		
 	{fopt:}<option {:is?:selected} value="{value_nick}">{value}</option>
-	{fbtn:}<label class="btn btn-secondary {:is?:active}">
-				<input type="radio" name="options" id="option1" autocomplete="off" {:is?:checked}> {value}
-			</label>
+	
 	{is:}{(data.md.more[...prop_nick][value_nick]|data.md[...prop_nick][value_nick])?:yes}
 	{get:}{:cat.mark.add}{more?:more.}{prop_nick}::.
 	{getv:}{...prop_nick=:producer?:getvinu?:getvinm}
-	{getvinm:}{:cat.mark.add}{...more?:more.}{...prop_nick}::.{value_nick}{:is??:one}
-	{getvinu:}{value_nick}{:cat.mark.set}
+		{getvinm:}{:cat.mark.add}{...more?:more.}{...prop_nick}::.{value_nick}{:is??:one}
+		{getvinu:}{value_nick}{:cat.mark.set}
 	{one:}=1
 
 	{prop-cost:}
-		<div style="margin-top:5px; border-bottom:1px solid #ddd">
+		<div class="mb-3">
 			<style scoped>
 				.costslide {
 					margin-bottom:10px;
@@ -123,10 +132,10 @@
 					<span>
 					  	<!-- id add label checked-->
 					  	{:costlabel}
-						{~objasdf(:id,:costyes,:add,:more.Цена.yes,:label,:costlabel,:checked,data.md.more.Цена.yes):box}
+						{~objasdf(:id,:costyes,:add,:more.цена.yes,:label,:costlabel,:checked,data.md.more.цена.yes):box}
 					</span>
 					<span style="font-weight:normal; font-size:14px">
-							{~obj(:id,:costno,:add,:more.Цена.no,:label,:costlabelno,:checked,data.md.more.Цена.no):box}
+							{~obj(:id,:costno,:add,:more.цена.no,:label,:costlabelno,:checked,data.md.more.цена.no):box}
 					</span>
 				</div>
 			</div>
@@ -140,11 +149,6 @@
 					</div>
 				</div>
 				<div id="costslider{prop_nick}"></div>
-			</div>
-			<div>
-				<label>
-				  
-				</label>
 			</div>
 			<script>
 				domready(function(){
