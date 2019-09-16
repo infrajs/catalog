@@ -22,7 +22,7 @@
 			text-decoration:none;
 		}
 	</style>
-	<div class="showfilters alert alert-{~conf.catalog.showfilterscls}" role="alert">
+	<div class="showfilters alert {~conf.catalog.showfilterscls}" role="alert">
 		Фильтры:
 		{data.filters::showfilter}
 	</div>
@@ -69,13 +69,13 @@
 					margin-right: 1ex; 
 				}
 			</style>
-			<div class="order-2 order-md-1 col-md-8 col-lg-8 col-xl-9 mb-3">
+			<div class="order-2 order-md-1 col-md-8 col-lg-8 col-xl-8 mb-3">
 				<div class="row">
 					{data.childs::groups_group}
 				</div>
 				{~length(data.filters)?:showfilters}
 			</div>
-			<div class="order-1 order-md-2 col-md-4 col-lg-4 col-xl-3 mb-3">
+			<div class="order-1 order-md-2 col-md-4 col-lg-4 col-xl-4 mb-3">
 				<div id="filgroups"></div>
 			</div>
 		</div>
@@ -151,8 +151,8 @@
 			{:pos-item-columns}
 		
 {pos-item-columns:}
-	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-3 d-flex flex-column justify-content-between">
-		<div class="flex-grow-1">
+	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4 d-flex flex-column justify-content-between">
+		<div class="">
 			<a class="title p-2 nobr" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|article}</a>
 			<div class="p-2 nobr">
 				<b><a href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {article}</a></b>
@@ -161,8 +161,9 @@
 			{images.0?:posimg?:noimg}
 			
 		</div>
-		<div class="px-2">
+		<div class="px-2 flex-grow-1">
 			{Цена?:extend.priceblockbig}
+			{Описание}
 		</div>
 	</div>
 	{producerlogo:}

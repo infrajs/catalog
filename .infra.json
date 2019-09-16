@@ -16,7 +16,7 @@
 	"tplsearch":"rows",
 	"tplgroups":"default",
 	"pageset":false,
-	"showfilterscls":"success",
+	"showfilterscls":"alert-success",
 	"showmore":true,
 	"filtermemory":true,
 	"searchingroups":true,
