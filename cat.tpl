@@ -104,7 +104,9 @@
 	</div>
 	{items:}
 		<a class="badge badge-pills" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{~key}{:mark.set}">{title}</a>
-{idsp:}{item_nick?:sp}{item_nick}
+{idsp:}{item_nick?:sp}{item_nick}{(iscatkit&catkit)?:ampvalsp}
 {sp:} 
-{idsl:}{item_nick?:sl}{item_nick}
+{idsl:}{item_nick?:sl}{item_nick}{(iscatkit&catkit)?:ampvalsl}
 {sl:}/
+{ampvalsp:}{item_nick|:sp}&{catkit}
+{ampvalsl:}{item_nick|:sl}&{catkit}
