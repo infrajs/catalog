@@ -44,7 +44,7 @@
 	{label-danger:}badge-danger
 {pos-img:}
 		{Наличие на складе?:nalichie}
-		<a style="position: relative" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+		<a style="position: relative" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
 			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=528&amp;src={images.0}" />
 		</a>
 {pos-item:}
@@ -53,11 +53,11 @@
 			{images.0?:pos-img?:pos-img}
 		</div>
 		<div class="col-12 col-sm-8 col-md-9">
-			<a class="title padding" href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|:name}</a>
+			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|:name}</a>
 			{logo?:producerlogo}
 			<div class="padding">
-				<b><a href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {~conf.showcase.hiddenarticle??article}</a></b>
-				<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a data-anchor=".breadcrumb" href="/{crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {~conf.showcase.hiddenarticle??article}</a></b>
+				<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
 			</div>
 			
 			{(more&~conf.catalog.showmore)?:havemore?:nomore}
@@ -79,21 +79,21 @@
 			<span style="border-bottom:1px dashed gray; cursor:pointer" onclick="$(this).next().slideToggle();">Описание</span>
 			<div style="display:none;">
 				{Описание}
-				<b><a href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">Подробнее</a></b>
+				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">Подробнее</a></b>
 			</div>
 		</div>
 	{nomore:}
 		<div class="padding">
 			<div style="font-family:Tahoma; font-size:85%; margin-bottom:10px">{Описание}</div>
 			{Цена?:priceblockbig}
-			<b><a href="/{crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">Подробнее</a></b>
+			<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">Подробнее</a></b>
 		</div>
 	{cat_more:}{(.&(.!:no))?:more}
 	{more:}{~key}:&nbsp;{.}{~last()|:comma}
 	{comma:}, 
 	{no:}Нет
 	{producerlogo:}
-		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{crumb}/{producer}{:cat.mark.set}" class="float-right" style="margin:5px 0 5px 5px">
+		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}/{producer_nick}{:cat.mark.set}" class="float-right" style="margin:5px 0 5px 5px">
 			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 		</a>
 	{cat::}-catalog/cat.tpl

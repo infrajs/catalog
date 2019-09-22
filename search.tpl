@@ -47,7 +47,7 @@
 	{:groups-{(group.showcase.tplgroups|~conf.catalog.tplgroups)}}
 	{(data.count<:limit)|~length(data.childs)<:1?:cat_showlist?:cat_notshow}
 	<p>{descr}</p>
-	{limit:}500
+	{limit:}1000
 	{1:}1
 	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:позиция,:позиции,:позиций)} &mdash; выберите группу.
 	{groups-default:}
