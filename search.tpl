@@ -151,17 +151,15 @@
 			{:pos-item-columns}
 		
 {pos-item-columns:}
-	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4 d-flex flex-column justify-content-between">
-		<div class="">
-			<a class="title p-2 nobr" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|article}</a>
-			<div class="p-2 nobr">
-				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {article}</a></b>
-			</div>
-			{Наличие на складе?:extend.nalichie}
-			{images.0?:posimg?:noimg}
-			
+	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4">
+		
+		<a class="title p-2 nobr" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|article}</a>
+		<div class="p-2 nobr">
+			<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {article}</a></b>
 		</div>
-		<div class="px-2 flex-grow-1">
+		{Наличие на складе?:extend.nalichie}
+		<div>{images.0?:posimg?:noimg}</div>
+		<div class="px-2">
 			{Цена?:extend.priceblockbig}
 			{Описание}
 		</div>
@@ -171,7 +169,7 @@
 			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 		</a>
 {posimg:}
-	<a style="position: relative" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+	<a style="position: relative;"href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
 		<img class="img-fluid border" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
 	</a>
 {noimg:}
