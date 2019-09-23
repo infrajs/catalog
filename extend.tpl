@@ -1,5 +1,6 @@
+{priceblockbig:}{:orig.priceblockbig}
 {pos-page:}{Цена?:priceblockbig}
-	{priceblockbig:}
+	{orig.priceblockbig:}
 		<div class="alert alert-success">
 			Цена: <span class="cost" style="font-size:20px">{~cost(Цена)}{:unit}</span>{:nds}<br> 
 			<!--По вопросам приобретения обращайтесь по телефонам в <a href="/contacts">контактах</a>.-->
