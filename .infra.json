@@ -1,5 +1,5 @@
 {
-	"pub":["dir", "title", "tplsearch","showfilterscls", "tplgroups", "nds","searchingroups","pageset","showmore","filtermemory"],
+	"pub":["showparentgroup", "dir", "title", "tplsearch","showfilterscls", "tplgroups", "nds","searchingroups","pageset","showmore","filtermemory"],
 	"dependencies":["path","event"],
 	"css":"style.css",
 	"js":["Catalog.js","infra.js"],
@@ -16,6 +16,7 @@
 	"tplsearch":"rows",
 	"tplgroups":"default",
 	"pageset":false,
+	"showparentgroup":false,
 	"showfilterscls":"alert-success",
 	"showmore":true,
 	"filtermemory":true,

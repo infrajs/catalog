@@ -1,9 +1,12 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
 	<div class="float-right">{:showcount}</div>
-	<h1><a href="/{Controller.names.catalog.crumb}/{data.group.parent}{:cat.mark.set}">{data.group.parent}</a>{data.group.parent?:tire} {data.title|data.name}</h1>
+	<h1>
+		{~conf.catalog.showparentgroup?:showparentgroup}{data.title|data.name}
+	</h1>
 	{data.count?data:searchgood?data:searchbad}
 	{:text}
+	{showparentgroup:}<a href="/{Controller.names.catalog.crumb}/{data.group.parent}{:cat.mark.set}">{data.group.parent}</a>{data.group.parent?:tire} 
 	{tire:} &mdash; 
 	{Группа:}Группа, 
 	{Поиск:}Поиск, 
