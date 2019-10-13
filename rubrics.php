@@ -2,17 +2,15 @@
 use infrajs\excel\Xlsx;
 use infrajs\load\Load;
 use infrajs\ans\Ans;
-use infrajs\catalog\Catalog;
+use akiyatkin\showcase\Showcase;
 use infrajs\router\Router;
 
+$ans = array();
 
-$ans=array();
+$m = Ans::GET('m','string','');
 
-$fd=Catalog::initMark($ans);
-//На главной странице каталога показываются
+$data = Load::loadJSON('-showcase/api/search/?m='.$m);
 
-$data = Load::loadJSON('-catalog/search.php?m='.$ans['m']);
-
-$ans['childs']=$data['childs'];
+$ans['childs'] = $data['childs'];
 
 return Ans::ret($ans);
