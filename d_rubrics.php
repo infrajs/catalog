@@ -1,9 +1,6 @@
 <?php
-use infrajs\excel\Xlsx;
 use infrajs\load\Load;
 use infrajs\ans\Ans;
-use akiyatkin\showcase\Showcase;
-use infrajs\router\Router;
 
 $ans = array();
 
