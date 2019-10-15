@@ -14,7 +14,7 @@
 		</select>
 
 	{prop-chain:}
-		<div class="alert alert-success" style="margin-bottom:3px;">
+		<div class="alert alert-success" style="margin-bottom:10px;">
 			<b>{prop}</b>
 			{chain:prop-select-chain}
 		</div>
@@ -33,7 +33,7 @@
 					var param = data.list[prop_nick];
 					var option = Sequence.get(Sequence.get({ data: data }, root),['childs',value]);
 					
-					
+					console.log(option, root, ['childs', value]);
 					var count = 0;
 					if (option && option.childs) {
 						for (var i in option.childs) count++;
