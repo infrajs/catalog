@@ -6,23 +6,22 @@
 		{:prop-select}
 	{prop-select:}
 		<select 
-		style="margin-top:3px" 
+		style="margin-top:3px; margin-bottom:10px" 
 		onchange="Crumb.go('/catalog/{:get}'+this.value+'=1')" 
-		class="custom-select form-control mb-0 shadow-over">
+		class="custom-select form-control shadow-over">
 			<option>{prop}</option>
 			{values::fopt}
 		</select>
 
 	{prop-chain:}
-		<div class="alert alert-success" style="margin-bottom:3px">
+		<div class="alert alert-success" style="margin-bottom:3px;">
 			<b>{prop}</b>
 			{chain:prop-select-chain}
 		</div>
 		{prop-select-chain:}
 			{~length(childs)>:0?:prop-select-chain-show}
 			{prop-select-chain-show:}
-				<select 
-				style="margin-top:3px" 
+				<select style="margin-top:3px;" 
 				onchange="
 					
 					var value = this.value;
@@ -123,8 +122,8 @@
 					background-color: var(--primary);
 				}
 				#costslider{prop_nick} {
-					margin-left:10px;
-					margin-right:10px;
+					margin-left:15px;
+					margin-right:15px;
 				}
 			</style>
 			<div>
@@ -145,7 +144,7 @@
 						<input style="width:100%; border:none; border-bottom:1px solid #ddd; padding-left:4px" id="inpmin{prop_nick}" type="text">
 					</div>
 					<div class="col-sm-6">
-						<input style="text-align:right; width:100%; border:none; border-bottom:1px solid #ddd; padding-left:4px" id="inpmax{prop_nick}" type="text">
+						<input style="text-align:right; width:100%; border:none; border-bottom:1px solid #ddd; padding-left:4px; padding-right:4px" id="inpmax{prop_nick}" type="text">
 					</div>
 				</div>
 				<div id="costslider{prop_nick}"></div>
