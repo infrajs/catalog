@@ -14,10 +14,11 @@
 		</select>
 
 	{prop-chain:}
-		<div class="alert alert-success" style="margin-bottom:10px;">
+		<div class="{bgcls|:bgclsdef}" style="margin-bottom:10px;">
 			<b>{prop}</b>
 			{chain:prop-select-chain}
 		</div>
+		{bgclsdef:}alert alert-success
 		{prop-select-chain:}
 			{~length(childs)>:0?:prop-select-chain-show}
 			{prop-select-chain-show:}
