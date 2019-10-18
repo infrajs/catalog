@@ -40,19 +40,14 @@
 			{logo?:producer}
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
-		<div><small class="text-muted a gagarin">{item}</small>
-			<div style="display:none">
-				{items?:showitems}
-			</div>
-		</div>
+		
+		{items?:showitems}
+			
 		{~length(images)?:images}
 		{:extend.pos-page}
 		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
 		{Скрыть фильтры в полном описании??:print_more}
-		<small class="text-muted a gagarin">{item}</small>
-		<div style="display:none">
-			{items?:showitems}
-		</div>
+		
 
 		{texts::text}
 		{~length(files)?:files}
