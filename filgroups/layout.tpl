@@ -15,5 +15,5 @@
 {is:}{data.md.more[...prop_nick][value_nick]?:yes}
 {str1:}1{*:}:more.{...prop_nick}.no=1
 {cat::}-catalog/cat.tpl
-{stron:}btn-warning
-{stroff:}btn-secondary
+{stron:}btn-info
+{stroff:}btn-outline-secondary
