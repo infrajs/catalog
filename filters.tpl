@@ -9,7 +9,7 @@
 		style="margin-top:3px; margin-bottom:10px" 
 		onchange="Crumb.go('/catalog/{:get}'+this.value+'=1')" 
 		class="custom-select form-control shadow-over">
-			<option>{prop}</option>
+			<option value="" style="font-weight: bold">{prop}</option>
 			{values::fopt}
 		</select>
 
@@ -131,10 +131,10 @@
 					<span>
 					  	<!-- id add label checked-->
 					  	{:costlabel}
-						{~objasdf(:id,:costyes,:add,:more.цена.yes,:label,:costlabel,:checked,data.md.more.цена.yes):box}
+						{~objasdf(:id,:costyes,:add,:more.{prop_nick}.yes,:label,:costlabel,:checked,data.md.more[prop_nick]yes):box}
 					</span>
 					<span style="font-weight:normal; font-size:14px">
-							{~obj(:id,:costno,:add,:more.цена.no,:label,:costlabelno,:checked,data.md.more.цена.no):box}
+							{~obj(:id,:costno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
 					</span>
 				</div>
 			</div>
