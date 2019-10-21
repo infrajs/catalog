@@ -54,7 +54,9 @@
 	{1:}1
 	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:позиция,:позиции,:позиций)} &mdash; выберите группу.
 	{groups-default:}
-		<div id="filgroups"></div>
+		<div class="row">
+			<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
+		</div>
 		{~length(data.filters)?:showfilters}
 		{data.childs:cat.groups}
 	{groups-info:}
