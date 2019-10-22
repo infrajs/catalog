@@ -146,17 +146,26 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
+		/*.cat_item .columpos {
+			max-height:590px; 
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		@media (max-width: 575px) {
+			.cat_item .columpos {
+				max-height: none;
+				overflow: visible;
+			}
+		}*/
 	</style>
 	
 	<div class="row cat_item"  style="margin-bottom:40px; clear:both">
 		{::cat-item-columns}
 	</div>
 {cat-item-columns:}
-	
-			{:pos-item-columns}
-		
+	{:pos-item-columns}	
 {pos-item-columns:}
-	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4">
+	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4 columpos space">
 		
 		<a class="title p-2 nobr" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|article}</a>
 		<div class="p-2 nobr">
@@ -166,9 +175,10 @@
 		<div>{images.0?:posimg?:noimg}</div>
 		<div class="px-2">
 			{Цена?:extend.priceblockbig}
-			{Описание}
+			<div>{~cut(:200,Описание)}</div>
 		</div>
 	</div>
+	{350:}350
 	{producerlogo:}
 		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}/{producer}{:cat.mark.set}" class="float-right p-2">
 			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
