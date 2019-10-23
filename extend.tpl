@@ -79,6 +79,7 @@
 		</div>
 		<div class="padding">
 			{Цена?:priceblockbig}
+		
 		</div>
 	{nomore:}
 		<div class="padding">

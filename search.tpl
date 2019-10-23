@@ -9,8 +9,8 @@
 	{showparentgroup:}<a href="/{Controller.names.catalog.crumb}/{data.group.parent}{:cat.mark.set}">{data.group.parent}</a>{data.group.parent?:tire} 
 	{tire:} &mdash; 
 	{Группа:}
-	{Поиск:}Поиск 
-	{Производитель:}Производитель 
+	{Поиск:}Поиск, 
+	{Производитель:}Производитель,  
 {showcount:}
 	{data.is=:isproducer?:Производитель}{data.is=:issearch?:Поиск}{data.is=:isgroup?:Группа}
 	{data.count} {~words(data.count,:модель,:модели,:моделей)}
