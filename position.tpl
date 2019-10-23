@@ -38,19 +38,20 @@
 	<div class="cat-position">
 		<div style="float:right">
 			{logo?:producer}
+			<div style="clear:both"></div>
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
-		
 		{items?:showitems}
-			
 		{~length(images)?:images}
-		{:extend.pos-page}
+		<div style="clear:both">
+			{:extend.pos-page}
+		</div>
 		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
-		{Скрыть фильтры в полном описании??:print_more}
+		<div class="space">{Скрыть фильтры в полном описании??:print_more}</div>
 		
-
 		{texts::text}
 		{~length(files)?:files}
+
 		<div style="clear:left; margin-bottom: 50px">
 			<hr>
 			{:extend.pos-sign}
@@ -59,7 +60,7 @@
 	{strСкрытый:}Скрытый
 	{startart:}<br><small><nobr>{producer}</nobr> <nobr>{article}</nobr></small>
 {showitems:}
-	<table class="table table-striped table-hover">
+	<table id="items" class="table table-striped table-hover table-sm">
 		<thead>
 			<tr>
 				{items.0.more::ihead}
@@ -71,23 +72,23 @@
 			{items::iitem}
 		</tbody>
 	</table>
-	{prcost:}<td>{~cost(Цена|...Цена)}&nbsp;руб.</td>
+	{prcost:}<td>{~cost(Цена)}&nbsp;руб.</td>
 	{headcost:}<th>Цена</th>
 	{headdescr:}<th>Описание</th>
 	{headname:}<th>Наименование</th>
 	{prdescr:}<th>{Описание|...Описание}</th>
 	{prname:}<th>{Наименование|...Наименование}</th>
 	{iitem:}
-		<tr style="cursor:pointer" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat-position'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
+		<tr style="cursor:pointer; font-size:14px" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat_images'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 			{~obj(:more,more,:itm,.,:pos,...).more::imore}
 			{Наименование?:prname}
 			{Цена?:prcost}
 		</tr>
-		{table-success:}table-success
+		{table-success:}font-weight-bold
 		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
 	{ihead:}<th>{~key}</th>
 {print_more:}
-	<table class="table table-striped" style="width:auto">
+	<table class="table table-striped table-sm" style="width:auto">
 		{more::pos_more}
 	</table>
 	
@@ -125,24 +126,24 @@
 		});
 	</script>
 	{image:}
-		<div class="float-left" style="margin:5px">
+		<div class="float-left">
 			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
-				<img class="img-thumbnail" title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?m=1&h=150&top=1&src={.}" />
+				<img title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?m=1&h=150&top=1&src={.}" />
 			</a>
 		</div>
 	{imagedef:}
-		<div class="float-left" style="margin:5px">
-			<a class="gallery" style="margin-bottom:0;" title="{..Наименование}" href="/-imager/?m=1&src={.}">
-				<img class="img-thumbnail" title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?m=1&h={~key=:0?:str320?:str150}&top=1&src={.}" />
+		<div class="float-left">
+			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
+				<img title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?m=1&h={~key=:0?:str300?:str150}&top=1&src={.}" />
 			</a>
 		</div>
 	{str0:}0
-	{str320:}320
+	{str300:}300
 	{str150:}150
 {producer:}
 	<div style="float:right; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
 		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}/{producer}{:cat.mark.set}">
-			<img width="160" style="margin-left:5px" src="/-imager/?w=160&h=100&src={logo}" />
+			<img style="margin-left:5px" src="/-imager/?w=160&h=70&src={logo}" />
 		</a>
 	</div>
 <!--	<div style="text-align:right; font-size: 11px; margin-top:5px;">

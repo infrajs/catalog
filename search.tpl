@@ -8,12 +8,13 @@
 	{:text}
 	{showparentgroup:}<a href="/{Controller.names.catalog.crumb}/{data.group.parent}{:cat.mark.set}">{data.group.parent}</a>{data.group.parent?:tire} 
 	{tire:} &mdash; 
-	{Группа:}Группа, 
-	{Поиск:}Поиск, 
-	{Производитель:}Производитель, 
+	{Группа:}
+	{Поиск:}Поиск 
+	{Производитель:}Производитель 
 {showcount:}
-	{data.is=:isproducer?:Производитель}{data.is=:issearch?:Поиск}
-	{data.count} {~words(data.count,:позиция,:позиции,:позиций)}
+	{data.is=:isproducer?:Производитель}{data.is=:issearch?:Поиск}{data.is=:isgroup?:Группа}
+	{data.count} {~words(data.count,:модель,:модели,:моделей)}
+	{asdf:}<span class="badge badge-secondary">{data.count}</span> {~words(data.count,:позиция,:позиции,:позиций)}
 {showfilters:}
 	<style scoped>
 		.showfilters a {

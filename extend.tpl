@@ -1,11 +1,16 @@
 {priceblockbig:}{:orig.priceblockbig}
 {pos-page:}{Цена?:priceblockbig}
 	{orig.priceblockbig:}
-		<div class="alert alert-success">
-			Цена: <span class="cost" style="font-size:20px">{~cost(Цена)}{:unit}</span>{:nds}<br> 
-			<!--По вопросам приобретения обращайтесь по телефонам в <a href="/contacts">контактах</a>.-->
-		</div>
-	{nds:}{~conf.catalog.nds?:ndsshow}{ndsshow:} c НДС 20%
+		{min?(show?:showonecost?:showitemscost)?:showonecost}	
+	{showitemscost:}
+	<span>Цена от&nbsp;<b>{~cost(min)}</b> до&nbsp;<b>{~cost(max)}{:unit}</b></span>
+	{show??:itemsa}
+	{itemsa:}<a 
+		href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}" 
+		data-anchor="#items">
+			{~length(items)}&nbsp;{~words(~length(items),:позиция,:позиции,:позиций)}</a>.
+	{itemsspan:}<span class="a" onclick="Ascroll.go('#items')">{~length(items)}&nbsp;{~words(~length(items),:позиция,:позиции,:позиций)}</span>.
+	{showonecost:}Цена <b class="cost">{~cost(Цена)}{:unit}</b>
 {pos-sign:}
 	<p>
 		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}/{group_nick}{:cat.mark.set}">{group}</a><br>
@@ -56,38 +61,31 @@
 		<div class="col-12 col-sm-8 col-md-9">
 			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|:name}</a>
 			{logo?:producerlogo}
+			<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
 			<div class="padding">
 				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {~conf.showcase.hiddenarticle??article}</a></b>
-				<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+				
 			</div>
-			
 			{(more&~conf.catalog.showmore)?:havemore?:nomore}
 			
 		</div>
 	</div>
+
 	{mobimghide:}d-none d-sm-block 
 	{name:}{article}
 	{havemore:}
-		<div class="padding" style="font-family:Tahoma; font-size:85%; margin-bottom:4px">    
+		<div class="padding">    
 			{more::cat_more}
 		</div>
 		<div class="padding">
 			{Цена?:priceblockbig}
 		</div>
-		{#Описание?:descrshow}
-		{descrshow:}
-		<div class="padding">
-			<span style="border-bottom:1px dashed gray; cursor:pointer" onclick="$(this).next().slideToggle();">Описание</span>
-			<div style="display:none;">
-				{Описание}
-				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">Подробнее</a></b>
-			</div>
-		</div>
 	{nomore:}
 		<div class="padding">
-			<div style="font-family:Tahoma; font-size:85%; margin-bottom:10px">{Описание}</div>
+			<div>{Описание}</div>
+		</div>
+		<div class="padding">
 			{Цена?:priceblockbig}
-			<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">Подробнее</a></b>
 		</div>
 	{cat_more:}{(.&(.!:no))?:more}
 	{more:}{~key}:&nbsp;{.}{~last()|:comma}
