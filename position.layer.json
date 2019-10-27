@@ -1,5 +1,5 @@
 {
 	"tpl":"-catalog/position.tpl",
-	"jsontpl":"-showcase/api/pos/{~encode(crumb.parent.name)}/{crumb.name}/{crumb.child.name}?m={~encode(Crumb.get.m)}",
-	"seojsontpl":"-showcase/api/pos/seo/{~encode(crumb.parent.name)}/{crumb.name}/{crumb.child.name}?seo=catalog&m={~encode(Crumb.get.m)}"
+	"jsontpl":"-showcase/api/pos/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?m={~encode(Crumb.get.m)}",
+	"seojsontpl":"-showcase/api/pos/seo/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?seo=catalog&m={~encode(Crumb.get.m)}"
 }

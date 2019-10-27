@@ -39,7 +39,9 @@
 		</div>
 {cat.mark.add:}{:cat.mark.server.add}
 {searchbad:}
-	<div id="filgroups"></div>
+	<div class="row">
+		<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
+	</div>
 	<div class="mb-4"></div>
 	<p>К сожалению, позиции не найдены.</p>
 	{~length(data.filters)?:showfilters}

@@ -58,35 +58,38 @@
 		</div>
 	</div>
 	{strСкрытый:}Скрытый
-	{startart:}<br><small><nobr>{producer}</nobr> <nobr>{article}</nobr></small>
+	{startart:}<br><small>{producer} {article}</small>
 {showitems:}
 	<table id="items" class="table table-striped table-hover table-sm">
 		<thead>
 			<tr>
-				{items.0.more::ihead}
-				{items.0.Наименование?:headname}
-				{items.0.Цена?:headcost}
+				{itemmore::ihead}
+				{~inArray(:Наименование,itemrows)?:headname}
+				{~inArray(:Цена,itemrows)?:headcost}
 			</tr>
 		</thead>
 		<tbody style="cursor:pointer;">
 			{items::iitem}
 		</tbody>
 	</table>
-	{prcost:}<td>{~cost(Цена)}&nbsp;руб.</td>
+	{Наименование:}Наименование
+	{Наименование:}Цена
+	{prcost:}<td>{Цена?:prnowcost}</td>
+	{prnowcost:}{~cost(Цена)}&nbsp;руб.
 	{headcost:}<th>Цена</th>
 	{headdescr:}<th>Описание</th>
 	{headname:}<th>Наименование</th>
 	{prdescr:}<th>{Описание|...Описание}</th>
-	{prname:}<th>{Наименование|...Наименование}</th>
+	{prname:}<td>{Наименование}</td>
 	{iitem:}
 		<tr style="cursor:pointer; font-size:14px" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat_images'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 			{~obj(:more,more,:itm,.,:pos,...).more::imore}
-			{Наименование?:prname}
-			{Цена?:prcost}
+			{~inArray(:Наименование,...itemrows)?:prname}
+			{~inArray(:Цена,...itemrows)?:prcost}
 		</tr>
 		{table-success:}font-weight-bold
 		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
-	{ihead:}<th>{~key}</th>
+	{ihead:}<th>{.}</th>
 {print_more:}
 	<table class="table table-striped table-sm" style="width:auto">
 		{more::pos_more}
