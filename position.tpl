@@ -60,7 +60,6 @@
 	{strСкрытый:}Скрытый
 	{startart:}<br><small>{producer} {article}</small>
 {showitems:}
-	{~print(itemrows)}
 	<table id="items" class="table table-striped table-hover table-sm">
 		<thead>
 			<tr>
