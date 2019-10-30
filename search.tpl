@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="col-lg-4 col-xl-3">
 			<div id="MAINFILTERS"></div>
-			<div id="allgroups"></div>	
+			<div id="allgroups" class="d-none d-lg-block"></div>	
 		</div>
 		<div class="col-lg-8 col-xl-9">
 			<div class="float-right">{:showcount}</div>
