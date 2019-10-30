@@ -1,12 +1,15 @@
 {root:}
 	{data.path?:h1link?:h1}
-	{~conf.catalog.searchingroups?:search}
+	{~conf.catalog.searchingroups?:find}
 	{:GROUPS}
-
-	{find::}-catalog/find.tpl
-	{search:}{:find.find}
 	{h1link:}<h1><a href="/catalog">{~conf.catalog.title}</a></h1>
 	{h1:}<h1>{~conf.catalog.title}</h1>
+{cart::}-cart/rest/search/layout.tpl
+{find:}
+	<div style="margin-bottom:15px;">
+		<input class="form-control" name="search" type="text" placeholder="Поиск по каталогу">
+	</div>
+	{:cart.JS}
 {cat::}-catalog/cat.tpl
 {GROUPS:}
 	<div class="-catalog-groups child">

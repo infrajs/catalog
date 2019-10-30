@@ -6,6 +6,23 @@
 	</h1>
 	{data.count?data:searchgood?data:searchbad}
 	{:text}
+{root-twocolumns:}
+	{data.breadcrumbs:cat.breadcrumbs}
+	<div class="row">
+		<div class="col-lg-4 col-xl-3">
+			<div id="MAINFILTERS"></div>
+			<div id="allgroups"></div>	
+		</div>
+		<div class="col-lg-8 col-xl-9">
+			<div class="float-right">{:showcount}</div>
+			<h1>
+				{~conf.catalog.showparentgroup?:showparentgroup}{data.title|data.name}
+			</h1>
+			{data.count?data:searchgood?data:searchbad}
+		</div>
+	</div>
+	<p>{descr}</p>
+	{:text}
 	{showparentgroup:}<a href="/{Controller.names.catalog.crumb}/{data.group.parent}{:cat.mark.set}">{data.group.parent}</a>{data.group.parent?:tire} 
 	{tire:} &mdash; 
 	{Группа:}
@@ -51,16 +68,18 @@
 {searchgood:}
 	
 	{:groups-{(group.showcase.tplgroups|~conf.catalog.tplgroups)}}
-	{(data.count<:limit)|~length(data.childs)<:1?:cat_showlist?:cat_notshow}
+	{((data.count<:limit)|~length(data.childs)<:1)?:cat_showlist?:cat_notshow}
 	<p>{descr}</p>
 	{limit:}1000
 	{1:}1
 	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:позиция,:позиции,:позиций)} &mdash; выберите группу.
 	{groups-default:}
-		<div class="row">
-			<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
-		</div>
 		{~length(data.filters)?:showfilters}
+		{~length(data.childs)?:showdefgroups}
+		{showdefgroups:}
+			<div class="row">
+				<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
+			</div>
 		{data.childs:cat.groups}
 	{groups-info:}
 		{~length(data.childs)?:showgroups?:nogroups}
