@@ -168,24 +168,11 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
-		/*.cat_item .columpos {
-			max-height:590px; 
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-		@media (max-width: 575px) {
-			.cat_item .columpos {
-				max-height: none;
-				overflow: visible;
-			}
-		}*/
 	</style>
 	
 	<div class="row cat_item"  style="margin-bottom:40px; clear:both">
-		{::cat-item-columns}
+		{::pos-item-columns}
 	</div>
-{cat-item-columns:}
-	{:pos-item-columns}	
 {pos-item-columns:}
 	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4 columpos space">
 		
@@ -195,7 +182,7 @@
 		</div>
 		{Наличие на складе?:extend.nalichie}
 		<div>{images.0?:posimg?:noimg}</div>
-		<div class="px-2">
+		<div class="py-2">
 			{Цена?:extend.priceblockbig}
 			<div>{~cut(:200,Описание)}</div>
 		</div>
