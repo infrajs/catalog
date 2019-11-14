@@ -170,7 +170,7 @@
 		}
 	</style>
 	
-	<div class="row cat_item"  style="margin-bottom:40px; clear:both">
+	<div class="row cat_item"  style="margin-bottom:20px; clear:both">
 		{::pos-item-columns}
 	</div>
 {pos-item-columns:}
@@ -201,7 +201,7 @@
 		<img class="img-fluid" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
 	</a>
 {cat_item:}
-	<div class="position" style="margin-bottom:40px;">
+	<div class="position" style="margin-bottom:20px;">
 		{:extend.pos-item}
 	</div>
 {pages:}
