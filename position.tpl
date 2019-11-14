@@ -79,7 +79,6 @@
 	{headcost:}<th>Цена</th>
 	{headdescr:}<th>Описание</th>
 	{headname:}<th>Наименование</th>
-	{prdescr:}<th>{Описание|...Описание}</th>
 	{prname:}<td>{Наименование}</td>
 	{iitem:}
 		<tr style="cursor:pointer; font-size:14px" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat_images'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
