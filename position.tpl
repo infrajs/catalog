@@ -83,12 +83,12 @@
 	{prname:}<td>{Наименование}</td>
 	{iitem:}
 		<tr style="cursor:pointer; font-size:14px" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat_images'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
-			{~obj(:more,more,:itm,.,:pos,...).more::imore}
+			{~obj(:more,more,:itm,.,:pos,...,:list,...itemmore).list::imore}
 			{~inArray(:Наименование,...itemrows)?:prname}
 			{~inArray(:Цена,...itemrows)?:prcost}
 		</tr>
 		{table-success:}font-weight-bold
-		{imore:}<td>{Dabudi.propget(...pos,~key,...itm)}</td>
+		{imore:}<td>{Dabudi.propget(...pos,.,...itm)}</td>
 	{ihead:}<th>{.}</th>
 {print_more:}
 	<table class="table table-striped table-sm" style="width:auto">
