@@ -27,3 +27,15 @@ table {
 .shadow-over {
 	transition-duration: 0.5s
 }
+
+.noUi-connect {
+    /*background-color: #17a2b8!important;
+    background-color: #fe5a00!important;*/
+    background-color: white!important;
+}
+html:not([dir=rtl]) .noUi-horizontal .noUi-handle-lower {
+    right: -32px;
+}
+html:not([dir=rtl]) .noUi-horizontal .noUi-handle-upper {
+    right: -2px;
+}

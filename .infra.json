@@ -1,6 +1,6 @@
 {
 	"pub":["showparentgroup", "dir", "title", "tplsearch","showfilterscls", "tplgroups", "nds","searchingroups","pageset","showmore","filtermemory"],
-	"dependencies":["path","event"],
+	"dependencies":["path","event","nouislider"],
 	"css":"style.css",
 	"js":["Catalog.js","infra.js"],
 	"clutch":{
