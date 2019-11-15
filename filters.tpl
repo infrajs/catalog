@@ -134,13 +134,12 @@
 			</style>
 			<div>
 				<div class="d-flex justify-content-between" style="font-weight:bold;">
-					<span>
-					  	<!-- id add label checked-->
+					<div>
 					  	{:costlabel}
-					</span>
-					<span style="font-weight:normal;">
+					</div>
+					<div style="font-weight:normal;">
 							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
-					</span>
+					</div>
 				</div>
 			</div>
 			<div class="costslide mt-1">
