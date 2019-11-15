@@ -137,7 +137,7 @@
 					<div>
 					  	{:costlabel}
 					</div>
-					<div style="font-weight:normal;">
+					<div style="font-weight:normal; margin-right:-0.5rem">
 							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
 					</div>
 				</div>
@@ -252,13 +252,12 @@
 			</style>
 			<div>
 				<div class="d-flex justify-content-between" style="font-weight:bold;">
-					<span>
-					  	<!-- id add label checked-->
+					<div>
 					  	{prop}
-					</span>
-					<span style="font-weight:normal;">
+					</div>
+					<div style="font-weight:normal; margin-right:-0.5rem">
 							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
-					</span>
+					</div>
 				</div>
 			</div>
 			<div class="propslide mt-1">
