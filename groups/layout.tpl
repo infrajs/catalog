@@ -4,12 +4,12 @@
 	{:GROUPS}
 	{h1link:}<h1><a href="/catalog">{~conf.catalog.title}</a></h1>
 	{h1:}<h1>{~conf.catalog.title}</h1>
-{cart::}-cart/rest/search/layout.tpl
+{search::}-cart/rest/search/layout.tpl
 {find:}
-	<div style="margin-bottom:15px;">
+	<form style="margin-bottom:15px;">
 		<input class="form-control" name="search" type="text" placeholder="Поиск по каталогу">
-	</div>
-	{:cart.JS}
+	</form>
+	{:search.JS}
 {cat::}-catalog/cat.tpl
 {GROUPS:}
 	<div class="-catalog-groups child">
