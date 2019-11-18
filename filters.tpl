@@ -137,7 +137,7 @@
 					<div>
 					  	{:costlabel}
 					</div>
-					<div style="font-weight:normal; margin-right:-0.5rem">
+					<div style="font-weight:normal; margin-right:-0.5rem" title="Не указано">
 							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
 					</div>
 				</div>
@@ -255,7 +255,7 @@
 					<div>
 					  	{prop}
 					</div>
-					<div style="font-weight:normal; margin-right:-0.5rem">
+					<div style="font-weight:normal; margin-right:-0.5rem" title="Не указано">
 							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
 					</div>
 				</div>

@@ -65,10 +65,14 @@
 	{isproducer:}producer
 	{isgroup:}group
 	{issearch:}search
+
+{itemlist:}{data.count>:limit?:cat_notshow?:cat_showlist}
+{itemlist:}{((data.count>:limit)|~length(data.childs))&~length(data.filters)<:1?:cat_notshow?:cat_showlist}
+{itemlist:}{((data.count>:limit)|~length(data.childs))?:cat_notshow?:cat_showlist}
 {searchgood:}
-	
+
 	{:groups-{(group.showcase.tplgroups|~conf.catalog.tplgroups)}}
-	{((data.count<:limit)|~length(data.childs)<:1)?:cat_showlist?:cat_notshow}
+	{:itemlist}
 	<p>{descr}</p>
 	{limit:}1000
 	{1:}1
@@ -81,6 +85,47 @@
 				<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
 			</div>
 		{data.childs:cat.groups}
+	{groups-blocks:}
+		{~length(data.childs)?:showblocks?:nogroups_simple}
+		{showblocks:}
+		<div class="row catgroups mt-4 mb-1">
+			<style>
+				.catgroups ul { 
+					list-style: none inside;
+					padding-left: 0.5rem;
+				} 
+				.catgroups ul > li:before {
+					content: "—"; 
+					margin-left: -1ex; 
+					margin-right: 1ex; 
+				}
+			</style>
+			
+			{data.childs::groups_group_block}
+			
+		</div>
+		{~length(data.filters)?:showfilters}
+	{groups-info3:}
+		{~length(data.childs)?:showgroups3?:nogroups_simple}
+		{showgroups3:}
+		<div class="catgroups mt-4 mb-1">
+			<style>
+				.catgroups ul { 
+					list-style: none inside;
+					padding-left: 0.5rem;
+				} 
+				.catgroups ul > li:before {
+					content: "—"; 
+					margin-left: -1ex; 
+					margin-right: 1ex; 
+				}
+			</style>
+			
+			{data.childs::groups_group}
+			
+			{~length(data.filters)?:showfilters}
+			
+		</div>
 	{groups-info:}
 		{~length(data.childs)?:showgroups?:nogroups}
 		{showgroups:}
@@ -113,7 +158,24 @@
 					{~length(data.filters)?:showfilters}
 				</div>
 			</div>
-			
+		{nogroups_simple:}
+			<div class="catgroups mt-4">
+				<div class="mb-3">
+					{~length(data.filters)?:showfilters}
+				</div>
+			</div>
+	{groups_group_block:}
+		<div 
+			class="col-6 col-md-4 col-lg-4 col-xl-3 d-flex mb-4 flex-column justify-content-start" 
+			style="{(icon|img)?:bgimg}">
+
+			<div class="text-center my-5 p-2" style=" background-color:rgba(255,255,255,0.8); background-color:rgba(0,0,0,0.7);">
+				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+			</div>
+
+		</div>
+		{bgimg:}background-image:url('/-imager/?w=300&h=200&m=1&crop=1&src={icon|img}'); background-repeat:no-repeat; background-position: center; background-size: cover;
+		{gimg_big:}<img class="img-fluid" src="/-imager/?w=300&h=200&crop=1&src={icon|img}">
 	{groups_group:}
 		<div class="col-lg-12 col-lg-6 col-xl-6 d-flex mb-3">
 			<div class="mr-2" style="min-width:100px; text-align:center">
