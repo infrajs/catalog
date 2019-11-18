@@ -79,12 +79,10 @@
 	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:модель,:модели,:моделей)} &mdash; выберите группу.
 	{groups-default:}
 		{~length(data.filters)?:showfilters}
-		{~length(data.childs)?:showdefgroups}
-		{showdefgroups:}
-			<div class="row">
-				<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
-			</div>
-		{data.childs:cat.groups}
+		<div class="row">
+			<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
+		</div>
+		{~length(data.childs)?data.childs:cat.groups}
 	{groups-blocks:}
 		{~length(data.childs)?:showblocks?:nogroups_simple}
 		{showblocks:}
