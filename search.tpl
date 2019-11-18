@@ -76,7 +76,7 @@
 	<p>{descr}</p>
 	{limit:}1000
 	{1:}1
-	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:позиция,:позиции,:позиций)} &mdash; выберите группу.
+	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:модель,:модели,:моделей)} &mdash; выберите группу.
 	{groups-default:}
 		{~length(data.filters)?:showfilters}
 		{~length(data.childs)?:showdefgroups}
