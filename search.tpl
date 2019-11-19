@@ -176,7 +176,7 @@
 	{groups_group_block:}
 		<div  class="col-6 col-md-4 col-lg-4 col-xl-3 d-flex mb-4 flex-column justify-content-between">
 			<div class="flex-grow-1">{(icon|img)?:gimg_big}</div>
-			<div class="text-center mt-2">
+			<div class="text-center mt-1">
 				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
 			</div>
 
