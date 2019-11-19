@@ -164,7 +164,7 @@
 					{~length(data.filters)?:showfilters}
 				</div>
 			</div>
-	{groups_group_block:}
+	{groups_group_block_bg:}
 		<div 
 			class="col-6 col-md-4 col-lg-4 col-xl-3 d-flex mb-4 flex-column justify-content-start" 
 			style="{(icon|img)?:bgimg}">
@@ -175,7 +175,16 @@
 
 		</div>
 		{bgimg:}background-image:url('/-imager/?w=300&h=200&m=1&crop=1&src={icon|img}'); background-repeat:no-repeat; background-position: center; background-size: cover;
-		{gimg_big:}<img class="img-fluid" src="/-imager/?w=300&h=200&crop=1&src={icon|img}">
+	{groups_group_block:}
+		<div  class="col-6 col-md-4 col-lg-4 col-xl-3 d-flex mb-4 flex-column justify-content-between">
+			<div class="flex-grow-1">{(icon|img)?:gimg_big}</div>
+			<div class="text-center mt-2">
+				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+			</div>
+
+		</div>
+		
+		{gimg_big:}<a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}"><img class="img-fluid" src="/-imager/?w=300&h=200&crop=1&src={icon|img}"></a>
 	{groups_group:}
 		<div class="col-lg-12 col-lg-6 col-xl-6 d-flex mb-3">
 			<div class="mr-2" style="min-width:100px; text-align:center">
