@@ -66,15 +66,14 @@
 	{isgroup:}group
 	{issearch:}search
 
-{itemlist:}{(data.count>:limit)&data.group.count<:1?:cat_notshow?:cat_showlist}
-{itemlist:}{((data.count>:limit)|~length(data.childs))&data.group.count<:1?:cat_notshow?:cat_showlist}
-{itemlist:}{(((data.count>:limit)|~length(data.childs))&~length(data.filters)<:1)&data.group.count<:1?:cat_notshow?:cat_showlist}
+{itemlist2:}{data.group.count?:cat_showlist?(~length(data.filters)?(data.count>:limit?:cat_notshow?:cat_showlist)?:cat_notshow)}
+{itemlist:}{data.showlist?:cat_showlist?:cat_notshow}
 {searchgood:}
 
 	{:groups-{(group.showcase.tplgroups|~conf.catalog.tplgroups)}}
 	{:itemlist}
 	<p>{descr}</p>
-	{limit:}1000
+	{limit:}500
 	{1:}1
 	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:модель,:модели,:моделей)} &mdash; выберите группу.
 	{groups-default:}
