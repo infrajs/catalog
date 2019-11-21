@@ -66,9 +66,9 @@
 	{isgroup:}group
 	{issearch:}search
 
-{itemlist:}{data.count>:limit?:cat_notshow?:cat_showlist}
-{itemlist:}{((data.count>:limit)|~length(data.childs))?:cat_notshow?:cat_showlist}
-{itemlist:}{((data.count>:limit)|~length(data.childs))&~length(data.filters)<:1?:cat_notshow?:cat_showlist}
+{itemlist:}{(data.count>:limit)&data.group.count<:1?:cat_notshow?:cat_showlist}
+{itemlist:}{((data.count>:limit)|~length(data.childs))&data.group.count<:1?:cat_notshow?:cat_showlist}
+{itemlist:}{(((data.count>:limit)|~length(data.childs))&~length(data.filters)<:1)&data.group.count<:1?:cat_notshow?:cat_showlist}
 {searchgood:}
 
 	{:groups-{(group.showcase.tplgroups|~conf.catalog.tplgroups)}}
