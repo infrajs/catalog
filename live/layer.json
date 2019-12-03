@@ -1,0 +1,5 @@
+{
+	"data":true,
+	"autofocus":true,
+	"tpl":"-catalog/search/layout.tpl"
+}
