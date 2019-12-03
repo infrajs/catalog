@@ -19,8 +19,7 @@
         "infrajs/autoedit":"~1",
         "infrajs/rubrics":"~1",
         "leongersen/nouislider":"~12",
-        "dimsemenov/magnific-popup":"~1",
-        "drakon5999/jquery-autocomplete":"~1"
+        "dimsemenov/magnific-popup":"~1"
     },
     "autoload":{
         "psr-4":{
