@@ -110,6 +110,7 @@
 {images:}
 	{~inArray(group_nick,~conf.catalog.bigimage)?:bigimg}
 	<div class="cat_images" style="clear:both; text-align:center; margin-top:10px; margin-bottom:10px;">
+		{:extend.nalichie}
 		{~inArray(group_nick,~conf.catalog.bigimage)?(~length(images)>:1?images::image)?images::imagedef}
 		<div style="clear:both"></div>
 	</div>

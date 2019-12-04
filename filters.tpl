@@ -74,6 +74,13 @@
 			
 			{foptkey:}<option {:isch?:selected} value="{nick}">{value}</option>
 			{isch:}{Session.get(:cat-chain.{...key})=nick?:yes}
+{prop-buttons2:}
+	<div class="my-3">
+		<div class="btn-group btn-group-toggle" data-toggle="buttons">
+			<label class="btn disabled">{prop}</label>
+			{values::fbtn}
+		</div>
+	</div>
 {prop-buttons:}
 	<div class="my-3">
 		<div class="btn-group btn-group-toggle" data-toggle="buttons">

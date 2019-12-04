@@ -104,10 +104,7 @@
 		</style>
 		<script>
 			if (!window.cdns) window.cdns = function (src, func) {
-				if (window.cdns[src]) {
-					func();
-					return;
-				}
+				if (window.cdns[src]) return func();
 				window.cdns[src] = true;
 				
 				var s = document.createElement("script");
@@ -121,12 +118,13 @@
 				
 			};
 			domready(function () {
-				
 				var div = $('#{div}');
-				window.cdns("https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.js", function () {
+				
+				if (window.innerWidth > 768) window.cdns("https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.js", function () {
 					//window.cdns('https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.2/jquery.autocomplete.min.js', function () {
 					//https://github.com/devbridge/jQuery-Autocomplete
 					var prodart = false;
+
 					div.find('input').autocomplete({
 						triggerSelectOnValidInput:true,
 						showNoSuggestionNotice:true,
