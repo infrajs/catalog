@@ -63,14 +63,14 @@
 			{logo?:producerlogo}
 			<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
 			<div class="padding">
-				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {~conf.showcase.hiddenarticle??article}</a></b>
+				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{~conf.showcase.hiddenarticle??:prodart}</a></b>
 				
 			</div>
 			{(more&~conf.catalog.showmore)?:havemore?:nomore}
 			
 		</div>
 	</div>
-
+	{prodart:}{producer} {article}
 	{mobimghide:}d-none d-sm-block 
 	{name:}{article}
 	{havemore:}
