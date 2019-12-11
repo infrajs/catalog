@@ -93,7 +93,7 @@
 	{comma:}, 
 	{no:}Нет
 	{producerlogo:}
-		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}/{producer_nick}{:cat.mark.set}" class="float-right" style="margin:5px 0 5px 5px">
+		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer.{producer_nick}=1" class="float-right" style="margin:5px 0 5px 5px">
 			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 		</a>
 	{cat::}-catalog/cat.tpl

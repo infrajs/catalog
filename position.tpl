@@ -131,13 +131,13 @@
 	{image:}
 		<div class="float-left">
 			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
-				<img title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?m=1&h=150&top=1&src={.}" />
+				<img title="{data.pos.producer} {data.pos.article}" src="/-imager/?m=1&h=150&top=1&src={.}" />
 			</a>
 		</div>
 	{imagedef:}
 		<div class="float-left">
 			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
-				<img title="{data.pos.Производитель} {data.pos.Артикул}" src="/-imager/?m=1&h={~key=:0?:str300?:str150}&top=1&src={.}" />
+				<img title="{data.pos.producer} {data.pos.article}" src="/-imager/?m=1&h={~key=:0?:str300?:str150}&top=1&src={.}" />
 			</a>
 		</div>
 	{str0:}0
@@ -145,7 +145,7 @@
 	{str150:}150
 {producer:}
 	<div style="float:right; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
-		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}/{producer}{:cat.mark.set}">
+		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer.{producer_nick}=1">
 			<img style="margin-left:5px" src="/-imager/?w=160&h=70&src={logo}" />
 		</a>
 	</div>
