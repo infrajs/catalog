@@ -140,11 +140,11 @@
 				}*/
 			</style>
 			<div>
-				<div class="d-flex justify-content-between" style="font-weight:bold;">
+				<div class="d-flex justify-content-between" style="font-weight:bold; overflow: hidden;">
 					<div>
 					  	{:costlabel}
 					</div>
-					<div style="font-weight:normal; margin-right:-0.5rem" title="Не указано">
+					<div style="font-weight:normal; margin-right:-0.5rem; position: relative;" title="Не указано">
 							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
 					</div>
 				</div>
