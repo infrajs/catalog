@@ -182,7 +182,7 @@
 				});
 				
 				//var disabled = true;
-				div.find('form').submit( function () {
+				div.find('form').submit( function (evt) {
 					var q = div.find('input').val();
 					var q = Path.encode(q, true);
 					if (Crumb.get.m) {
@@ -194,8 +194,8 @@
 					
 					var href = '/catalog';
 					//if (Crumb.child && Crumb.child.child && !Crumb.child.child.child) href = '/catalog/'+Crumb.child.child.name;
-
 					Crumb.go(href+''+params);
+					evt.preventDefault();
 					return false;
 				});
 			});

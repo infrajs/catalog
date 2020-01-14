@@ -34,6 +34,8 @@
 {error:}
 	<div class="alert alert-danger">Позиция <b>{crumb.parent.name} {crumb.name}</b> не найдена!</div>
 {extend::}-catalog/extend.tpl
+{CATPOSIMAGES:}
+	{~length(images)?:images}
 {start:}
 	<div class="cat-position">
 		<div style="float:right">
@@ -42,7 +44,7 @@
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
 		{items?:showitems}
-		{~length(images)?:images}
+		<div id="CATPOSIMAGES"></div>
 		<div style="clear:both">
 			{:extend.pos-page}
 		</div>

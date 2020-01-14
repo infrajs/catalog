@@ -1,5 +1,13 @@
 {
 	"tpl":"-catalog/position.tpl",
 	"jsontpl":"-showcase/api/pos/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?m={~encode(Crumb.get.m)}",
-	"seojsontpl":"-showcase/api/pos/seo/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?seo=catalog&m={~encode(Crumb.get.m)}"
+	"seojsontpl":"-showcase/api/pos/seo/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?seo=catalog&m={~encode(Crumb.get.m)}",
+	"divs":{
+		"CATPOSIMAGES":{
+			"tpl":"-catalog/position.tpl",
+			"dataroot":"data.pos",
+			"tplroot":"CATPOSIMAGES",
+			"jsontpl":"-showcase/api/pos/{crumb.parent.name}/{crumb.name}/{crumb.child.name}/{crumb.child.child.name}?m={~encode(Crumb.get.m)}"
+		}
+	}
 }
