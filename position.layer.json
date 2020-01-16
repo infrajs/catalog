@@ -6,6 +6,7 @@
 		"CATPOSIMAGES":{
 			"tpl":"-catalog/position.tpl",
 			"dataroot":"data.pos",
+			"showanimate":false,
 			"tplroot":"CATPOSIMAGES",
 			"jsontpl":"-showcase/api/pos/{crumb.parent.name}/{crumb.name}/{crumb.child?:next?:1}{next:}{crumb.child.name}/{crumb.child.child.name}"
 		}
