@@ -96,8 +96,14 @@
 	</div>
 {prop-row:}
 	<div style="margin-bottom:10px;">
-		<b>{prop}</b>: {values::varow}
+		<b>{prop}</b>{help:help}: {values::varow}
 	</div>
+	<script>
+		domready(() => {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
+	{help:}&nbsp;<i style="cursor: pointer; color:gray" data-toggle="tooltip" title="{.}" data-html="true" data-trigger="click" class="far fa-question-circle"></i>
 	{varow:}<span 
 	onclick="Crumb.go('/catalog/{:getv}')" 
 	class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
