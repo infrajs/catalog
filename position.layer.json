@@ -4,6 +4,7 @@
 	"seojsontpl":"-showcase/api/pos/seo/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?seo=catalog&m={~encode(Crumb.get.m)}",
 	"divs":{
 		"CATPOSIMAGES":{
+			"divcheck":true,
 			"tpl":"-catalog/position.tpl",
 			"dataroot":"data.pos",
 			"showanimate":false,
