@@ -106,12 +106,14 @@
 		<a class="badge badge-pills" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{~key}{:mark.set}">{title}</a>
 {idsp:}{item_nick?:sp}{item_nick}{(iscatkit&catkit)?:ampvalsp}
 {sp:} 
-
+{kit:}{article_nick}{item_num!:odin?:pval}
+{odin:}1
+{pval:}:{item_num}
 {idsl:}{(item_nick|(iscatkit&catkit))?item_num:slval}{(iscatkit&catkit)?catkit:slval}
+{idsladd:}{item_num:slval}/{(iscatkit&catkit)?catkit:slvalamp}
 {sl:}/
 {ampvalsp:}{item_nick|:sp}&{catkit}
 {slval:}/{.}
-{*:}
-producer/article
-producer/article /2
-producer/article /1/catkit&catkit
+{slvalamp:}/{.}&
+{pospath:}{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:idsl}
+{pospathadd:}{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:idsladd}
