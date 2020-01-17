@@ -251,7 +251,7 @@
 		{Наличие на складе?:extend.nalichie}
 		<div>{images.0?:posimg?:noimg}</div>
 		<div class="py-2 between">
-			{Цена?:extend.priceblockbig}
+			{:extend.priceblockbig}
 			<div>{~cut(:200,Описание)}</div>
 		</div>
 	</div>
