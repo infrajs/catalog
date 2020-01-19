@@ -109,7 +109,7 @@
 {kit:}{article_nick}{item_num!:odin?:pval}
 {odin:}1
 {pval:}:{item_num}
-{idsl:}{(item_nick|(iscatkit&catkit))?item_num:slval}{(iscatkit&catkit)?catkit:slval}
+{idsl:}{(item_num!:odin|(iscatkit&catkit))?item_num:slval}{(iscatkit&catkit)?catkit:slval}
 {idsladd:}{item_num:slval}/{(iscatkit&catkit)?catkit:slvalamp}
 {sl:}/
 {ampvalsp:}{item_nick|:sp}&{catkit}
