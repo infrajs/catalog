@@ -2,7 +2,7 @@
 	{data.breadcrumbs:cat.breadcrumbs}
 	<div class="float-right">{:showcount}</div>
 	<h1>
-		{~conf.catalog.showparentgroup?:showparentgroup}{data.title|data.name}
+		{~conf.catalog.showparentgroup?:showparentgroup}{data.name|data.title}
 	</h1>
 	{data.count?data:searchgood?data:searchbad}
 	{:text}
@@ -16,7 +16,7 @@
 		<div class="col-lg-8 col-xl-9">
 			<div class="float-right">{:showcount}</div>
 			<h1>
-				{~conf.catalog.showparentgroup?:showparentgroup}{data.title|data.name}
+				{~conf.catalog.showparentgroup?:showparentgroup}{data.name|data.title}
 			</h1>
 			{data.count?data:searchgood?data:searchbad}
 		</div>
