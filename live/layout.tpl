@@ -77,7 +77,7 @@
 				});
 
 				let Load = (await import('/vendor/akiyatkin/load/Load.js')).default; 
-				await Load.on('cdnjs', '//cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.js');
+				await Load.on('script-src', '//cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.js');
 
 				if (!iscontext()) return;
 			

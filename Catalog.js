@@ -9,13 +9,9 @@ window.Catalog = {
 		Controller.check();
 	},
 	search: function (val) {
-		//val = Path.encode(val, true);
-		var layer = Controller.names.catalog;
-		var params = (Crumb.get.m) ? '?m=' + Crumb.get.m : '';
-		Crumb.go('/'+Controller.names.catalog.crumb.toString()+'/'+val+params);
-		setTimeout( function () {
-			$.getJSON('/-catalog/stat.php?submit=1&val=' + val);
-		}, 1);
+		var params = Crumb.get.m ? '?m=' + Crumb.get.m : '?m=';
+		params+=':search='+val;
+		Crumb.go('/catalog'+params);
 		return false;
 	},
 	getItemRowValue: function (pos) {
