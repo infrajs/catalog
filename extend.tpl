@@ -37,15 +37,27 @@
 {badgenalichie:}
 	{Наличие на складе?:badgenalichieshow}
 	{badgenalichieshow:}
-<a href="/catalog{:cat.mark.add}more.Наличие-на-складе::.{Наличие на складе}=1" class="badge {Наличие на складе=:strnal?:strpri?(Наличие на складе=:strras?:label-success?(Наличие на складе=:strzak?:label-info?(Наличие на складе=:stract?:label-danger?:label-secondary)))}">
+<a href="/catalog{:cat.mark.add}more.{Path.encode(:strНаличие-на-складе)}::.{Path.encode(Наличие на складе)}=1" class="badge {Наличие на складе=:strnal?:clsnal?(Наличие на складе=:strras?:clsras?(Наличие на складе=:strzak?:clszak?(Наличие на складе=:stract?:clsact?(Наличие на складе=:strmalo?:clsmalo?:clsdef))))}">
 		{Наличие на складе}</a>
+	{strНаличие-на-складе:}Наличие на складе
 	{strnal:}В наличии
+	{clsnal:}badge-primary
+	{clsdef:}badge-secondary
+
 	{stract:}Акция
+	{clsact:}badge-danger
+
 	{strras:}Распродажа
+	{clsras:}badge-success
+
 	{strzak:}На заказ
-	{strpri:}badge-primary
+	{clszak:}badge-info
+
+	{strmalo:}Мало
+	{clsmalo:}badge-warning
+	
 	{label-success:}badge-success
-	{label-info:}badge-info
+	{label-info:}
 	{label-secondary:}badge-secondary
 	{label-danger:}badge-danger
 {pos-img:}
