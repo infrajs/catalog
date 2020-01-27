@@ -2,7 +2,7 @@
 	"tpl":"-catalog/search.tpl",
 	"nocache":true,
 	"jsontpl":"-showcase/api/search?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",
-	"redirecttpl":"{data.is=:producer?:p}{data.is=:group?:g}{p:}{:com}{data.title:s}{g:}{:com}{data.group.group_nick:s}{s:}/{.}{com:}/{crumb}",
+	"redirecttpl":"{crumb.child?:red}{red:}{data.is=:producer?:p}{data.is=:group?:g}{p:}{:com}{data.title:s}{g:}{:com}{data.group.group_nick:s}{s:}/{.}{com:}/{crumb}",
 	"seojsontpl":"-showcase/api/search/seo?seo={Controller.names.catalog.crumb}&val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}",
 	"name":"catalog"
 }
