@@ -2,6 +2,7 @@
 	"tpl":"-catalog/position.tpl",
 	"jsontpl":"-showcase/api/pos/{crumb.parent.name}/{crumb.name}/{crumb.child.name|:1}?m={~encode(Crumb.get.m)}",
 	"seojsontpl":"-showcase/api/pos/seo/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?seo=catalog&m={~encode(Crumb.get.m)}",
+	"redirecttpl":"{data.pos?:red}{red:}/{crumb.parent.parent}/{data.pos.producer_nick}/{data.pos.article_nick}{data.pos.item_num!:1?data.pos.item_num:s}{s:}/{.}",
 	"divs":{
 		"CATPOSIMAGES":{
 			"divcheck":true,
