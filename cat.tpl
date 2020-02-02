@@ -115,5 +115,5 @@
 {ampvalsp:}{item_nick|:sp}&{catkit}
 {slval:}/{.}
 {slvalamp:}/{.}&
-{pospath:}{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:idsl}
+{pospath:}{Controller.names.catalog.crumb}/{producer_nick|...producer_nick}/{article_nick|...article_nick}{:idsl}
 {pospathadd:}{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:idsladd}
