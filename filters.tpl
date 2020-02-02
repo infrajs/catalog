@@ -96,7 +96,7 @@
 	</div>
 {prop-row:}
 	<div style="margin-bottom:10px;">
-		<b>{prop}</b>{help:help}: {values::varow}
+		<b>{prop}</b>{help:help}: {multi?values::varowmulti?values::varow}
 	</div>
 	<script>
 		domready(() => {
@@ -104,6 +104,9 @@
 		});
 	</script>
 	{help:}&nbsp;<i style="cursor: pointer; color:gray" data-toggle="tooltip" title="{.}" data-html="true" data-trigger="click" class="far fa-question-circle"></i>
+	{varowmulti:}<span 
+	onclick="Crumb.go('/catalog/{:getvmulti}')" 
+	class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
 	{varow:}<span 
 	onclick="Crumb.go('/catalog/{:getv}')" 
 	class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
@@ -126,6 +129,7 @@
 	
 	{is:}{(data.md.more[...prop_nick][value_nick]|data.md[...prop_nick][value_nick])?:yes}
 	{get:}{:cat.mark.add}{more?:more.}{prop_nick}::.
+	{getvmulti:}{:cat.mark.add}{...more?:more.}{...prop_nick}.{value_nick}{:is??:one}
 	{getv:}{...prop_nick=:producer?:getvinu?:getvinm}
 		{getvinm:}{:cat.mark.add}{...more?:more.}{...prop_nick}::.{value_nick}{:is??:one}
 		{getvinu:}{value_nick}{:cat.mark.set}
