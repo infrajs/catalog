@@ -13,10 +13,7 @@
 		"seojsontpl":"-showcase/api/search/seo?val={~encode(crumb.name)}&seo={Controller.names.catalog.crumb}&m={~encode(Crumb.get.m)}",
 		"redirecttpl":"{data.is=:producer?:p}{data.is=:group?:g}{p:}{:com}{data.title:s}{g:}{:com}{data.group.group_nick:s}{s:}/{.}{com:}/{crumb.parent}",
 		"child":{
-			"tpl":"-catalog/position.tpl",
-			"redirecttpl":"{data.pos?:red}{red:}/{crumb.parent.parent}/{data.pos.producer_nick}/{data.pos.article_nick}{data.pos.item_num!:1?data.pos.item_num:s}{s:}/{.}",
-			"jsontpl":"-showcase/api/pos/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?m={~encode(Crumb.get.m)}",
-			"seojsontpl":"-showcase/api/pos/seo/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?seo={Controller.names.catalog.crumb}&m={~encode(Crumb.get.m)}"
+			"external":"-catalog/position.layer.json"	
 		}
 	},
 	"childs":{
