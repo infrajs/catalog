@@ -11,7 +11,7 @@
 		"tpl":"-catalog/search.tpl",
 		"jsontpl":"-showcase/api/search?val={~encode(crumb.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",
 		"seojsontpl":"-showcase/api/search/seo?val={~encode(crumb.name)}&seo={Controller.names.catalog.crumb}&m={~encode(Crumb.get.m)}",
-		"redirecttpl":"{data.is=:producer?:p}{data.is=:group?:g}{p:}{:com}{data.title:s}{g:}{:com}{data.group.group_nick:s}{s:}/{.}{com:}/{crumb.parent}",
+		"redirecttpl":"{crumb.name=:actions??:n}{n:}{data.is=:producer?:p}{data.is=:group?:g}{p:}{:com}{data.title:s}{g:}{:com}{data.group.group_nick:s}{s:}/{.}{com:}/{crumb.parent}",
 		"child":{
 			"external":"-catalog/position.layer.json"	
 		}
