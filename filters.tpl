@@ -171,7 +171,7 @@
 				<div id="costslider{prop_nick}"></div>
 			</div>
 			<script>
-				domready(function(){
+				domready(async () => {
 					var m = "{data.m}";
 					var path = "more.{prop_nick}";
 					var min = {min|:0};
@@ -194,6 +194,12 @@
 						}
 					}
 					var slider = document.getElementById('costslider{prop_nick}');
+
+
+					let Load = (await import('/vendor/akiyatkin/load/Load.js')).default; 
+					await Load.cdn('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.js');
+					Load.cdn('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.css');
+
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
 						connect: true,	
@@ -289,7 +295,7 @@
 				<div id="propslide{prop_nick}"></div>
 			</div>
 			<script>
-				domready(function(){
+				domready(async () => {
 					var m = "{data.m}";
 					var path = "more.{prop_nick}";
 					var min = {min|:0};
@@ -312,6 +318,9 @@
 						}
 					}
 					var slider = document.getElementById('propslide{prop_nick}');
+					let Load = (await import('/vendor/akiyatkin/load/Load.js')).default; 
+					await Load.cdn('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.js');
+					Load.cdn('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.css');
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
 						connect: true,	

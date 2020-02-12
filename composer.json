@@ -11,6 +11,7 @@
         "infrajs/mark":"~1",
         "infrajs/rest":"~1",
         "akiyatkin/boo":"~1",
+        "akiyatkin/load":"~1",
         "ded/domready":"~1",
         "infrajs/ascroll":"~1",
         "infrajs/layer-seojson":"~1",
@@ -18,7 +19,6 @@
         "infrajs/layer-autosave":"~1",
         "infrajs/autoedit":"~1",
         "infrajs/rubrics":"~1",
-        "leongersen/nouislider":"~12",
         "dimsemenov/magnific-popup":"~1"
     },
     "autoload":{
