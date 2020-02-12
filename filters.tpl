@@ -197,8 +197,8 @@
 
 
 					let Load = (await import('/vendor/akiyatkin/load/Load.js')).default; 
-					await Load.cdn('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.js');
 					Load.cdn('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.css');
+					await Load.cdn('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.js');
 
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
