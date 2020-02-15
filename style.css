@@ -34,8 +34,8 @@ table {
     background-color: white!important;
 }
 html:not([dir=rtl]) .noUi-horizontal .noUi-handle-lower {
-    right: -32px;
+    right: -32px!important;
 }
 html:not([dir=rtl]) .noUi-horizontal .noUi-handle-upper {
-    right: -2px;
+    right: -2px!important;
 }
