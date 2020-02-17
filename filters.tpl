@@ -14,7 +14,69 @@
 		<option value="" style="font-weight: bold">{prop}</option>
 		{values::fopt}
 	</select>
+{prop-chain-card:}
+	<div class="card">
+		<div class="card-header bg-primary text-uppercase">
+			{prop}
+		</div>
+		<div class="card-body">
+			{chain:prop-select-chain-title}
+		</div>
+	</div>
+	{bgclsdef:}alert alert-success
+	{prop-select-chain-title:}
+		{~length(childs)>:0?:prop-select-chain-show}
+		{prop-select-chain-show:}
+			<select style="margin-top:3px;" 
+			onchange="
+				
+				var value = this.value;
+				var layer = Controller.ids['{id}'];
+				var root = Sequence.right('{~dataroot()}');
+				var prop_nick = root[2];
+				var key = '{key}';
+				var data = Load.loadJSON(layer.json);
+				var param = data.list[prop_nick];
+				var option = Sequence.get(Sequence.get({ data: data }, root),['childs',value]);
+				
+				var count = 0;
+				if (option && option.childs) {
+					for (var i in option.childs) count++;
+					if (count == 1) {
+						if (i == value) count = 0;
+					}
+				}
 
+				if (option && (count<1)) {
+					var src = '/catalog/?m=' + data.m + ':';
+						src += param.more?'more.':'';
+					if (!option.childs) {
+						src += prop_nick+'::.'+value+'=1';
+					} else {
+						while (option.childs) {
+							for (var i in option.childs) break;
+							option = option.childs[i];
+						}
+						src += prop_nick+'::.'+i+'=1';
+					}
+					Session.set('cat-chain.{key}');
+					Crumb.go(src);
+
+				} else {
+					Session.set('cat-chain.{key}', value); 
+					layer.parsed='{counter}'; 
+					Controller.check();
+				}
+				
+			" 
+			class="custom-select form-control mb-0 shadow-over">
+				<option>{key}</option>
+				{childs::foptkey}
+			</select>
+			{Session.get(:cat-chain.{key})?childs[Session.get(:cat-chain.{key})]:prop-select-chain}
+			
+			{foptkey:}<option {:isch?:selected} value="{nick}">{value}</option>
+			{isch:}{Session.get(:cat-chain.{...key})=nick?:yes}
 {prop-chain:}
 	<div class="{bgcls|:bgclsdef}" style="margin-bottom:10px;">
 		<b>{prop}</b>
