@@ -16,8 +16,8 @@
 	</select>
 {prop-chain-card:}
 	<div class="card">
-		<div class="card-header bg-primary text-uppercase">
-			{prop}
+		<div class="card-header bg-primary text-uppercase font-weight-bold">
+			{title|prop}
 		</div>
 		<div class="card-body">
 			{chain:prop-select-chain-title}

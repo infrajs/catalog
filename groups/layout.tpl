@@ -28,29 +28,46 @@
 			}
 			.-catalog-groups .point {
 				cursor: pointer;
-				font-size:80%;
+				font-size:130%;
+			}
+			.bt {
+				border-top:1px solid var(--gray);
+			}
+			.bb {
+				border-bottom:1px solid var(--gray);
 			}
 		</style>
-		{data.root.childs::child}
+		{data.root.childs::child1}
 		<script>
 			domready(function(){
 				var div = $('.-catalog-groups');
 				div.find('.point').click( function () {
-					$(this).toggleClass('fa-minus').toggleClass('fa-plus').parent().find('.childs:first').slideToggle('fast');
+					$(this).toggleClass('{:iopen}').toggleClass('{:iclose}').parents('.top:first').find('.childs:first').slideToggle('fast');
 				})
 			})
 		</script>
 	</div>
-{group:}
-	{~length(childs)?:gr?:it}<a href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group}</a><br>
-	<div class="pl-4 childs" style="{active??:strnone}">
-		{childs::child}
+{iopen:}fa-angle-left
+{iclose:}fa-angle-down
+{child1:}
+	<div class="top">{.:group2}</div>
+{group2:}
+	<div class="py-2 px-3 d-flex justify-content-between align-items-center" style="border-top:1px solid var(--gray)">
+		<a href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive} text-uppercase">{group}</a><div>{~length(childs)?:gr?:it}</div>
+	</div>
+	<div class="py-2 px-3 bt childs" style="{active??:strnone}">
+		{childs::child2}
+	</div>
+	{notlast:}pb-2 mb-2 bb
+{child2:}
+	<div class="child {~last()?:last?:notlast}">{.:group3}</div>
+{group3:}
+	<div class="d-flex justify-content-between">
+		<a href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group}</a> <span class="ml-2" style="margin-right:7px; color:gray">{count}</span>
 	</div>
 	{strnone:}display:none;
 	{clsactive:}font-weight-bold
-	{gr:}{active?:minus?:plus}
-	{it:}<span style="color:#ccc" class="point far fa-fw fa-2x"></span> 
-	{plus:}<span style="color:#ccc" class="point fas fa-plus fa-fw fa-2x"></span> 
-	{minus:}<span style="color:#ccc" class="point fas fa-minus fa-fw fa-2x"></span> 
-{child:}
-	<div class="child">{.:group}</div>
+	{gr:}{active?:open?:close}
+	{it:}
+	{close:}<span class="point fas {:iopen} fa-fw"></span> 
+	{open:}<span class="point fas {:iclose} fa-fw"></span> 
