@@ -14,37 +14,54 @@
 {GROUPS:}
 	<div class="-catalog-groups child">
 		<style>
-			.-catalog-groups .far {
+			#{div} .far {
 				cursor:pointer;
 			}
-			.-catalog-groups .childs {
-				margin-top:5px;
-			}
-			.-catalog-groups .child {
+			
+			#{div} .child {
 				margin-bottom:5px;
 			}
-			.-catalog-groups {
-				/*font-size:100%;*/
-			}
-			.-catalog-groups .point {
+			
+			#{div} .header {
 				cursor: pointer;
+			}
+			#{div} .point {
 				font-size:130%;
 			}
-			.bt {
+			#{div} .bt {
 				border-top:1px solid var(--gray);
 			}
-			.bb {
+			#{div} .bb {
 				border-bottom:1px solid var(--gray);
 			}
+		    #{div} .childs {
+		        max-height: 0;
+			    opacity: 0;
+			    overflow: hidden;
+			    transition: 0.5s;
+		    }
+		    #{div} .childs.show {
+		    	display: block;
+		    	opacity: 1;
+		    	max-height: 400px;
+		    }
 		</style>
 		{data.root.childs::child1}
-		<script>
-			domready(function(){
-				var div = $('.-catalog-groups');
-				div.find('.point').click( function () {
-					$(this).toggleClass('{:iopen}').toggleClass('{:iclose}').parents('.top:first').find('.childs:first').slideToggle('fast');
-				})
-			})
+		<script type="module">
+			(async () => {
+				let div = document.getElementById('{div}')
+				let cls = cls => div.getElementsByClassName(cls)
+				let points = cls('point')
+				for (let i = 0, l = points.length; i < l; i++ ) {
+					let point = points[i];
+					point.parentNode.parentNode.addEventListener('click', (e) => {
+						point.classList.toggle('{:iopen}')
+						point.classList.toggle('{:iclose}')
+						let childs = point.parentNode.parentNode.nextSibling.nextSibling
+						childs.classList.toggle('show')
+					})
+				}
+			})()
 		</script>
 	</div>
 {iopen:}fa-angle-left
@@ -52,11 +69,13 @@
 {child1:}
 	<div class="top">{.:group2}</div>
 {group2:}
-	<div class="py-2 px-3 d-flex justify-content-between align-items-center" style="border-top:1px solid var(--gray)">
+	<div class="header py-2 px-3 d-flex justify-content-between align-items-center" style="border-top:1px solid var(--gray)">
 		<a href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive} text-uppercase">{group}</a><div>{~length(childs)?:gr?:it}</div>
 	</div>
-	<div class="py-2 px-3 bt childs" style="{active??:strnone}">
-		{childs::child2}
+	<div class="bt childs {active?:stron?:strnone}">
+		<div class="py-2 px-3">
+			{childs::child2}
+		</div>
 	</div>
 	{notlast:}pb-2 mb-2 bb
 {child2:}
@@ -65,7 +84,8 @@
 	<div class="d-flex justify-content-between">
 		<a href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group}</a> <span class="ml-2" style="margin-right:7px; color:gray">{count}</span>
 	</div>
-	{strnone:}display:none;
+	{stron:}collapsed
+	{strnone:}
 	{clsactive:}font-weight-bold
 	{gr:}{active?:open?:close}
 	{it:}

@@ -1,0 +1,4 @@
+{
+	"tpl":"-catalog/snippets/layout.tpl",
+	"jsontpl":"-showcase/api/groups?data=true&val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}&art={~encode(crumb.child.child.name)}"
+}

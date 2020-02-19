@@ -262,12 +262,10 @@
 		</a>
 {posimg:}
 	<a style="position: relative;"href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
-		<img class="img-fluid border" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
+		<img class="img-fluid border" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}&or=-images/noimage.jpg" />
 	</a>
 {noimg:}
-	<a style="position: relative" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
-		<img class="img-fluid" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
-	</a>
+	&nbsp;
 {cat_item:}
 	<div class="position" style="margin-bottom:20px;">
 		{:extend.pos-item}
