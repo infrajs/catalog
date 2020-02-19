@@ -14,11 +14,7 @@
 
 {JSform:}
 	<script async type="module">
-		let wait = () => {
-			if (wait.promise) return wait.promise;
-			return wait.promise = new Promise((resolve, reject) => 
-				domready(() => Event.one('Controller.onshow', resolve)));
-		};
+		
 		let iscontext = () => {
 			if (!window.Controller) return true;
 			let layer = Controller.ids[{id}];
@@ -26,7 +22,9 @@
 			return layer.counter == {counter};
 		}
 		(async () => {
-			await wait();
+			let Load = (await import('/vendor/akiyatkin/load/Load.js')).default;
+			let Wait = await Load.on('import-default', '/vendor/akiyatkin/load/Wait.js')
+			await Wait();
 			let div = $(document.getElementById('{div}'));
 			div.find('form').submit( function (evt) {
 				var q = div.find('input').val();
@@ -54,11 +52,6 @@
 		</style>
 		{:JSform}
 		<script async type="module">
-			let wait = () => {
-				if (wait.promise) return wait.promise;
-				return wait.promise = new Promise((resolve, reject) => 
-					domready(() => Event.one('Controller.onshow', resolve)));
-			};
 			let iscontext = () => {
 				if (!window.Controller) return true;
 				let layer = Controller.ids[{id}];
@@ -67,7 +60,10 @@
 			}
 
 			(async () => {
-				await wait();
+				let Load = (await import('/vendor/akiyatkin/load/Load.js')).default;
+				let Wait = await Load.on('import-default', '/vendor/akiyatkin/load/Wait.js')
+				let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+				await Wait();
 				let div = $(document.getElementById('{div}'));
 				div.find('form').submit( function (evt) {
 					var q = div.find('input').val();
@@ -76,9 +72,10 @@
 					return false;
 				});
 
-				let Load = (await import('/vendor/akiyatkin/load/Load.js')).default; 
-				await Load.cdnjs('jquery');
-				await Load.cdnjs('jquery.autocomplete', '//cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.js');
+				
+				
+				await CDN.js('jquery');
+				await CDN.js('jquery.autocomplete', '//cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.js');
 
 				if (!iscontext()) return;
 

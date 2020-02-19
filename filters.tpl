@@ -259,8 +259,9 @@
 
 
 					let Load = (await import('/vendor/akiyatkin/load/Load.js')).default; 
-					Load.cdncss('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.css');
-					await Load.cdnjs('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.js');
+					let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+					CDN.css('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.css');
+					await CDN.js('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.js');
 
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
@@ -381,8 +382,9 @@
 					}
 					var slider = document.getElementById('propslide{prop_nick}');
 					let Load = (await import('/vendor/akiyatkin/load/Load.js')).default; 
-					await Load.cdn('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.js');
-					Load.cdn('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.css');
+					let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+					CDN.css('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.css');
+					await CDN.js('nouislider','//cdnjs.cloudflare.com/ajax/libs/noUiSlider/12.1.0/nouislider.min.js');
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
 						connect: true,	
