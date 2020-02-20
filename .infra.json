@@ -3,16 +3,6 @@
 	"dependencies":["path","event","nouislider"],
 	"css":"style.css",
 	"js":["Catalog.js","infra.js"],
-	"clutch":{
-		"magnific-popup":[
-			"vendor/dimsemenov/",
-			"vendor/infrajs/catalog/"
-		],
-		"nouislider":[
-			"vendor/leongersen/",
-			"vendor/infrajs/catalog/"
-		]
-	},
 	"tplsearch":"rows",
 	"tplgroups":"default",
 	"pageset":false,

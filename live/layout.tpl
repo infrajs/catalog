@@ -14,23 +14,19 @@
 
 {JSform:}
 	<script async type="module">
-		
-		let iscontext = () => {
-			if (!window.Controller) return true;
-			let layer = Controller.ids[{id}];
-			if (!layer) return true;
-			return layer.counter == {counter};
-		}
 		(async () => {
 			let Load = (await import('/vendor/akiyatkin/load/Load.js')).default;
-			let Wait = await Load.on('import-default', '/vendor/akiyatkin/load/Wait.js')
-			await Wait();
+			let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+			await CDN.load('jquery')
+	
 			let div = $(document.getElementById('{div}'));
-			div.find('form').submit( function (evt) {
-				var q = div.find('input').val();
-				Catalog.search(q);
+			div.find('form').submit( async (evt) => {
 				evt.preventDefault();
-				return false;
+				var q = div.find('input').val();
+
+				let Wait = await Load.on('import-default', '/vendor/akiyatkin/load/Wait.js')
+				await Wait();
+				Catalog.search(q);
 			});
 		})();
 	</script>
@@ -63,7 +59,8 @@
 				let Load = (await import('/vendor/akiyatkin/load/Load.js')).default;
 				let Wait = await Load.on('import-default', '/vendor/akiyatkin/load/Wait.js')
 				let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
-				await Wait();
+				await CDN.load('jquery.autocomplete');
+				
 				let div = $(document.getElementById('{div}'));
 				div.find('form').submit( function (evt) {
 					var q = div.find('input').val();
@@ -71,11 +68,7 @@
 					evt.preventDefault();
 					return false;
 				});
-
 				
-				
-				await CDN.js('jquery');
-				await CDN.js('jquery.autocomplete', '//cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.10/jquery.autocomplete.js');
 
 				if (!iscontext()) return;
 

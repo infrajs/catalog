@@ -116,20 +116,21 @@
 		{~inArray(group_nick,~conf.catalog.bigimage)?(~length(images)>:1?images::image)?images::imagedef}
 		<div style="clear:both"></div>
 	</div>
-	<script>
-		domready( function () {
-			var div = $('.cat-position .cat_images');
-			if (!div.magnificPopup) return console.info('Требуется magnificPopup');
-				
-			div.find('a.gallery').magnificPopup({
+	<script async type="module">
+		(async () => {
+			let Load = (await import('/vendor/akiyatkin/load/Load.js')).default
+			let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+			await CDN.load('magnific-popup')
+			let div = document.getElementById('{div}')
+			$(div).find('a.gallery').magnificPopup({
 				type: 'image',
 				gallery:{
 					enabled:true
 				}
-			});
-		
-		});
+			})
+		})()
 	</script>
+	
 	{image:}
 		<div class="float-left">
 			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
