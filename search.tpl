@@ -207,10 +207,11 @@
 			</ul>
 			{subgr:}<li><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></li>
 		{gimg:}<img src="/-imager/?w=100&h=100&src={icon|img}">
+{model::}-catalog/model.tpl
 {cat_showlist:}
 	{:pages}
 	{~conf.catalog.pageset?:pageset}
-	{list:search-{(group.showcase.tplsearch|~conf.catalog.tplsearch)}}
+	{list:model.{(group.showcase.tplsearch|~conf.catalog.tplsearch)}-list}
 	{:pages}
 
 {search-columns:}

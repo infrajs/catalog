@@ -1,0 +1,7 @@
+{
+	"В наличии":"badge-primary",
+	"Акция":"badge-danger",
+	"Распродажа":"badge-success",
+	"На заказ":"badge-info",
+	"Мало":"badge-warning"
+}

@@ -1,7 +1,7 @@
 {root:}
 	{~length(data.list)>:0?:showroot}
 	{showroot:}
-	<div class="space">{data.list::showmf}</div>
+	<div class="mb-3">{data.list::showmf}</div>
 	{showmf:}
 		{:{tpl}}
 {prop-default:}
