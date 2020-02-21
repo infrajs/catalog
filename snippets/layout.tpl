@@ -27,7 +27,9 @@
 
 {child:}
 	<h2>{group}</h2>
+	search-columns
 	{data:search.search-columns}
+	search-rows
 	{data:search.search-rows}
 	
 	{childs::child}

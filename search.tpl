@@ -189,7 +189,7 @@
 			</div>
 			<div class="flex-grow-1">
 				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
-				{~length(childs)?:subgrs2?:subposs}
+				{~length(childs)&(childs!~root().childs)?:subgrs2?:subposs}
 			</div>
 		</div>
 		{subposs:}
@@ -212,10 +212,7 @@
 	{~conf.catalog.pageset?:pageset}
 	{list:search-{(group.showcase.tplsearch|~conf.catalog.tplsearch)}}
 	{:pages}
-{search-rows:}
-	{:extend.pos-item-css}
-	<div style="clear:both"></div>
-	{::cat_item}
+
 {search-columns:}
 	<style scoped>
 		.cat_item .title {
@@ -236,36 +233,44 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
+		.cat_item .hoverup {
+			transform: scale(1);
+			transition: transform 1s ease;
+		}
+		.cat_item .hoverup:hover {
+		    transform: scale(1.05);
+		}
 	</style>
-	
-	<div class="row cat_item"  style="margin-bottom:20px; clear:both">
+	<div class="row cat_item" style="clear:both">
 		{::pos-item-columns}
 	</div>
-{pos-item-columns:}
-	<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4 columpos space">
-		
-		<a class="title p-2 nobr" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|article}</a>
-		<div class="p-2 nobr">
-			<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{producer} {article}</a></b>
+	{pos-item-columns:}
+		<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4 columpos space">
+			
+			{Наличие на складе?:extend.nalichie}
+			<div>{images.0?:posimg?:noimg}</div>
+			<a class="d-block pt-2 text-truncate" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|article}</a>
+			<div class="py-2 between">
+				
+				{:extend.print_more}
+				{:extend.priceblockbig}
+			</div>
 		</div>
-		{Наличие на складе?:extend.nalichie}
-		<div>{images.0?:posimg?:noimg}</div>
-		<div class="py-2 between">
-			{:extend.priceblockbig}
-			<div>{~cut(:200,Описание)}</div>
-		</div>
-	</div>
-	{350:}350
-	{producerlogo:}
-		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}/{producer}{:cat.mark.set}" class="float-right p-2">
-			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
-		</a>
+		{350:}350
+		{producerlogo:}
+			<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}/{producer}{:cat.mark.set}" class="float-right p-2">
+				<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
+			</a>
 {posimg:}
-	<a style="position: relative;"href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
-		<img class="img-fluid border" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}&or=-images/noimage.jpg" />
+	<a style="position: relative;" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+		<img class="img-fluid" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}&or=-images/noimage.jpg" />
 	</a>
 {noimg:}
 	&nbsp;
+{search-rows:}
+	{:extend.pos-item-css}
+	<div style="clear:both"></div>
+	{::cat_item}
 {cat_item:}
 	<div class="position" style="margin-bottom:20px;">
 		{:extend.pos-item}
