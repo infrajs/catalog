@@ -33,6 +33,9 @@
 {JS:}
 	<div>
 		<style>
+			#{div} .submit {
+				cursor: pointer
+			}
 			.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
 			.autocomplete-suggestion { 
 				padding: 2px 5px; 
@@ -68,6 +71,8 @@
 					evt.preventDefault();
 					return false;
 				});
+
+				div.find('.submit').click(() => div.find('form').submit())
 				
 
 				if (!iscontext()) return;
