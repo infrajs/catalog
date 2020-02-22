@@ -12,7 +12,7 @@
 	{:search.JS}
 {cat::}-catalog/cat.tpl
 {GROUPS:}
-	<div class="-catalog-groups child">
+	<div class="child">
 		<style>
 			#{div} .far {
 				cursor:pointer;
@@ -84,7 +84,7 @@
 	<div class="d-flex justify-content-between">
 		<a href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group}</a> <span class="ml-2" style="margin-right:7px; color:gray">{count}</span>
 	</div>
-	{stron:}collapsed
+	{stron:}show
 	{strnone:}
 	{clsactive:}font-weight-bold
 	{gr:}{active?:open?:close}
