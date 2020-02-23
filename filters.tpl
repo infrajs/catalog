@@ -3,7 +3,7 @@
 	{showroot:}
 	<div class="mb-3">{data.list::showmf}</div>
 	{showmf:}
-		{:{tpl}}
+		{:{ftpl}}
 {prop-default:}
 	{:prop-select}
 {prop-select:}

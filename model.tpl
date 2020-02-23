@@ -36,7 +36,7 @@
 	{:CARDS-basket}
 {CARDS-image:}
 	{Наличие на складе?:nalichie}
-	{images.0?:posimg?:sp}
+	{images.0?:posimg}
 {CARDS-name:}
 	<a class="d-block py-2 text-truncate" href="/catalog/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
 		{Наименование|article}
@@ -45,17 +45,25 @@
 	<table class="props">
 		{showcase.props::trprop}
 	</table>
-	{trprop:}
-		{((....).more[value]|(....)[value])?:trpropshow}
+		{trprop:}
+		{:pval?:trpropshow}
 		{trpropshow:}
-		<tr>
-			<td class="d-flex"><div>{title}:</div><div class="line"></div></td>
-			{link?:tdlink?:tdstr}
-		</tr>
-		{tdlink:}
-			<td><a href="/catalog/{(....)[nick]}{:orig.cat.mark.set}">{(....)[value]|(....).more[value]}</a></td>
-		{tdstr:}
-			<td>{(....)[value]|(....).more[value]}</td>
+			{ptpl?(:{ptpl})?:prop-default}
+		{prop-default:}
+			<tr>
+				<td class="d-flex"><div>{prop}:</div><div class="line"></div></td>
+				<td>{:pval}</td>
+			</tr>
+		{prop-bold:}
+			<tr>
+				<td class="d-flex"><div>{prop}:</div><div class="line"></div></td>
+				<th>{:pval}</th>
+			</tr>
+		{prop-link:}
+			<tr>
+				<td class="d-flex"><div>{prop}:</div><div class="line"></div></td>
+				<td><a href="/catalog/{(....)[nick]}{:orig.cat.mark.set}">{:pval}</a></td>
+			</tr>
 	{pval:}{(....)[value]|(....).more[value]}
 	{pnick:}{(....)[nick]|(....).more[nick]}
 {CARDS-basket:}
