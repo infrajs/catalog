@@ -134,13 +134,13 @@
 	{image:}
 		<div class="float-left">
 			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
-				<img title="{data.pos.producer} {data.pos.article}" src="/-imager/?m=1&h=150&top=1&src={.}" />
+				<img class="img-fluid" title="{data.pos.producer} {data.pos.article}" src="/-imager/?m=1&h=150&top=1&src={.}" />
 			</a>
 		</div>
 	{imagedef:}
 		<div class="float-left">
 			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
-				<img title="{data.pos.producer} {data.pos.article}" src="/-imager/?m=1&h={~key=:0?:str300?:str150}&top=1&src={.}" />
+				<img class="img-fluid" title="{data.pos.producer} {data.pos.article}" src="/-imager/?m=1&h={~key=:0?:str300?:str150}&top=1&src={.}" />
 			</a>
 		</div>
 	{str0:}0
