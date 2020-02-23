@@ -33,7 +33,7 @@
 	{:CARDS-image}
 	{:CARDS-name}
 	{:CARDS-props}
-	{:CARDS-cost}
+	{:CARDS-basket}
 {CARDS-image:}
 	{Наличие на складе?:nalichie}
 	{images.0?:posimg?:sp}
@@ -58,7 +58,7 @@
 			<td>{(....)[value]|(....).more[value]}</td>
 	{pval:}{(....)[value]|(....).more[value]}
 	{pnick:}{(....)[nick]|(....).more[nick]}
-{CARDS-cost:}
+{CARDS-basket:}
 	<div class="float-right">{Цена?:itemcost}</div>
 {ROWS-list:}
 	{:css}
