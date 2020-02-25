@@ -80,7 +80,6 @@
 {ROWS-data:}
 {ROWS-name:}
 {ROWS-props:}
-
 {itemcost:}<span class="cost">{~cost(Цена)}{:unit}</span>
 {unit:}<small>&nbsp;руб.</small>
 {sp:}&nbsp;
