@@ -34,22 +34,66 @@
 {error:}
 	<div class="alert alert-danger">Позиция <b>{crumb.parent.name} {crumb.name}</b> не найдена!</div>
 {extend::}-catalog/extend.tpl
+{model::}-catalog/model.tpl
 {CATPOSIMAGES:}
 	{~length(images)?:images}
+{images:}
+	{~inArray(group_nick,~conf.catalog.bigimage)?:bigimg}
+	<div class="d-flex" style="clear:both; text-align:center; margin-top:10px; margin-bottom:10px;">
+		<div class="flex-grow-1">
+			{images.0:imagelg}
+		</div>
+		<div>
+			{images::image}
+		</div>
+	</div>
+	<script async type="module">
+		(async () => {
+			let Load = (await import('/vendor/akiyatkin/load/Load.js')).default
+			let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+			await CDN.load('magnific-popup')
+			let div = document.getElementById('{div}')
+			$(div).find('a.gallery').magnificPopup({
+				type: 'image',
+				gallery:{
+					enabled:true
+				}
+			})
+		})()
+	</script>
+	
+	{image:}
+		{~key=:0??:imagesm}
+	{imagesm:}
+		<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
+			<img class="img-fluid" title="{data.pos.producer} {data.pos.article}" 
+			src="/-imager/?m=1&h=50&top=1&src={.}" />
+		</a>
+	{imagelg:}
+		<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
+			<img class="img-fluid" title="{data.pos.producer} {data.pos.article}" 
+			src="/-imager/?m=1&h=400&top=1&src={.}" />
+		</a>
 {start:}
 	<div class="cat-position">
 		<div style="float:right">
 			{logo?:producer}
-			<div style="clear:both"></div>
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
 		{items?:showitems}
-		<div id="CATPOSIMAGES"></div>
-		<div style="clear:both">
-			{:extend.pos-page}
+		<div class="row">
+			<div class="col-sm-6 mb-3">
+				<div id="CATPOSIMAGES"></div>
+				{:model.css}
+				{:model.basket-between}
+			</div>
+			<div class="col-sm-6 mb-3">
+				<div class="mb-3">{Описание}</div>
+				<div class="mb-3">{:model.CARDS-props}</div>
+				<div>{Скрыть фильтры в полном описании??:print_more}</div>
+			</div>
 		</div>
-		<div style="color:gray; margin-bottom:30px; margin-top:15px">{Описание}</div>
-		<div class="space">{Скрыть фильтры в полном описании??:print_more}</div>
+		
 		
 		{texts::text}
 		{~length(files)?:files}
@@ -95,7 +139,6 @@
 	<table class="table table-striped table-sm" style="width:auto">
 		{more::pos_more}
 	</table>
-	
 {pos_more:}<tr><td>{~key}:</td><th style="text-align:left">{.}</th></tr>
 {files:}
 	<h2>Файлы для {Продажа} {producer} {~conf.showcase.hiddenarticle??article}</h2>
@@ -109,43 +152,7 @@
 {text:}
 	{.}
 {bigimg:}<img class="img-fluid" src="/-imager/?m=1&src={images.0}">
-{images:}
-	{~inArray(group_nick,~conf.catalog.bigimage)?:bigimg}
-	<div class="cat_images" style="clear:both; text-align:center; margin-top:10px; margin-bottom:10px;">
-		{:extend.nalichie}
-		{~inArray(group_nick,~conf.catalog.bigimage)?(~length(images)>:1?images::image)?images::imagedef}
-		<div style="clear:both"></div>
-	</div>
-	<script async type="module">
-		(async () => {
-			let Load = (await import('/vendor/akiyatkin/load/Load.js')).default
-			let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
-			await CDN.load('magnific-popup')
-			let div = document.getElementById('{div}')
-			$(div).find('a.gallery').magnificPopup({
-				type: 'image',
-				gallery:{
-					enabled:true
-				}
-			})
-		})()
-	</script>
-	
-	{image:}
-		<div class="float-left">
-			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
-				<img class="img-fluid" title="{data.pos.producer} {data.pos.article}" src="/-imager/?m=1&h=150&top=1&src={.}" />
-			</a>
-		</div>
-	{imagedef:}
-		<div class="float-left">
-			<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
-				<img class="img-fluid" title="{data.pos.producer} {data.pos.article}" src="/-imager/?m=1&h={~key=:0?:str300?:str150}&top=1&src={.}" />
-			</a>
-		</div>
-	{str0:}0
-	{str300:}300
-	{str150:}150
+
 {producer:}
 	<div style="float:right; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
 		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer.{producer_nick}=1">

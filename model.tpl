@@ -38,7 +38,7 @@
 	{Наличие на складе?:nalichie}
 	{images.0?:posimg}
 {CARDS-name:}
-	<a class="d-block py-2 text-truncate" href="/catalog/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+	<a class="d-block py-2 text-truncate" href="{:link-pos}">
 		{Наименование|article}
 	</a>
 {CARDS-props:}
@@ -62,10 +62,25 @@
 		{prop-link:}
 			<tr>
 				<td class="d-flex"><div>{prop}:</div><div class="line"></div></td>
-				<td><a href="/catalog/{(....)[nick]}{:orig.cat.mark.set}">{:pval}</a></td>
+				<td><a href="{nick:link-val}">{:pval}</a></td>
 			</tr>
+		{prop-empty:}
+		{prop-filter:}
+			<tr>
+				<td class="d-flex"><div>{prop}:</div><div class="line"></div></td>
+				<td>{:fval}</td>
+			</tr>
+			{fval:}{~split(:value,((....)[value]|(....).more[value]),:nick,nick)::filter-vals}
+				{filter-vals:}{~key?:comma}<a href="{:link-filter}">{value}</a>
+				{link-filter:}/{Controller.names.catalog.crumb}/{:cat.mark.add}more.{nick}::.{Path.encode(value)}=1
 	{pval:}{(....)[value]|(....).more[value]}
 	{pnick:}{(....)[nick]|(....).more[nick]}
+	{ampval:}&{.}
+	{sl:}/
+	{slval:}/{.}
+	{link-pos:}/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{item_nick:slval}{catkit?:sl}{catkit:ampval}{:cat.mark.set}
+	{link-val:}/{Controller.names.catalog.crumb}/{.}{:cat.mark.set}
+	
 {CARDS-basket:}
 	<div class="float-right">{Цена?:itemcost}</div>
 {ROWS-list:}
@@ -87,8 +102,9 @@
 	<div style="position:absolute; left:15px; z-index:1" class="m-1">{:badgenalichie}</div>
 {badgenalichie:}
 	{Наличие на складе?:badgenalichieshow}
+	{strНаличие:}Наличие
 	{badgenalichieshow:}
-		<a href="/catalog{:cat.mark.add}more.{Path.encode(:strНаличие-на-складе)}::.{Path.encode(Наличие на складе)}=1" 
+		<a href="/{Controller.names.catalog.crumb}/{:cat.mark.add}{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" 
 			class="badge {:ncls}">
 			{Наличие на складе}
 		</a>
@@ -97,11 +113,11 @@
 		{~data(:model-cls-src)[Наличие на складе]|:clsdef}		
 	{clsdef:}badge-secondary
 {prodimg:}
-	<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}/{producer}{:cat.mark.set}" class="float-right p-2">
+	<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="{producer_nick:link-val}" class="float-right p-2">
 		<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 	</a>
 {posimg:}
-	<a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+	<a href="{:link-pos}">
 		<img class="img-fluid" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
 	</a>
 {pos-item:}
@@ -110,11 +126,12 @@
 			{images.0?:pos-img?:pos-img}
 		</div>
 		<div class="col-12 col-sm-8 col-md-9">
-			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|:name}</a>
+			<a class="title padding" href="{:link-pos}">{Наименование|:name}</a>
 			{logo?:producerlogo}
-			<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+			<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a data-anchor=".breadcrumb" 
+				href="{group_nick:link-val}">{group}</a></div>
 			<div class="padding">
-				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{~conf.showcase.hiddenarticle??:prodart}</a></b>
+				<b><a href="{:link-pos}">{~conf.showcase.hiddenarticle??:prodart}</a></b>
 				
 			</div>
 			{(more&~conf.catalog.showmore)?:havemore?:nomore}
@@ -144,6 +161,6 @@
 	{comma:}, 
 	{no:}Нет
 	{producerlogo:}
-		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer.{producer_nick}=1" class="float-right" style="margin:5px 0 5px 5px">
+		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="{producer_nick:link-val}" class="float-right" style="margin:5px 0 5px 5px">
 			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 		</a>
