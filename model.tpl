@@ -118,7 +118,7 @@
 	</a>
 {posimg:}
 	<a href="{:link-pos}">
-		<img class="img-fluid" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}" />
+		<img class="img-fluid" src="/-imager/?m=1&amp;w=525&amp;h=420&amp;top=1&amp;crop=1&amp;src={images.0}" />
 	</a>
 {pos-item:}
 	<div class="row cat_item">
