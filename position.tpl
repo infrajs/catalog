@@ -4,27 +4,27 @@
 	{data.result?data.pos:start?:error}
 {css:}
 	<style scoped>
-		.cat-position .bigimage {
+		/*.cat-position .bigimage {
 			border-top:1px dotted gray;
 			text-align:center;
 			padding-top:10px;
 			padding-bottom:10px;
-		}
+		}*/
 
 		.cat-position .files {
 			margin:0;padding:0;
 			list-style: none;
 			margin-top: 6px;
 		}
-			.cat-position .files li {
-				line-height: 18px;
-				padding-left: 25px;
-			}
-			.cat-position .files .ico {
-				/*background-image: url("images/pdf_icon.png");*/
-				background-repeat: no-repeat;
-				background-position: 0px 1px;
-			}
+		.cat-position .files li {
+			line-height: 18px;
+			padding-left: 25px;
+		}
+		.cat-position .files .ico {
+			/*background-image: url("images/pdf_icon.png");*/
+			background-repeat: no-repeat;
+			background-position: 0px 1px;
+		}
 		/*.cat-position .information {
 			line-height: 18px;
 			margin-top: 25px;
@@ -82,29 +82,48 @@
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
 		{items?:showitems}
 		<div class="row">
-			<div class="col-sm-6 mb-3">
+			<div class="col-md-6 mb-3">
 				<div id="CATPOSIMAGES"></div>
 				{:model.css}
-				{:model.basket-between}
 			</div>
-			<div class="col-sm-6 mb-3">
-				<div class="mb-3">{Описание}</div>
+			<div class="col-md-6 mb-3">
+				<div class="mb-3 text-muted">{Описание}</div>
 				<div class="mb-3">{:model.CARDS-props}</div>
 				<div>{Скрыть фильтры в полном описании??:print_more}</div>
+				{:model.basket-between}
 			</div>
 		</div>
-		
-		
 		{texts::text}
 		{~length(files)?:files}
-
-		<div style="clear:left; margin-bottom: 50px">
-			<hr>
-			{:extend.pos-sign}
+		{:info}
+		<div class="mb-3">	
+			Перейти к группе <a data-anchor='.breadcrumb' href="{group_nick:model.link-val}">{group}</a><br>
 		</div>
 	</div>
 	{strСкрытый:}Скрытый
 	{startart:}<br><small>{producer} {article}</small>
+{info:}
+	<div class="alert alert-primary pb-2">
+		<div class="row">
+			<div class="col-sm-6 mb-2">
+				<b><a href="/guaranty">Гарантия</a></b>
+				<div>Бесплатное устранение неполадки, замена товара на аналогичный или возврата денежных средств</div>
+			</div>
+			<div class="col-sm-6 mb-2">	
+				<b><a href="/return">Возврат в течение 60 дней</a></b>
+				<div>Вернуть и обменять товары можно в течении 60 дней со дня получения товара.</div>
+			</div>
+			<div class="col-sm-6 mb-2">
+				<b><a href="/pay">Оплата</a></b>
+				<div>На карту Сбербанка, на карту Альфа-банка, наличные при получении, оплата картой VISA, MASTERCARD при самовывозе.</div>
+			</div>
+			<div class="col-sm-6 mb-2">
+				<b><a href="/transport">Доставка по всей России и СНГ</a></b>
+				<div>Почта России, Курьерская доставка почтой EMS, Транспортные компании: СДЭК, ПЭК, Деловые Линии, Байкал Сервис, Энергия, КИТ, Желдор экспедиция, Возовоз</div>
+			</div>
+			
+		</div>
+	</div>
 {showitems:}
 	<table id="items" class="table table-striped table-hover table-sm">
 		<thead>
@@ -136,6 +155,8 @@
 		{imore:}<td>{Dabudi.propget(...pos,.,...itm)}</td>
 	{ihead:}<th>{.}</th>
 {print_more:}
+	{~length(more)?:printmorenow}
+	{printmorenow:}
 	<table class="table table-striped table-sm" style="width:auto">
 		{more::pos_more}
 	</table>
