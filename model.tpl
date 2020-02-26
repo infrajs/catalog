@@ -123,7 +123,7 @@
 {pos-item:}
 	<div class="row cat_item">
 		<div class="{images.0??:mobimghide}col-12 col-sm-4 col-md-3">
-			{images.0?:pos-img?:pos-img}
+			{images.0?:posimg?:posimg}
 		</div>
 		<div class="col-12 col-sm-8 col-md-9">
 			<a class="title padding" href="{:link-pos}">{Наименование|:name}</a>

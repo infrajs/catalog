@@ -87,10 +87,7 @@
 				{:model.css}
 			</div>
 			<div class="col-md-6 mb-3">
-				<div class="mb-3 text-muted">{Описание}</div>
-				<div class="mb-3">{:model.CARDS-props}</div>
-				<div>{Скрыть фильтры в полном описании??:print_more}</div>
-				{:model.basket-between}
+				{:props}
 			</div>
 		</div>
 		{texts::text}
@@ -99,7 +96,12 @@
 		<div class="mb-3">	
 			Перейти к группе <a data-anchor='.breadcrumb' href="{group_nick:model.link-val}">{group}</a><br>
 		</div>
+
 	</div>
+	{props:}
+			<div class="mb-3 text-muted">{Описание}</div>
+			<div class="mb-3">{:model.CARDS-props}</div>
+			<div>{Скрыть фильтры в полном описании??:print_more}</div>
 	{strСкрытый:}Скрытый
 	{startart:}<br><small>{producer} {article}</small>
 {info:}
