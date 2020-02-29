@@ -69,10 +69,9 @@
 {itemlist2:}{data.group.count?:cat_showlist?(~length(data.filters)?(data.count>:limit?:cat_notshow?:cat_showlist)?:cat_notshow)}
 {itemlist:}{data.showlist?:cat_showlist?:cat_notshow}
 {searchgood:}
-
-	{:groups-{(group.showcase.tplgroups|~conf.catalog.tplgroups)}}
-	{:itemlist}
-	<p>{descr}</p>
+		{group.showcase.tplgroups?:groups-{group.showcase.tplgroups}?:groups-default}
+		{:itemlist}
+		<p>{descr}</p>
 	{limit:}500
 	{1:}1
 	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:модель,:модели,:моделей)} &mdash; выберите группу.
@@ -81,7 +80,27 @@
 		<div class="row">
 			<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
 		</div>
-		{~length(data.childs)?data.childs:cat.groups}
+		{~length(data.childs)?data.childs:groups-def}
+		{groups-def:}
+			<div class="cart">
+				<div class="catgrouplist row no-gutters mb-4" style="margin-left:-5px; margin-right:-5px">
+					{::groups-def-group}
+				</div>
+			</div>
+			{groups-def-group:}
+				<div class="col-sm-6 col-md-4 col-lg-6 col-xl-4" style="padding:5px">
+					<a class="d-flex p-1 bg-white rounded" style="align-items:center; height:68px;" 
+						data-anchor='.breadcrumb' 
+						href="{group_nick:model.link-val}">
+						<div style="text-align:center; width:70px">
+							{(img|icon):gimgdef}
+						</div>
+						<div class="title">
+							{group}
+						</div>
+					</a>
+				</div>
+				{gimgdef:}<img class="img-fluid" src="/-imager/?src={.}&w=130&h=60">
 	{groups-blocks:}
 		{~length(data.childs)?:showblocks?:nogroups_simple}
 		{showblocks:}
@@ -167,7 +186,7 @@
 			style="{(icon|img)?:bgimg}">
 
 			<div class="text-center my-5 p-2" style=" background-color:rgba(255,255,255,0.8); background-color:rgba(0,0,0,0.7);">
-				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="{group_nick:model.link-val}">{group}</a></div>
 			</div>
 
 		</div>
@@ -176,19 +195,19 @@
 		<div  class="col-6 col-md-4 col-lg-4 col-xl-3 d-flex mb-4 flex-column justify-content-between">
 			<div class="flex-grow-1">{(icon|img)?:gimg_big}</div>
 			<div class="text-center mt-1">
-				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="{group_nick:model.link-val}">{group}</a></div>
 			</div>
 
 		</div>
 		
-		{gimg_big:}<a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}"><img class="img-fluid" src="/-imager/?w=300&h=200&crop=1&src={icon|img}"></a>
+		{gimg_big:}<a href="{group_nick:model.link-val}"><img class="img-fluid" src="/-imager/?w=300&h=200&crop=1&src={icon|img}"></a>
 	{groups_group:}
 		<div class="col-lg-12 col-lg-6 col-xl-6 d-flex mb-3">
 			<div class="mr-2" style="min-width:100px; text-align:center">
-				<a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{(img|icon)?:gimg}</a>
+				<a href="{group_nick:model.link-val}">{(img|icon)?:gimg}</a>
 			</div>
 			<div class="flex-grow-1">
-				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="{group_nick:model.link-val}">{group}</a></div>
 				{~length(childs)&(childs!~root().childs)?:subgrs2?:subposs}
 			</div>
 		</div>
@@ -199,19 +218,19 @@
 			{onecost:}Цена {~cost(min)}&nbsp;руб.
 		{subgrs2:}
 			<div>{childs::subgr2}</div>
-			{subgr2:}<a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a>{~last()|:comma}
+			{subgr2:}<a href="{group_nick:model.link-val}">{group}</a>{~last()|:comma}
 			{comma:}, 
 		{subgrs:}
 			<ul>
 				{childs::subgr}
 			</ul>
-			{subgr:}<li><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></li>
+			{subgr:}<li><a href="{group_nick:model.link-val}">{group}</a></li>
 		{gimg:}<img src="/-imager/?w=100&h=100&src={icon|img}">
 {model::}-catalog/model.tpl
 {cat_showlist:}
 	{:pages}
 	{~conf.catalog.pageset?:pageset}
-	{list:model.{(group.showcase.tplsearch|~conf.catalog.tplsearch)}-list}
+	{group.showcase.tplsearch?list:model.{group.showcase.tplsearch}-list?list:model.ROWS-list}
 	{:pages}
 
 {search-columns:}
@@ -250,7 +269,7 @@
 			
 			{Наличие на складе?:extend.nalichie}
 			<div>{images.0?:posimg?:noimg}</div>
-			<a class="d-block pt-2 text-truncate" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|article}</a>
+			<a class="d-block pt-2 text-truncate" href="{:model.link-pos}">{Наименование|article}</a>
 			<div class="py-2 between">
 				
 				{:extend.print_more}
@@ -259,11 +278,11 @@
 		</div>
 		{350:}350
 		{producerlogo:}
-			<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}/{producer}{:cat.mark.set}" class="float-right p-2">
+			<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="{producer_nick:model.link-val}" class="float-right p-2">
 				<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 			</a>
 {posimg:}
-	<a style="position: relative;" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
+	<a style="position: relative;" href="{:model.link-pos}">
 		<img class="img-fluid" src="/-imager/?m=1&amp;w=528&amp;h=528&amp;top=1&amp;crop=1&amp;src={images.0}&or=-images/noimage.jpg" />
 	</a>
 {noimg:}

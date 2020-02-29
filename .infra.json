@@ -3,8 +3,6 @@
 	"dependencies":["path","event","nouislider"],
 	"css":"style.css",
 	"js":["Catalog.js","infra.js"],
-	"tplsearch":"rows",
-	"tplgroups":"default",
 	"pageset":false,
 	"showparentgroup":false,
 	"showfilterscls":"alert-success",
