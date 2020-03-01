@@ -12,6 +12,11 @@
 			overflow: hidden;
 			white-space: nowrap;
 		}
+		#{div} .model {
+			border:1px solid var(--gray);
+			position: relative;
+
+		}
 	</style>
 {PRINT-item:}
 	<p>
@@ -25,22 +30,24 @@
 	</div>
 {CARDS-item:}
 	<div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3 d-flex flex-column justify-content-between">
-		{:CARDS-data}
+		<div class="model shadow-over">{:CARDS-data}</div>
 	</div>
 {CARDS-data:}
 	<div>
 		{:CARDS-image}
-		{:CARDS-name}
-		{:CARDS-props}
+		<div class="px-2 pt-2">
+			{:CARDS-name}
+			{:CARDS-props}
+		</div>
 	</div>
-	<div>
+	<div class="px-2 pb-2">
 		{:CARDS-basket}
 	</div>
 {CARDS-image:}
 	{Наличие?:nalichie}
 	{images.0?:posimg}
 {CARDS-name:}
-	<a class="d-block mt-2 text-truncate" href="{:link-pos}">
+	<a class="font-weight-bold d-block pt-2 py-1 text-truncate" href="{:link-pos}">
 		{Наименование|article}
 	</a>
 {CARDS-props:}
@@ -165,7 +172,7 @@
 {unit:}<small>&nbsp;руб.</small>
 {sp:}&nbsp;
 {nalichie:}
-	<div style="position:absolute; left:15px; z-index:1" class="m-1">{:badgenalichie}</div>
+	<div style="position:absolute; left:0px; z-index:1" class="m-2">{:badgenalichie}</div>
 {badgenalichie:}
 	{Наличие?:badgenalichieshow}
 	{strНаличие:}Наличие
