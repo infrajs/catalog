@@ -4,7 +4,13 @@
 		#{div} .props .line {
 			margin-right:10px;
 			border-bottom: 1px dotted #ccc; 
-			width:100%
+			flex-grow: 1;
+		}
+		#{div} .props .limit {
+			max-width: 150px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
 		}
 	</style>
 {PRINT-item:}
@@ -138,7 +144,12 @@
 				{tr-prop-p:}<tr><td colspan="2">{:pval}</td></tr>
 				{tr-prop-filter:}
 					<tr>
-						<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
+						<td>
+							<div class="d-flex">
+								<div class="limit">{prop}:</div>
+								<div class="line"></div>
+							</div>
+						</td>
 						<td>{:fval}</td>
 					</tr>
 {itemcost:}
