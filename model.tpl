@@ -132,7 +132,7 @@
 				{tr-prop-link:}
 					<tr>
 						<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
-						<td><a href="{nick:link-val}">{:pval}</a></td>
+						<td><a href="{(:pnick):link-val}">{:pval}</a></td>
 					</tr>
 				{tr-prop-empty:}
 				{tr-prop-p:}<tr><td colspan="2">{:pval}</td></tr>

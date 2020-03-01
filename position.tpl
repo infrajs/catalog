@@ -90,14 +90,17 @@
 				{:props}
 			</div>
 		</div>
-		{texts::text}
-		{~length(files)?:files}
+		{:body}
+	</div>
+	{body:}
+		<div class="mb-4">
+			{texts::text}
+			{~length(files)?:files}
+		</div>
 		{:info}
 		<div class="mb-3">	
 			Перейти к группе <a data-anchor='.breadcrumb' href="{group_nick:model.link-val}">{group}</a><br>
 		</div>
-
-	</div>
 	{props:}
 			<div class="mb-3">{:model.CARDS-props}</div>
 			<div>{Скрыть фильтры в полном описании??:print_more}</div>
