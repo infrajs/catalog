@@ -4,7 +4,6 @@
 	"nocache":true,
 	"jsontpl":"-showcase/api/search?val=&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",
 	"seojsontpl":"-showcase/api/search/seo?seo={Controller.names.catalog.crumb}&val=&m={~encode(Crumb.get.m)}",
-	"autoedittpl":{ "fast":"{~conf.showcase.folders}"},
 	"showanimate":true,
 	"name":"catalog",
 	"child":{
@@ -30,14 +29,12 @@
 		"producers":{
 			"tpl":"-catalog/producers.tpl",
 			"jsontpl":"-showcase/api/producers?lim=0,200&m={~encode(Crumb.get.m)}",
-			"seojsontpl":"-showcase/api/producers/seo?seo={Controller.names.catalog.crumb}",
-			"autoedittpl":{ "fast":"{~conf.showcase.texts}Производители"}
+			"seojsontpl":"-showcase/api/producers/seo?seo={Controller.names.catalog.crumb}"
 		},
 		"stat":{
 			"tpl":"-catalog/stat.tpl",
 			"json":"-catalog/stat.php",
-			"seojsontpl":"-catalog/stat.php?seo={Controller.names.catalog.crumb}",
-			"autoedittpl":{ "fast":"{~conf.showcase.texts}Статистика поиска по каталогу"}
+			"seojsontpl":"-catalog/stat.php?seo={Controller.names.catalog.crumb}"
 		}
 	}
 }
