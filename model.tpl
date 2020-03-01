@@ -89,7 +89,7 @@
 {ROWS-list:}
 	{:css}
 	{::ROWS-item}
-	{ROWS-item:}
+{ROWS-item:}
 		<div class="row mb-5">
 			<div class="{images.0??:mobimghide} col-12 col-sm-4 col-md-3">
 				{:ROWS-image}
@@ -99,59 +99,59 @@
 			</div>
 		</div>
 	{mobimghide:}d-none d-sm-block 
-	{ROWS-image:}
+{ROWS-image:}
 		{Наличие?:nalichie}
 		<a href="{:link-pos}">
 			<img class="img-fluid" src="/-imager/?m=1&amp;w=525&amp;src={images.0}" />
 		</a>
-	{ROWS-data:}
-		<div class="bg-secondary text-white px-2 py-1 mb-2">
-			{:ROWS-name}
-		</div>
-		<div class="px-2">
-			{:ROWS-props}
-			{:ROWS-basket}
-		</div>
-		{ROWS-basket:}
-			<div class="my-1 float-right">{:cost}</div>
-		{ROWS-name:}
-			<a style="color:inherit" href="{:link-pos}">{Наименование|article}</a>
-		{ROWS-props:}
-			{logo?:producerlogo}
-			<table class="props">
-				{showcase.props::trprop}
-			</table>
-			{trprop:}
-				{:pval?:trpropshow}
-				{trpropshow:}
-					{ptpl?(:tr-{ptpl})?:tr-prop-filter}
-				{tr-prop-default:}
-					<tr>
-						<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
-						<td>{:pval}</td>
-					</tr>
-				{tr-prop-bold:}
-					<tr>
-						<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
-						<th>{:pval}</th>
-					</tr>
-				{tr-prop-link:}
-					<tr>
-						<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
-						<td><a href="{(:pnick):link-val}">{:pval}</a></td>
-					</tr>
-				{tr-prop-empty:}
-				{tr-prop-p:}<tr><td colspan="2">{:pval}</td></tr>
-				{tr-prop-filter:}
-					<tr>
-						<td>
-							<div class="d-flex">
-								<div title="{prop}" class="limit">{prop}:</div>
-								<div class="line"></div>
-							</div>
-						</td>
-						<td>{:fval}</td>
-					</tr>
+{ROWS-data:}
+	<div class="bg-secondary text-white px-2 py-1 mb-2">
+		{:ROWS-name}
+	</div>
+	<div class="px-2">
+		{:ROWS-props}
+		{Цена?:ROWS-basket}
+	</div>
+{ROWS-basket:}
+	<div class="my-1 float-right">{:cost}</div>
+{ROWS-name:}
+	<a style="color:inherit" href="{:link-pos}">{Наименование|article}</a>
+{ROWS-props:}
+	{logo?:producerlogo}
+	<table class="props">
+		{showcase.props::trprop}
+	</table>
+	{trprop:}
+		{:pval?:trpropshow}
+	{trpropshow:}
+		{ptpl?(:tr-{ptpl})?:tr-prop-filter}
+	{tr-prop-default:}
+		<tr>
+			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
+			<td>{:pval}</td>
+		</tr>
+	{tr-prop-bold:}
+		<tr>
+			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
+			<th>{:pval}</th>
+		</tr>
+	{tr-prop-link:}
+		<tr>
+			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
+			<td><a href="{(:pnick):link-val}">{:pval}</a></td>
+		</tr>
+	{tr-prop-empty:}
+	{tr-prop-p:}<tr><td colspan="2">{:pval}</td></tr>
+	{tr-prop-filter:}
+		<tr>
+			<td>
+				<div class="d-flex">
+					<div title="{prop}" class="limit">{prop}:</div>
+					<div class="line"></div>
+				</div>
+			</td>
+			<td>{:fval}</td>
+		</tr>
 {itemcost:}
 	<div class="my-1">{:cost}</div>
 {cost:}
