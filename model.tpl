@@ -146,7 +146,7 @@
 					<tr>
 						<td>
 							<div class="d-flex">
-								<div class="limit">{prop}:</div>
+								<div title="{prop}" class="limit">{prop}:</div>
 								<div class="line"></div>
 							</div>
 						</td>
