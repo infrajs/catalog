@@ -82,7 +82,7 @@
 	<div class="child {~last()?:last?:notlast}">{.:group3}</div>
 {group3:}
 	<div class="d-flex justify-content-between">
-		<a href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group}</a> <span class="ml-2" style="margin-right:7px; color:gray">{count}</span>
+		<a href="/catalog/{group_nick}{:cat.mark.server.set}" class="{active?:clsactive}">{group}</a> <span class="ml-2" style="margin-right:7px; color:gray">{sum}</span>
 	</div>
 	{stron:}show
 	{strnone:}
