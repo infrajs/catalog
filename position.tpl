@@ -81,6 +81,12 @@
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
 		{items?:showitems}
+		{images.0?:imagesyes?:imagesno}
+		{imagesno:}
+			<div class="mb-3">
+				{:props}
+			</div>
+		{imagesyes:}
 		<div class="row">
 			<div class="col-md-6 mb-3">
 				<div id="CATPOSIMAGES"></div>

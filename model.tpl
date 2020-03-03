@@ -29,8 +29,8 @@
 		{::CARDS-item}
 	</div>
 {CARDS-item:}
-	<div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3 d-flex flex-column justify-content-between">
-		<div class="model shadow-over">{:CARDS-data}</div>
+	<div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-stretch">
+		<div class="d-flex flex-column justify-content-between model shadow-over w-100">{:CARDS-data}</div>
 	</div>
 {CARDS-data:}
 	<div>
@@ -77,8 +77,8 @@
 		{div-prop-empty:}
 		{div-prop-filter:}
 			<div class="d-flex my-1">
-				<div class="ptitle pr-2 text-nowrap">{prop}:</div>
-				<div class="text-truncate">{:fval}</div>
+				<div style="min-width:100px" title="{prop}" class="ptitle pr-2 text-truncate">{prop}:</div>
+				<div style="min-width:30px" class="text-truncate">{:fval}</div>
 			</div>
 	{fval:}{~split(:value,((....)[value]|(....).more[value]),:nick,nick)::filter-vals}
 		{filter-vals:}{~key?:comma}<a rel="nofollow" href="{:link-filter}">{value}</a>
@@ -164,9 +164,9 @@
 {cost:}
 	{min?(show?:cost-one?:cost-two)?:cost-one}
 	{cost-one:}
-		Цена:&nbsp;<b class="cost">{~cost(Цена)}{:unit}</b>
+		<b class="cost">{~cost(Цена)}{:unit}</b>
 	{cost-two:}
-		Цена от&nbsp;<b class="cost">{~cost(min)}</b> 
+		От&nbsp;<b class="cost">{~cost(min)}</b> 
 		до&nbsp;<b class="cost">{~cost(max)}{:unit}</b>
 
 {unit:}<small>&nbsp;руб.</small>
