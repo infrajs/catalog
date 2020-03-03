@@ -164,7 +164,9 @@
 {cost:}
 	{min?(show?:cost-one?:cost-two)?:cost-one}
 	{cost-one:}
-		<b class="cost">{~cost(Цена)}{:unit}</b>
+		<b class="cost {Наличие=:strАкция?:strred}">{~cost(Цена)}{:unit}</b>
+		{strАкция:}Акция
+		{strred:}text-danger
 	{cost-two:}
 		От&nbsp;<b class="cost">{~cost(min)}</b> 
 		до&nbsp;<b class="cost">{~cost(max)}{:unit}</b>
