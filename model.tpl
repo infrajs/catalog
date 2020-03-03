@@ -35,12 +35,12 @@
 {CARDS-data:}
 	<div>
 		{:CARDS-image}
-		<div class="px-2 pt-2">
+		<div class="px-3 pt-2">
 			{:CARDS-name}
 			{:CARDS-props}
 		</div>
 	</div>
-	<div class="px-2 pb-2">
+	<div class="px-3 pb-3">
 		{:CARDS-basket}
 	</div>
 {CARDS-image:}
@@ -172,7 +172,7 @@
 {unit:}<small>&nbsp;руб.</small>
 {sp:}&nbsp;
 {nalichie:}
-	<div style="position:absolute; left:0px; z-index:1" class="m-2">{:badgenalichie}</div>
+	<div style="position:absolute; left:0px; z-index:1" class="m-3">{:badgenalichie}</div>
 {badgenalichie:}
 	{Наличие?:badgenalichieshow}
 	{strНаличие:}Наличие
