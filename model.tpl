@@ -57,7 +57,7 @@
 	{divprop:}
 		{:pval?:divpropshow}
 		{divpropshow:}
-			{ptpl?(:div-{ptpl})?:div-prop-filter}
+			{tplprop?(:div-{tplprop})?:div-prop-filter}
 		{div-prop-default:}
 			<div class="d-flex my-1">
 				<div class="ptitle pr-2 text-nowrap">{prop}:</div>
@@ -131,7 +131,7 @@
 	{trprop:}
 		{:pval?:trpropshow}
 	{trpropshow:}
-		{ptpl?(:tr-{ptpl})?:tr-prop-filter}
+		{tplprop?(:tr-{tplprop})?:tr-prop-filter}
 	{tr-prop-default:}
 		<tr>
 			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
