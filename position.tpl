@@ -81,6 +81,7 @@
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
 		{items?:showitems}
+		{:model.css}
 		{images.0?:imagesyes?:imagesno}
 		{imagesno:}
 			<div class="mb-3">
@@ -90,7 +91,6 @@
 		<div class="row">
 			<div class="col-md-6 mb-3">
 				<div id="CATPOSIMAGES"></div>
-				{:model.css}
 			</div>
 			<div class="col-md-6 mb-3">
 				{:props}
