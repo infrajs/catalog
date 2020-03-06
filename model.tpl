@@ -47,9 +47,28 @@
 	{Наличие?:nalichie}
 	{images.0?:posimg}
 {CARDS-name:}
-	<a class="font-weight-bold d-block pt-2 py-1 text-truncate" href="{:link-pos}">
+	<a class="font-weight-bold d-block pt-2 py-1" href="{:link-pos}">
 		{Наименование|article}
 	</a>
+{POS-props:}
+	<div class="props">
+		{showcase.props::posprop}
+	</div>
+	{posprop:}
+		{:pval?:pospropshow}
+		{pospropshow:}
+			{tplprop?(:pos-{tplprop})?:pos-prop-filter}
+			{pos-prop-default:}
+				{:pos-frow}{:pval}{:/pos-frow}
+			{pos-prop-bold:}
+				{:pos-frow}<b>{:pval}</b>{:/pos-frow}
+			{pos-prop-link:}
+				{:pos-frow}<a href="{(:pnick):link-val}">{:pval}</a>{:/pos-frow}
+			{pos-prop-p:}<div class="my-1">{:pval}</div>
+			{pos-prop-empty:}
+			{pos-prop-filter:}
+				{:pos-frow}{:fval}{:/pos-frow}
+			{pos-frow:}<div class="d-flex my-1 flex-wrap"><div class="pr-2">{prop}:</div><div>{/pos-frow:}</div></div>
 {CARDS-props:}
 	<div class="props">
 		{showcase.props::divprop}
@@ -60,17 +79,17 @@
 			{tplprop?(:div-{tplprop})?:div-prop-filter}
 		{div-prop-default:}
 			<div class="d-flex my-1">
-				<div class="ptitle pr-2 text-nowrap">{prop}:</div>
+				<div class="ptitle pr-2 text-truncate">{prop}:</div>
 				<div title="{:pval}" class="text-truncate">{:pval}</div>
 			</div>
 		{div-prop-bold:}
 			<div class="d-flex my-1">
-				<div class="ptitle pr-2 text-nowrap">{prop}:</div>
+				<div class="ptitle pr-2 text-truncate">{prop}:</div>
 				<div title="{:pval}" class="text-truncate"><b>{:pval}</b></div>
 			</div>
 		{div-prop-link:}
 			<div class="d-flex my-1">
-				<div class="ptitle pr-2 text-nowrap">{prop}:</div>
+				<div class="ptitle pr-2 text-truncate">{prop}:</div>
 				<div title="{:pval}" class="text-truncate"><a href="{(:pnick):link-val}">{:pval}</a></div>
 			</div>
 		{div-prop-p:}<div class="my-1">{:pval}</div>

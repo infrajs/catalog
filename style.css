@@ -1,6 +1,13 @@
 :root {
 	--gray:rgba(0,0,0,.125);
 }
+
+.cat-position {
+
+}
+.cat-search {
+	
+}
 .a {
 	cursor: pointer;
 	color: #337ab7;

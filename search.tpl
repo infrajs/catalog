@@ -69,9 +69,11 @@
 {itemlist2:}{data.group.count?:cat_showlist?(~length(data.filters)?(data.count>:limit?:cat_notshow?:cat_showlist)?:cat_notshow)}
 {itemlist:}{data.showlist?:cat_showlist?:cat_notshow}
 {searchgood:}
+	<div class="cat-search">
 		{group.showcase.tplgroups?:groups-{group.showcase.tplgroups}?:groups-default}
 		{:itemlist}
 		<p>{descr}</p>
+	</div>
 	{limit:}500
 	{1:}1
 	{cat_notshow:}Найдено <b>{data.count}</b> {~words(data.count,:модель,:модели,:моделей)} &mdash; выберите группу.

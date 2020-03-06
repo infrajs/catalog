@@ -108,7 +108,7 @@
 			Перейти к группе <a data-anchor='.breadcrumb' href="{group_nick:model.link-val}">{group}</a><br>
 		</div>
 	{props:}
-			<div class="mb-3">{:model.CARDS-props}</div>
+			<div class="mb-3">{:model.POS-props}</div>
 			<div>{Скрыть фильтры в полном описании??:print_more}</div>
 	{strСкрытый:}Скрытый
 	{startart:}<br><small>{producer} {article}</small>
