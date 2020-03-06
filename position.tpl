@@ -84,18 +84,20 @@
 		{:model.css}
 		{images.0?:imagesyes?:imagesno}
 		{imagesno:}
-			<div class="mb-3">
-				{:props}
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					{:props}
+				</div>
 			</div>
 		{imagesyes:}
-		<div class="row">
-			<div class="col-md-6 mb-3">
-				<div id="CATPOSIMAGES"></div>
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<div id="CATPOSIMAGES"></div>
+				</div>
+				<div class="col-md-6 mb-3">
+					{:props}
+				</div>
 			</div>
-			<div class="col-md-6 mb-3">
-				{:props}
-			</div>
-		</div>
 		{:body}
 	</div>
 	{body:}
@@ -156,12 +158,12 @@
 	{headname:}<th>Наименование</th>
 	{prname:}<td>{Наименование}</td>
 	{iitem:}
-		<tr style="cursor:pointer; font-size:14px" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat_images'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
+		<tr style="cursor:pointer;" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat_images'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 			{~obj(:more,more,:itm,.,:pos,...,:list,...itemmore).list::imore}
 			{~inArray(:Наименование,...itemrows)?:prname}
 			{~inArray(:Цена,...itemrows)?:prcost}
 		</tr>
-		{table-success:}font-weight-bold
+		{table-success:}bg-secondary text-light
 		{imore:}<td>{Dabudi.propget(...pos,.,...itm)}</td>
 	{ihead:}<th>{.}</th>
 {print_more:}
