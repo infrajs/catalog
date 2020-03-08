@@ -23,6 +23,7 @@
 		{Наименование} {producer} {article}{item:pr}
 		<br><b>{count}</b> по <b>{~cost(cost)}&nbsp;руб.</b> = <b>{~cost(sum)}&nbsp;руб.</b>
 	</p>
+	{pr:} {.}
 {CARDS-list:}
 	{:css}
 	<div class="row">
@@ -47,7 +48,7 @@
 	{Наличие?:nalichie}
 	{images.0?:posimg}
 {CARDS-name:}
-	<a class="font-weight-bold d-block pt-2 py-1" href="{:link-pos}">
+	<a class="font-weight-bold d-block pt-1" href="{:link-pos}">
 		{Наименование|article}
 	</a>
 {POS-props:}
