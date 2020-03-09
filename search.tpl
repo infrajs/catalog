@@ -159,13 +159,13 @@
 					margin-right: 1ex; 
 				}
 			</style>
-			<div class="order-2 order-md-1 col-md-8 col-lg-8 col-xl-8 mb-3">
+			<div class="order-2 order-md-2 col-md-8 col-lg-8 col-xl-8 mb-3">
 				<div class="row">
 					{data.childs::groups_group}
 				</div>
 				{~length(data.filters)?:showfilters}
 			</div>
-			<div class="order-1 order-md-2 col-md-4 col-lg-4 col-xl-4 mb-3">
+			<div class="order-1 order-md-1 col-md-4 col-lg-4 col-xl-4 mb-3">
 				<div id="filgroups"></div>
 			</div>
 		</div>
