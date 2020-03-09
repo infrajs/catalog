@@ -80,9 +80,11 @@
 			{logo?:producer}
 		</div>
 		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
-		{items?:showitems}
+		
 		{:model.css}
 		{images.0?:imagesyes?:imagesno}
+		{:body}
+	</div>
 		{imagesno:}
 			<div class="row">
 				<div class="col-md-6 mb-3">
@@ -91,15 +93,13 @@
 			</div>
 		{imagesyes:}
 			<div class="row">
-				<div class="col-md-6 mb-3">
+				<div class="order-md-2 col-md-6 mb-3">
 					<div id="CATPOSIMAGES"></div>
 				</div>
-				<div class="col-md-6 mb-3">
+				<div class="order-md-1 col-md-6 mb-3">
 					{:props}
 				</div>
 			</div>
-		{:body}
-	</div>
 	{body:}
 		<div class="mb-4">
 			{texts::text}
@@ -110,8 +110,16 @@
 			Перейти к группе <a data-anchor='.breadcrumb' href="{group_nick:model.link-val}">{group}</a><br>
 		</div>
 	{props:}
-			<div class="mb-3">{:model.POS-props}</div>
-			<div>{Скрыть фильтры в полном описании??:print_more}</div>
+		<div class="mb-3">
+			{:model.POS-props}
+		</div>
+		{items?:showitems}
+		<div>
+			{Скрыть фильтры в полном описании??:print_more}
+		</div>
+		<div class="mb-3">
+			{Цена?:model.cost}
+		</div>
 	{strСкрытый:}Скрытый
 	{startart:}<br><small>{producer} {article}</small>
 {info:}
@@ -137,7 +145,7 @@
 		</div>
 	</div>
 {showitems:}
-	<table id="items" class="table table-striped table-hover table-sm">
+	<table id="items" class="mt-3 table table-striped table-hover table-sm">
 		<thead>
 			<tr>
 				{itemmore::ihead}
@@ -158,7 +166,7 @@
 	{headname:}<th>Наименование</th>
 	{prname:}<td>{Наименование}</td>
 	{iitem:}
-		<tr style="cursor:pointer;" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = '.cat_images'; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
+		<tr style="cursor:pointer;" class="{...item_nick=item_nick?:table-success}" onclick="Ascroll.once = false; Crumb.go('/{crumb}{:cat.idsl}{:cat.mark.set}');">
 			{~obj(:more,more,:itm,.,:pos,...,:list,...itemmore).list::imore}
 			{~inArray(:Наименование,...itemrows)?:prname}
 			{~inArray(:Цена,...itemrows)?:prcost}
@@ -169,10 +177,10 @@
 {print_more:}
 	{~length(more)?:printmorenow}
 	{printmorenow:}
-	<table class="table table-striped table-sm" style="width:auto">
+	<table class="table table-sm">
 		{more::pos_more}
 	</table>
-{pos_more:}<tr><td>{~key}:</td><th style="text-align:left">{.}</th></tr>
+{pos_more:}<tr><td class="text-nowrap">{~key}:</td><th style="text-align:left; width:100%">{.}</th></tr>
 {files:}
 	<h2>Файлы для {Продажа} {producer} {~conf.showcase.hiddenarticle??article}</h2>
 		<ul class="files">
