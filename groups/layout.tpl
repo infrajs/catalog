@@ -53,8 +53,15 @@
 				let cls = cls => div.getElementsByClassName(cls)
 				let points = cls('point')
 				for (let i = 0, l = points.length; i < l; i++ ) {
-					let point = points[i];
-					point.parentNode.parentNode.addEventListener('click', (e) => {
+					let point = points[i]
+					let header = point.parentNode.parentNode
+					header.addEventListener('click', (e) => {
+						let shows = cls('show')
+						for (let i = 0, l = shows.length; i < l; i++ ) {
+							let myheader = shows[i].parentNode.getElementsByClassName('header')[0];
+							if (header == myheader) continue;
+							myheader.dispatchEvent(new Event('click'));
+						}
 						point.classList.toggle('{:iopen}')
 						point.classList.toggle('{:iclose}')
 						let childs = point.parentNode.parentNode.nextSibling.nextSibling

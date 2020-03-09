@@ -80,17 +80,17 @@
 			{tplprop?(:div-{tplprop})?:div-prop-filter}
 		{div-prop-default:}
 			<div class="d-flex my-1">
-				<div class="ptitle pr-2 text-truncate">{prop}:</div>
+				<div class="ptitle pr-2">{prop}:</div>
 				<div title="{:pval}" class="text-truncate">{:pval}</div>
 			</div>
 		{div-prop-bold:}
 			<div class="d-flex my-1">
-				<div class="ptitle pr-2 text-truncate">{prop}:</div>
+				<div class="ptitle pr-2">{prop}:</div>
 				<div title="{:pval}" class="text-truncate"><b>{:pval}</b></div>
 			</div>
 		{div-prop-link:}
 			<div class="d-flex my-1">
-				<div class="ptitle pr-2 text-truncate">{prop}:</div>
+				<div class="ptitle pr-2">{prop}:</div>
 				<div title="{:pval}" class="text-truncate"><a href="{(:pnick):link-val}">{:pval}</a></div>
 			</div>
 		{div-prop-p:}<div class="my-1">{:pval}</div>

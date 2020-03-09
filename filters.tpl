@@ -1,7 +1,7 @@
 {root:}
 	{~length(data.list)>:0?:showroot}
 	{showroot:}
-	<div class="mb-3">{data.list::showmf}</div>
+		<div class="mb-3">{data.list::showmf}</div>
 	{showmf:}
 		{:{tplfilter}?:{tplfilter}?:prop-default}
 {prop-default:}
@@ -203,9 +203,9 @@
 				.costslide {
 					margin-bottom:10px;
 				}
-				#costslider{prop_nick} .noUi-connect {
+				/*#costslider{prop_nick} .noUi-connect {
 					background-color: var(--primary);
-				}
+				}*/
 				/*#costslider{prop_nick} {
 					margin-left:15px;
 					margin-right:15px;
