@@ -4,6 +4,7 @@
 	<h1>
 		{~conf.catalog.showparentgroup?:showparentgroup}{data.name|data.title}
 	</h1>
+	{data.group.showcase.tplgroups?:groups-{data.group.showcase.tplgroups}?:groups-default}
 	{data.count?data:searchgood?data:searchbad}
 	{:text}
 {root-twocolumns:}
@@ -56,12 +57,17 @@
 		</div>
 {cat.mark.add:}{:cat.mark.server.add}
 {searchbad:}
-	<div class="row">
-		<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
-	</div>
+	<!--<div class="row">
+		<div class="col-md-6 mb-3">
+			<div id="filgroups"></div>
+		</div>
+		<div class="col-md-6 mb-3">
+			{~length(data.filters)?:showfilters}	
+		</div>
+	</div>-->
 	<div class="mb-4"></div>
 	<p>К сожалению, позиции не найдены.</p>
-	{~length(data.filters)?:showfilters}
+	
 	{isproducer:}producer
 	{isgroup:}group
 	{issearch:}search
@@ -70,7 +76,7 @@
 {itemlist:}{data.showlist?:cat_showlist?:cat_notshow}
 {searchgood:}
 	<div class="cat-search">
-		{group.showcase.tplgroups?:groups-{group.showcase.tplgroups}?:groups-default}
+		
 		{:itemlist}
 		<p>{descr}</p>
 	</div>
@@ -106,22 +112,22 @@
 	{groups-blocks:}
 		{~length(data.childs)?:showblocks?:nogroups_simple}
 		{showblocks:}
-		<div class="row catgroups mt-4 mb-1">
-			<style>
-				.catgroups ul { 
-					list-style: none inside;
-					padding-left: 0.5rem;
-				} 
-				.catgroups ul > li:before {
-					content: "—"; 
-					margin-left: -1ex; 
-					margin-right: 1ex; 
-				}
-			</style>
-			
-			{data.childs::groups_group_block}
-			
-		</div>
+			<div class="row catgroups mt-4 mb-1">
+				<style>
+					.catgroups ul { 
+						list-style: none inside;
+						padding-left: 0.5rem;
+					} 
+					.catgroups ul > li:before {
+						content: "—"; 
+						margin-left: -1ex; 
+						margin-right: 1ex; 
+					}
+				</style>
+				
+				{data.childs::groups_group_block}
+				
+			</div>
 		{~length(data.filters)?:showfilters}
 	{groups-info3:}
 		{~length(data.childs)?:showgroups3?:nogroups_simple}
@@ -147,35 +153,52 @@
 	{groups-info:}
 		{~length(data.childs)?:showgroups?:nogroups}
 		{showgroups:}
-		<div class="row catgroups mt-4 mb-1">
-			<style>
-				.catgroups ul { 
-					list-style: none inside;
-					padding-left: 0.5rem;
-				} 
-				.catgroups ul > li:before {
-					content: "—"; 
-					margin-left: -1ex; 
-					margin-right: 1ex; 
-				}
-			</style>
-			<div class="order-2 order-md-2 col-md-8 col-lg-8 col-xl-8 mb-3">
-				<div class="row">
-					{data.childs::groups_group}
+			<div class="row catgroups mt-4 mb-1">
+				<style>
+					.catgroups ul { 
+						list-style: none inside;
+						padding-left: 0.5rem;
+					} 
+					.catgroups ul > li:before {
+						content: "—"; 
+						margin-left: -1ex; 
+						margin-right: 1ex; 
+					}
+				</style>
+				<div class="order-2 order-md-2 col-md-6 col-lg-8 col-xl-8 mb-3">
+					<div class="row">
+						{data.childs::groups_group}
+					</div>
+					{~length(data.filters)?:showfilters}
 				</div>
-				{~length(data.filters)?:showfilters}
+				<div class="order-1 order-md-1 col-md-6 col-lg-4 col-xl-4 mb-3">
+					<div id="filgroups"></div>
+				</div>
 			</div>
-			<div class="order-1 order-md-1 col-md-4 col-lg-4 col-xl-4 mb-3">
-				<div id="filgroups"></div>
-			</div>
-		</div>
 		{nogroups:}
-			<div class="row catgroups mt-4">
-				<div class="col-md-6 mb-3">
+			<div class="row catgroups mt-4 mb-1">
+				<style>
+					.catgroups ul { 
+						list-style: none inside;
+						padding-left: 0.5rem;
+					} 
+					.catgroups ul > li:before {
+						content: "—"; 
+						margin-left: -1ex; 
+						margin-right: 1ex; 
+					}
+				</style>
+				<div class="order-2 order-md-2 col-md-6 mb-3">
+					<div class="row">
+						{data.childs::groups_group}
+					</div>
+				</div>
+				<div class="order-1 order-md-1 col-md-6 mb-3">
 					<div id="filgroups"></div>
 					{~length(data.filters)?:showfilters}
 				</div>
 			</div>
+			
 		{nogroups_simple:}
 			<div class="catgroups mt-4">
 				<div class="mb-3">
@@ -204,7 +227,7 @@
 		
 		{gimg_big:}<a href="{group_nick:model.link-val}"><img class="img-fluid" src="/-imager/?w=300&h=200&crop=1&src={icon|img}"></a>
 	{groups_group:}
-		<div class="col-lg-12 col-lg-6 col-xl-6 d-flex mb-3">
+		<div class="col-md-12 col-lg-6 col-xl-6 d-flex mb-3">
 			<div class="mr-2" style="min-width:100px; text-align:center">
 				<a href="{group_nick:model.link-val}">{(img|icon)?:gimg}</a>
 			</div>
