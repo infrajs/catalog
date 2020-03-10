@@ -216,7 +216,7 @@
 					<div>
 					  	{:costlabel}
 					</div>
-					<div style="font-weight:normal; margin-right:-0.5rem; position: relative;" title="Не указано">
+					<div class="d-none" style="font-weight:normal; margin-right:-0.5rem; position: relative;" title="Не указано">
 							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
 					</div>
 				</div>
@@ -319,29 +319,13 @@
 				.propslide {
 					margin-bottom:10px;
 				}
-				/*.propslide .noUi-horizontal {
-					height: 10px;
-				}
-				.propslide .noUi-horizontal .noUi-handle {
-					height: 20px;
-				}
-				.propslide .noUi-horizontal .noUi-handle:after, .propslide .noUi-horizontal .noUi-handle:before {
-					height: 6px;
-				}*/
-				#propslide{prop_nick} .noUi-connect {
-					background-color: var(--primary);
-				}
-				#propslide{prop_nick} {
-					/*margin-left:15px;
-					margin-right:15px;*/
-				}
 			</style>
 			<div>
 				<div class="d-flex justify-content-between" style="font-weight:bold;">
 					<div>
 					  	{prop}
 					</div>
-					<div style="font-weight:normal; margin-right:-0.5rem" title="Не указано">
+					<div class="d-none" style="font-weight:normal; margin-right:-0.5rem" title="Не указано">
 							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
 					</div>
 				</div>
