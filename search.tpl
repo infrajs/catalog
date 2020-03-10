@@ -153,7 +153,7 @@
 	{groups-info:}
 		{~length(data.childs)?:showgroups?:nogroups}
 		{showgroups:}
-			<div class="row catgroups mt-4 mb-1">
+			<div class="row catgroups mt-4 mb-4">
 				<style>
 					.catgroups ul { 
 						list-style: none inside;
@@ -176,7 +176,7 @@
 				</div>
 			</div>
 		{nogroups:}
-			<div class="row catgroups mt-4 mb-1">
+			<div class="row catgroups mt-4 mb-4">
 				<style>
 					.catgroups ul { 
 						list-style: none inside;
@@ -195,10 +195,11 @@
 				</div>
 				<div class="order-1 order-md-1 col-md-6 mb-3">
 					<div id="filgroups"></div>
-					{~length(data.filters)?:showfilters}
+					{~length(data.filters)?:showfiltersm}
 				</div>
 			</div>
-			
+			{showfiltersm:}
+				<div class="mt-5">{:showfilters}</div>
 		{nogroups_simple:}
 			<div class="catgroups mt-4">
 				<div class="mb-3">

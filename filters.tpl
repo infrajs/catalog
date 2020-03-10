@@ -8,9 +8,8 @@
 	{:prop-select}
 {prop-select:}
 	<select 
-	style="margin-top:3px; margin-bottom:10px" 
 	onchange="Crumb.go('/catalog/{:get}'+this.value+'=1')" 
-	class="custom-select form-control shadow-over">
+	class="mb-3 custom-select form-control shadow-over">
 		<option value="" style="font-weight: bold">{prop}</option>
 		{values::fopt}
 	</select>
