@@ -15,8 +15,7 @@
 {JSform:}
 	<script async type="module">
 		(async () => {
-			let Load = (await import('/vendor/akiyatkin/load/Load.js')).default;
-			let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+			let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default;
 			await CDN.load('jquery')
 	
 			let div = $(document.getElementById('{div}'));
@@ -24,7 +23,7 @@
 				evt.preventDefault();
 				var q = div.find('input').val();
 
-				let Wait = await Load.on('import-default', '/vendor/akiyatkin/load/Wait.js')
+				let Wait = (await import('/vendor/akiyatkin/load/Wait.js')).default
 				await Wait();
 				Catalog.search(q);
 			});
@@ -59,9 +58,9 @@
 			}
 
 			(async () => {
-				let Load = (await import('/vendor/akiyatkin/load/Load.js')).default;
-				let Wait = await Load.on('import-default', '/vendor/akiyatkin/load/Wait.js')
-				let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+				
+				let Wait = (await import('/vendor/akiyatkin/load/Wait.js')).default
+				let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
 				await CDN.load('jquery.autocomplete');
 				
 				let div = $(document.getElementById('{div}'));
