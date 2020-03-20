@@ -40,10 +40,10 @@
 {images:}
 	{~inArray(group_nick,~conf.catalog.bigimage)?:bigimg}
 	<div class="d-flex" style="clear:both; text-align:center; margin-top:10px; margin-bottom:10px;">
-		<div class="flex-grow-1">
+		<div>
 			{images.0:imagelg}
 		</div>
-		<div>
+		<div class="flex-grow-1">
 			{images::image}
 		</div>
 	</div>
@@ -65,8 +65,8 @@
 		{~key=:0??:imagesm}
 	{imagesm:}
 		<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
-			<img class="img-fluid" title="{data.pos.producer} {data.pos.article}" 
-			src="/-imager/?m=1&h=50&top=1&src={.}" />
+			<img title="{data.pos.producer} {data.pos.article}" 
+			src="/-imager/?m=1&w=70&top=1&src={.}" />
 		</a>
 	{imagelg:}
 		<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
@@ -78,7 +78,7 @@
 		<div style="float:right">
 			{logo?:producer}
 		</div>
-		<h1 style="text-align:left">{Наименование}{~conf.showcase.hiddenarticle??:startart}</h1>
+		<h1 style="text-align:left">{Наименование}</h1>
 		
 		{:model.css}
 		{images.0?:imagesyes?:imagesno}
