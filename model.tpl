@@ -83,6 +83,11 @@
 				<div class="ptitle pr-2">{prop}:</div>
 				<div title="{:pval}" class="text-truncate">{:pval}</div>
 			</div>
+		{div-prop-hideable:}
+			<div class="d-flex my-1">
+				<div class="ptitle pr-2">{prop}:</div>
+				<div title="{:pval}" class="text-truncate">{~length(:pval)>:strlenprim?:rowprimhidden?:pval}</div>
+			</div>
 		{div-prop-bold:}
 			<div class="d-flex my-1">
 				<div class="ptitle pr-2">{prop}:</div>
@@ -152,6 +157,13 @@
 		{:pval?:trpropshow}
 	{trpropshow:}
 		{tplprop?(:tr-{tplprop})?:tr-prop-filter}
+	{tr-prop-hideable:}
+		<tr>
+			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td><td>
+			{~length(:pval)>:strlenprim?:rowprimhidden?:pval}
+		</tr>
+			{rowprimhidden:}<span class="a" onclick="$(this).hide().next().show()">Показать</span><span onclick="$(this).hide().prev().show()" style="display: none">{:pval}</span></td>
+			{strlenprim:}30
 	{tr-prop-default:}
 		<tr>
 			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>

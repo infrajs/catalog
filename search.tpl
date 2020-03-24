@@ -76,7 +76,6 @@
 {itemlist:}{data.showlist?:cat_showlist?:cat_notshow}
 {searchgood:}
 	<div class="cat-search">
-		
 		{:itemlist}
 		<p>{descr}</p>
 	</div>
