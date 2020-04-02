@@ -34,38 +34,37 @@
 			#{div} .bb {
 				border-bottom:1px solid var(--gray);
 			}
-		    #{div} .childs {
-		        max-height: 0;
+			#{div} .childs {
+		   		max-height: 0;
 			    opacity: 0;
 			    overflow: hidden;
 			    transition: 0.5s;
-		    }
-		    #{div} .childs.show {
-		    	display: block;
-		    	opacity: 1;
-		    	max-height: 400px;
+			}
+		   	#{div} .childs.show {
+		   		opacity: 1;
+		    	max-height: 800px;
 		    }
 		</style>
 		{data.root.childs::child1}
 		<script type="module">
 			(async () => {
-				let div = document.getElementById('{div}')
-				let cls = cls => div.getElementsByClassName(cls)
-				let points = cls('point')
-				for (let i = 0, l = points.length; i < l; i++ ) {
-					let point = points[i]
+				let cls = (cls, div = document.getElementById('{div}')) => div.getElementsByClassName(cls)
+				let toggle = async header => {
+					let point = cls('point', header)[0]
+					point.classList.toggle('{:iopen}')
+					point.classList.toggle('{:iclose}')
+					let childs = header.nextSibling.nextSibling
+					childs.classList.toggle('show')
+				}
+				for (const point of cls('point')) {
 					let header = point.parentNode.parentNode
-					header.addEventListener('click', (e) => {
-						let shows = cls('show')
-						for (let i = 0, l = shows.length; i < l; i++ ) {
-							let myheader = shows[i].parentNode.getElementsByClassName('header')[0];
+					header.addEventListener('click', async (e) => {
+						for (const showed of cls('show')) {
+							let myheader = cls('header', showed.parentNode)[0]
 							if (header == myheader) continue;
-							myheader.dispatchEvent(new Event('click'));
+							toggle(myheader)
 						}
-						point.classList.toggle('{:iopen}')
-						point.classList.toggle('{:iclose}')
-						let childs = point.parentNode.parentNode.nextSibling.nextSibling
-						childs.classList.toggle('show')
+						toggle(header)
 					})
 				}
 			})()
