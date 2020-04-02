@@ -233,6 +233,12 @@
 			</div>
 			<script>
 				domready(async () => {
+					let iscontext = () => {
+						if (!window.Controller) return true
+						let layer = Controller.ids[{id}]
+						if (!layer) return true
+						return layer.counter == {counter}
+					}
 					var m = "{data.m}";
 					var path = "more.{prop_nick}";
 					var min = {min|:0};
@@ -259,7 +265,7 @@
 
 					let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
 					await CDN.load('nouislider')
-
+					if (!iscontext()) return
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
 						connect: true,	
