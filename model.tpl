@@ -63,6 +63,8 @@
 				{:pos-frow}{:pval}{:/pos-frow}
 			{pos-prop-bold:}
 				{:pos-frow}<b>{:pval}</b>{:/pos-frow}
+			{pos-prop-cost:}
+				{:pos-frow}<b>{~cost(:pval)}{:unit}</b>{:/pos-frow}
 			{pos-prop-link:}
 				{:pos-frow}<a href="{(:pnick):link-val}">{:pval}</a>{:/pos-frow}
 			{pos-prop-p:}<div class="my-1">{:pval}</div>
@@ -92,6 +94,11 @@
 			<div class="d-flex my-1">
 				<div class="ptitle pr-2">{prop}:</div>
 				<div title="{:pval}" class="text-truncate"><b>{:pval}</b></div>
+			</div>
+		{div-prop-cost:}
+			<div class="d-flex my-1">
+				<div class="ptitle pr-2">{prop}:</div>
+				<div><b>{~cost(:pval)}{:unit}</b></div>
 			</div>
 		{div-prop-link:}
 			<div class="d-flex my-1">
@@ -173,6 +180,11 @@
 		<tr>
 			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
 			<th>{:pval}</th>
+		</tr>
+	{tr-prop-cost:}
+		<tr>
+			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
+			<th>{~cost(:pval)}{:unit}</th>
 		</tr>
 	{tr-prop-link:}
 		<tr>
