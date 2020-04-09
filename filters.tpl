@@ -10,7 +10,7 @@
 	<select 
 	onchange="Crumb.go('/catalog/{:get}'+this.value+'=1')" 
 	class="mb-3 custom-select form-control shadow-over">
-		<option value="" style="font-weight: bold">{prop}</option>
+		<option value="" style="font-weight: bold">{title?title?prop}</option>
 		{values::fopt}
 	</select>
 {prop-chain-card:}

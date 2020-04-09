@@ -71,7 +71,7 @@
 			{pos-prop-empty:}
 			{pos-prop-filter:}
 				{:pos-frow}{:fval}{:/pos-frow}
-			{pos-frow:}<div class="d-flex my-1 flex-wrap"><div class="pr-2">{prop}:</div><div>{/pos-frow:}</div></div>
+			{pos-frow:}<div class="d-flex my-1 flex-wrap"><div class="pr-2">{title?title?prop}:</div><div>{/pos-frow:}</div></div>
 {CARDS-props:}
 	<div class="props">
 		{showcase.props::divprop}
@@ -109,7 +109,7 @@
 		{div-prop-empty:}
 		{div-prop-filter:}
 			<div class="d-flex my-1">
-				<div style="min-width:65px" title="{prop}" class="ptitle pr-2 text-truncate">{prop}:</div>
+				<div style="min-width:65px" title="{title?title?prop}" class="ptitle pr-2 text-truncate">{title?title?prop}:</div>
 				<div style="min-width:30px" class="text-truncate">{:fval}</div>
 			</div>
 	{fval:}{~split(:value,((....)[value]|(....).more[value]),:nick,nick)::filter-vals}
@@ -197,7 +197,7 @@
 		<tr>
 			<td>
 				<div class="d-flex">
-					<div title="{prop}" class="limit">{prop}:</div>
+					<div title="{prop}" class="limit">{title?title?prop}:</div>
 					<div class="line"></div>
 				</div>
 			</td>
