@@ -194,9 +194,9 @@
 {bigimg:}<img class="img-fluid" src="/-imager/?m=1&src={images.0}">
 
 {producer:}
-	<div style="float:right; padding:10px 10px 10px 10px; margin-left:5px; margin-bottom:5px;">
+	<div style="float:right; margin-left:5px; margin-bottom:5px;">
 		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer.{producer_nick}=1">
-			<img style="margin-left:5px" src="/-imager/?w=160&h=70&src={logo}" />
+			<img style="margin-left:5px" src="/-imager/?w=160&h=25&src={logo}" />
 		</a>
 	</div>
 <!--	<div style="text-align:right; font-size: 11px; margin-top:5px;">
