@@ -1,5 +1,7 @@
- Event.handler('Controller.onshow', function () {
- 	//На любой элемент вешаем класс gagarin и data-name указываем имя для элемента который надо будет скрыть у которого класс gagarin{name}
+ Event.handler('Controller.onshow', async () => {
+ 	//На любой элемент вешаем класс gagarin и data-name указываем имя для элемента который надо будет скрыть у которого класс gagarin{name} 	
+ 	let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
+ 	await CDN.load('jquery')
  	var ctrls = document.getElementsByClassName('gagarin');
  	var hand = function () {
  		var div = this.dataset.div;
