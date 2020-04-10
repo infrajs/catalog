@@ -35,11 +35,11 @@
 {nalichie:}
 	<div style="position:absolute; left:15px; z-index:1" class="m-1">{:badgenalichie}</div>
 {badgenalichie:}
-	{Наличие на складе?:badgenalichieshow}
+	{Наличие?:badgenalichieshow}
 	{badgenalichieshow:}
-<a href="/catalog{:cat.mark.add}more.{Path.encode(:strНаличие-на-складе)}::.{Path.encode(Наличие на складе)}=1" class="badge {Наличие на складе=:strnal?:clsnal?(Наличие на складе=:strras?:clsras?(Наличие на складе=:strzak?:clszak?(Наличие на складе=:stract?:clsact?(Наличие на складе=:strmalo?:clsmalo?:clsdef))))}">
-		{Наличие на складе}</a>
-	{strНаличие-на-складе:}Наличие на складе
+<a href="/catalog{:cat.mark.add}more.{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" class="badge {Наличие=:strnal?:clsnal?(Наличие=:strras?:clsras?(Наличие=:strzak?:clszak?(Наличие=:stract?:clsact?(Наличие=:strmalo?:clsmalo?:clsdef))))}">
+		{Наличие}</a>
+	{strНаличие:}Наличие
 	{strnal:}В наличии
 	{clsnal:}badge-primary
 	{clsdef:}badge-secondary
@@ -61,7 +61,7 @@
 	{label-secondary:}badge-secondary
 	{label-danger:}badge-danger
 {pos-img:}
-		{Наличие на складе?:nalichie}
+		{Наличие?:nalichie}
 		<a style="position: relative" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">
 			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=528&amp;src={images.0}" />
 		</a>

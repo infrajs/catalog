@@ -292,7 +292,7 @@
 	{pos-item-columns:}
 		<div class="mb-4 col-12 col-sm-6 col-lg-4 col-xl-4 columpos space">
 			
-			{Наличие на складе?:extend.nalichie}
+			{Наличие?:extend.nalichie}
 			<div>{images.0?:posimg?:noimg}</div>
 			<a class="d-block pt-2 text-truncate" href="{:model.link-pos}">{Наименование|article}</a>
 			<div class="py-2 between">
