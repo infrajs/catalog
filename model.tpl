@@ -109,7 +109,7 @@
 		{div-prop-empty:}
 		{div-prop-filter:}
 			<div class="d-flex my-1">
-				<div style="min-width:65px" title="{title?title?prop}" class="ptitle pr-2 text-nowrap">{title?title?prop}:</div>
+				<div title="{title?title?prop}" class="ptitle pr-2 text-nowrap">{title?title?prop}:</div>
 				<div style="min-width:30px" class="text-truncate">{:fval}</div>
 			</div>
 	{fval:}{~split(:value,((....)[value]|(....).more[value]),:nick,nick)::filter-vals}
