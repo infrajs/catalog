@@ -41,7 +41,7 @@
 			{:CARDS-props}
 		</div>
 	</div>
-	<div class="px-3 pb-3">
+	<div class="px-3 pb-3 pt-2">
 		{:CARDS-basket}
 	</div>
 {CARDS-image:}
@@ -114,12 +114,12 @@
 			</div>
 	{fval:}{~split(:value,((....)[value]|(....).more[value]),:nick,nick)::filter-vals}
 		{filter-vals:}{~key?:comma}<a rel="nofollow" href="{:link-filter}">{value}</a>
-		{link-filter:}/{Controller.names.catalog.crumb}/{:cat.mark.add}more.{nick}::.{Path.encode(value)}=1
 	{pval:}{(....)[value]|(....).more[value]}
 	{pnick:}{(....)[nick]|(....).more[nick]}
 	{ampval:}&{.}
 	{sl:}/
 	{slval:}/{.}
+	{link-filter:}/{Controller.names.catalog.crumb}/{:cat.mark.add}more.{nick}::.{Path.encode(value)}=1
 	{link-pos:}/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{item_nick:slval}{catkit?:sl}{catkit:ampval}{:cat.mark.set}
 	{link-val:}/{Controller.names.catalog.crumb}/{.}{:cat.mark.set}
 	
@@ -139,9 +139,9 @@
 		</div>
 	{mobimghide:}d-none d-sm-block 
 {ROWS-image:}
-		{Наличие?:nalichie}
+		<div style="position: absolute">{Наличие?:nalichie}</div>
 		<a href="{:link-pos}">
-			<img class="img-fluid" src="/-imager/?m=1&amp;w=525&amp;src={images.0}" />
+			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=525&amp;src={images.0}" />
 		</a>
 {ROWS-data:}
 	<div class="bg-secondary text-white px-2 py-1 mb-2">
