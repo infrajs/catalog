@@ -2,7 +2,7 @@
 	"pub":["showparentgroup", "dir", "title", "tplsearch","showfilterscls", "tplgroups", "nds","searchingroups","pageset","showmore","filtermemory"],
 	"dependencies":["path","event","nouislider"],
 	"css":"style.css",
-	"js":["Catalog.js","infra.js"],
+	"js":["infra.js"],
 	"pageset":false,
 	"showparentgroup":false,
 	"showfilterscls":"alert-success",
