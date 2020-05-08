@@ -8,7 +8,11 @@
 	{:prop-select}
 {prop-select:}
 	<select 
-	onchange="Crumb.go('/catalog/{:get}'+this.value+'=1')" 
+	onchange="
+		let val = this.value; 
+		import('/vendor/infrajs/controller/src/Crumb.js').then(obj => 
+			obj.Crumb.go('/catalog/{:get}'+val+'=1')
+		)" 
 	class="mb-3 custom-select form-control shadow-over">
 		<option value="" style="font-weight: bold">{title?title?prop}</option>
 		{values::fopt}
@@ -59,7 +63,7 @@
 						src += prop_nick+'::.'+i+'=1';
 					}
 					Session.set('cat-chain.{key}');
-					Crumb.go(src);
+					import('/vendor/infrajs/controller/src/Crumb.js').then(obj => obj.Crumb.go(src))
 
 				} else {
 					Session.set('cat-chain.{key}', value); 
@@ -118,7 +122,7 @@
 						src += prop_nick+'::.'+i+'=1';
 					}
 					Session.set('cat-chain.{key}');
-					Crumb.go(src);
+					import('/vendor/infrajs/controller/src/Crumb.js').then(obj => obj.Crumb.go(src))
 
 				} else {
 					Session.set('cat-chain.{key}', value); 
@@ -148,7 +152,7 @@
 			{values::fbtn}
 		</div>
 	</div>
-	{fbtn:}<label onclick="Crumb.go('/catalog/{:getv}')" class="btn btn-secondary {:is?:active}">
+	{fbtn:}<label onclick="import('/vendor/infrajs/controller/src/Crumb.js').then(obj => obj.Crumb.go('/catalog/{:getv}'))" class="btn btn-secondary {:is?:active}">
 			<input type="radio" name="options" id="option1" autocomplete="off" {:is?:checked}> {value}
 		</label>
 {prop-image:}

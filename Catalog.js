@@ -1,3 +1,4 @@
+import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
 let Catalog = {
 	choiсe: function (producer, article, id, divcatitem, m) {
 		var ans = Load.loadJSON('-showcase/api/pos/' + producer + '/' + article + '/' + id + '?m=' + m);
