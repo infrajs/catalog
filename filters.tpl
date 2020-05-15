@@ -185,41 +185,40 @@
 				</div>
 				<div id="costslider{prop_nick}"></div>
 			</div>
-			<script>
-				domready(async () => {
-					let iscontext = () => {
-						if (!window.Controller) return true
-						let layer = Controller.ids[{id}]
-						if (!layer) return true
-						return layer.counter == {counter}
-					}
-					var m = "{data.m}";
-					var path = "more.{prop_nick}";
-					var min = {min|:0};
-					var max = {max|:100};
-					var origminval = {minval|:0};
-					var origmaxval = {maxval|:100};
-					var step = {step|:10};
-					var go = function (minval, maxval){
-						Ascroll.once = false;
-						if (min >= minval && max <= maxval) {
-							Crumb.go('/catalog?m=' + m + ':'+path+'.minmax');
-						}else if (minval == maxval) {
-							var minv = minval - step;
-							var maxv = Number(maxval) + step;
-							if (minv < min) minv = min;
-							if (maxv > max) maxv = max;
-							Crumb.go('/catalog?m=' + m + ':' + path + '.minmax=' + minv + '/' + maxv);
-						} else {
-							Crumb.go('/catalog?m=' + m + ':' + path + '.minmax='+minval+'/'+maxval);
-						}
-					}
-					var slider = document.getElementById('costslider{prop_nick}');
+			<script type="module">
+				import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+				import { DOM } from '/vendor/akiyatkin/load/DOM.js'
+				import { Ascroll } from '/vendor/infrajs/ascroll/Ascroll.js'
+				import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
 
+				let div = document.getElementById('{div}')
+				let context = div.firstElementChild
+				var m = "{data.m}"
+				var path = "more.{prop_nick}"
+				var min = {min|:0}
+				var max = {max|:100}
+				var origminval = {minval|:0}
+				var origmaxval = {maxval|:100}
+				var step = {step|:10}
+				var go = function (minval, maxval){
+					Ascroll.once = false
+					if (min >= minval && max <= maxval) {
+						Crumb.go('/catalog?m=' + m + ':'+path+'.minmax')
+					}else if (minval == maxval) {
+						var minv = minval - step
+						var maxv = Number(maxval) + step
+						if (minv < min) minv = min
+						if (maxv > max) maxv = max
+						Crumb.go('/catalog?m=' + m + ':' + path + '.minmax=' + minv + '/' + maxv)
+					} else {
+						Crumb.go('/catalog?m=' + m + ':' + path + '.minmax='+minval+'/'+maxval)
+					}
+				}
+				var slider = document.getElementById('costslider{prop_nick}')
 
-					let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
-					await CDN.load('nouislider')
-					if (!iscontext()) return
+				CDN.load('nouislider').then(() => {
+					if (!context.parentElement) return
+
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
 						connect: true,	
@@ -229,34 +228,33 @@
 							'min': min,
 							'max': max
 						}
-					});
+					})
 
-					var inpmin = document.getElementById('inpmin{prop_nick}');
-					var inpmax = document.getElementById('inpmax{prop_nick}');
+					var inpmin = document.getElementById('inpmin{prop_nick}')
+					var inpmax = document.getElementById('inpmax{prop_nick}')
 
 					slider.noUiSlider.on('update', function( values, handle ) {
-						var value = values[handle];
+						var value = values[handle]
 						if ( handle ) { //max
-							inpmax.value = Math.round(value);
+							inpmax.value = Math.round(value)
 						} else { //min
-							inpmin.value = Math.round(value);
+							inpmin.value = Math.round(value)
 						}
 						
-					});
+					})
 					slider.noUiSlider.on('set', function (values) {
-						var min = Math.round(values[0]);
-						var max = Math.round(values[1]);
-						go(min, max);
-					});
+						var min = Math.round(values[0])
+						var max = Math.round(values[1])
+						go(min, max)
+					})
 
 					inpmax.addEventListener('change', function(){
-						slider.noUiSlider.set([null, this.value]);
-					});
+						slider.noUiSlider.set([null, this.value])
+					})
 					inpmin.addEventListener('change', function(){
-						slider.noUiSlider.set([this.value, null]);
-					});
-					
-				});	
+						slider.noUiSlider.set([this.value, null])
+					})
+				})					
 			</script>
 		</div>
 		{costlabel:}Цена,&nbsp;руб.
@@ -298,8 +296,13 @@
 				</div>
 				<div id="propslide{prop_nick}"></div>
 			</div>
-			<script>
-				domready(async () => {
+			<script type="module">
+				import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+				import { DOM } from '/vendor/akiyatkin/load/DOM.js'
+				import { Ascroll } from '/vendor/infrajs/ascroll/Ascroll.js'
+				import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
+
+				DOM.wait('load').then(async () => {
 					var m = "{data.m}";
 					var path = "more.{prop_nick}";
 					var min = {min|:0};

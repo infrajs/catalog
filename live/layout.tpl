@@ -13,9 +13,11 @@
 	{img:}<img style="clear:both; margin-left:5px; float:right; position:relative" src="/-imager/?src={images.0}&h=70&w=70&crop=1">
 
 {JSform:}
-	<script async type="module">
+	<script type="module">
+		import { DOM } from '/vendor/akiyatkin/load/DOM.js'
+		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+		import { Catalog } from '/vendor/infrajs/catalog/Catalog.js'
 		(async () => {
-			let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default;
 			await CDN.load('jquery')
 	
 			let div = $(document.getElementById('{div}'));
@@ -23,8 +25,7 @@
 				evt.preventDefault();
 				var q = div.find('input').val();
 
-				let Wait = (await import('/vendor/akiyatkin/load/Wait.js')).default
-				await Wait();
+				await DOM.wait('load')
 				Catalog.search(q);
 			});
 		})();
@@ -49,20 +50,18 @@
 			.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
 		</style>
 		{:JSform}
-		<script async type="module">
-			let iscontext = () => {
-				if (!window.Controller) return true;
-				let layer = Controller.ids[{id}];
-				if (!layer) return true;
-				return layer.counter == {counter};
-			}
+		<script type="module">
+			import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+			import { Catalog } from '/vendor/infrajs/catalog/Catalog.js'
+			import { Template } from '/vendor/infrajs/template/Template.js'
+			import { Controller } from '/vendor/infrajs/controller/src/Controller.js'
+			import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
 
-			(async () => {
-				
-				let Wait = (await import('/vendor/akiyatkin/load/Wait.js')).default
-				let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
-				await CDN.load('jquery.autocomplete');
-				
+			let div = document.getElementById('{div}')
+			let context = div.firstElementChild
+
+			CDN.load('jquery.autocomplete').then(() => {
+
 				let div = $(document.getElementById('{div}'));
 				div.find('form').submit( function (evt) {
 					var q = div.find('input').val();
@@ -74,7 +73,7 @@
 				div.find('.submit').click(() => div.find('form').submit())
 				
 
-				if (!iscontext()) return;
+				if(!context.parentElement) return
 
 				div.find('input').autocomplete({
 					triggerSelectOnValidInput:true,
@@ -123,6 +122,6 @@
 					$(this).autocomplete('enable');
 				});
 
-			})();
+			});
 		</script>
 	</div>
