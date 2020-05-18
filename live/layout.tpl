@@ -1,5 +1,5 @@
 {root:}
-	<form>
+	<form data-autosave="{autosavename}">
 		<input name="search" type="search" class="form-control" placeholder="Поиск по каталогу">
 		{:JS}
 	</form>
@@ -11,25 +11,6 @@
 	{br:} <br>{.}
 	{cost:} <b>{~cost(Цена)}{:extend.unit}</b>
 	{img:}<img style="clear:both; margin-left:5px; float:right; position:relative" src="/-imager/?src={images.0}&h=70&w=70&crop=1">
-
-{JSform:}
-	<script type="module">
-		import { DOM } from '/vendor/akiyatkin/load/DOM.js'
-		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
-		import { Catalog } from '/vendor/infrajs/catalog/Catalog.js'
-		(async () => {
-			await CDN.load('jquery')
-	
-			let div = $(document.getElementById('{div}'));
-			div.find('form').submit( async (evt) => {
-				evt.preventDefault();
-				var q = div.find('input').val();
-
-				await DOM.wait('load')
-				Catalog.search(q);
-			});
-		})();
-	</script>
 {JS:}
 	<div>
 		<style>
@@ -49,33 +30,40 @@
 			.autocomplete-group { padding: 2px 5px; }
 			.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
 		</style>
-		{:JSform}
 		<script type="module">
 			import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+			import { Autosave } from '/vendor/akiyatkin/form/Autosave.js'
 			import { Catalog } from '/vendor/infrajs/catalog/Catalog.js'
 			import { Template } from '/vendor/infrajs/template/Template.js'
 			import { Controller } from '/vendor/infrajs/controller/src/Controller.js'
 			import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
 
-			let div = document.getElementById('{div}')
-			let context = div.firstElementChild
+			
+			let form = document.getElementById('{div}').getElementsByTagName('form')[0]
+			let cls = cls => form.getElementsByClassName(cls)
+			let tag = tag => form.getElementsByTagName(tag)
+			
+			for (let btn of cls('submit')) {
+				btn.addEventListener('click', ()=>{
+					let event = new Event('submit');
+					form.dispatchEvent(event);
+				})
+			}
 
-			CDN.load('jquery.autocomplete').then(() => {
+			form.addEventListener('submit', (event) => {
+				event.preventDefault()
+				var query = tag('input')[0].value
+				Catalog.search(query);
+			})
 
-				let div = $(document.getElementById('{div}'));
-				div.find('form').submit( function (evt) {
-					var q = div.find('input').val();
-					Catalog.search(q);
-					evt.preventDefault();
-					return false;
-				});
+			Autosave.init(form, form.dataset.autosave)
 
-				div.find('.submit').click(() => div.find('form').submit())
+
+			CDN.on('load','jquery.autocomplete').then(() => {
 				
+				if (!form.closest('html')) return;
 
-				if(!context.parentElement) return
-
-				div.find('input').autocomplete({
+				$(tag('input')).autocomplete({
 					triggerSelectOnValidInput:true,
 					showNoSuggestionNotice:true,
 					noSuggestionNotice:'<div class="p-2">По запросу ничего не найдено. Попробуйте изменить запрос или поискать по <a onclick="$(\'#{div}\').find(\'input\').autocomplete(\'hide\'); Crumb.go(\'/catalog\'); $(\'#{div}\').find(\'input\').blur(); return false" href="/catalog">группам</a>.</div>',
@@ -87,7 +75,7 @@
 						return;
 					},
 					transformResult: function (ans) {
-						var query = div.find('input').val();
+						var query = form.getElementsByTagName('input')[0].value
 						return {
 							suggestions: $.map(ans.list, function (pos) {
 								return { 
@@ -115,7 +103,7 @@
 				    	} else {
 				    		$('.autocomplete-suggestions').append('<div class="msgready" style="margin:10px 5px 5px 5px;" onclick="$(\'#{div}\').find(\'input\').autocomplete(\'hide\'); Crumb.go(\'/catalog/'+q+'\'); "><a onclick="return false" href="/catalog" class="float-right"><b>Показать всё</b></a></div>');
 				    	}
-				    	Controller.check();
+				    	//Controller.check();
 				    	
 				    }
 				}).autocomplete('disable').click( function (){

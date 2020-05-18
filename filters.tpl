@@ -216,7 +216,7 @@
 				}
 				var slider = document.getElementById('costslider{prop_nick}')
 
-				CDN.load('nouislider').then(() => {
+				CDN.on('load','nouislider').then(() => {
 					if (!context.parentElement) return
 
 					noUiSlider.create(slider, {
@@ -325,8 +325,7 @@
 						}
 					}
 					var slider = document.getElementById('propslide{prop_nick}');
-					let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default; 
-					await CDN.load('nouislider')
+					await CDN.on('load','nouislider')
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
 						connect: true,	

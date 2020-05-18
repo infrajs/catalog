@@ -48,9 +48,8 @@
 		</div>
 	</div>
 	<script type="module">
-		(async () => {
-			let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
-			await CDN.load('magnific-popup')
+		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+		CDN.on('load','magnific-popup').then(()=> {
 			let div = document.getElementById('{div}')
 			$(div).find('a.gallery').magnificPopup({
 				type: 'image',
@@ -58,7 +57,7 @@
 					enabled:true
 				}
 			})
-		})()
+		})
 	</script>
 	
 	{image:}
