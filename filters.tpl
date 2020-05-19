@@ -298,11 +298,10 @@
 			</div>
 			<script type="module">
 				import { CDN } from '/vendor/akiyatkin/load/CDN.js'
-				import { DOM } from '/vendor/akiyatkin/load/DOM.js'
 				import { Ascroll } from '/vendor/infrajs/ascroll/Ascroll.js'
 				import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
 
-				DOM.wait('load').then(async () => {
+				CDN.on('load','nouislider').then(async () => {
 					var m = "{data.m}";
 					var path = "more.{prop_nick}";
 					var min = {min|:0};
@@ -325,7 +324,6 @@
 						}
 					}
 					var slider = document.getElementById('propslide{prop_nick}');
-					await CDN.on('load','nouislider')
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
 						connect: true,	
