@@ -34,9 +34,8 @@
 			import { CDN } from '/vendor/akiyatkin/load/CDN.js'
 			import { Autosave } from '/vendor/akiyatkin/form/Autosave.js'
 			import { Catalog } from '/vendor/infrajs/catalog/Catalog.js'
-			import { Template } from '/vendor/infrajs/template/Template.js'
-			import { Controller } from '/vendor/infrajs/controller/src/Controller.js'
 			import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
+			let Template
 
 			
 			let form = document.getElementById('{div}').getElementsByTagName('form')[0]
@@ -70,6 +69,9 @@
 					serviceUrl: function (q) {
 						var query = encodeURIComponent(q);
 						return '/-catalog/live/' + query;
+					},
+					onSearchStart: async () => {
+						Template = (await import('/vendor/infrajs/template/Template.js')).Template
 					},
 					onSelect: function (suggestion) {
 						return;

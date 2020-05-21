@@ -48,18 +48,18 @@
 			<script type="module">
 				import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
 				import { Session } from '/vendor/infrajs/session/Session.js'
-				import { Controller } from '/vendor/infrajs/controller/src/Controller.js'
+				import { Seq } from '/vendor/infrajs/sequence/Seq.js'
+				import { Layer } from '/vendor/infrajs/controller/src/Layer.js'
 				let cls = (cls, div = document.getElementById('{div}')) => div.getElementsByClassName(cls)[0]
-				cls('chain{key}').addEventListener('change', function () {
+				cls('chain{key}').addEventListener('change', async function () {
 					var value = this.value;
-					var layer = Controller.ids['{id}'];
-					var root = Sequence.right('{~dataroot()}');
+					var layer = await Layer.get({id});
+					var root = Seq.right('{~dataroot()}');
 					var prop_nick = root[2];
 					var key = '{key}';
-					var data = Load.loadJSON(layer.json);
+					var data = await Load.on('json', layer.json);
 					var param = data.list[prop_nick];
-					var option = Sequence.get(Sequence.get({ data: data }, root),['childs',value]);
-					
+					var option = Seq.getr(Seq.getr({ data: data }, root),['childs',value]);
 					var count = 0;
 					if (option && option.childs) {
 						for (var i in option.childs) count++;
@@ -86,7 +86,7 @@
 					} else {
 						Session.set('cat-chain.{key}', value); 
 						layer.parsed='{counter}'; 
-						Controller.check();
+						DOM.emit('check')
 					}
 				})
 			</script>
