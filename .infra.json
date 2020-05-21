@@ -3,7 +3,6 @@
 	"dependencies":["path","event","nouislider"],
 	"css":"style.css",
 	"js":["infra.js"],
-	"pageset":false,
 	"showparentgroup":false,
 	"showfilterscls":"alert-success",
 	"showmore":true,

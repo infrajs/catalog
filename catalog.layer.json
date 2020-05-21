@@ -1,5 +1,4 @@
 {
-	"domready":true,
 	"tpl":"-catalog/search.tpl",
 	"nocache":true,
 	"jsontpl":"-showcase/api/search?val=&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",

@@ -4,16 +4,21 @@
 		<div class="mb-3">{data.list::showmf}</div>
 	{showmf:}
 		{:{tplfilter}?:{tplfilter}?:prop-default}
+		<script type="module">
+			import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
+			let div = document.getElementById('{div}')
+			let cls = cls => div.getElementsByClassName(cls)
+			for (let s of cls('propselect')) {
+				s.addEventListener('change', async () => {
+					let val = s.value; 
+					Crumb.go('/catalog/{:get}'+val+'=1')
+				})
+			}
+		</script>
 {prop-default:}
 	{:prop-select}
 {prop-select:}
-	<select 
-	onchange="
-		let val = this.value; 
-		import('/vendor/infrajs/controller/src/Crumb.js').then(obj => 
-			obj.Crumb.go('/catalog/{:get}'+val+'=1')
-		)" 
-	class="mb-3 custom-select form-control shadow-over">
+	<select class="propselect mb-3 custom-select form-control shadow-over">
 		<option value="" style="font-weight: bold">{title?title?prop}</option>
 		{values::fopt}
 	</select>
@@ -85,7 +90,7 @@
 					}
 				})
 			</script>
-			{Session.get(:cat-chain.{key})?childs[Session.get(:cat-chain.{key})]:prop-select-chain}
+			{Session.get(:cat-chain.{key})?childs[Session.get(f-chain.{key})]:prop-select-chain}
 			
 			{foptkey:}<option {:isch?:selected} value="{nick}">{value}</option>
 			{isch:}{Session.get(:cat-chain.{...key})=nick?:yes}
@@ -102,7 +107,7 @@
 			{values::fbtn}
 		</div>
 	</div>
-	{fbtn:}<label onclick="import('/vendor/infrajs/controller/src/Crumb.js').then(obj => obj.Crumb.go('/catalog/{:getv}'))" class="btn btn-secondary {:is?:active}">
+	{fbtn:}<label data-crumb="/catalog/{:getv}" class="btn btn-secondary {:is?:active}">
 			<input type="radio" name="options" id="option1" autocomplete="off" {:is?:checked}> {value}
 		</label>
 {prop-image:}
@@ -113,18 +118,21 @@
 	<div style="margin-bottom:10px;">
 		<b>{prop}</b>{help:help}: {multi?values::varowmulti?values::varow}
 	</div>
-	<script>
-		domready(() => {
-			$('[data-toggle="tooltip"]').tooltip();
-		});
+	<script type="module">
+		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+		CDN.load('jquery', () => {
+			$('[data-toggle="tooltip"]').tooltip();	
+		})
 	</script>
-	{help:}&nbsp;<i style="cursor: pointer; color:gray" data-toggle="tooltip" title="{.}" data-html="true" data-trigger="click" class="far fa-question-circle"></i>
+	{help:}&nbsp;<i style="cursor: pointer; color:gray" 
+		data-toggle="tooltip" title="{.}" data-html="true" 
+		data-trigger="click" class="far fa-question-circle"></i>
 	{varowmulti:}<span 
-	onclick="Crumb.go('/catalog/{:getvmulti}')" 
-	class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
+		data-crumb="/catalog/{:getvmulti}" 
+		class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
 	{varow:}<span 
-	onclick="Crumb.go('/catalog/{:getv}')" 
-	class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
+		data-crumb="/catalog/{:getv}" 
+		class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
 	{comma:}, 
 	{font-weight-bold:}font-weight-bold border-0
 {prop-a:}
@@ -132,7 +140,7 @@
 		{values::va}
 	</div>
 	{va:}<span 
-	onclick="Crumb.go('/catalog/{:getv}')" 
+	data-crumb="/catalog/{:getv}" 
 	class="a {:is?:font-weight-bold}">{value}</span><br>
 
 
@@ -169,9 +177,6 @@
 					<div>
 					  	{:costlabel}
 					</div>
-					<div class="d-none" style="font-weight:normal; margin-right:-0.5rem; position: relative;" title="Не указано">
-							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
-					</div>
 				</div>
 			</div>
 			<div class="costslide mt-1">
@@ -191,8 +196,6 @@
 				import { Ascroll } from '/vendor/infrajs/ascroll/Ascroll.js'
 				import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
 
-				let div = document.getElementById('{div}')
-				let context = div.firstElementChild
 				var m = "{data.m}"
 				var path = "more.{prop_nick}"
 				var min = {min|:0}
@@ -217,8 +220,7 @@
 				var slider = document.getElementById('costslider{prop_nick}')
 
 				CDN.on('load','nouislider').then(() => {
-					if (!context.parentElement) return
-
+					if (!slider.closest('body')) return
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
 						connect: true,	
@@ -234,6 +236,7 @@
 					var inpmax = document.getElementById('inpmax{prop_nick}')
 
 					slider.noUiSlider.on('update', function( values, handle ) {
+						if(!slider.closest('body')) return
 						var value = values[handle]
 						if ( handle ) { //max
 							inpmax.value = Math.round(value)
@@ -259,15 +262,6 @@
 		</div>
 		{costlabel:}Цена,&nbsp;руб.
 		{costlabelno:}
-		{cat::}-catalog/cat.tpl
-		{box:}
-			<!-- id add label checked-->
-			<div style="cursor:pointer" class="custom-control custom-checkbox">
-				<input onchange="Ascroll.once = false; Crumb.go('/catalog{:cat.mark.add}{add}{checked??:one}')" {checked?:checked} type="checkbox" class="custom-control-input" id="box{id}">
-				<label class="custom-control-label" for="box{id}">{label}</label>
-			</div>
-		<!--<input style="cursor:pointer" onchange="Ascroll.once = false; Crumb.go('/catalog{:cat.mark.add}{add}')" {checked?:checked} type="checkbox">-->
-
 	{prop-slider:}
 		<div class="mb-3">
 			<style scoped>
@@ -279,9 +273,6 @@
 				<div class="d-flex justify-content-between" style="font-weight:bold;">
 					<div>
 					  	{prop}
-					</div>
-					<div class="d-none" style="font-weight:normal; margin-right:-0.5rem" title="Не указано">
-							{~obj(:id,:selno,:add,:more.{prop_nick}.no,:label,:costlabelno,:checked,data.md.more[prop_nick]no):box}
 					</div>
 				</div>
 			</div>
@@ -300,30 +291,31 @@
 				import { CDN } from '/vendor/akiyatkin/load/CDN.js'
 				import { Ascroll } from '/vendor/infrajs/ascroll/Ascroll.js'
 				import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
-
-				CDN.on('load','nouislider').then(async () => {
-					var m = "{data.m}";
-					var path = "more.{prop_nick}";
-					var min = {min|:0};
-					var max = {max|:100};
-					var origminval = {minval|:0};
-					var origmaxval = {maxval|:100};
-					var step = {step|:10};
-					var go = function (minval, maxval){
-						Ascroll.once = false;
-						if (min >= minval && max <= maxval) {
-							Crumb.go('/catalog?m=' + m + ':'+path+'.minmax');
-						}else if (minval == maxval) {
-							var minv = minval - step;
-							var maxv = Number(maxval) + step;
-							if (minv < min) minv = min;
-							if (maxv > max) maxv = max;
-							Crumb.go('/catalog?m=' + m + ':' + path + '.minmax=' + minv + '/' + maxv);
-						} else {
-							Crumb.go('/catalog?m=' + m + ':' + path + '.minmax='+minval+'/'+maxval);
-						}
+				var m = "{data.m}";
+				var path = "more.{prop_nick}";
+				var min = {min|:0};
+				var max = {max|:100};
+				var origminval = {minval|:0};
+				var origmaxval = {maxval|:100};
+				var step = {step|:10};
+				var go = function (minval, maxval){
+					Ascroll.once = false;
+					if (min >= minval && max <= maxval) {
+						Crumb.go('/catalog?m=' + m + ':'+path+'.minmax');
+					}else if (minval == maxval) {
+						var minv = minval - step;
+						var maxv = Number(maxval) + step;
+						if (minv < min) minv = min;
+						if (maxv > max) maxv = max;
+						Crumb.go('/catalog?m=' + m + ':' + path + '.minmax=' + minv + '/' + maxv);
+					} else {
+						Crumb.go('/catalog?m=' + m + ':' + path + '.minmax='+minval+'/'+maxval);
 					}
-					var slider = document.getElementById('propslide{prop_nick}');
+				}
+				var slider = document.getElementById('propslide{prop_nick}');
+				CDN.fire('load','nouislider').then(async () => {
+					if (!slider.closest('body')) return
+					
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
 						connect: true,	
@@ -339,6 +331,7 @@
 					var inpmax = document.getElementById('inpmax{prop_nick}');
 
 					slider.noUiSlider.on('update', function( values, handle ) {
+						if (!slider.closest('body')) return
 						var value = values[handle];
 						if ( handle ) { //max
 							inpmax.value = Math.round(value);
@@ -364,35 +357,6 @@
 			</script>
 		</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {producers:}
 	<h3>Производители</h3>
 	<ul>
@@ -405,56 +369,4 @@
 		<li><a data-ascroll="false"{data.fd.producer[~key]?:selprod} href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer.{~key}=1">{~key} - {.}</a></li>
 	{selprod:} style="font-weight:bold"
 {cat::}-catalog/cat.tpl
-{filters:}
-<div class="catfilters">
-	<style scoped>
-		.catfilters .checked {
-			font-weight:bold;
-		}
-		.catfilters small {
-			color:#aaa;
-			font-size:80%;
-		}
-		.catfilters label {
-			font-weight:normal;
-		}
-		.catfilters .disabled {
-			color:#999;
-		}
-		
-		
-	</style>
-	{~length(data.blocks)?:filtersbody}
-</div>
-	{filtersbody:}
-		<div style="margin-top:20px; font-size:38px; opacity: 0.2; text-transform: uppercase; font-weight: bold;">Фильтры</div>
-		<div class="space">
-			{data.blocks::layout}
-		</div>
-		<div class="space">
-			Найдено <a class="a" rel="nofollow" data-anchor="h1" href="/catalog{:cat.mark.set}">{data.search} {~words(data.search,:pos1,:pos2,:pos5)}</a>
-		</div>
-		{pos1:}позиция
-		{pos2:}позиции
-		{pos5:}позиций
-{layout:}
-	{:layout-{layout}}
-{layout-default:}
-	<div style="margin-top:5px; border-bottom:1px solid #ddd">
-		<div>
-			<label style="font-weight:bold;">
-			  {data.count!count?:box}
-			  {title}&nbsp;<small>{filter}</small>
-			</label>
-		</div>
-		{row::option}
-	</div>
-	{option:}
-		<div class="{filter??:disabled}">
-			<label style="cursor:pointer">
-			  {:box} {title}&nbsp;<small>{filter}</small>
-			</label>
-		</div>
 {checked:}checked
-{disabled:}disabled
-{*box:}<input style="cursor:pointer" onchange="Ascroll.once = false; Crumb.go('/catalog{:cat.mark.add}{add}')" {checked?:checked} type="checkbox">

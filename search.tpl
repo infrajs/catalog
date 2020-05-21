@@ -254,7 +254,6 @@
 {model::}-catalog/model.tpl
 {cat_showlist:}
 	{:pages}
-	{~conf.catalog.pageset?:pageset}
 	{group.showcase.tplsearch?list:model.{group.showcase.tplsearch}-list?list:model.ROWS-list}
 	{:pages}
 
@@ -327,35 +326,6 @@
 	<ul class="pagination">
 		{data.numbers::pagenum}
 	</ul>
-{pageset:}
-	
-
-	<div rel="nofollow" class="float-right a mr-1 mb-4" style="z-index:1; position:relative; cursor:pointer;" onclick="Session.set('catalog.cog', !$('.settings:visible').length); $('.settings').slideToggle('fast');">Сортировка</div>
-
-	<div class="settings alert alert-info" style="display:none">
-		Сортировать <a rel="nofollow" style="font-weight:{data.md.sort??:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort'>по умолчанию</a>,
-			<a rel="nofollow" style="font-weight:{data.md.sort=:name?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:name|:name}'>по наименованию</a>, 
-			<a rel="nofollow" style="font-weight:{data.md.sort=:art?:bold}"data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:art|:art}'>по артикулу</a>, 
-			<a rel="nofollow" style="font-weight:{data.md.sort=:cost?:bold}"data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:cost|:cost}'>по цене</a>, 
-			<a rel="nofollow" style="font-weight:{data.md.sort=:change?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}sort={data.md.sort=:change|:change}'>по дате изменений</a><br>
-		Показывать по
-		<select onchange="ascroll.once='.pagination'; Crumb.go('/{Controller.names.catalog.crumb}{:cat.mark.add}count='+$(this).val());">
-			<option {data.md.count=:5?:selected}>5</option>
-			<option {data.md.count=:10?:selected}>10</option>
-			<option {data.md.count=:20?:selected}>20</option>
-			<option {data.md.count=:100?:selected}>100</option>
-		</select> позиций на странице<br>
-		Показать в <a rel="nofollow" style="font-weight:{data.md.reverse?:bold}" data-anchor='.pagination' href='/{Controller.names.catalog.crumb}{:cat.mark.add}reverse={data.md.reverse??:1}'>обратном порядке</a>.
-	</div>
-	<div style="clear:both"></div>
-	<script>
-		domready(function () {
-			Event.one('Controller.onshow', function () {
-				var show = Session.get('catalog.cog');
-				if (show) $('.settings').show();
-			});
-		});
-	</script>
 {pagenum:}
 	<li class="page-item {active?:pageact}{empty?:pagedis}">
 		{empty?:pagenumt?:pagenuma}
