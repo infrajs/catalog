@@ -5,7 +5,7 @@
 	{brcrumb:}
 		{active?:crumblast?:crumb}
 	{crumb:}
-		<li class="breadcrumb-item"><a data-anchor='.breadcrumb' href="{main?:hrefmain?:href}">{title}</a></li>
+		<li class="breadcrumb-item"><a href="{main?:hrefmain?:href}">{title}</a></li>
 	{crumblast:}
 		<li class="breadcrumb-item active">{title}</li>
 	{add:}{:mark.add}{add}
@@ -21,7 +21,7 @@
 		
 	</div>
 	{items:}
-		<a class="badge badge-pills" data-anchor='.breadcrumb' href="/{Controller.names.catalog.crumb}/{~key}{:mark.set}">{title}</a>
+		<a class="badge badge-pills" href="/{Controller.names.catalog.crumb}/{~key}{:mark.set}">{title}</a>
 {idsp:}{item_nick?:sp}{item_nick}{(iscatkit&catkit)?:ampvalsp}
 {sp:} 
 {kit:}{article_nick}{item_num!:odin?:pval}

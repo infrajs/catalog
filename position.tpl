@@ -65,7 +65,7 @@
 	{imagesm:}
 		<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
 			<img title="{data.pos.producer} {data.pos.article}" 
-			src="/-imager/?m=1&w=70&top=1&src={.}" />
+			src="/-imager/?m=1&w=100&top=1&src={.}" />
 		</a>
 	{imagelg:}
 		<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
@@ -78,10 +78,11 @@
 			{logo?:producer}
 		</div>
 		<h1 style="text-align:left">{Наименование}</h1>
-		
-		{:model.css}
-		{images.0?:imagesyes?:imagesno}
-		{:body}
+		<div style="clear:both">
+			{:model.css}
+			{images.0?:imagesyes?:imagesno}
+			{:body}
+		</div>
 	</div>
 		{imagesno:}
 			<div class="row">
@@ -105,7 +106,7 @@
 		</div>
 		{:info}
 		<div class="mb-3">	
-			Перейти к группе <a data-anchor='.breadcrumb' href="{group_nick:model.link-val}">{group}</a><br>
+			Перейти к группе <a href="{group_nick:model.link-val}">{group}</a><br>
 		</div>
 	{props:}
 		<div class="mb-3">

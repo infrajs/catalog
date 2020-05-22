@@ -49,7 +49,7 @@
 		{data.filters::showfilter}
 	</div>
 	{showfilter:}
-		<div class="item" data-anchor='.breadcrumb'>
+		<div class="item">
 			<a rel="nofollow" href="/{Controller.names.catalog.crumb}{:cat.mark.add}{name}">
 				<span style="color:red; font-family:Tahoma; font-weight:bold">&times;</span>
 				{title}:</a> <b>{value}</b>
@@ -97,7 +97,6 @@
 			{groups-def-group:}
 				<div class="col-sm-6 col-md-4 col-lg-6 col-xl-4" style="padding:5px">
 					<a class="d-flex p-1 bg-white rounded" style="align-items:center; height:68px;" 
-						data-anchor='.breadcrumb' 
 						href="{group_nick:model.link-val}">
 						<div style="text-align:center; width:70px">
 							{(img|icon):gimgdef}
@@ -302,7 +301,7 @@
 		</div>
 		{350:}350
 		{producerlogo:}
-			<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="{producer_nick:model.link-val}" class="float-right p-2">
+			<a title="Посмотреть продукцию {producer}" href="{producer_nick:model.link-val}" class="float-right p-2">
 				<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 			</a>
 {posimg:}

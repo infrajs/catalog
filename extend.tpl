@@ -13,7 +13,7 @@
 	{showonecost:}Цена <b class="cost">{~cost(Цена)}{:unit}</b>
 {pos-sign:}
 	<p>
-		Перейти к группе <a data-anchor='.breadcrumb' href="/{crumb.parent.parent}/{group_nick}{:cat.mark.set}">{group}</a><br>
+		Перейти к группе <a href="/{crumb.parent.parent}/{group_nick}{:cat.mark.set}">{group}</a><br>
 	</p>
 	{Скрытый:}Скрытый
 {pos-item-css:}
@@ -73,7 +73,7 @@
 		<div class="col-12 col-sm-8 col-md-9">
 			<a class="title padding" href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{Наименование|:name}</a>
 			{logo?:producerlogo}
-			<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
+			<div class="float-right" style="font-size:90%; margin-left:10px; clear:right"><a href="/{Controller.names.catalog.crumb}/{group_nick}{:cat.mark.set}">{group}</a></div>
 			<div class="padding">
 				<b><a href="/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{:cat.idsl}{:cat.mark.set}">{~conf.showcase.hiddenarticle??:prodart}</a></b>
 				
@@ -105,7 +105,7 @@
 	{comma:}, 
 	{no:}Нет
 	{producerlogo:}
-		<a data-anchor=".breadcrumb" title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer.{producer_nick}=1" class="float-right" style="margin:5px 0 5px 5px">
+		<a title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer.{producer_nick}=1" class="float-right" style="margin:5px 0 5px 5px">
 			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 		</a>
 	{cat::}-catalog/cat.tpl

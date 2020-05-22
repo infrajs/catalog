@@ -2,23 +2,24 @@
 	{~length(data.list)>:0?:showroot}
 	{showroot:}
 		<div class="mb-3">{data.list::showmf}</div>
-	{showmf:}
-		{:{tplfilter}?:{tplfilter}?:prop-default}
+		{:rootjs}
+	{rootjs:}
 		<script type="module">
 			import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
 			let div = document.getElementById('{div}')
 			let cls = cls => div.getElementsByClassName(cls)
-			for (let s of cls('propselect')) {
-				s.addEventListener('change', async () => {
-					let val = s.value; 
-					Crumb.go('/catalog/{:get}'+val+'=1')
+			for (let select of cls('propselect')) {
+				select.addEventListener('change', async () => {
+					Crumb.go('/catalog/' + select.dataset.nick + select.value + '=1')
 				})
 			}
 		</script>
+	{showmf:}
+		{:{tplfilter}?:{tplfilter}?:prop-default}
 {prop-default:}
 	{:prop-select}
 {prop-select:}
-	<select class="propselect mb-3 custom-select form-control shadow-over">
+	<select class="propselect mb-3 custom-select form-control shadow-over" data-nick="{:get}">
 		<option value="" style="font-weight: bold">{title?title?prop}</option>
 		{values::fopt}
 	</select>
@@ -219,7 +220,7 @@
 				}
 				var slider = document.getElementById('costslider{prop_nick}')
 
-				CDN.on('load','nouislider').then(() => {
+				CDN.fire('load','nouislider').then(() => {
 					if (!slider.closest('body')) return
 					noUiSlider.create(slider, {
 						start: [origminval, origmaxval],
@@ -363,7 +364,7 @@
 		{data.list::prodlist}
 	</ul>
 	<div class="d-block d-lg-none">
-		<a data-anchor=".breadcrumb" href="/{Controller.names.catalog.crumb}{:cat.mark.set}">Показать</a>
+		<a href="/{Controller.names.catalog.crumb}{:cat.mark.set}">Показать</a>
 	</div>
 	{prodlist:}
 		<li><a data-ascroll="false"{data.fd.producer[~key]?:selprod} href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer.{~key}=1">{~key} - {.}</a></li>
