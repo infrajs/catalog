@@ -165,7 +165,7 @@
 	{headname:}<th>Наименование</th>
 	{prname:}<td>{Наименование}</td>
 	{iitem:}
-		<tr data-go="/{crumb}{:cat.idsl}{:cat.mark.set}" style="cursor:pointer;" class="crumbgo {...item_nick=item_nick?:table-success}" 
+		<tr data-crumb="/{crumb}{:cat.idsl}{:cat.mark.set}" style="cursor:pointer; border-bottom:none;" class="a {...item_nick=item_nick?:table-success}" 
 			onclick="Ascroll.once = false">
 			{~obj(:more,more,:itm,.,:pos,...,:list,...itemmore).list::imore}
 			{~inArray(:Наименование,...itemrows)?:prname}
