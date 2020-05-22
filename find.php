@@ -23,22 +23,5 @@ $ans['breadcrumbs']=array();
 
 $ans['breadcrumbs'][]=array('href'=>'','title'=>$conf['title']);
 
-
-$menu = [
-	"producers"=>[
-		"title"=>"Производители",
-		"descr"=>"Производители представленные на сайте"
-	],
-	"stat"=>[
-		"title"=>"Статистика",
-		"descr"=>"Статистика поиска по каталогу"
-	],
-	"find"=>[
-		"title"=>"Поиск",
-		"descr"=>"Поиск по каталогу. Поисковая фраза разбивается по словам и будет найдены все товарные позиции которые содержат указанные слова в любом порядке."
-	]
-];
-
-$ans['breadcrumbs'][]=array('active'=>true, 'href'=>'find','title'=>$menu['find']['title']);
-$ans['menu']=$menu;
+$ans['breadcrumbs'][]=array('active'=>true, 'href'=>'find','title'=>'Поиск');
 return Ans::ret($ans);
