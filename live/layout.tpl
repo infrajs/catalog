@@ -105,7 +105,8 @@
 				    	} else {
 				    		$('.autocomplete-suggestions').append('<div class="msgready" style="margin:10px 5px 5px 5px;" onclick="$(\'#{div}\').find(\'input\').autocomplete(\'hide\'); Crumb.go(\'/catalog/'+q+'\'); "><a onclick="return false" href="/catalog" class="float-right"><b>Показать всё</b></a></div>');
 				    	}
-				    	//Controller.check();
+				    	//Чтобы ссылки в результатах поиска были асинхронными
+						DOM.emit('load')
 				    	
 				    }
 				}).autocomplete('disable').click( function (){

@@ -91,7 +91,7 @@
 					}
 				})
 			</script>
-			{Session.get(:cat-chain.{key})?childs[Session.get(f-chain.{key})]:prop-select-chain}
+			{Session.get(:cat-chain.{key})?childs[Session.get(:cat-chain.{key})]:prop-select-chain}
 			
 			{foptkey:}<option {:isch?:selected} value="{nick}">{value}</option>
 			{isch:}{Session.get(:cat-chain.{...key})=nick?:yes}
@@ -121,7 +121,7 @@
 	</div>
 	<script type="module">
 		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
-		CDN.load('jquery', () => {
+		CDN.fire('load','jquery').then(() => {
 			$('[data-toggle="tooltip"]').tooltip();	
 		})
 	</script>
