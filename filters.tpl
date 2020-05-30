@@ -48,17 +48,19 @@
 			</select>
 			<script type="module">
 				import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
-				import { Session } from '/vendor/infrajs/session/Session.js'
 				import { Seq } from '/vendor/infrajs/sequence/Seq.js'
 				import { Layer } from '/vendor/infrajs/controller/src/Layer.js'
+				import { Load } from '/vendor/akiyatkin/load/Load.js'
 				let cls = (cls, div = document.getElementById('{div}')) => div.getElementsByClassName(cls)[0]
 				cls('chain{key}').addEventListener('change', async function () {
 					var value = this.value;
 					var layer = await Layer.get({id});
+					if (!layer.config) layer.config = { }
+					if (!layer.config.catchain) layer.config.catchain = { }
 					var root = Seq.right('{~dataroot()}');
 					var prop_nick = root[2];
 					var key = '{key}';
-					var data = await Load.on('json', layer.json);
+					var data = await Load.fire('json', '{json}');
 					var param = data.list[prop_nick];
 					var option = Seq.getr(Seq.getr({ data: data }, root),['childs',value]);
 					var count = 0;
@@ -81,20 +83,20 @@
 							}
 							src += prop_nick+'::.'+i+'=1';
 						}
-						Session.set('cat-chain.{key}')
+						layer.config.catchain['{key}'] = false
 						Crumb.go(src)
 
 					} else {
-						Session.set('cat-chain.{key}', value); 
-						layer.parsed='{counter}'; 
+						layer.config.catchain['{key}'] = value
+						layer.parsed = value; 
 						DOM.emit('check')
 					}
 				})
 			</script>
-			{Session.get(:cat-chain.{key})?childs[Session.get(:cat-chain.{key})]:prop-select-chain}
+			{config.catchain[key]?childs[config.catchain[key]]:prop-select-chain}
 			
 			{foptkey:}<option {:isch?:selected} value="{nick}">{value}</option>
-			{isch:}{Session.get(:cat-chain.{...key})=nick?:yes}
+			{isch:}{config.catchain[...key]=nick?:yes}
 {prop-buttons2:}
 	<div class="my-3">
 		<div class="btn-group btn-group-toggle" data-toggle="buttons">
