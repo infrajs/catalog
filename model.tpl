@@ -119,9 +119,9 @@
 	{ampval:}&{.}
 	{sl:}/
 	{slval:}/{.}
-	{link-filter:}/{Controller.names.catalog.crumb}/{:cat.mark.add}more.{nick}::.{Path.encode(value)}=1
-	{link-pos:}/{Controller.names.catalog.crumb}/{producer_nick}/{article_nick}{item_nick:slval}{catkit?:sl}{catkit:ampval}{:cat.mark.set}
-	{link-val:}/{Controller.names.catalog.crumb}/{.}{:cat.mark.set}
+	{link-filter:}/catalog/{:cat.mark.add}more.{nick}::.{Path.encode(value)}=1
+	{link-pos:}/catalog/{producer_nick}/{article_nick}{item_nick:slval}{catkit?:sl}{catkit:ampval}{:cat.mark.set}
+	{link-val:}/-catalog/{.}{:cat.mark.set}
 	
 {CARDS-basket:}
 	<div class="float-right">{Цена?:itemcost}</div>
@@ -223,7 +223,7 @@
 	{Наличие?:badgenalichieshow}
 	{strНаличие:}Наличие
 	{badgenalichieshow:}
-		<a href="/{Controller.names.catalog.crumb}/{:cat.mark.add}{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" 
+		<a href="/catalog/{:cat.mark.add}{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" 
 			class="badge {:ncls}">
 			{Наличие}
 		</a>
