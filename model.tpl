@@ -121,7 +121,7 @@
 	{slval:}/{.}
 	{link-filter:}/catalog/{:cat.mark.add}more.{nick}::.{Path.encode(value)}=1
 	{link-pos:}/catalog/{producer_nick}/{article_nick}{item_nick:slval}{catkit?:sl}{catkit:ampval}{:cat.mark.set}
-	{link-val:}/-catalog/{.}{:cat.mark.set}
+	{link-val:}/catalog/{.}{:cat.mark.set}
 	
 {CARDS-basket:}
 	<div class="float-right">{Цена?:itemcost}</div>
