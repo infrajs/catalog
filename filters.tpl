@@ -23,6 +23,7 @@
 		<option value="" style="font-weight: bold">{title?title?prop}</option>
 		{values::fopt}
 	</select>
+
 {prop-chain-card:}
 	<div class="card">
 		<div class="card-header bg-primary text-uppercase font-weight-bold">
@@ -117,9 +118,29 @@
 	<div class="mt-3 text-left">
 		{values::prodimg}
 	</div>
+{prop-select-title:}
+	<div class="mb-3 d-flex align-items-center">
+		<div><b>{prop}:&nbsp;</b></div>
+		<div class="flex-grow-1">
+			<select class="propselect custom-select form-control shadow-over" data-nick="{:get}">
+				<option value="" style="font-weight: bold"></option>
+				{values::fopt}
+			</select>
+		</div>
+	</div>
+{prop-fil:}
+	<div class="mb-3 d-flex align-items-center">
+		<b>{prop}:&nbsp;</b>
+		<div>{values::optfil}</div>
+	</div>
+	{optfil:}
+		<a class="btn mb-1 btn-sm {:is?:stron?:stroff}" 
+		href="{:getv}">{value}</a>
+		{stron:}btn-info
+		{stroff:}btn-outline-secondary
 {prop-row:}
 	<div style="margin-bottom:10px;">
-		<b>{prop}</b>{help:help}: {multi?values::varowmulti?values::varow}
+		<b>{prop}{help:help}:</b> {multi?values::varowmulti?values::varow}
 	</div>
 	<script type="module">
 		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
@@ -163,7 +184,7 @@
 	{selno:}selno{prop_nick}
 	{prop-cost:}
 		<div class="mb-3">
-			<style scoped>
+			<style>
 				.costslide {
 					margin-bottom:10px;
 				}

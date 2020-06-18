@@ -10,7 +10,7 @@
 		<td class="pr-0">{values::opt}</td>
 	</tr>
 	{opt:}
-		<a data-anchor=".table" class="btn mb-1 btn-sm {:is?:stron?:stroff}" 
+		<a class="btn mb-1 btn-sm {:is?:stron?:stroff}" 
 		href="/catalog{:cat.mark.add}more.{...prop_nick}::.{value_nick}={:is??:str1}">{value}</a>
 {is:}{data.md.more[...prop_nick][value_nick]?:yes}
 {str1:}1{*:}:more.{...prop_nick}.no=1
