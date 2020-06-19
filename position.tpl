@@ -187,7 +187,7 @@
 			{files::file}
 		</ul>
 	{file:}
-		<li class="ico" style="background-image:url('/-autoedit/icons/{ext}.png')">
+		<li class="ico" style="background-image:url('/-rubrics/icons/{ext}.png')">
 			<a href="/{path}">{name}</a> {size}&nbsp;Mb
 		</li>
 {text:}
