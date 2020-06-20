@@ -144,7 +144,7 @@
 	</div>
 	<script type="module">
 		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
-		CDN.fire('load','jquery').then(() => {
+		CDN.fire('load','bootstrap').then(() => {
 			$('[data-toggle="tooltip"]').tooltip();	
 		})
 	</script>
