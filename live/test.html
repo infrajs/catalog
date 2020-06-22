@@ -1,0 +1,110 @@
+
+<div class="col-lg-8 col-xl-9 flex-grow-1 w-auto">
+    <style>
+        .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+        .autocomplete-suggestion { 
+            padding: 2px 5px; 
+            /*white-space: nowrap; */
+            /*overflow: hidden; */
+        }
+        .autocomplete-selected { background: #F0F0F0; }
+        .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; cursor:pointer;}
+        .autocomplete-group { padding: 2px 5px; }
+        .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+        
+        @media (max-width: 768px) {
+            .autocomplete-suggestions {
+                width: auto!important;
+                margin-right: 15px;
+            }
+        }
+    </style>
+    <form class="input-group shadow-over">
+        <input style="font-size:16px; padding: .5rem .75rem;" class="form-control" type="text" name="search">
+        <div class="input-group-append">
+            <button style="text-transform: uppercase; font-weight: bold" type="submit" class="btn btn-primary">Поиск</button>
+        </div>
+    </form>
+    <script type="module">
+        import { Catalog } from '/vendor/infrajs/catalog/Catalog.js'
+        let form = document.getElementsByTagName('form')[0]
+        let tag = tag => form.getElementsByTagName(tag)
+        form.addEventListener('submit', event => {
+            event.preventDefault()
+            let query = tag('input')[0].value
+            Catalog.search(query);
+        })
+    </script>
+    <script type="module">
+        import { CDN } from '/vendor/akiyatkin/load/CDN.js'
+        import { DOM } from '/vendor/akiyatkin/load/DOM.js'
+        import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
+        import { Catalog } from '/vendor/infrajs/catalog/Catalog.js'
+        let Template
+    
+        let form = document.getElementsByTagName('form')[0]
+        let cls = cls => form.getElementsByClassName(cls)
+        let tag = tag => form.getElementsByTagName(tag)
+        CDN.fire('load','bootstrap')
+        CDN.fire('load', 'jquery.autocomplete').then(() => {
+            let prodart = false;
+            let div = $(document);
+            let query = '';
+            
+            div.find('input').autocomplete({
+                triggerSelectOnValidInput:false,
+                deferRequestBy:200,
+                minChars:3,
+                showNoSuggestionNotice:true,
+                noSuggestionNotice:'<div class="p-2">По запросу ничего не найдено. Попробуйте изменить запрос или поискать по <a onclick="Crumb.go(\'/catalog\'); $(\'#{div}\').find(\'input\').blur(); return false" href="/catalog">группам</a>.</div>',
+                serviceUrl: function (q) {
+                    query = q;
+                    return '/-cart/rest/search/' + q;
+                },
+                // onSelect: function (suggestion) {
+                // 	return;
+                // },
+                onSearchStart: async () => {
+                    Template = (await import('/vendor/infrajs/template/Template.js')).Template
+                },
+                transformResult: function (ans) {
+                    return {
+                        suggestions: $.map(ans.list, function (pos) {
+                            //var itemrow = Catalog.getItemRowValue(pos);
+                            //if (itemrow) itemrow = ' ' + itemrow;
+                            //var value = pos['Производитель'] + ' ' + pos['Артикул'] + itemrow;
+                            return { 
+                                value: query, 
+                                data: pos 
+                            };
+                        })
+                    };
+                },
+                dataType:"json",
+                formatResult: function (suggestion, currentValue) {
+                    if (!currentValue) return suggestion;
+                    return Template.parse('-catalog/live/layout.tpl', suggestion.data, 'SUGGESTION');
+                },
+                onSearchComplete: function (suggestion) {
+                    if ($('.autocomplete-suggestion').length < 10) return;
+                    $('.autocomplete-suggestions').append('<div class="p-2 submit"><span class="a">Показать всё</span></div>');
+                    //Чтобы ссылки в результатах поиска были асинхронными
+                    let block = document.getElementsByClassName('autocomplete-suggestions')[0]
+                    let all = block.getElementsByClassName('submit')[0]
+                    all.addEventListener('click', () => {
+                        div.find('input').autocomplete('hide')
+                        let event = new Event('submit');
+                        form.dispatchEvent(event);
+                    })
+                    //DOM.emit('load')
+                    //Если сделать тут puff. hand выполняются одновременно и начало выполнения каждого hand было до появления текущего кода
+                    //То есть уже собраны, например, нужные a и где-то там в асинхронности ещё выполняемся. Пропуск будет означать что новые a не обработаются
+                }
+            });
+            // .autocomplete('disable').click( function (){
+            // 	$(this).autocomplete('enable');
+            // });
+        })
+    </script>
+</div>
+
