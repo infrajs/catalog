@@ -99,7 +99,10 @@
 				    	
 				    	$('.autocomplete-suggestions').not(':last()').remove();
 				    	
-				    	if ($('.autocomplete-suggestions').find('.msgready').length) return;
+				    	if ($('.autocomplete-suggestions').find('.msgready').length) {
+							DOM.emit('load')
+							return;
+						}
 				    	if ($('.autocomplete-suggestion').length < 10) {
 				    		$('.autocomplete-suggestions').append('<div class="msgready" style="margin:10px 5px 5px 5px;" onclick="$(\'#{div}\').find(\'input\').autocomplete(\'hide\'); Crumb.go(\'/catalog/'+q+'\');"><a onclick="return false" href="/catalog" class="float-right"><b>Открыть каталог</b></a></div>');
 				    	} else {
