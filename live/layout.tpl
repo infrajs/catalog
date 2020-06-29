@@ -35,7 +35,8 @@
 			import { Autosave } from '/vendor/akiyatkin/form/Autosave.js'
 			import { Catalog } from '/vendor/infrajs/catalog/Catalog.js'
 			import { Crumb } from '/vendor/infrajs/controller/src/Crumb.js'
-			let Template
+			import { Template } from '/vendor/infrajs/template/Template.js'
+			//let Template
 
 			
 			let form = document.getElementById('{div}').getElementsByTagName('form')[0]
@@ -71,7 +72,7 @@
 						return '/-catalog/live/' + query;
 					},
 					onSearchStart: async () => {
-						Template = (await import('/vendor/infrajs/template/Template.js')).Template
+						//Template = (await import('/vendor/infrajs/template/Template.js')).Template
 					},
 					onSelect: function (suggestion) {
 						return;
