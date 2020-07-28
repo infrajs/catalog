@@ -223,7 +223,7 @@
 	{Наличие?:badgenalichieshow}
 	{strНаличие:}Наличие
 	{badgenalichieshow:}
-		<a rel="nofollow" href="/catalog/{:cat.mark.add}{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" 
+		<a rel="nofollow" href="/catalog/{:cat.mark.add}more.{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" 
 			class="badge {:ncls}">
 			{Наличие}
 		</a>
