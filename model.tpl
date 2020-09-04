@@ -20,7 +20,7 @@
 	</style>
 {PRINT-item:}
 	<p>
-		{Наименование} {producer} {article}{item:pr}
+		{model.Наименование} {model.producer} {model.article}{model.item:pr}
 		<br><b>{count}</b> по <b>{~cost(cost)}&nbsp;руб.</b> = <b>{~cost(sum)}&nbsp;руб.</b>
 	</p>
 	{pr:} {.}
