@@ -21,7 +21,7 @@
 {PRINT-item:}
 	<p>
 		{model.Наименование} {model.producer} {model.article}{model.item:pr}
-		<br><b>{count}</b> по <b>{~cost(cost)}&nbsp;руб.</b> = <b>{~cost(sum)}&nbsp;руб.</b>
+		<br><b>{count}</b> по <b>{~cost(cost)}{:unit}</b> = <b>{~cost(sum)}{:unit}</b>
 	</p>
 	{pr:} {.}
 {CARDS-list:}
@@ -215,7 +215,7 @@
 		От&nbsp;<b class="cost">{~cost(min)}</b> 
 		до&nbsp;<b class="cost">{~cost(max)}{:unit}</b>
 
-{unit:}<small>&nbsp;руб.</small>
+{unit:}&nbsp;₽
 {sp:}&nbsp;
 {nalichie:}
 	<div style="position:absolute; left:0px; z-index:1" class="m-3">{:badgenalichie}</div>

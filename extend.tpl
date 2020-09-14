@@ -111,4 +111,4 @@
 	{cat::}-catalog/cat.tpl
 	{strcatalog:}catalog
 	{priceblock:}<div class="alert alert-success cost" style="clear:right; font-size:140%; padding:5px 10px; margin:15px 0;">{~cost(Цена)}{:unit}</div>
-	{unit:}<small>&nbsp;руб.</small>
+	{unit:}&nbsp;руб.
