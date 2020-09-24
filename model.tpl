@@ -140,7 +140,7 @@
 	{mobimghide:}d-none d-sm-block 
 {ROWS-image:}
 		<div style="position: absolute">{Наличие?:nalichie}</div>
-		<a href="{:link-pos}">
+		<a href="{:link-pos}" style="border:none; text-decoration: none">
 			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=525&amp;src={images.0}" />
 		</a>
 {ROWS-data:}
@@ -154,7 +154,7 @@
 {ROWS-basket:}
 	<div class="my-1 float-right">{:cost}</div>
 {ROWS-name:}
-	<a style="color:inherit" href="{:link-pos}">{Наименование|article}</a>
+	<a style="color:inherit; border:none" href="{:link-pos}">{Наименование|article}</a>
 {ROWS-props:}
 	{logo?:producerlogo}
 	<table class="props">
