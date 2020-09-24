@@ -15,6 +15,7 @@
         "infrajs/layer-seojson":"~1",
         "infrajs/layer-config":"~1",
         "akiyatkin/form":"~1",
+        "akiyatkin/showcase":"~1",
         "infrajs/rubrics":"~1"
     },
     "autoload":{
