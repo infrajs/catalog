@@ -4,8 +4,9 @@ import { CDN } from '/vendor/akiyatkin/load/CDN.js'
 
 Event.handler('Controller.onshow', async () => {
 	//На любой элемент вешаем класс gagarin и data-name указываем имя для элемента который надо будет скрыть у которого класс gagarin{name} 	
-	await CDN.on('load','jquery')
+	
 	var ctrls = document.getElementsByClassName('gagarin');
+	if (ctrls.length) await CDN.fire('load','jquery')
 	var hand = function () {
 		var div = this.dataset.div;
 		if (!div) div = $(this).next().get(0);
