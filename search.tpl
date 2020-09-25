@@ -108,6 +108,9 @@
 				</div>
 				{gimgdef:}<img class="img-fluid" src="/-imager/?src={.}&w=130&h=60">
 	{groups-blocks:}
+		<div class="row">
+			<div class="col-md-8 col-lg-8 col-xl-6" id="filgroups"></div>
+		</div>
 		{~length(data.childs)?:showblocks?:nogroups_simple}
 		{showblocks:}
 			<div class="row catgroups mt-4 mb-1">
@@ -197,7 +200,7 @@
 				</div>
 			</div>
 			{showfiltersm:}
-				<div class="mt-5">{:showfilters}</div>
+				<div class="mt-2">{:showfilters}</div>
 		{nogroups_simple:}
 			<div class="catgroups mt-4">
 				<div class="mb-3">
