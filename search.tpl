@@ -1,6 +1,6 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
-	<div class="float-right">{:showcount}</div>
+	<div class="float-right ml-2">{:showcount}</div>
 	<h1>
 		{~conf.catalog.showparentgroup?:showparentgroup}{data.name|data.title}
 	</h1>
