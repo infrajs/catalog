@@ -151,12 +151,14 @@
 	{help:}&nbsp;<i style="cursor: pointer; color:gray" 
 		data-toggle="tooltip" title="{.}" data-html="true" 
 		data-trigger="click" class="far fa-question-circle"></i>
-	{varowmulti:}<span 
-		data-crumb="/catalog/{:getvmulti}" 
-		class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
-	{varow:}<span 
-		data-crumb="/catalog/{:getv}" 
-		class="a {:is?:font-weight-bold}">{value}</span>{~last()|:comma}
+	{varowmulti:}<a 
+		rel="nofollow"
+		href="/catalog/{:getvmulti}" 
+		class="{:is?:font-weight-bold}">{value}</a>{~last()|:comma}
+	{varow:}<a 
+		rel="nofollow"
+		href="/catalog/{:getv}" 
+		class="{:is?:font-weight-bold}">{value}</a>{~last()|:comma}
 	{comma:}, 
 	{font-weight-bold:}font-weight-bold border-0
 {prop-a:}
