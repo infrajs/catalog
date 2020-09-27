@@ -29,11 +29,6 @@
 			"tpl":"-catalog/producers.tpl",
 			"jsontpl":"-showcase/api/producers?lim=0,200&m={~encode(Crumb.get.m)}",
 			"seojsontpl":"-showcase/api/producers/seo?seo={Controller.names.catalog.crumb}"
-		},
-		"stat":{
-			"tpl":"-catalog/stat.tpl",
-			"json":"-catalog/stat.php",
-			"seojsontpl":"-catalog/stat.php?seo={Controller.names.catalog.crumb}"
 		}
 	}
 }
