@@ -3,13 +3,13 @@
 		<input name="search" type="search" class="form-control" placeholder="Поиск по каталогу">
 		{:JS}
 	</form>
-{extend::}-catalog/extend.tpl
+{model::}-catalog/model.tpl
 {SUGGESTION:}
-		<a href="/catalog/{producer_nick}/{article_nick}{:extend.cat.idsl}">{images.0?:img}{Наименование}<br><b>{article}</b></a>
+		<a href="{:model.link-pos}">{images.0?:img}{Наименование}<br><b>{article}</b></a>
 			<br>{Цена?:cost}
 		<hr class="my-2" style="clear:both">
 	{br:} <br>{.}
-	{cost:} <b>{~cost(Цена)}{:extend.unit}</b>
+	{cost:} <b>{~cost(Цена)}{:model.unit}</b>
 	{img:}<img style="clear:both; margin-left:5px; float:right; position:relative" src="/-imager/?src={images.0}&h=70&w=70&crop=1">
 {JS:}
 	<div>
