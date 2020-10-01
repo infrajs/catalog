@@ -224,7 +224,7 @@
 	{strНаличие:}Наличие
 	{badgenalichieshow:}
 		<a rel="nofollow" href="/catalog/{:cat.mark.add}more.{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" 
-			class="badge {:ncls}">
+			class="ml-3 badge {:ncls}">
 			{Наличие}
 		</a>
 	{model-cls-src:}-catalog/model-cls.json
