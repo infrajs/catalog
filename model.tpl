@@ -130,18 +130,25 @@
 	{::ROWS-item}
 {ROWS-item:}
 		<div class="row mb-5">
-			<div class="{images.0??:mobimghide} col-12 col-sm-4 col-md-3">
+			<div class="text-center order-2 mt-3 mt-sm-0 order-sm-1 {images.0??:mobimghide} col-12 col-sm-4 col-md-3">
 				{:ROWS-image}
 			</div>
-			<div class="col-12 col-sm-8 col-md-9">
+			<div class="order-1 order-sm-2 col-12 col-sm-8 col-md-9">
 				{:ROWS-data}
 			</div>
 		</div>
 	{mobimghide:}d-none d-sm-block 
 {ROWS-image:}
 		<div style="position: absolute">{Наличие?:nalichie}</div>
-		<a href="{:link-pos}" style="border:none; text-decoration: none">
-			<img class="img-thumbnail" src="/-imager/?m=1&amp;w=525&amp;src={images.0}" />
+		<a href="{:link-pos}" style="border:none; text-decoration: none; display: block; 
+			background-image: url('/-imager/?m=1&amp;w=525&amp;h=525&amp;src={images.0}');
+			background-repeat: no-repeat;
+			background-position: top center;
+			min-height: 200px;
+			background-size: contain;
+			height:100%;
+			">
+			<img style= src= />
 		</a>
 {ROWS-data:}
 	<div class="bg-secondary text-white px-2 py-1 mb-2">
