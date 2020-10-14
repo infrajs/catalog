@@ -148,7 +148,6 @@
 			background-size: contain;
 			height:100%;
 			">
-			<img style= src= />
 		</a>
 {ROWS-data:}
 	<div class="bg-secondary text-white px-2 py-1 mb-2">
@@ -240,11 +239,11 @@
 	{clsdef:}badge-secondary
 {prodimg:}
 	<a title="Посмотреть продукцию {producer}" href="{producer_nick:link-val}" class="float-right p-2">
-		<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
+		<img loading="lazy" width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 	</a>
 {posimg:}
 	<a href="{:link-pos}">
-		<img class="img-fluid" src="/-imager/?m=1&amp;w=525&amp;h=420&amp;top=1&amp;crop=1&amp;src={images.0}">
+		<img loading="lazy" class="img-fluid" src="/-imager/?m=1&amp;w=525&amp;h=420&amp;top=1&amp;crop=1&amp;src={images.0}">
 	</a>
 	{prodart:}{producer} {article}
 	{cat_more:}{(.&(.!:no))?:more}
@@ -253,5 +252,5 @@
 	{no:}Нет
 	{producerlogo:}
 		<a title="Посмотреть продукцию {producer}" href="{producer_nick:link-val}" class="float-right" style="margin:5px 0 5px 5px">
-			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
+			<img loading="lazy" width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 		</a>
