@@ -92,7 +92,7 @@
 			</div>
 		{div-prop-bold:}
 			<div class="d-flex my-1">
-				<div class="ptitle pr-2">{prop}:</div>
+				<div class="ptitle pr-2">{title?title?prop}:</div>
 				<div title="{:pval}" class="text-truncate"><b>{:pval}</b></div>
 			</div>
 		{div-prop-cost:}
@@ -184,7 +184,7 @@
 		</tr>
 	{tr-prop-bold:}
 		<tr>
-			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
+			<td class="d-flex text-nowrap"><div>{title?title?prop}:</div><div class="line"></div></td>
 			<th>{:pval}</th>
 		</tr>
 	{tr-prop-cost:}
