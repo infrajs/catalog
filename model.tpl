@@ -130,10 +130,10 @@
 	{::ROWS-item}
 {ROWS-item:}
 		<div class="row mb-5">
-			<div class="text-center order-2 mt-3 mt-sm-0 order-sm-1 {images.0??:mobimghide} col-12 col-sm-4 col-md-3">
+			<div class="text-center order-1 mt-3 mt-sm-0 order-sm-1 {images.0??:mobimghide} col-12 col-sm-4 col-md-3">
 				{:ROWS-image}
 			</div>
-			<div class="order-1 order-sm-2 col-12 col-sm-8 col-md-9">
+			<div class="order-2 order-sm-2 col-12 col-sm-8 col-md-9">
 				{:ROWS-data}
 			</div>
 		</div>
