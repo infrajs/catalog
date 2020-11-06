@@ -74,7 +74,7 @@
 			{pos-frow:}<div class="d-flex my-1 flex-wrap"><div class="pr-2">{title?title?prop}:</div><div>{/pos-frow:}</div></div>
 {fromgroup:}
 	{~obj(:strgroup,Load.loadJSON(:grouppath).group,:strmore,.).group.props::divprop}
-	{grouppath:}-showcase/api2/modelgroup?group_id={group_id}
+	{grouppath:}-showcase/api2/group?group_id={group_id}
 	{strmore:}more
 	{strgroup:}group
 {CARDS-props:}
