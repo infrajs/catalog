@@ -72,14 +72,9 @@
 			{pos-prop-filter:}
 				{:pos-frow}{:fval}{:/pos-frow}
 			{pos-frow:}<div class="d-flex my-1 flex-wrap"><div class="pr-2">{title?title?prop}:</div><div>{/pos-frow:}</div></div>
-{fromgroup:}
-	{~obj(:strgroup,Load.loadJSON(:grouppath).group,:strmore,.).group.props::divprop}
-	{grouppath:}-showcase/api2/group?group_id={group_id}
-	{strmore:}more
-	{strgroup:}group
 {CARDS-props:}
 	<div class="props">
-		{showcase.props?showcase.props::divprop?:fromgroup}
+		{showcase.props?showcase.props::divprop}
 	</div>
 	{divprop:}
 		{:pval?:divpropshow}
