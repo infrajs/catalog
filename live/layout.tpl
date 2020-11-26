@@ -70,7 +70,7 @@
 						noSuggestionNotice:'<div class="p-2">По запросу ничего не найдено. Попробуйте изменить запрос или поискать по <a onclick="$(\'#{div}\').find(\'input\').autocomplete(\'hide\'); Crumb.go(\'/catalog\'); $(\'#{div}\').find(\'input\').blur(); return false" href="/catalog">группам</a>.</div>',
 						serviceUrl: function (q) {
 							var query = encodeURIComponent(q);
-							return '/-showcase/api2/live/?search=' + query;
+							return '/-showcase/api2/live/?query=' + query;
 						},
 						onSearchStart: async () => {
 							//Template = (await import('/vendor/infrajs/template/Template.js')).Template

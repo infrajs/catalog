@@ -1,7 +1,7 @@
 {
 	"tpl":"-catalog/position.tpl",
-	"jsontpl":"-showcase/api/pos/{crumb.parent.name}/{crumb.name}/{crumb.child.name|:1}?m={~encode(Crumb.get.m)}",
-	"seojsontpl":"-showcase/api/pos/seo/{crumb.parent.name}/{crumb.name}/{crumb.child.name}?seo=catalog&m={~encode(Crumb.get.m)}",
+	"jsontpl":"-showcase/api2/pos?producer_nick={crumb.parent.name}&article_nick={crumb.name}&item_num={crumb.child.name|:1}&catkit={crumb.child.child.name}",
+	"seojsontpl":"-showcase/api2/posseo?producer_nick={crumb.parent.name}&article_nick={crumb.name}&item_num={crumb.child.name|:1}&catkit={crumb.child.child.name}",
 	"redirecttpl":"{data.pos?:red}{red:}/{crumb.parent.parent}/{data.pos.producer_nick}/{data.pos.article_nick}{data.pos.item_num!:1?data.pos.item_num:s}{s:}/{.}",
 	"showanimatefastreparse":true,
 	"divs":{
@@ -11,7 +11,7 @@
 			"dataroot":"data.pos",
 			"showanimate":false,
 			"tplroot":"CATPOSIMAGES",
-			"jsontpl":"-showcase/api/pos/{crumb.parent.name}/{crumb.name}/{crumb.child?:next?:1}{next:}{crumb.child.name}/{crumb.child.child.name}"
+			"jsontpl":"-showcase/api2/pos?producer_nick={crumb.parent.name}&article_nick={crumb.name}&item_num={crumb.child.name|:1}&catkit={crumb.child.child.name}"
 		}
 	}
 }

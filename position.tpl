@@ -32,7 +32,11 @@
 		}*/
 	</style>
 {error:}
+
 	<div class="alert alert-danger">Позиция <b>{crumb.parent.name} {crumb.name}</b> не найдена!</div>
+
+
+	
 {extend::}-catalog/extend.tpl
 {model::}-catalog/model.tpl
 {CATPOSIMAGES:}
@@ -164,8 +168,10 @@
 	{headdescr:}<th>Описание</th>
 	{headname:}<th>Наименование</th>
 	{prname:}<td>{Наименование}</td>
+	{1:}1
+	{s:}/{~key}
 	{iitem:}
-		<tr data-crumb="/{crumb}{:cat.idsl}{:cat.mark.set}" style="cursor:pointer; border-bottom:none;" class="a {...item_nick=item_nick?:table-success}" 
+		<tr data-crumb="{...:model.link-pos}{~key=:1??:s}" style="cursor:pointer; border-bottom:none;" class="a {...item_num=~key?:table-success}" 
 			onclick="Ascroll.once = false">
 			{~obj(:more,more,:itm,.,:pos,...,:list,...itemmore).list::imore}
 			{~inArray(:Наименование,...itemrows)?:prname}

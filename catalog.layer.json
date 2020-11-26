@@ -1,7 +1,7 @@
 {
 	"tpl":"-catalog/search.tpl",
 	"nocache":true,
-	"jsontpl":"-showcase/api/search?val=&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",
+	"jsontpl":"-showcase/api2/search?val=&m={~encode(Crumb.get.m)}&p={Crumb.get.p|:1}&showlist=0",
 	"seojsontpl":"-showcase/api/search/seo?seo={Controller.names.catalog.crumb}&val=&m={~encode(Crumb.get.m)}",
 	"showanimate":true,
 	"name":"catalog",
