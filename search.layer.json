@@ -1,8 +1,8 @@
 {
 	"tpl":"-catalog/search.tpl",
 	"nocache":true,
-	"jsontpl":"-showcase/api/search?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p}",
+	"jsontpl":"-showcase/api2/search?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p|:1}&showlist=0",
 	"redirecttpl":"{crumb.child.name=:actions??:n}{n:}{crumb.child?:red}{red:}{data.is=:producer?:p}{data.is=:group?:g}{p:}{:com}{data.title:s}{g:}{:com}{data.group.group_nick:s}{s:}/{.}{com:}/{crumb}",
-	"seojsontpl":"-showcase/api/search/seo?seo={Controller.names.catalog.crumb}&val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}",
+	"seojsontpl":"-showcase/api2/searchseo?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p|:1}&showlist=0",
 	"name":"catalog"
 }

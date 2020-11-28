@@ -1,4 +1,4 @@
 {
-	"jsontpl":"-showcase/api/filters?val={crumb.child.name}&m={Crumb.get.m}",
+	"jsontpl":"-showcase/api2/filters?val={crumb.child.name}&m={Crumb.get.m}",
 	"tpl":"-catalog/filgroups/layout.tpl"
 }
