@@ -4,7 +4,7 @@
 	<h1>
 		{~conf.catalog.showparentgroup?:showparentgroup}{data.name|data.title}
 	</h1>
-	{data.group.showcase.tplgroups?:groups-{data.group.showcase.tplgroups}?:groups-default}
+	{data.group.options.tplgroups?:groups-{data.group.options.tplgroups}?:groups-default}
 	{data.count?data:searchgood?data:searchbad}
 	{:text}
 {root-twocolumns:}
@@ -256,7 +256,7 @@
 {model::}-catalog/model.tpl
 {cat_showlist:}
 	{:pages}
-	{group.showcase.tplsearch?list:model.{group.showcase.tplsearch}-list?list:model.ROWS-list}
+	{group.options.tplsearch?list:model.{group.options.tplsearch}-list?list:model.ROWS-list}
 	{:pages}
 
 {search-columns:}
