@@ -4,7 +4,7 @@
 	{:GROUPS}
 	{h1link:}<h1><a href="/catalog">{~conf.catalog.title}</a></h1>
 	{h1:}<h1>{~conf.catalog.title}</h1>
-{search::}-cart/rest/search/layout.tpl
+{search::}-catalog/live/layout.tpl
 {find:}
 	<form style="margin-bottom:15px;">
 		<input class="form-control" name="search" type="text" placeholder="Поиск по каталогу">
