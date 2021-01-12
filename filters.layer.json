@@ -2,7 +2,7 @@
 	"istpl":"{crumb.child.child??:yes}",
 	"showanimate":false,
 	"onlyclient":false,
-	"jsontpl":"-showcase/api/filters?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}",
+	"jsontpl":"-showcase/api2/filters?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}",
 	"tpl":"-catalog/filters.tpl",
 	"config":{
 		"split":true
