@@ -44,7 +44,7 @@
 			text-decoration:none;
 		}
 	</style>
-	<div class="showfilters alert {~conf.catalog.showfilterscls}" role="alert">
+	<div style="margin-bottom: 30px" class="showfilters alert alert-primary" role="alert">
 		Фильтры:
 		{data.filters::showfilter}
 	</div>
@@ -113,7 +113,8 @@
 		</div>
 		{~length(data.childs)?:showblocks?:nogroups_simple}
 		{showblocks:}
-			<div class="row catgroups mt-4 mb-1">
+			<!-- catgroups mt-4 -->
+			<div class="row catgroups mb-1">
 				<style>
 					.catgroups ul { 
 						list-style: none inside;
@@ -133,7 +134,7 @@
 	{groups-info3:}
 		{~length(data.childs)?:showgroups3?:nogroups_simple}
 		{showgroups3:}
-		<div class="catgroups mt-4 mb-1">
+		<div class="catgroups mb-1">
 			<style>
 				.catgroups ul { 
 					list-style: none inside;
@@ -154,7 +155,7 @@
 	{groups-info:}
 		{~length(data.childs)?:showgroups?:nogroups}
 		{showgroups:}
-			<div class="row catgroups mt-4 mb-4">
+			<div class="row catgroups mb-4">
 				<style>
 					.catgroups ul { 
 						list-style: none inside;
@@ -177,7 +178,7 @@
 				</div>
 			</div>
 		{nogroups:}
-			<div class="row catgroups mt-4 mb-4">
+			<div class="row catgroups mb-4">
 				<style>
 					.catgroups ul { 
 						list-style: none inside;
@@ -202,7 +203,7 @@
 			{showfiltersm:}
 				<div class="mt-2">{:showfilters}</div>
 		{nogroups_simple:}
-			<div class="catgroups mt-4">
+			<div class="catgroups">
 				<div class="mb-3">
 					{~length(data.filters)?:showfilters}
 				</div>
@@ -325,7 +326,7 @@
 {data.numbers?:pagenumbers}
 
 {pagenumbers:}
-	<ul class="pagination">
+	<ul class="pagination" style="margin: 30px 0">
 		{data.numbers::pagenum}
 	</ul>
 {pagenum:}
