@@ -207,10 +207,10 @@
 			</div>
 			<div class="costslide mt-1">
 				<div class="row" style="margin-bottom:10px;">
-					<div class="col-sm-6">
+					<div class="col-6">
 						<input style="width:100%; border:none;" id="inpmin{prop_nick}" type="text">
 					</div>
-					<div class="col-sm-6">
+					<div class="col-6">
 						<input style="text-align:right; width:100%; border:none; padding-left:4px;" id="inpmax{prop_nick}" type="text">
 					</div>
 				</div>
