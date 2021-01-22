@@ -67,6 +67,7 @@
 				{:pos-frow}<b>{~cost(:pval)}{:unit}</b>{:/pos-frow}
 			{pos-prop-link:}
 				{:pos-frow}<a href="{(:pnick):link-val}">{:pval}</a>{:/pos-frow}
+			{pos-prop-justlink:}{:pos-prop-link}
 			{pos-prop-p:}<div class="my-1">{:pval}</div>
 			{pos-prop-empty:}
 			{pos-prop-filter:}
@@ -103,6 +104,10 @@
 		{div-prop-link:}
 			<div class="d-flex my-1">
 				<div class="ptitle pr-2">{prop}:</div>
+				<div title="{:pval}" class="text-truncate"><a href="{(:pnick):link-val}">{:pval}</a></div>
+			</div>
+		{div-prop-justlink:}
+			<div class="d-flex my-1">
 				<div title="{:pval}" class="text-truncate"><a href="{(:pnick):link-val}">{:pval}</a></div>
 			</div>
 		{div-prop-p:}<div class="my-1">{:pval}</div>
@@ -197,6 +202,7 @@
 			<td class="d-flex text-nowrap"><div>{prop}:</div><div class="line"></div></td>
 			<td><a rel="nofollow" href="{(:pnick):link-val}">{:pval}</a></td>
 		</tr>
+	{tr-prop-justlink:}{:tr-prop-link}
 	{tr-prop-empty:}
 	{tr-prop-p:}<tr><td colspan="2">{:pval}</td></tr>
 	{tr-prop-filter:}
@@ -224,13 +230,13 @@
 {unit:}&nbsp;₽
 {sp:}&nbsp;
 {nalichie:}
-	<div style="position:absolute; left:0px; z-index:1" class="m-3">{:badgenalichie}</div>
+	<div style="position:absolute; right:0px; z-index:1; margin: 1rem">{:badgenalichie}</div>
 {badgenalichie:}
 	{Наличие?:badgenalichieshow}
 	{strНаличие:}Наличие
 	{badgenalichieshow:}
 		<a rel="nofollow" href="/catalog/{:cat.mark.add}more.{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" 
-			class="ml-3 badge {:ncls}">
+			class="badge {:ncls}">
 			{Наличие}
 		</a>
 	{model-cls-src:}-catalog/model-cls.json
