@@ -64,7 +64,7 @@
 					
 					if (!form.closest('html')) return;
 
-					$(tag('input')).autocomplete({
+					$(tag('input')[0]).autocomplete({
 						triggerSelectOnValidInput:false,
 						showNoSuggestionNotice:true,
 						noSuggestionNotice:'<div class="p-2">По запросу ничего не найдено. Попробуйте изменить запрос или поискать по <a onclick="$(\'#{div}\').find(\'input\').autocomplete(\'hide\'); Crumb.go(\'/catalog\'); $(\'#{div}\').find(\'input\').blur(); return false" href="/catalog">группам</a>.</div>',
