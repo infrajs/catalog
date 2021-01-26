@@ -96,7 +96,7 @@
 			</div>
 			{groups-def-group:}
 				<div class="col-sm-6 col-md-4 col-lg-6 col-xl-4" style="padding:5px">
-					<a class="d-flex p-1 bg-white rounded" style="align-items:center; height:68px;" 
+					<a class="d-flex p-1 bg-white rounded" style="align-items:center; height:68px; border: none" 
 						href="{group_nick:model.link-val}">
 						<div style="text-align:center; width:70px">
 							{(img|icon):gimgdef}
@@ -228,11 +228,11 @@
 
 		</div>
 		
-		{gimg_big:}<a href="{group_nick:model.link-val}"><img class="img-fluid" src="/-imager/?w=300&h=200&crop=1&src={icon|img}"></a>
+		{gimg_big:}<a style="border: none" href="{group_nick:model.link-val}"><img class="img-fluid" src="/-imager/?w=300&h=200&crop=1&src={icon|img}"></a>
 	{groups_group:}
 		<div class="col-md-12 col-lg-6 col-xl-6 d-flex mb-3">
 			<div class="mr-2" style="min-width:100px; text-align:center">
-				<a href="{group_nick:model.link-val}">{(img|icon)?:gimg}</a>
+				<a style="border: none" href="{group_nick:model.link-val}">{(img|icon)?:gimg}</a>
 			</div>
 			<div class="flex-grow-1">
 				<div style="font-size:100%; overflow: hidden; text-overflow: ellipsis; font-weight: bold; text-transform: uppercase;"><a href="{group_nick:model.link-val}">{group}</a></div>

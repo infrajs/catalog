@@ -29,28 +29,12 @@
 	<div class="row">
 		{::CARDS-item}
 	</div>
-{CARDS-item:}
-	<div class="mb-4 col-12 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-stretch">
-		<div class="d-flex flex-column justify-content-between model shadow-over w-100">{:CARDS-data}</div>
-	</div>
-{CARDS-data:}
-	<div>
-		{:CARDS-image}
-		<div class="px-3 pt-2">
-			{:CARDS-name}
-			{:CARDS-props}
-		</div>
-	</div>
-	<div class="px-3 pb-3 pt-2">
-		{:CARDS-basket}
-	</div>
+
+
 {CARDS-image:}
 	{Наличие?:nalichie}
 	{images.0?:posimg}
-{CARDS-name:}
-	<a class="font-weight-bold d-block pt-1" href="{:link-pos}">
-		{Наименование|article}
-	</a>
+
 {POS-props:}
 	<div class="props">
 		{showcase.props::posprop}
@@ -219,10 +203,7 @@
 	<div class="my-1">{:cost}</div>
 {cost:}
 	{min?(show?:cost-one?:cost-two)?:cost-one}
-	{cost-one:}
-		<b class="cost {Наличие=:strАкция?:strred}">{~cost(Цена)}{:unit}</b>
-		{strАкция:}Акция
-		{strred:}text-danger
+	
 	{cost-two:}
 		От&nbsp;<b class="cost">{~cost(min)}</b> 
 		до&nbsp;<b class="cost">{~cost(max)}{:unit}</b>
@@ -234,29 +215,71 @@
 {badgenalichie:}
 	{Наличие?:badgenalichieshow}
 	{strНаличие:}Наличие
-	{badgenalichieshow:}
-		<a rel="nofollow" href="/catalog/{:cat.mark.add}more.{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" 
-			class="badge {:ncls}">
-			{Наличие}
-		</a>
+	
 	{model-cls-src:}-catalog/model-cls.json
 	{ncls:}
 		{~data(:model-cls-src)[Наличие]|:clsdef}		
 	{clsdef:}badge-secondary
 {prodimg:}
-	<a title="Посмотреть продукцию {producer}" href="{producer_nick:link-val}" class="float-right p-2">
+	<a style="border: none" title="Посмотреть продукцию {producer}" href="{producer_nick:link-val}" class="float-right p-2">
 		<img loading="lazy" width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 	</a>
-{posimg:}
-	<a href="{:link-pos}">
-		<img loading="lazy" class="img-fluid" src="/-imager/?m=1&amp;w=525&amp;h=420&amp;top=1&amp;crop=1&amp;src={images.0}">
-	</a>
+
 	{prodart:}{producer} {article}
 	{cat_more:}{(.&(.!:no))?:more}
 	{more:}{~key}:&nbsp;{.}{~last()|:comma}
 	{comma:}, 
 	{no:}Нет
 	{producerlogo:}
-		<a title="Посмотреть продукцию {producer}" href="{producer_nick:link-val}" class="float-right" style="margin:5px 0 5px 5px">
+		<a title="Посмотреть продукцию {producer}" href="{producer_nick:link-val}" class="float-right" style="margin:5px 0 5px 5px; border: none">
 			<img loading="lazy" width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 		</a>
+
+
+
+
+
+
+
+{CARDS-list:}
+	<div style="padding-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); grid-gap: 20px">
+		{::CARDS-item}
+	</div>
+{CARDS-item:}
+	<div style="position:relative; display:flex; flex-direction: column; justify-content: space-between;" class="shadow-over">		{:CARDS-data}
+	</div>
+{CARDS-name:}
+	<div style="display:block; font-weight: bold; margin-top: 5px; margin-bottom: 0.5rem">
+		<a href="{:link-pos}">
+			{Наименование|article}
+		</a>
+	</div>
+{posimg:}
+	<a style="border: none; display: block; text-align: center;" href="{:link-pos}">
+		<img loading="lazy" style="max-width: 100%; margin: 0 auto" src="/-imager/?m=1&amp;w=400&amp;h=300&amp;top=1&amp;crop=1&amp;src={images.0}">
+	</a>
+{CARDS-data:}
+	<div>
+		{:CARDS-image}
+		<div style="margin: 0.5rem 1rem;">
+			{:CARDS-name}
+			{:CARDS-props}
+		</div>
+	</div>
+	<div style="margin: 0.5rem 0.9rem 1rem 0.9rem">	
+		{:CARDS-basket}
+	</div>
+
+{cost-one:}
+	<b class="cost {Наличие=:strАкция?:strred}">{~cost(Цена)}{:unit}</b>
+	{Старая цена?:oldcost}
+	{oldcost:}<s style="display: block; margin-top: -3px; text-align:right; margin-right: 2px; color:#ccc; font-size: 12px; font-weight: bold">{~cost(Старая цена)}{:unit}</s>
+
+
+
+{badgenalichieshow:}
+	<a rel="nofollow" href="/catalog/{:cat.mark.add}more.{Path.encode(:strНаличие)}::.{Path.encode(Наличие)}=1" 
+		class="badge {:ncls}">
+		{Старая цена?:calcsale?Наличие}
+	</a>
+{calcsale:}-{discount}%

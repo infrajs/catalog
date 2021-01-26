@@ -24,7 +24,8 @@ let Catalog = {
 	find: function (val) {
 		val = val.replace(':', ' ')
 		val = encodeURIComponent(val)
-		let m = Crumb.get.m ? '?m=' + Crumb.get.m : '?m='
+		//let m = Crumb.get.m ? '?m=' + Crumb.get.m : '?m='
+		let m = '?m='
 
 		if (/:search/.test(m)) {
 			m = m.replace(/:search=[^:]*/,':search=' + val)	
@@ -32,11 +33,11 @@ let Catalog = {
 			m += ':search=' + val
 		}
 		m = m.replace(/:search$/,'')	
-		if (Crumb.child.name == 'catalog' && Crumb.child.child) {
-			Crumb.go('/catalog/' + Crumb.child.child.name + m)	
-		} else {
+		//if (Crumb.child.name == 'catalog' && Crumb.child.child) {
+		//	Crumb.go('/catalog/' + Crumb.child.child.name + m)	
+		//} else {
 			Crumb.go('/catalog' + m)	
-		}
+		//}
 		
 		return false;
 	},
