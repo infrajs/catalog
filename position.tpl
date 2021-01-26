@@ -67,12 +67,12 @@
 	{image:}
 		{~key=:0??:imagesm}
 	{imagesm:}
-		<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
+		<a style="border: none" class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
 			<img title="{data.pos.producer} {data.pos.article}" 
 			src="/-imager/?m=1&w=100&top=1&src={.}" />
 		</a>
 	{imagelg:}
-		<a class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
+		<a style="border: none" class="gallery" title="{..Наименование}" href="/-imager/?m=1&src={.}">
 			<img class="img-fluid" title="{data.pos.producer} {data.pos.article}" 
 			src="/-imager/?m=1&h=400&top=1&src={.}" />
 		</a>
@@ -202,7 +202,7 @@
 
 {producer:}
 	<div style="float:right; margin-left:5px; margin-bottom:5px;">
-		<a data-anchor=".pagination" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer.{producer_nick}=1">
+		<a style="border: none" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer.{producer_nick}=1">
 			<img style="margin-left:5px" src="/-imager/?w=160&h=25&src={logo}" />
 		</a>
 	</div>
