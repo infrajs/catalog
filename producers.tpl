@@ -1,6 +1,7 @@
 {root:}
 	{data.breadcrumbs:cat.breadcrumbs}
 	<h1>Производители</h1>
+	<div id="filgroups"></div>
 	<div style="padding:10px; font-size:12px; margin-bottom:20px;">
 		{data.list::catprod1}
 	</div>
