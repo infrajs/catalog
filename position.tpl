@@ -78,7 +78,7 @@
 		</a>
 {start:}
 	<div class="cat-position">
-		<div style="float:right">
+		<div style="float:right;">
 			{logo?:producer}
 		</div>
 		<h1 style="text-align:left">{Наименование}</h1>
@@ -202,8 +202,8 @@
 
 {producer:}
 	<div style="float:right; margin-left:5px; margin-bottom:5px;">
-		<a style="border: none" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer.{producer_nick}=1">
-			<img style="margin-left:5px" src="/-imager/?w=160&h=25&src={logo}" />
+		<a style="border: none;" title="Посмотреть продукцию {producer}" href="/{crumb.parent.parent}{:cat.mark.add}producer.{producer_nick}=1">
+			<img style="margin-left:5px;" src="/-imager/?w=160&h=50&src={logo}" />
 		</a>
 	</div>
 <!--	<div style="text-align:right; font-size: 11px; margin-top:5px;">
