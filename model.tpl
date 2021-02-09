@@ -128,7 +128,7 @@
 		</div>
 	{mobimghide:}d-none d-sm-block 
 {ROWS-image:}
-		<div style="position: absolute">{Наличие?:nalichie}</div>
+		<div style="position: absolute; width: 100%;">{Наличие?:nalichie}</div>
 		<a href="{:link-pos}" style="border:none; text-decoration: none; display: block; 
 			background-image: url('/-imager/?m=1&amp;w=525&amp;h=525&amp;src={images.0}');
 			background-repeat: no-repeat;
@@ -211,7 +211,7 @@
 {unit:}&nbsp;₽
 {sp:}&nbsp;
 {nalichie:}
-	<div style="position:absolute; right:0px; z-index:1; margin: 1rem">{:badgenalichie}</div>
+	<div style="position:absolute; left:0px; line-height: 0; z-index:1; margin: 0.5rem">{:badgenalichie}</div>
 {badgenalichie:}
 	{Наличие?:badgenalichieshow}
 	{strНаличие:}Наличие
@@ -246,7 +246,7 @@
 		{::CARDS-item}
 	</div>
 {CARDS-item:}
-	<div style="position:relative; display:flex; flex-direction: column; justify-content: space-between;" class="shadow-over">		{:CARDS-data}
+	<div style="position:relative; display:flex; flex-direction: column; justify-content: space-between;" class="shadow-over model">		{:CARDS-data}
 	</div>
 {CARDS-name:}
 	<div style="display:block; font-weight: bold; margin-top: 5px; margin-bottom: 0.5rem">

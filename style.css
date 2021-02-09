@@ -33,10 +33,15 @@ input[type=number]::-webkit-outer-spin-button {
 	padding-right: 3px; 
 	text-align: left;
 }
+
 .shadow-over {
+	transition: box-shadow;
 	transition-duration: 0.3s
 }
-
+.shadow-over:hover {
+	/*box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);*/
+	box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important
+}
 .noUi-connect {
     /*background-color: #17a2b8!important;
     background-color: #fe5a00!important;
