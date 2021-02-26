@@ -61,7 +61,7 @@
 					var root = Seq.right('{~dataroot()}');
 					var prop_nick = root[2];
 					var key = '{key}';
-					var data = await Load.fire('json', '{json}');
+					var data = await Load.fire('json', "{json}");
 					var param = data.list[prop_nick];
 					var option = Seq.getr(Seq.getr({ data: data }, root),['childs',value]);
 					var count = 0;

@@ -29,12 +29,11 @@
 	<div class="row">
 		{::CARDS-item}
 	</div>
-
-
 {CARDS-image:}
-	{Наличие?:nalichie}
-	{images.0?:posimg}
-
+	<div style="min-height: 2rem">
+		{Наличие?:nalichie}
+		{images.0?:posimg}
+	</div>
 {POS-props:}
 	<div class="props">
 		{showcase.props::posprop}
@@ -211,7 +210,7 @@
 {unit:}&nbsp;₽
 {sp:}&nbsp;
 {nalichie:}
-	<div style="position:absolute; left:0px; line-height: 0; z-index:1; margin: 0.5rem">{:badgenalichie}</div>
+	<div style="position:absolute; left:0px; line-height: 0; z-index:1; margin: 1rem">{:badgenalichie}</div>
 {badgenalichie:}
 	{Наличие?:badgenalichieshow}
 	{strНаличие:}Наличие
@@ -246,7 +245,8 @@
 		{::CARDS-item}
 	</div>
 {CARDS-item:}
-	<div style="position:relative; display:flex; flex-direction: column; justify-content: space-between;" class="shadow-over model">		{:CARDS-data}
+	<div style="position:relative; display:flex; flex-direction: column; justify-content: space-between;" class="shadow-over model">
+		{:CARDS-data}
 	</div>
 {CARDS-name:}
 	<div style="display:block; font-weight: bold; margin-top: 5px; margin-bottom: 0.5rem">
@@ -256,7 +256,7 @@
 	</div>
 {posimg:}
 	<a style="border: none; display: block; text-align: center;" href="{:link-pos}">
-		<img loading="lazy" style="max-width: 100%; margin: 0 auto" src="/-imager/?m=1&amp;w=400&amp;h=300&amp;top=1&amp;crop=1&amp;src={images.0}">
+		<img loading="lazy" style="max-width: 100%; margin: 0 auto" src="/-imager/?m=1&amp;w=263&amp;h=150&amp;top=1&amp;crop=1&amp;src={images.0}">
 	</a>
 {CARDS-data:}
 	<div>

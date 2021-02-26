@@ -1,16 +1,35 @@
 {root:}
 	<form data-autosave="{autosavename}">
-		<input name="search" type="search" class="form-control" placeholder="Поиск по каталогу">
-		{:JS}
+		<input name="search" type="search" placeholder="Поиск по каталогу">
 	</form>
+	<script type="module" async>
+		import { Live } from "/vendor/infrajs/catalog/live/Live.js"
+		const form = document.getElementById('{div}').getElementsByTagName('form')[0]
+		Live.fire('init', form)
+	</script>
 {model::}-catalog/model.tpl
+
+{TITLE:}
+	<i>{data.query}...</i>
+{TITLEBODY:}
+	{data.query?:pquery}
+	<a href="/catalog{:model.cat.mark.add}search={data.query}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a> 
+	в {data.gcount} {~words(data.gcount,:группе,:группах,:группах)}
+	{pquery:}<i>{data.query}</i>, найдено 
+{BODY:}
+	{data.count?:BODYshow}
+	{BODYshow:}
+	<div style="padding-top: 4px; display: grid; grid-template-columns: 1fr max-content; grid-gap: 5px 5px">
+		{data.groups::SUGGESTIONGROUP}
+		{data.list::SUGGESTION}
+	</div>
+{SUGGESTIONGROUP:}
+	<a href="/catalog/{group_nick}{:model.cat.mark.add}search={data.query}"><b>{group}</b></a>
+	<div></div>
 {SUGGESTION:}
-		<a href="{:model.link-pos}">{images.0?:img}{Наименование}<br><b>{article}</b></a>
-			<br>{Цена?:cost}
-		<hr class="my-2" style="clear:both">
-	{br:} <br>{.}
-	{cost:} <b>{~cost(Цена)}{:model.unit}</b>
-	{img:}<img style="clear:both; margin-left:5px; float:right; position:relative" src="/-imager/?src={images.0}&h=70&w=70&crop=1">
+		<a href="{:model.link-pos}">{Наименование}</a>
+		<div style="text-align:right">{Цена?:cost}</div>
+	{cost:}{~cost(Цена)}{:model.unit}
 {JS:}
 	<div>
 		<style>
