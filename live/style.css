@@ -10,6 +10,7 @@
 	transition: opacity 0.3s, max-height 1s;
 }
 .livetitle.show {
+
 	opacity: 1;
 	max-height: 25px;
 }
@@ -32,8 +33,10 @@
 	background-color: white;
 	transition: opacity 0.3s;
 	padding: 5px;
+	pointer-events: none;
 }
 
 .livemenu.show {
+	pointer-events: auto;
 	opacity: 1;
 }
