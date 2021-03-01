@@ -23,24 +23,42 @@ Live.hand('search', async (query) => {
 	query = encodeURIComponent(query)
 	return Load.fire('json', '-showcase/api2/live/?query=' + query)
 })
+Live.hand('searchselect', async (query) => {	
+	query = encodeURIComponent(query)
+	return Load.fire('json', '-showcase/api2/livepos/?query=' + query)
+})
 Live.before('init', async form => {
 	Form.fire('init', form)
 })
-const ws = new WeakMap()
+
 Live.hash = query => {
 	return Path.encode(query)
 }
+Live.ws = new WeakMap()
+Live.getState = form => {
+	let state = Live.ws.get(form)
+	if (state) return state
+	state = {
+		item: null,
+		hash: null,
+		select: false
+	}
+	Live.ws.set(form, state)
+	return state
+}
+Live.search = (form, query) => {
+	let state = Live.ws.get(form)
+	if (state.select) return Live.puff('searchselect', query)
+	return Live.puff('search', query)
+}
+
 Live.hand('init', async form => {
-	const state = {}
-	ws.set(form, state)
+	const state = Live.getState(form)
 	const input = form.elements.search
 	if (!input) return false
 	input.classList.add('liveinput')
 	input.setAttribute('autocomplete','off')
-	form.addEventListener('submit', async e => {
-		e.preventDefault()
-		Catalog.search(input.value)
-	})
+
 	const go = async () => {
 		let query = input.value
 		query = query.toLowerCase()
@@ -48,14 +66,25 @@ Live.hand('init', async form => {
 		query = query.replace(/[\s\-\"\']+/g, " ")
 		//if (!query) return
 		const hash = Path.encode(query)
-
-		
 		Live.emit('process', form, query)
 		
-	 	const ans = await Live.puff('search', query)
- 		if (state.hash != hash) return
+
+	 	const ans = await Live.search(form, query)
+ 		if (state.hash != hash) return ans
 	 	Live.emit('show', form, ans)
+	 	return ans
 	}
+
+	form.addEventListener('submit', async e => {
+		e.preventDefault()
+		if (state.select) {
+			const ans = await go()
+			Live.fire(form, 'select', ans.list[0])
+		} else {
+			Catalog.search(input.value)
+		}
+	})
+
 	if (document.activeElement == input) go()
 	input.addEventListener('focus', go)
 	input.addEventListener('input', go)
@@ -75,7 +104,8 @@ Live.hand('init', async form => {
 
 Live.hand('process', (form, query) => {
 	const hash = Path.encode(query)
-	const state = ws.get(form)
+	const state = Live.getState(form)
+
 	const menu = Live.getMenu(form)
 	const title = cls(menu, 'livetitle')[0]
 	const body = cls(menu, 'livebody')[0]
@@ -89,19 +119,32 @@ Live.hand('process', (form, query) => {
 Live.done('process', async (form, res, query) => {
  	const menu = Live.getMenu(form)
  	const title = cls(menu, 'livetitle')[0]
- 	const ans = await Live.puff('search', query) 	
- 	const state = ws.get(form)
+ 	const ans = await Live.search(form, query)	
+ 	const state = Live.getState(form)
  	if (state.hash != Path.encode(query)) return
- 	title.innerHTML = Template.parse('-catalog/live/layout.tpl', { data: ans }, 'TITLEBODY')
+ 	const tpl = state.select ? 'TITLEBODYSELECT' : 'TITLEBODY'
+ 	title.innerHTML = Template.parse('-catalog/live/layout.tpl', { data: ans }, tpl)
  	DOM.emit('load')
 })
 
 
 Live.hand('show', async (form, ans) => {
 	const menu = Live.getMenu(form)
+	const state = Live.getState(form)
 	const body = cls(menu, 'livebody')[0]
 	body.classList.remove('mute')
-	body.innerHTML = Template.parse('-catalog/live/layout.tpl', { data: ans }, 'BODY')
+	const tpl = state.select ? 'BODYSELECT' : 'BODY'
+	body.innerHTML = Template.parse('-catalog/live/layout.tpl', { data: ans }, tpl)
+	let i = 0
+	for (const item of cls(body, 'liveselect')) {
+		const index = i
+		item.addEventListener('click', () => {
+			state.item = ans.list[index]
+			Live.emit('select', form)
+			Live.drop('select', form)
+		})
+		i++
+	}
 	DOM.emit('load')
 })
 

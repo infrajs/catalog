@@ -16,6 +16,10 @@
 	<a href="/catalog{:model.cat.mark.add}search={data.query}">{data.count} {~words(data.count,:позиция,:позиции,:позиций)}</a> 
 	в {data.gcount} {~words(data.gcount,:группе,:группах,:группах)}
 	{pquery:}<i>{data.query}</i>, найдено 
+{TITLEBODYSELECT:}
+	{data.query?:pquery}
+	{data.count} {~words(data.count,:позиция,:позиции,:позиций)}
+	{pquery:}<i>{data.query}</i>, найдено 
 {BODY:}
 	{data.count?:BODYshow}
 	{BODYshow:}
@@ -23,13 +27,22 @@
 		{data.groups::SUGGESTIONGROUP}
 		{data.list::SUGGESTION}
 	</div>
-{SUGGESTIONGROUP:}
-	<a href="/catalog/{group_nick}{:model.cat.mark.add}search={data.query}"><b>{group}</b></a>
-	<div></div>
+{BODYSELECT:}
+	{data.count?:BODYshowsel}
+	{BODYshowsel:}
+		{data.list::SUGGESTIONSELECT}
+	{SUGGESTIONSELECT:}
+		<div class="liveselect">
+			<div>{Наименование}</div>
+			<div style="margin-left: 5px;">{Цена?:cost}</div>
+		</div>
 {SUGGESTION:}
 		<a href="{:model.link-pos}">{Наименование}</a>
 		<div style="text-align:right">{Цена?:cost}</div>
 	{cost:}{~cost(Цена)}{:model.unit}
+{SUGGESTIONGROUP:}
+	<a href="/catalog/{group_nick}{:model.cat.mark.add}search={data.query}"><b>{group}</b></a>
+	<div></div>
 {JS:}
 	<div>
 		<style>
