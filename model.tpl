@@ -271,10 +271,12 @@
 	</div>
 
 {cost-one:}
-	<b class="cost {Наличие=:strАкция?:strred}">{~cost(Цена)}{:unit}</b>
+	<b class="cost" style="{(Наличие=:strАкция)|(Наличие=:strАкция)?:strred}">{~cost(Цена)}{:unit}</b>
 	{Старая цена?:oldcost}
 	{oldcost:}<s style="display: block; margin-top: -3px; text-align:right; margin-right: 2px; color:#ccc; font-size: 12px; font-weight: bold">{~cost(Старая цена)}{:unit}</s>
-
+{strred:}color: var(--danger)
+{strАкция:}Акция
+{strРаспродажа:}Распродажа
 
 
 {badgenalichieshow:}
