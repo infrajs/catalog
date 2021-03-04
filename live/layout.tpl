@@ -13,7 +13,7 @@
 	<i>{data.query}...</i>
 {TITLEBODY:}
 	{data.query?:pquery}
-	<a href="/catalog{:model.cat.mark.add}search={data.query}">Найдено {data.count} {~words(data.count,:товар,:товара,:товаров)}</a> 
+	<a href="/catalog{:model.cat.mark.add}search={data.query}">{data.count} {~words(data.count,:товар,:товара,:товаров)}</a> 
 	в {data.gcount} {~words(data.gcount,:группе,:группах,:группах)}
 	{pquery:}<i>{data.query}</i>, найдено 
 {TITLEBODYSELECT:}
