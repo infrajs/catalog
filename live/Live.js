@@ -87,6 +87,7 @@ Live.hand('init', async form => {
 
 	if (document.activeElement == input) go()
 	input.addEventListener('focus', go)
+	input.addEventListener('click', go)
 	input.addEventListener('input', go)
 	document.body.addEventListener('click', (e) => {
 		if (!form.closest('body')) return

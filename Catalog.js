@@ -12,13 +12,26 @@ let Catalog = {
 		Controller.check();
 	},
 	search: function (val) {
+		if (val) {
+			Crumb.go('/catalog?m=:search=' + val)
+		} else {
+			Crumb.go('/catalog')
+		}
+		return;
+
 		let m = Crumb.get.m ? '?m=' + Crumb.get.m : '?m='
 		if (/:search/.test(m)) {
-			m = m.replace(/:search=[^:]*/,':search=' + val)	
-		} else {
+			m = m.replace(/:search[^:]*/g,'')
+		}
+		if (val) {
 			m += ':search=' + val
 		}
-		Crumb.go('/catalog' + m)
+		if (Crumb.child.name == 'catalog' && Crumb.child.child && !Crumb.child.child.child) {
+			Crumb.go('/catalog/'+Crumb.child.child.name + m)
+		} else {
+			Crumb.go('/catalog' + m)
+		}
+		
 		return false;
 	},
 	find: function (val) {
