@@ -112,7 +112,7 @@ Live.hand('process', (form, query) => {
 	const body = cls(menu, 'livebody')[0]
 	if (state.hash != hash) {
 		body.classList.add('mute')
-		title.innerHTML = Template.parse('-catalog/live/layout.tpl?v=1', { data: { query } }, 'TITLE')
+		title.innerHTML = Template.parse('-catalog/live/layout.tpl?v=2', { data: { query } }, 'TITLE')
 	}
 	menu.classList.add('show')
 	state.hash = hash	
@@ -124,7 +124,7 @@ Live.done('process', async (form, res, query) => {
  	const state = Live.getState(form)
  	if (state.hash != Path.encode(query)) return
  	const tpl = state.select ? 'TITLEBODYSELECT' : 'TITLEBODY'
- 	title.innerHTML = Template.parse('-catalog/live/layout.tpl?v=1', { data: ans }, tpl)
+ 	title.innerHTML = Template.parse('-catalog/live/layout.tpl?v=2', { data: ans }, tpl)
  	DOM.emit('load')
 })
 
@@ -135,7 +135,7 @@ Live.hand('show', async (form, ans) => {
 	const body = cls(menu, 'livebody')[0]
 	body.classList.remove('mute')
 	const tpl = state.select ? 'BODYSELECT' : 'BODY'
-	body.innerHTML = Template.parse('-catalog/live/layout.tpl?v=1', { data: ans }, tpl)
+	body.innerHTML = Template.parse('-catalog/live/layout.tpl?v=2', { data: ans }, tpl)
 	let i = 0
 	for (const item of cls(body, 'liveselect')) {
 		const index = i
