@@ -1,12 +1,12 @@
 {
-	"tpl":"-catalog/search.tpl",
+	"tpltpl":"-catalog/search.tpl?v={~conf.index.v}",
 	"nocache":true,
 	"jsontpl":"-showcase/api2/search?val=&m={~encode(Crumb.get.m)}&p={Crumb.get.p|:1}&showlist=0",
 	"seojsontpl":"-showcase/api2/searchseo?val=&m={~encode(Crumb.get.m)}&p={Crumb.get.p|:1}&showlist=0",
 	"showanimate":true,
 	"name":"catalog",
 	"child":{
-		"tpl":"-catalog/search.tpl",
+		"tpltpl":"-catalog/search.tpl?v={~conf.index.v}",
 		"jsontpl":"-showcase/api2/search?val={~encode(crumb.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p|:1}&showlist=0",
 		"seojsontpl":"-showcase/api2/searchseo?val={~encode(crumb.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p|:1}&showlist=0",
 		"redirecttpl":"{parent.childs[crumb.name]??:n}{n:}{data.is=:producer?:p}{data.is=:group?:g}{p:}{:com}{data.title:s}{g:}{:com}{data.title:s}{s:}/{.}{com:}/{crumb.parent}",

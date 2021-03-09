@@ -1,12 +1,12 @@
 {
-	"tpl":"-catalog/position.tpl",
+	"tpltpl":"-catalog/position.tpl?v={~conf.index.v}",
 	"jsontpl":"-showcase/api2/pos?producer_nick={crumb.parent.name}&article_nick={crumb.name}&item_num={crumb.child.name|:1}&catkit={crumb.child.child.name}",	"seojsontpl":"-showcase/api2/posseo?producer_nick={crumb.parent.name}&article_nick={crumb.name}&item_num={crumb.child.name|:1}&catkit={crumb.child.child.name}",
 	"redirecttpl":"{data.pos?:red}{red:}/{crumb.parent.parent}/{data.pos.producer_nick}/{data.pos.article_nick}{data.pos.item_num!:1?data.pos.item_num:s}{s:}/{.}",
 	"showanimatefastreparse":true,
 	"divs":{
 		"CATPOSIMAGES":{
 			"divcheck":true,
-			"tpl":"-catalog/position.tpl",
+			"tpltpl":"-catalog/position.tpl?v={~conf.index.v}",
 			"dataroot":"data.pos",
 			"showanimate":false,
 			"tplroot":"CATPOSIMAGES",

@@ -12,7 +12,7 @@
 	{set:}?m={add}
 	{hrefmain:}/
 	{href:}/{Controller.names.catalog.crumb}{href?:/}{href}{add?(~conf.catalog.filtermemory?:add?:set)?(~conf.catalog.filtermemory?:mark.set|(nomark))}
-{mark::}-catalog/mark.tpl
+{mark::}-catalog/mark.tpl?v={~conf.index.v}
 {/:}/
 {menu:}
 	<div style="margin-top:10px">

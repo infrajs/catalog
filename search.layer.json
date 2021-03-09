@@ -1,5 +1,5 @@
 {
-	"tpl":"-catalog/search.tpl",
+	"tpltpl":"-catalog/search.tpl?v={~conf.index.v}",
 	"nocache":true,
 	"jsontpl":"-showcase/api2/search?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}&p={Crumb.get.p|:1}&showlist=0",
 	"redirecttpl":"{crumb.child.name=:actions??:n}{n:}{crumb.child?:red}{red:}{data.is=:producer?:p}{data.is=:group?:g}{p:}{:com}{data.title:s}{g:}{:com}{data.group.group_nick:s}{s:}/{.}{com:}/{crumb}",

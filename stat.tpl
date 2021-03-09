@@ -15,6 +15,6 @@
 	</tr>
 {statitem:}<a href="/{crumb.parent}/{val}" title="от {~date(:d.m.Y,time)}">{val}</a><sup>{count}</sup>{~last()??:statsep}
 {statsep:} |  
-{cat::}-catalog/cat.tpl
+{cat::}-catalog/cat.tpl?v={~conf.index.v}
 {cat.mark.set:}{:cat.mark.client.set}
 {cat.mark.add:}{:cat.mark.client.add}

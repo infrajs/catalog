@@ -5,7 +5,7 @@
 	</ul>
 	<h1>Группы с карточками товаров</h1>
 	{:GROUPS}
-{cat::}-catalog/cat.tpl
+{cat::}-catalog/cat.tpl?v={~conf.index.v}
 {GROUPS:}
 	<div class="child">
 		<style>
@@ -37,5 +37,5 @@
 <div class="col-sm-4">
 	{:extend.pos-item}
 </div>
-{search::}-catalog/search.tpl
-{extend::}-catalog/extend.tpl
+{search::}-catalog/search.tpl?v={~conf.index.v}
+{extend::}-catalog/extend.tpl?v={~conf.index.v}

@@ -37,8 +37,8 @@
 
 
 	
-{extend::}-catalog/extend.tpl
-{model::}-catalog/model.tpl
+{extend::}-catalog/extend.tpl?v={~conf.index.v}
+{model::}-catalog/model.tpl?v={~conf.index.v}
 {CATPOSIMAGES:}
 	{~length(images)?:images}
 {images:}
@@ -211,7 +211,7 @@
 	</div>
 	-->
 {strcatalog:}catalog
-{cat::}-catalog/cat.tpl
+{cat::}-catalog/cat.tpl?v={~conf.index.v}
 {cat.mark.set:}{:cat.mark.client.set}
 {cat.mark.add:}{:cat.mark.client.add}
 {extend.cat.mark.set:}{:cat.mark.set}

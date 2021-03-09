@@ -7,7 +7,7 @@
 		const form = document.getElementById('{div}').getElementsByTagName('form')[0]
 		Live.fire('init', form)
 	</script>
-{model::}-catalog/model.tpl
+{model::}-catalog/model.tpl?v={~conf.index.v}
 
 {TITLE:}
 	<i>{data.query}...</i>

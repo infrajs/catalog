@@ -3,7 +3,7 @@
 	<a href="/{root}/repeats">Поиск дублей</a><br>
 	<a href="/{root}/misfiles">Убрать в архив неиспользуемые файлы</a><br>
 	<a href="/{root}/oldpos">Поиск старых позиции</a>
-{ans::}-ans/ans.tpl
+{ans::}-ans/ans.tpl?v={~conf.index.v}
 {404:}
 	<h1>{query}</h1>
 	<p>

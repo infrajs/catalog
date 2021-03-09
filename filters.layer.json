@@ -3,7 +3,7 @@
 	"showanimate":false,
 	"onlyclient":false,
 	"jsontpl":"-showcase/api2/filters?val={~encode(crumb.child.name)}&m={~encode(Crumb.get.m)}",
-	"tpl":"-catalog/filters.tpl",
+	"tpltpl":"-catalog/filters.tpl?v={~conf.index.v}",
 	"config":{
 		"split":true
 	}

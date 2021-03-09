@@ -254,7 +254,7 @@
 			</ul>
 			{subgr:}<li><a href="{group_nick:model.link-val}">{group}</a></li>
 		{gimg:}<img src="/-imager/?w=100&h=100&src={icon|img}">
-{model::}-catalog/model.tpl
+{model::}-catalog/model.tpl?v={~conf.index.v}
 {cat_showlist:}
 	{:pages}
 	{group.options.tplsearch?list:model.{group.options.tplsearch}-list?list:model.ROWS-list}
@@ -338,8 +338,8 @@
 {pageact:} active
 {pagedis:} disabled
 {space:}&nbsp;
-{cat::}-catalog/cat.tpl
-{extend::}-catalog/extend.tpl
+{cat::}-catalog/cat.tpl?v={~conf.index.v}
+{extend::}-catalog/extend.tpl?v={~conf.index.v}
 {text:}
 	{data.text}
 	{data.textinfo.gallery::textimg}

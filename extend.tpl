@@ -108,7 +108,7 @@
 		<a title="Посмотреть продукцию {producer}" href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer.{producer_nick}=1" class="float-right" style="margin:5px 0 5px 5px">
 			<img width="100" src="/-imager/?w=100&amp;h=100&amp;src={logo}" />
 		</a>
-	{cat::}-catalog/cat.tpl
+	{cat::}-catalog/cat.tpl?v={~conf.index.v}
 	{strcatalog:}catalog
 	{priceblock:}<div class="alert alert-success cost" style="clear:right; font-size:140%; padding:5px 10px; margin:15px 0;">{~cost(Цена)}{:unit}</div>
 	{unit:}&nbsp;руб.

@@ -394,5 +394,5 @@
 	{prodlist:}
 		<li><a data-ascroll="false"{data.fd.producer[~key]?:selprod} href="/{Controller.names.catalog.crumb}{:cat.mark.add}producer.{~key}=1">{~key} - {.}</a></li>
 	{selprod:} style="font-weight:bold"
-{cat::}-catalog/cat.tpl
+{cat::}-catalog/cat.tpl?v={~conf.index.v}
 {checked:}checked

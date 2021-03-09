@@ -10,7 +10,7 @@
 		<input class="form-control" name="search" type="text" placeholder="Поиск по каталогу">
 	</form>
 	{:search.JS}
-{cat::}-catalog/cat.tpl
+{cat::}-catalog/cat.tpl?v={~conf.index.v}
 {GROUPS:}
 	<div class="child">
 		<style>

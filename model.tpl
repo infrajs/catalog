@@ -1,4 +1,4 @@
-{cat::}-catalog/cat.tpl
+{cat::}-catalog/cat.tpl?v={~conf.index.v}
 {css:}
 	<style>
 		#{div} .props .line {

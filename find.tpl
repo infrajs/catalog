@@ -24,7 +24,7 @@
 			Catalog.search($(this).find('[type=text]').val())	
 		})
 	</script>
-{cat::}-catalog/cat.tpl
-{search::}-catalog/search.tpl
+{cat::}-catalog/cat.tpl?v={~conf.index.v}
+{search::}-catalog/search.tpl?v={~conf.index.v}
 {cat.mark.set:}{:cat.mark.client.set}
 {cat.mark.add:}{:cat.mark.client.add}
