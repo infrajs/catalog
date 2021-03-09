@@ -5,6 +5,7 @@ import { Path } from '/vendor/infrajs/path/Path.js'
 import { Form } from "/vendor/akiyatkin/form/Form.js"
 import { Catalog } from "/vendor/infrajs/catalog/Catalog.js"
 import { Template } from "/vendor/infrajs/template/Template.js"
+import { Config } from "/vendor/infrajs/config/Config.js"
 
 const Live = { ...Fire }
 const wait = delay => new Promise(resolve => setTimeout(resolve, delay))
@@ -106,13 +107,13 @@ Live.hand('init', async form => {
 Live.hand('process', (form, query) => {
 	const hash = Path.encode(query)
 	const state = Live.getState(form)
-
+	const v = Config.get('index').v
 	const menu = Live.getMenu(form)
 	const title = cls(menu, 'livetitle')[0]
 	const body = cls(menu, 'livebody')[0]
 	if (state.hash != hash) {
 		body.classList.add('mute')
-		title.innerHTML = Template.parse('-catalog/live/layout.tpl?v=2', { data: { query } }, 'TITLE')
+		title.innerHTML = Template.parse('-catalog/live/layout.tpl?v='+v, { data: { query } }, 'TITLE')
 	}
 	menu.classList.add('show')
 	state.hash = hash	
@@ -120,11 +121,12 @@ Live.hand('process', (form, query) => {
 Live.done('process', async (form, res, query) => {
  	const menu = Live.getMenu(form)
  	const title = cls(menu, 'livetitle')[0]
+ 	const v = Config.get('index').v
  	const ans = await Live.search(form, query)	
  	const state = Live.getState(form)
  	if (state.hash != Path.encode(query)) return
  	const tpl = state.select ? 'TITLEBODYSELECT' : 'TITLEBODY'
- 	title.innerHTML = Template.parse('-catalog/live/layout.tpl?v=2', { data: ans }, tpl)
+ 	title.innerHTML = Template.parse('-catalog/live/layout.tpl?v='+v, { data: ans }, tpl)
  	DOM.emit('load')
 })
 
@@ -133,9 +135,10 @@ Live.hand('show', async (form, ans) => {
 	const menu = Live.getMenu(form)
 	const state = Live.getState(form)
 	const body = cls(menu, 'livebody')[0]
+	const v = Config.get('index').v
 	body.classList.remove('mute')
 	const tpl = state.select ? 'BODYSELECT' : 'BODY'
-	body.innerHTML = Template.parse('-catalog/live/layout.tpl?v=2', { data: ans }, tpl)
+	body.innerHTML = Template.parse('-catalog/live/layout.tpl?v='+v, { data: ans }, tpl)
 	let i = 0
 	for (const item of cls(body, 'liveselect')) {
 		const index = i
