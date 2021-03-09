@@ -1,5 +1,5 @@
 {
 	"tplroot":"root",
 	"autosavename":"user",
-	"tpl":"-catalog/live/layout.tpl"
+	"tpltpl":"-catalog/live/layout.tpl?v={~conf.index.v}"
 }
